@@ -5,7 +5,6 @@ import {
   HeaderWrapper, Logo, Menu, MenuItem, MenuGroup, StyledBurger, BurgerMenuGroup,
 } from './styles';
 
-
 const Header = () => {
   const [open, setOpen] = useState(false);
 

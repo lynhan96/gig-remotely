@@ -22,6 +22,11 @@ export const HeaderWrapper = styled.div`
     padding: 20px 30px;
     width: calc(100% - 60px);
   }
+
+  @media(max-width: 768px) {
+    padding: 20px 15px;
+    width: calc(100% - 30px);
+  }
 `;
 
 export const Logo = styled.img`
@@ -52,7 +57,7 @@ export const Menu = styled.div`
     flex-direction: column;
     justify-content: center;
     background: ${color.offWhite};
-    height: ${({ open }) => (open ? 0 : 'calc(100vh - 80px)')};
+    height: ${({ open }) => (open ? 'calc(100vh - 80px)' : 0)};
     overflow: hidden;
     position: absolute;
     top: 80px;
@@ -121,6 +126,8 @@ export const StyledBurger = styled.button`
     outline: none;
   }
 
+  padding-left: ${({ open }) => (open ? '5px' : '0')};
+
   div {
     display: none;
     width: 25px;
@@ -138,6 +145,7 @@ export const StyledBurger = styled.button`
 
     :nth-child(2) {
       opacity: ${({ open }) => (open ? '0' : '1')};
+      width: ${({ open }) => (open ? '0px' : '25px')};
       transform: ${({ open }) => (open ? 'translateX(20px)' : 'translateX(0)')};
     }
 
@@ -154,5 +162,9 @@ export const StyledBurger = styled.button`
     div {
       display: block;
     }
+  }
+
+  @media(max-width: 768px) {
+    right: 15px;
   }
 `;
