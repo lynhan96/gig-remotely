@@ -1,0 +1,37 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react",
+    "airbnb"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    // don't force es6 functions to include space before paren
+    "space-before-function-paren": 0,
+
+    // allow specifying true explicitly for boolean props
+    "react/jsx-boolean-value": 0,
+    "jsx-quotes": [2, "prefer-single"],
+    "no-nested-ternary": 0,
+    "react/jsx-curly-spacing": 0,
+    "react/no-multi-comp": 0,
+    "react/jsx-no-bind": 0,
+    "react/no-unused-prop-types": 1,
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": true
+    }],
+    "react/jsx-props-no-spreading": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": [1, { "ignore": ["key"] }]
+  }
+}
