@@ -1,19 +1,19 @@
 import React from 'react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import configureStore from '../config/store';
+import configureStore from 'config/store';
 
 const store = configureStore();
 
 const App = ({ Component, pageProps }) => (
-  <div>
+  <Provider store={store}>
     <Head>
-      <link rel='shortcut icon' type='image/png' sizes='32x32' href='/favicon.png' />
+      {/* <link rel='shortcut icon' type='image/png' sizes='32x32' href='/favicon.png' /> */}
     </Head>
     <div>
       <Component {...pageProps} />
     </div>
-  </div>
+  </Provider>
 );
 
 export default App;

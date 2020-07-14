@@ -10,23 +10,6 @@ module.exports = withCSS({
         esModule: false,
       },
     })
-    if (isServer) {
-      const origExternals = [...config.externals];
-      config.externals = [
-        (context, request, callback) => {
-          if (typeof origExternals[0] === 'function') {
-            origExternals[0](context, request, callback);
-          } else {
-            callback();
-          }
-        },
-        ...(typeof origExternals[0] === 'function' ? [] : origExternals),
-      ];
-
-      config.module.rules.unshift({
-        use: 'null-loader',
-      });
-    }
     return config;
   },
 });
