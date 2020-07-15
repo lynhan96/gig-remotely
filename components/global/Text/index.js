@@ -27,6 +27,11 @@ const fontSize = (size) => {
   }
 };
 
+const toTitleCase = (str) => str.replace(/[^a-zA-Z ]/g, ' ').replace(
+  /([^\W_]+[^\s-]*) */g,
+  (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(),
+);
+
 const Text = ({
   children,
   size,
@@ -49,6 +54,7 @@ const Text = ({
 );
 
 Text.fontSize = (size) => fontSize(size);
+Text.toTitleCase = (str) => toTitleCase(str);
 
 Text.propTypes = {
   size: PropTypes.oneOf([

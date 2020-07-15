@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import JobItem from 'components/pages/JobItem';
+import { useDispatch } from 'react-redux';
+import { onGetJobs } from 'saga/jobs';
 import { Wrapper } from './styles';
 
 const JobList = () => {
-  const [state, setState] = useState({ loading: true, data: [{ title: 1, active: true}, { title: 1}, { title: 1}] });
+  const [state, setState] = useState({ loading: true, data: [] });
   const { loading, data } = state;
+  const dispatch = useDispatch();
+
+  const callback = (jobs) => {
+    setState({ loading: false, data: data.concat(jobs) });
+  };
+
+  const getJobs = useCallback((params, callback) => dispatch(
+    onGetJobs(params, callback),
+  ), [dispatch]);
+
+  useEffect(() => {
+    getJobs({}, callback);
+  }, []);
 
   return (
     <Wrapper>

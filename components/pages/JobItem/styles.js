@@ -101,6 +101,7 @@ export const Label = styled.span`
   border-radius: 26px;
   padding: 5px 12px;
   color: ${color.offWhite};
+  text-transform: capitalize;
 
   @media (max-width: 440px){
     padding: 4px 12px;
@@ -131,7 +132,7 @@ export const Info = styled.div`
 `;
 
 export const Title = styled.div`
-  width: 40%;
+  width: 44%;
   display: flex;
   flex-flow: wrap row;
   align-items: center;
@@ -147,12 +148,13 @@ export const Title = styled.div`
 
 export const Description = styled(Text)`
   margin-top: 30px;
-  width: 40%;
+  width: 44%;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  letter-spacing: 0.34px;
 
 
   @media (min-width: 769px) and (max-width: 1500px){
@@ -165,9 +167,9 @@ export const Description = styled(Text)`
 `;
 
 export const Locale = styled.div`
-  width: 40%;
+  width: 43%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 
   @media (min-width: 769px) and (max-width: 1500px){
@@ -192,17 +194,20 @@ export const LocaleItem = styled.div`
   }
 
   @media (max-width: 440px) {
-    width: 90px;
+    width: 80px;
+    margin-right: 5px;
+
+    ${({ longText }) => longText && css`width: 95px;`}
   }
 
   @media (max-width: 375px){
     width: 75px;
 
     ${({ longText }) => longText && css`width: 80px;`}
+  }
 
-    &:last-child {
-      margin-right: 0;
-    }
+  &:last-child {
+    margin-right: 0;
   }
 `;
 
@@ -224,7 +229,7 @@ export const LocaleContent = styled.div`
 `;
 
 export const TagGroup = styled.div`
-  width: 40%;
+  width: 43%;
   display: flex;
   flex-flow: wrap row;
   margin-top: 20px;
@@ -280,6 +285,10 @@ export const Time = styled(Text)`
   bottom: 30px;
   right: 30px;
 
+  @media (max-width: 768px) {
+    bottom: 20px;
+  }
+
   @media (max-width: 440px) {
     font-size: 12px;
     right: 15px;
@@ -293,7 +302,7 @@ export const Time = styled(Text)`
 
 export const LocaleContentTitle = styled(Text)`
   @media (max-width: 440px) {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   @media (max-width: 375px) {
@@ -303,11 +312,10 @@ export const LocaleContentTitle = styled(Text)`
 
 export const LocaleContentText = styled(Text)`
   @media (max-width: 440px) {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   @media (max-width: 375px) {
     font-size: 11px;
   }
 `;
-
