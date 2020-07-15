@@ -106,6 +106,10 @@ export const Label = styled.span`
     padding: 4px 12px;
     font-size: 12px;
   }
+
+  @media (max-width: 768px){
+    display: none;
+  }
 `;
 
 export const Content = styled.div`
@@ -130,7 +134,7 @@ export const Info = styled.div`
   justify-content: space-between;
 `;
 
-export const Title = styled.div`
+export const TitleWrapper = styled.div`
   width: 44%;
   display: flex;
   flex-flow: wrap row;
@@ -142,6 +146,24 @@ export const Title = styled.div`
 
   @media (max-width: 768px){
     width: 100%
+  }
+`;
+
+export const Title = styled(Text)`
+  margin-right: 10px;
+  margin-bottom: 5px;
+
+  ${Label} {
+    display: none;
+  }
+  @media (max-width: 768px){
+    display: inline-block;
+    margin-right: 0;
+    ${Label} {
+      margin-left: 10px;
+      margin-top: -3px;
+      display: initial !important;
+    }
   }
 `;
 

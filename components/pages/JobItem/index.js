@@ -16,6 +16,7 @@ import {
   FavoriteImage,
   Time,
   Label,
+  TitleWrapper,
   Title,
   Description,
   Active,
@@ -48,18 +49,18 @@ const JobItem = ({ item }) => {
       <ContentWrapper active={active()}>
         <Information>
           <Content>
-            <Title>
-              <Text
+            <TitleWrapper>
+              <Title
                 width='auto'
                 weight='bold'
                 size='llg'
-                style={{ marginRight: 10, marginBottom: 5 }}
               >
                 {title}
-              </Text>
+                <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
+              </Title>
               <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
               <Text size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</Text>
-            </Title>
+            </TitleWrapper>
             <Locale>
               <LocaleItem>
                 <LocaleImage src='/images/icon/calendar.svg' />
