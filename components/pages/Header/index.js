@@ -12,7 +12,6 @@ const Header = () => {
   useEffect(() => {
     const header = document.getElementById('header');
     const scrollCallBack = window.addEventListener('scroll', () => {
-      console.log(window.pageYOffset)
       if (window.pageYOffset > 50) {
         header.classList.add('sticky');
       } else {
