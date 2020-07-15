@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Provider } from 'react-redux';
 import configureStore from 'config/store';
 import Header from 'components/pages/Header';
+import Footer from 'components/pages/Footer';
 import { GlobalStyle, Layout } from 'components/global/styles';
 
 const store = configureStore();
@@ -22,6 +23,7 @@ const App = ({ Component, pageProps }) => (
     <Layout>
       <Component {...pageProps} />
     </Layout>
+    <Footer />
     <GlobalStyle />
   </Provider>
 );

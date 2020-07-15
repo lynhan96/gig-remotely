@@ -9,6 +9,7 @@ const Button = ({
   style,
   onClick,
   className,
+  type,
 }) => {
   const fontSize = () => {
     switch (size) {
@@ -30,6 +31,7 @@ const Button = ({
       style={style}
       size={fontSize()}
       onClick={onClick}
+      type={type}
     >
       {children}
     </StyledButton>
@@ -47,9 +49,11 @@ Button.propTypes = {
   children: PropTypes.node,
   width: PropTypes.string,
   className: PropTypes.string,
+  type: PropTypes.string,
 };
 
 Button.defaultProps = {
+  type: 'default',
   className: '',
   width: 'auto',
   size: 'md',

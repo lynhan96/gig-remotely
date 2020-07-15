@@ -38,7 +38,7 @@ const labelBackground = (type) => {
 
 const JobItem = ({ item }) => {
   const {
-    title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, expiredAt
+    title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, expiredAt, startedAt,
   } = item;
 
   const active = () => boostStart && boostEnd && moment(boostStart) < moment(boostEnd);
@@ -102,7 +102,7 @@ const JobItem = ({ item }) => {
           <StyledButton width='200px'>apply</StyledButton>
           <FavoriteImage src='/images/icon/favorite.svg' />
         </Action>
-        <Time size='xs' color='#9a9a8b'>{moment(expiredAt).fromNow()}</Time>
+        <Time size='xs' color='#9a9a8b'>{moment(startedAt).fromNow()}</Time>
       </ContentWrapper>
     </ItemWrapper>
   );

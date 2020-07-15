@@ -203,7 +203,7 @@ export const LocaleItem = styled.div`
   @media (max-width: 375px){
     width: 75px;
 
-    ${({ longText }) => longText && css`width: 80px;`}
+    ${({ longText }) => longText && css`width: 90px;`}
   }
 
   &:last-child {
@@ -219,6 +219,11 @@ export const LocaleImage = styled.img`
   @media (max-width: 440px) {
     width: 17px;
     height: 15px;
+  }
+
+  @media (max-width: 375px){
+    width: 13px;
+    height: 12px;
   }
 `;
 
@@ -306,7 +311,7 @@ export const LocaleContentTitle = styled(Text)`
   }
 
   @media (max-width: 375px) {
-    font-size: 11px;
+    font-size: 10px;
   }
 `;
 
@@ -316,6 +321,6 @@ export const LocaleContentText = styled(Text)`
   }
 
   @media (max-width: 375px) {
-    font-size: 11px;
+    font-size: 10px;
   }
 `;

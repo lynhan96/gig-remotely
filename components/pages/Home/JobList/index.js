@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import Button from 'components/global/Button';
 import JobItem from 'components/pages/JobItem';
 import { useDispatch } from 'react-redux';
 import { onGetJobs } from 'saga/jobs';
-import { Wrapper } from './styles';
+import { ListWrapper, Wrapper } from './styles';
 
 const JobList = () => {
   const [state, setState] = useState({ loading: true, data: [] });
@@ -13,8 +14,8 @@ const JobList = () => {
     setState({ loading: false, data: data.concat(jobs) });
   };
 
-  const getJobs = useCallback((params, callback) => dispatch(
-    onGetJobs(params, callback),
+  const getJobs = useCallback((params, onCallback) => dispatch(
+    onGetJobs(params, onCallback),
   ), [dispatch]);
 
   useEffect(() => {
@@ -23,11 +24,14 @@ const JobList = () => {
 
   return (
     <Wrapper>
-      {
-        data.map((item, index) => (
-          <JobItem key={index} item={item} />
-        ))
-       }
+      <ListWrapper>
+        {
+          data.map((item, index) => (
+            <JobItem key={index} item={item} />
+          ))
+         }
+      </ListWrapper>
+      <Button type='light' width='220px'>load more</Button>
     </Wrapper>
   );
 };

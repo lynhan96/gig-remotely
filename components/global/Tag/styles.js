@@ -8,7 +8,7 @@ export const StyledTag = styled.div`
     font-size: ${size}px;
     font-weight: ${weight};
   `}
-  margin-top: 7px;
+  margin-top: 8px;
   margin-right: 10px;
   border-radius: 5px;
   background-color: ${color.eggshell};

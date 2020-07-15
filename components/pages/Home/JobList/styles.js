@@ -8,4 +8,11 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export default Wrapper;
+export const ListWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 70px;
+`;
