@@ -176,7 +176,7 @@ export const Description = styled(Text)`
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   letter-spacing: 0.34px;
-
+  line-height: 1.3;
 
   @media (min-width: 769px) and (max-width: 1500px){
     width: 45%
