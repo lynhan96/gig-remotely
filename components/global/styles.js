@@ -71,6 +71,7 @@ export const GlobalStyle = createGlobalStyle`
   button,
   select,
   label,
+  img,
   a{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }

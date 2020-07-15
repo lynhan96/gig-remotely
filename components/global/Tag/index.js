@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledText } from './styles';
+import { StyledTag } from './styles';
 
 const fontSize = (size) => {
   switch (size) {
+    case 'xxs':
+      return 13;
     case 'xs':
       return 15;
     case 'sm':
@@ -27,36 +29,32 @@ const fontSize = (size) => {
   }
 };
 
-const Text = ({
+const Tag = ({
   children,
   size,
   style,
-  width,
   weight,
   className,
-  color,
 }) => (
-  <StyledText
-    color={color}
+  <StyledTag
     className={className}
-    width={width}
     style={style}
     size={fontSize(size)}
     weight={weight}
   >
     {children}
-  </StyledText>
+  </StyledTag>
 );
 
-Text.fontSize = (size) => fontSize(size);
+Tag.fontSize = (size) => fontSize(size);
 
-Text.propTypes = {
+Tag.propTypes = {
   size: PropTypes.oneOf([
+    'xxs',
     'xs',
     'sm',
     'md',
     'lg',
-    'llg',
     'xl',
     'xxl',
     'xxxl',
@@ -64,20 +62,16 @@ Text.propTypes = {
   ]),
   style: PropTypes.shape(),
   className: PropTypes.string,
-  width: PropTypes.string,
   children: PropTypes.node,
   weight: PropTypes.string,
-  color: PropTypes.string,
 };
 
-Text.defaultProps = {
+Tag.defaultProps = {
   className: '',
   weight: 'normal',
-  width: '100%',
   size: 'sm',
   style: {},
   children: null,
-  color: '',
 };
 
-export default Text;
+export default Tag;

@@ -4,7 +4,7 @@ import RadioGroup from 'components/global/RadioGroup';
 export const Wrapper = styled.div`
   display: flex;
   flex-flow: wrap row;
-  margin-bottom: 100px;
+  margin-bottom: 120px;
 
   @media (max-width: 768px) {
     justify-content: center;

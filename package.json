@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "pro_start": "NODE_ENV=production next",
-    "dev": "next dev --port 8000",
+    "pro": "NODE_ENV=production next --port 8000",
+    "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start"
   },
