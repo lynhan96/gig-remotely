@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import Button from 'components/global/Button';
 import JobItem from 'components/pages/JobItem';
+import { Button } from 'components/global';
 import { useDispatch } from 'react-redux';
 import { onGetJobs } from 'saga/jobs';
 import { ListWrapper, Wrapper } from './styles';

@@ -1,7 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 import { color } from 'components/utils/color';
-import Text from 'components/global/Text';
-import Button from 'components/global/Button';
+import { Button, Text } from 'components/global';
 
 const animatedGradient = keyframes`
   0% {

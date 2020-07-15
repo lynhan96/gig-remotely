@@ -12,6 +12,7 @@ export const HeaderWrapper = styled.div`
   padding: 50px 90px;
   height: 45px;
   align-items: center;
+  background: ${color.offWhite};
 
   @media(min-width: 1025px) and (max-width: 1280px) {
     padding: 40px;

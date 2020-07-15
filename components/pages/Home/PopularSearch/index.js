@@ -1,6 +1,5 @@
 import React from 'react';
-import Tag from 'components/global/Tag';
-import Text from 'components/global/Text';
+import { Tag, Text } from 'components/global';
 import { Wrapper, TagGroup } from './styles';
 
 const PopularSearch = () => (

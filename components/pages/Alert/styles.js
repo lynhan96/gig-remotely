@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Text from 'components/global/Text';
+import { Text } from 'components/global';
 
 export const Link = styled.a`
   cursor: pointer;

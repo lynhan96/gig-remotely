@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
-import AlertUI from 'components/global/Alert';
 import { Link, Message } from './styles';
+import { Alert as AlertUI } from 'components/global';
 
 const Alert = () => {
   const [open, setOpen] = useState(true);

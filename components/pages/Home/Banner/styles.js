@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import Text from 'components/global/Text';
+import { Text } from 'components/global';
 
 const moveDown = keyframes`
   0% { margin-top: 4px }

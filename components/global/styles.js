@@ -76,6 +76,19 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
+  .sticky {
+    position: fixed !important;
+    top: 0 !important;
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+    box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.2);
+
+    @media (max-width: 1024px) {
+      padding-top: 20px !important;
+      padding-bottom: 20px !important;
+    }
+  }
+
   body {
     margin: 0;
     flex-direction: column;
@@ -100,7 +113,7 @@ export const GlobalStyle = createGlobalStyle`
 
   ::-webkit-scrollbar
   {
-    width: 5px;
+    width: 10px;
     background-color: #F5F5F5;
   }
 

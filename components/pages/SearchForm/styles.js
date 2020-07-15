@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import RadioGroup from 'components/global/RadioGroup';
+import { RadioGroup } from 'components/global';
 
 export const Wrapper = styled.div`
   display: flex;

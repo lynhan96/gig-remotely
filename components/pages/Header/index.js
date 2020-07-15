@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Router from 'next/router';
-import Button from 'components/global/Button';
+import { Button } from 'components/global';
 import {
   HeaderWrapper, Logo, Menu, MenuItem, MenuGroup, StyledBurger, BurgerMenuGroup,
 } from './styles';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const header = document.getElementById('header');
+    const scrollCallBack = window.addEventListener('scroll', () => {
+      console.log(window.pageYOffset)
+      if (window.pageYOffset > 50) {
+        header.classList.add('sticky');
+      } else {
+        header.classList.remove('sticky');
+      }
+    });
+    return () => {
+      window.removeEventListener('scroll', scrollCallBack);
+    };
+  }, []);
 
   return (
-    <HeaderWrapper>
+    <HeaderWrapper ref={ref} id='header'>
       <Logo src='/images/logo.svg' onClick={() => Router.push('/')} />
       <StyledBurger open={open} onClick={() => setOpen(!open)}>
         <div />

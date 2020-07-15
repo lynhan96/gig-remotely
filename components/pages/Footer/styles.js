@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { color } from 'components/utils/color';
 import { Container } from 'components/global/styles';
-import Text from 'components/global/Text';
+import { Text } from 'components/global';
 
 export const Wrapper = styled.div`
   background: ${color.black};
@@ -50,8 +50,4 @@ export const Group = styled.div`
   @media (min-width: 1280px) and (max-width: 1500px){
     width: calc(50% - 10px);
   }
-/*
-  @media (max-width: 1280px) {
-    width: 48%;
-  }*/
 `;

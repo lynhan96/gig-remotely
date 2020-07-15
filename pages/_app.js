@@ -3,8 +3,7 @@ import Head from 'next/head';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import configureStore from 'config/store';
-import Header from 'components/pages/Header';
-import Footer from 'components/pages/Footer';
+import { Header, Footer } from 'components/pages';
 import { GlobalStyle, Layout } from 'components/global/styles';
 
 const store = configureStore();

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import Text from 'components/global/Text';
-import Tag from 'components/global/Tag';
+import { Tag, Text } from 'components/global';
 import {
   ItemWrapper,
   ContentWrapper,

@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import Button from 'components/global/Button';
-import Input from 'components/global/Input';
+import { Button, Input } from 'components/global';
 import { Wrapper, InputWrapper, StyledRadioGroup } from './styles';
 
 const radioOptions = [
