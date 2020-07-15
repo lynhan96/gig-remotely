@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { color } from 'components/ultis/color';
+import { color } from 'components/utils/color';
 
 const fontSize = '18px';
 const responsiveFontSize = '24px';

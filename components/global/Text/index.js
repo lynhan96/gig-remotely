@@ -5,7 +5,7 @@ import { StyledText } from './styles';
 const fontSize = (size) => {
   switch (size) {
     case 'xs':
-      return 14;
+      return 15;
     case 'sm':
       return 16;
     case 'md':

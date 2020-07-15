@@ -133,15 +133,18 @@ export const IconWrapper = styled.div`
   align-items: flex-start;
   width: 100%;
   height: 40px;
-  margin-top: 130px;
-  margin: 100px 0;
+  margin-top: 100px;
+  margin-bottom: 140px;
 
   @media(max-width: 1024px) {
-    margin: 40px 0;
+    margin-top: 40px;
+    margin-bottom: 60px;
+
   }
 
   @media(max-width: 768px) {
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
 `;
 

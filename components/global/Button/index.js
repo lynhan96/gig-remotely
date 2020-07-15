@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { StyledButton } from './styles';
 
 const Button = ({
+  width,
   children,
   size,
   style,
@@ -23,6 +24,7 @@ const Button = ({
 
   return (
     <StyledButton
+      width={width}
       style={style}
       size={fontSize()}
       onClick={onClick}
@@ -41,9 +43,11 @@ Button.propTypes = {
   style: PropTypes.shape(),
   onClick: PropTypes.func,
   children: PropTypes.node,
+  width: PropTypes.string,
 };
 
 Button.defaultProps = {
+  width: 'auto',
   size: 'md',
   style: {},
   onClick: null,

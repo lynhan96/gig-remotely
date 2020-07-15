@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { color } from 'components/ultis/color';
+import { color } from 'components/utils/color';
 
 export const Layout = styled.div`
   margin: 0;
@@ -7,6 +7,30 @@ export const Layout = styled.div`
   flex-direction: column;
   color: ${color.black};
   background: ${color.offWhite};
+`;
+
+export const Container = styled.div`
+  width: 1440px;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  margin: auto;
+
+  @media (min-width: 1500px) {
+    width: 1440px;
+  }
+
+  @media (min-width: 1280px) and (max-width: 1500px){
+    width: 1140px;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    width: 992px;
+  }
+
+  @media (max-width: 1024px) {
+    width: calc(100% - 30px);
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -46,6 +70,7 @@ export const GlobalStyle = createGlobalStyle`
   textarea,
   button,
   select,
+  label,
   a{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
