@@ -63,7 +63,7 @@ export const GlobalStyle = createGlobalStyle`
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
     -webkit-text-fill-color: #090513;
-    -webkit-box-shadow: 0 0 0px 1000px #F8F6FB inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px ${color.offWhite} inset !important;
   }
 
   input,
@@ -71,7 +71,9 @@ export const GlobalStyle = createGlobalStyle`
   button,
   select,
   label,
+  span,
   img,
+  div,
   a{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
@@ -84,8 +86,8 @@ export const GlobalStyle = createGlobalStyle`
     box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.2);
 
     @media (max-width: 1024px) {
-      padding-top: 20px !important;
-      padding-bottom: 20px !important;
+      padding-top: 10px !important;
+      padding-bottom: 10px !important;
     }
   }
 

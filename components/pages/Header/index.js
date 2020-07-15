@@ -1,55 +1,33 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Router from 'next/router';
-import { Button } from 'components/global';
+import Menu from './Menu';
 import {
-  HeaderWrapper, Logo, Menu, MenuItem, MenuGroup, StyledBurger, BurgerMenuGroup,
+  HeaderWrapper, Logo,
 } from './styles';
 
 const Header = () => {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
+  const headerScroll = () => {
+    const header = document.getElementById('header');
+    if (window.pageYOffset > 50) {
+      header.classList.add('sticky');
+    } else {
+      header.classList.remove('sticky');
+    }
+  };
 
   useEffect(() => {
-    const header = document.getElementById('header');
-    const scrollCallBack = window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 50) {
-        header.classList.add('sticky');
-      } else {
-        header.classList.remove('sticky');
-      }
-    });
+    const scrollCallBack = window.addEventListener('scroll', headerScroll);
     return () => {
       window.removeEventListener('scroll', scrollCallBack);
     };
   }, []);
 
-  return (
-    <HeaderWrapper ref={ref} id='header'>
-      <Logo src='/images/logo.svg' onClick={() => Router.push('/')} />
-      <StyledBurger open={open} onClick={() => setOpen(!open)}>
-        <div />
-        <div />
-        <div />
-      </StyledBurger>
-      <Menu open={open}>
-        <MenuGroup>
-          <MenuItem>find gigs</MenuItem>
-          <MenuItem>companies</MenuItem>
-        </MenuGroup>
-        <MenuGroup>
-          <MenuItem>sign up / log in</MenuItem>
-          <MenuItem>
-            <Button>post gig</Button>
-          </MenuItem>
-        </MenuGroup>
+  const redirectTo = (link) => Router.push(link);
 
-        <BurgerMenuGroup>
-          <MenuItem>post gig</MenuItem>
-          <MenuItem>find gigs</MenuItem>
-          <MenuItem>companies</MenuItem>
-          <MenuItem>sign up / log in</MenuItem>
-        </BurgerMenuGroup>
-      </Menu>
+  return (
+    <HeaderWrapper id='header'>
+      <Logo src='/images/logo.svg' onClick={() => redirectTo('/')} />
+      <Menu />
     </HeaderWrapper>
   );
 };

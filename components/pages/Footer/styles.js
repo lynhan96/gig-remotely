@@ -41,13 +41,17 @@ export const StyledText = styled(Text)`
 `;
 
 export const Group = styled.div`
-  width: 48%;
+  width: ${({ position }) => (position === 'first' ? '55%' : '40%')};
   display: flex;
   flex-flow: wrap row;
   justify-content: space-between;
   align-items: center;
 
   @media (min-width: 1280px) and (max-width: 1500px){
-    width: calc(50% - 10px);
+    width: ${({ position }) => (position === 'first' ? '55.5%' : '40.5%')};
+  }
+
+  @media (max-width: 120px){
+    width: 50%;
   }
 `;

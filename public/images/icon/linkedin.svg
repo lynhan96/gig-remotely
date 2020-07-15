@@ -1,3 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="22.5" height="22.5" viewBox="0 0 22.5 22.5">
-    <path d="M20.893 0H1.6A1.614 1.614 0 0 0 0 1.622v19.256A1.614 1.614 0 0 0 1.6 22.5h19.293a1.618 1.618 0 0 0 1.607-1.622V1.622A1.618 1.618 0 0 0 20.893 0zM6.8 19.286H3.465V8.55h3.34v10.736zM5.133 7.081A1.934 1.934 0 1 1 7.066 5.15a1.934 1.934 0 0 1-1.933 1.931zM19.3 19.286h-3.334v-5.223c0-1.246-.025-2.848-1.733-2.848-1.738 0-2 1.356-2 2.757v5.314H8.895V8.55h3.2v1.467h.045a3.512 3.512 0 0 1 3.16-1.735c3.375 0 4 2.225 4 5.118z" data-name="Icon awesome-linkedin"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52">
+    <g id="prefix__Group_314" data-name="Group 314" transform="translate(-751 -1037)">
+        <circle id="prefix__Ellipse_6" cx="26" cy="26" r="26" data-name="Ellipse 6" transform="translate(751 1037)" style="fill:#1d66a3"/>
+        <path id="prefix__Icon_awesome-linkedin-in" d="M5.194 23.2H.383V7.712h4.811zM2.786 5.6a2.8 2.8 0 1 1 2.786-2.813A2.809 2.809 0 0 1 2.786 5.6zM23.2 23.2h-4.8v-7.538c0-1.8-.036-4.1-2.5-4.1-2.5 0-2.884 1.953-2.884 3.972V23.2H8.207V7.712h4.614v2.113h.067a5.055 5.055 0 0 1 4.552-2.5c4.869 0 5.763 3.206 5.763 7.37V23.2z" data-name="Icon awesome-linkedin-in" transform="translate(765 1050.999)" style="fill:#fff"/>
+    </g>
 </svg>

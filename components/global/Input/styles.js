@@ -13,6 +13,7 @@ export const StyledInput = styled.input`
   border: solid 1px ${color.black};
   background: ${color.offWhite};
   color: ${color.black};
+  position: relative;
 
   ::placeholder {
     color: ${color.cement};
@@ -32,4 +33,20 @@ export const StyledInput = styled.input`
   }
 `;
 
-export default StyledInput;
+export const ShowPasswordText = styled.span`
+  position: absolute;
+  right: 10px;
+  font-size: 17px;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
+`;
+
+export const InputWrapper = styled.span`
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+`;

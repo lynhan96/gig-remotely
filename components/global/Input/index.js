@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { StyledInput } from './styles';
+import { StyledInput, ShowPasswordText, InputWrapper } from './styles';
 
 const Input = ({
   size,
   name,
   onChange,
   placeholder,
+  type,
 }) => {
+  const [inputType, setInputType] = useState(type);
+
   const fontSize = () => {
     switch (size) {
       case 'sm':
@@ -21,13 +24,22 @@ const Input = ({
     }
   };
 
+  const togglePasword = () => {
+    if (inputType === 'password') setInputType('text');
+    if (inputType === 'text') setInputType('password');
+  };
+
   return (
-    <StyledInput
-      name={name}
-      size={fontSize()}
-      onChange={onChange}
-      placeholder={placeholder}
-    />
+    <InputWrapper>
+      <StyledInput
+        type={inputType}
+        name={name}
+        size={fontSize()}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
+      {type === 'password' && <ShowPasswordText onClick={togglePasword}>{inputType === 'password' ? 'show' : 'hide'}</ShowPasswordText>}
+    </InputWrapper>
   );
 };
 
@@ -38,11 +50,17 @@ Input.propTypes = {
     'lg',
   ]),
   name: PropTypes.string,
+  type: PropTypes.oneOf([
+    'text',
+    'email',
+    'password',
+  ]),
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
 };
 
 Input.defaultProps = {
+  type: 'text',
   size: 'md',
   onChange: null,
   name: '',

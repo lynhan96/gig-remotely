@@ -4,6 +4,7 @@ import Input from 'components/global/Input';
 import Button from 'components/global/Button';
 import RadioGroup from 'components/global/RadioGroup';
 import Alert from 'components/global/Alert';
+import Form from 'components/global/Form';
 
 export {
   Tag,
@@ -12,4 +13,5 @@ export {
   Button,
   RadioGroup,
   Alert,
+  Form,
 };

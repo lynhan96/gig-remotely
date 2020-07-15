@@ -7,7 +7,7 @@ import {
 const Footer = () => (
   <Wrapper>
     <StyledContainer>
-      <Group>
+      <Group position='first'>
         <StyledText size='xs'>Who We Are</StyledText>
         <StyledText size='xs'>Recruiter’s Sign Up</StyledText>
         <StyledText size='xs'>Gig Seeker’s Sign Up</StyledText>

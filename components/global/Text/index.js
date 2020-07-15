@@ -10,6 +10,8 @@ const fontSize = (size) => {
       return 17;
     case 'md':
       return 18;
+    case 'mmd':
+      return 20;
     case 'lg':
       return 24;
     case 'llg':
@@ -61,6 +63,7 @@ Text.propTypes = {
     'xs',
     'sm',
     'md',
+    'mmd',
     'lg',
     'llg',
     'xl',
