@@ -8,6 +8,8 @@ const Input = ({
   onChange,
   placeholder,
   type,
+  inputRef,
+  error,
 }) => {
   const [inputType, setInputType] = useState(type);
 
@@ -32,6 +34,8 @@ const Input = ({
   return (
     <InputWrapper>
       <StyledInput
+        error={error}
+        ref={inputRef}
         type={inputType}
         name={name}
         size={fontSize()}
@@ -57,14 +61,16 @@ Input.propTypes = {
   ]),
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  error: PropTypes.bool,
 };
 
 Input.defaultProps = {
   type: 'text',
   size: 'md',
-  onChange: null,
+  onChange: () => {},
   name: '',
   placeholder: '',
+  error: false,
 };
 
 export default Input;

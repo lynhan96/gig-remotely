@@ -131,4 +131,24 @@ export const GlobalStyle = createGlobalStyle`
         background: transparent; /* make scrollbar transparent */
     }
   }
+
+  .ReactModal__Overlay {
+    opacity: 0 !important;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1 !important;
+    transition: all 0.3s ease;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0 !important;
+    transition: all 0.3s ease;
+  }
 `;

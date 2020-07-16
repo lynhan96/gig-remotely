@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
-import Router from 'next/router';
-import { Link, Message } from './styles';
-import { Alert as AlertUI } from 'components/global';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Modal, Button, Text } from 'components/global';
+import { onCloseAlert } from 'redux/alert';
+import { Wrapper } from './styles';
 
 const Alert = () => {
-  const [open, setOpen] = useState(true);
+  const dispatch = useDispatch();
+  const open = useSelector((state) => state.alert.open);
+  const message = useSelector((state) => state.alert.message);
 
-  const onClose = () => setOpen(false);
-  const redirect = () => Router.push('/');
+  const onClose = useCallback(() => dispatch(
+    onCloseAlert(),
+  ), [dispatch]);
+
   return (
-    <AlertUI open={open} onClose={onClose}>
-      <Message
-        width='auto'
-        size='xs'
-      >
-        In light of the global COVID-19 outbreak, 50% off job post revenue will go to charity.
-        <Link onClick={redirect}>
-          Learn more.
-        </Link>
-      </Message>
-    </AlertUI>
+    <Modal
+      showCloseIcon={false}
+      onClose={onClose}
+      isOpen={open}
+    >
+      <Wrapper>
+        <Text size='xl' weight='bold' width='auto' style={{ margin: '10px 0 40px 0' }}>{message}</Text>
+        <Button width='200px' onClick={onClose}>close</Button>
+      </Wrapper>
+    </Modal>
   );
 };
 

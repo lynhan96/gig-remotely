@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { Container } from 'components/global/styles';
-import { SignUp } from 'components/pages';
+import { SignUp, Alert } from 'components/pages';
 
-const SignUpPage = () => (
-  <>
-    <Head>
-      <title>Sign up</title>
-    </Head>
-    <Container style={{ alignItems: 'center' }}>
-      <SignUp />
-    </Container>
-  </>
-);
+const SignUpPage = () => {
+  useEffect(() => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('user_type');
+  }, []);
+
+  return (
+    <>
+      <Head>
+        <title>Sign up</title>
+      </Head>
+      <Container style={{ alignItems: 'center' }}>
+        <SignUp />
+        <Alert />
+      </Container>
+    </>
+  );
+};
 
 export default SignUpPage;

@@ -6,6 +6,7 @@ export const color = {
   aquaMarine: '#4ad3b9',
   pumpkinOrange: '#fa7d00',
   cement: '#9a9a8b',
+  red: 'rgb(255, 0, 0)',
 };
 
 export default color;
