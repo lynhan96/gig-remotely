@@ -59,14 +59,14 @@ export const ItemWrapper = styled.div`
       width: 14px;
       height: 14px;
       transform: scale(0);
-      background:rgb(51, 122, 183);
+      background: ${color.black};
     }
   }
 
   input[type="radio"] {
     display: none;
     &:checked + label:before {
-      border: 1px solid rgba(0, 0, 0, 0.54) !important;
+      border: 1px solid ${color.black} !important;
       animation: ${animation} 0.2s linear forwards;
     }
     &:checked + label:after {
