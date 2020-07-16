@@ -8,10 +8,8 @@ export const ON_SIGN_UP = 'ON_SIGN_UP';
 function* signUp({ params, callback }) {
   try {
     const response = yield call(post, '/users', params);
-    console.log(response)
     callback(response);
   } catch (error) {
-    console.log(error)
     yield put(onOpenAlert(error.data.message));
   }
 }
@@ -24,9 +22,7 @@ function* login({ params, callback }) {
     localStorage.setItem('user_type', 'SEEKER');
     callback();
   } catch (error) {
-    if (error.status === 401) {
-      yield put(onOpenAlert('Wrong email or password!'));
-    }
+    yield put(onOpenAlert('Wrong email or password!'));
   }
 }
 
