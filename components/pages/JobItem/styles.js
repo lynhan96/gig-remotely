@@ -159,7 +159,8 @@ export const Title = styled(Text)`
   @media (max-width: 768px){
     display: inline-block;
     margin-right: 0;
-    width: cacl(100% - 5px);
+    width: 96% !important;
+
     ${Label} {
       margin-left: 10px;
       margin-top: -3px;
