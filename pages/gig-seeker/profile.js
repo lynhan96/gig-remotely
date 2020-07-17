@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import { privateRoute } from 'routes';
 
 const ProfilePage = () => (
   <>
@@ -10,4 +11,4 @@ const ProfilePage = () => (
   </>
 );
 
-export default ProfilePage;
+export default privateRoute(ProfilePage);

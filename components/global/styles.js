@@ -7,6 +7,15 @@ export const Layout = styled.div`
   flex-direction: column;
   color: ${color.black};
   background: ${color.offWhite};
+  margin-top: 145px;
+
+  @media(min-width: 1025px) and (max-width: 1280px) {
+    margin-top: 125px;
+  }
+
+  @media(max-width: 1024px) {
+    margin-top: 85px;
+  }
 `;
 
 export const Container = styled.div`
@@ -79,8 +88,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .sticky {
-    position: fixed !important;
-    top: 0 !important;
     padding-top: 30px !important;
     padding-bottom: 30px !important;
     box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.2);

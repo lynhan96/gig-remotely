@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { onSignUp } from 'saga/authentication';
+import { onOpenAlert } from 'redux/alert';
 import {
   Form, Button, Text,
 } from 'components/global';
 import {
-  Wrapper, Title, SocialGroup, Image, ContentWrapper, StyledContainer, NoticeTitle
+  Wrapper, Title, SocialGroup, Image, ContentWrapper, StyledContainer, NoticeTitle,
 } from './styles';
 
 const SignUp = () => {
@@ -18,8 +19,16 @@ const SignUp = () => {
     onSignUp(params, onCallback),
   ), [dispatch]);
 
+  const showAlert = useCallback((message) => dispatch(
+    onOpenAlert(message),
+  ), [dispatch]);
+
   const onSubmit = (values) => {
-    signUp(values, callback);
+    if (values.confirmPassword !== values.password) {
+      showAlert('Password and confirmation not match!');
+    } else {
+      signUp(values, callback);
+    }
   };
 
   if (showNotice) {

@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Router from 'next/router';
 import { onLogin } from 'saga/authentication';
@@ -13,18 +12,13 @@ import {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
 
-  const callback = () => {
-    router.push('/gig-seeker/profile');
-  };
-
-  const login = useCallback((params, onCallback) => dispatch(
-    onLogin(params, onCallback),
+  const login = useCallback((params) => dispatch(
+    onLogin(params),
   ), [dispatch]);
 
   const onSubmit = (values) => {
-    login(values, callback);
+    login(values);
   };
 
   return (

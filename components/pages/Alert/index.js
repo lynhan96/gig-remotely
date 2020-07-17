@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Modal, Button, Text } from 'components/global';
 import { onCloseAlert } from 'redux/alert';
-import { Wrapper } from './styles';
+import { Wrapper, StyledText } from './styles';
 
 const Alert = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Alert = () => {
       isOpen={open}
     >
       <Wrapper>
-        <Text size='xl' weight='bold' width='auto' style={{ margin: '10px 0 40px 0' }}>{message}</Text>
+        <StyledText size='xl' weight='bold' width='auto' >{message}</StyledText>
         <Button width='200px' onClick={onClose}>close</Button>
       </Wrapper>
     </Modal>

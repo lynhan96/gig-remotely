@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import Router from 'next/router';
 import Menu from './Menu';
 import {
-  HeaderWrapper, Logo,
+  HeaderWrapper, Logo, MenuWrapper,
 } from './styles';
 
 const Header = () => {
   const headerScroll = () => {
     const header = document.getElementById('header');
-    if (window.pageYOffset > 50) {
+    if (window.pageYOffset > 50 && !header.classList.contains('sticky')) {
       header.classList.add('sticky');
-    } else {
+    }
+
+    if (window.pageYOffset < 50 && header.classList.contains('sticky')) {
       header.classList.remove('sticky');
     }
   };
@@ -27,7 +29,9 @@ const Header = () => {
   return (
     <HeaderWrapper id='header'>
       <Logo src='/images/logo.svg' onClick={() => redirectTo('/')} />
-      <Menu />
+      <MenuWrapper>
+        <Menu />
+      </MenuWrapper>
     </HeaderWrapper>
   );
 };
