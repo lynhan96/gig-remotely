@@ -1,20 +1,23 @@
 import ServerCookie from 'next-cookies';
 import React, { Component } from 'react';
-import Router from 'next/router';
 import jwtDecode from 'jwt-decode';
 
-export const privateRoute = (WrappedComponent) => class extends Component {
+export const privateRoute = (WrappedComponent, status = 'all') => class extends Component {
   static async getInitialProps(ctx) {
-    const { __gigtoken } = ServerCookie(ctx);
-    let expiresAt = null;
+    const { __gigtoken, __gigtype } = ServerCookie(ctx);
+    let expiresAt = false;
     if (__gigtoken) {
       const auth = jwtDecode(__gigtoken);
-      expiresAt = new Date(auth.exp * 1000);
+      expiresAt = new Date() > new Date(auth.exp * 1000);
     }
 
-    if (!__gigtoken || (expiresAt && new Date() > expiresAt)) {
-      Router.push('/login?redirected=true');
+    if ((status === 'all' && !__gigtype) || (status === 'onlyToken' && __gigtype) || !__gigtoken || expiresAt) {
+      ctx.res.writeHead(302, {
+        Location: '/login?redirected=true',
+      });
+      ctx.res.end();
     }
+
     if (WrappedComponent.getInitialProps) return WrappedComponent.getInitialProps();
     return {};
   }

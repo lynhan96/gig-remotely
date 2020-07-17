@@ -5,7 +5,7 @@ import Footer from 'components/pages/Footer';
 import Login from 'components/pages/Login';
 import SignUp from 'components/pages/SignUp';
 import Alert from 'components/pages/Alert';
-import Verification from 'components/pages/Verification';
+import SetupAccount from 'components/pages/SetupAccount';
 
 export {
   Footer,
@@ -15,5 +15,5 @@ export {
   Login,
   SignUp,
   Alert,
-  Verification,
+  SetupAccount,
 };

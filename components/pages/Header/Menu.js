@@ -15,6 +15,11 @@ const Nav = () => {
     Router.push(link);
   };
 
+
+  console.log(token)
+  console.log(userType)
+
+
   if (token && userType === 'COMPANY') {
     return (
       <>
@@ -63,7 +68,7 @@ const Nav = () => {
           <MenuGroup>
             <MenuItem>account</MenuItem>
             <MenuItem>
-              <Button onClick={redirectTo('/gigs')}>find gigs</Button>
+              <Button onClick={() => redirectTo('/gigs')}>find gigs</Button>
             </MenuItem>
           </MenuGroup>
         </Menu>
@@ -71,7 +76,7 @@ const Nav = () => {
     );
   }
 
-  if (!token && !userType) {
+  if ((!token && !userType) || (token && !userType)) {
     return (
       <>
         <StyledBurger open={open} onClick={() => setOpen(!open)}>

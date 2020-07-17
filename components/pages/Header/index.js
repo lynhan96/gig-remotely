@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import Router from 'next/router';
 import Menu from './Menu';
 import {
-  HeaderWrapper, Logo, MenuWrapper
+  HeaderWrapper, Logo, MenuWrapper,
 } from './styles';
 
 const Header = () => {
   const headerScroll = () => {
     const header = document.getElementById('header');
-    if (window.pageYOffset > 50) {
+    if (window.pageYOffset > 50 && !header.classList.contains('sticky')) {
       header.classList.add('sticky');
-    } else {
+    }
+
+    if (window.pageYOffset < 50 && header.classList.contains('sticky')) {
       header.classList.remove('sticky');
     }
   };

@@ -6,13 +6,14 @@ const responsiveFontSize = '24px';
 
 export const HeaderWrapper = styled.div`
   z-index: 9999;
-  position: relative;
   display: flex;
   width: calc(100% - 180px);
   padding: 50px 90px;
   height: 45px;
   align-items: center;
   background: ${color.offWhite};
+  position: fixed;
+  top: 0;
 
   @media(min-width: 1025px) and (max-width: 1280px) {
     padding: 40px;

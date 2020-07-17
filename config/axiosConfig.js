@@ -2,11 +2,11 @@ import axios from 'axios';
 import Cookie from 'js-cookie';
 
 const baseUrl = 'https://api.gigremotely.tk/';
-// axios.defaults.headers.common['Authorization'] = `Bearer ${}`;
+// axios.defaults.headers.common['Authorization'] = `Bearer ${Cookie.get('_gigtoken')}`;
 axios.interceptors.request.use(
   (config) => {
     if (config.baseURL === baseUrl && !config.headers.Authorization) {
-      const token = Cookie.get('_token');
+      const token = Cookie.get('__gigtoken');
       if (token) config.headers.Authorization = `Bearer ${token}`;
     }
 
