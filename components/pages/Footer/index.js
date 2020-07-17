@@ -5,6 +5,8 @@ import {
 } from './styles';
 
 const Footer = () => (
+  <>
+    {console.log('render')}
   <Wrapper>
     <StyledContainer>
       <Group position='first'>
@@ -22,6 +24,7 @@ const Footer = () => (
       </Group>
     </StyledContainer>
   </Wrapper>
+  </>
 );
 
 export default Footer;

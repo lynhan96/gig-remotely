@@ -1,6 +1,8 @@
 import { post } from 'axios';
+import Cookie from 'js-cookie';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
+import Router from 'next/router';
 
 export const ON_LOGIN = 'ON_LOGIN';
 export const ON_SIGN_UP = 'ON_SIGN_UP';
@@ -14,15 +16,22 @@ function* signUp({ params, callback }) {
   }
 }
 
-function* login({ params, callback }) {
+function* login({ params }) {
   try {
     const response = yield call(post, '/users/login', params);
 
-    localStorage.setItem('access_token', response.access_token);
-    localStorage.setItem('user_type', 'SEEKER');
-    callback();
+    Cookie.set('__gigtoken', response.access_token);
+    Cookie.set('__gigtype', response.userType);
+    Router.push('/gig-seeker/profile');
   } catch (error) {
-    yield put(onOpenAlert('Wrong email or password!'));
+    console.log(error);
+    if (error.status === 401) {
+      yield put(onOpenAlert('Wrong email or password!'));
+    } else if (error.status === 403) {
+      Router.push('/resend-verification');
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
   }
 }
 

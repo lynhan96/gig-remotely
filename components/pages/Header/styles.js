@@ -30,7 +30,20 @@ export const HeaderWrapper = styled.div`
   }
 `;
 
+export const MenuWrapper = styled.div`
+  width: calc(100% - 300px);
+  display: flex;
+  align-items: center;
+
+  @media(max-width: 1024px) {
+    height: 100%;
+    width: 100%;
+  }
+
+`;
+
 export const Logo = styled.img`
+  width: 300px;
   object-fit: contain;
   cursor: pointer;
 
@@ -45,9 +58,9 @@ export const Logo = styled.img`
 
 export const Menu = styled.div`
   display: flex;
-  width: calc(100% - 250px);
   justify-content: space-between;
   margin-left: 60px;
+  width: 100%;
 
   @media(min-width: 1025px) and (max-width: 1280px) {
     margin-left: 35px;
@@ -58,10 +71,10 @@ export const Menu = styled.div`
     flex-direction: column;
     justify-content: center;
     background: ${color.offWhite};
-    height: ${({ open }) => (open ? 'calc(100vh - 80px)' : 0)};
+    height: ${({ open }) => (open ? 'calc(100vh - 65px)' : 0)};
     overflow: hidden;
     position: absolute;
-    top: 80px;
+    top: 65px;
     left: 0;
     transition: height 0.4s ease-in-out;
     width: 100%;
@@ -73,7 +86,8 @@ export const MenuGroup = styled.div`
   align-items: center;
 
   @media(max-width: 1024px) {
-    display: none;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
 
