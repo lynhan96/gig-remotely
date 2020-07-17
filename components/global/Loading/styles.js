@@ -18,19 +18,22 @@ const dots = keyframes`
   }
 `;
 
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const StyledLoading = styled.div`
   display: initial;
   text-align: center;
   color: ${color.black};
-  font-size: 50px;
+  font-size: ${({ size }) => size || '50px'};
   font-weight: bold;
-
 
   :after {
     content: ' .';
     animation: ${dots} 1s steps(5, end) infinite;
   }
-
 `;
 
 export default StyledLoading;

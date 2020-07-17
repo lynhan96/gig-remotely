@@ -6,6 +6,7 @@ import Login from 'components/pages/Login';
 import SignUp from 'components/pages/SignUp';
 import Alert from 'components/pages/Alert';
 import SetupAccount from 'components/pages/SetupAccount';
+import Companies from 'components/pages/Companies';
 
 export {
   Footer,
@@ -16,4 +17,5 @@ export {
   SignUp,
   Alert,
   SetupAccount,
+  Companies,
 };

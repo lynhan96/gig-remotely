@@ -15,11 +15,6 @@ const Nav = () => {
     Router.push(link);
   };
 
-
-  console.log(token)
-  console.log(userType)
-
-
   if (token && userType === 'COMPANY') {
     return (
       <>
