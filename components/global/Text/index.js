@@ -43,6 +43,7 @@ const Text = ({
   className,
   color,
   onClick,
+  dangerouslySetInnerHTML,
 }) => (
   <StyledText
     onClick={onClick}
@@ -52,6 +53,7 @@ const Text = ({
     style={style}
     size={fontSize(size)}
     weight={weight}
+    dangerouslySetInnerHTML={dangerouslySetInnerHTML}
   >
     {children}
   </StyledText>

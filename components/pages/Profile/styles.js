@@ -74,6 +74,8 @@ export const TitleWrapper = styled.div`
 `;
 
 export const StyledText = styled(Text)`
+  white-space: pre-line;
+  line-height: 1.23;
   margin-bottom: ${({ marginBottom }) => marginBottom || '20px'};
 
   a{

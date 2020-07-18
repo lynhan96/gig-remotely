@@ -15,7 +15,7 @@ import {
   ContactInfo,
   Icon,
   ContactItem,
-  GigInfo
+  GigInfo,
 } from './styles';
 
 const CompanyProfile = ({ data }) => {
@@ -37,23 +37,23 @@ const CompanyProfile = ({ data }) => {
       <InfoWrapper>
         <AboutUs>
           <StyledText size='mmd' weight='bold'>About the Company</StyledText>
-          <StyledText size='mmd'>{about}</StyledText>
+          <StyledText size='mmd' dangerouslySetInnerHTML={{ __html: about }} />
         </AboutUs>
         <ContacInfoWrapper>
           <GigInfo>
             <GigNumber>0</GigNumber>
             <StyledText style={{ textAlign: 'center' }} size='mmd' weight='bold'>gig(s) available</StyledText>
-            <Button >see gigs</Button>
+            <Button>see gigs</Button>
           </GigInfo>
           <ContactItem>
-            <Icon src='/images/icon/email.svg' alt='error'/>
+            <Icon src='/images/icon/email.svg' alt='error' />
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Email</StyledText>
               <StyledText size='mmd' marginBottom='0'><a href={`mailto:${email}`}>{email}</a></StyledText>
             </ContactInfo>
           </ContactItem>
           <ContactItem>
-            <Icon src='/images/icon/phone.svg' alt='error'/>
+            <Icon src='/images/icon/phone.svg' alt='error' />
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Contact No.</StyledText>
               <StyledText size='mmd' marginBottom='0'>
@@ -62,7 +62,7 @@ const CompanyProfile = ({ data }) => {
             </ContactInfo>
           </ContactItem>
           <ContactItem>
-            <Icon src='/images/icon/earth.svg' alt='error'/>
+            <Icon src='/images/icon/earth.svg' alt='error' />
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Location</StyledText>
               <StyledText size='mmd' marginBottom='0'>{location}</StyledText>
