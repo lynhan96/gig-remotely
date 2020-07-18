@@ -42,8 +42,10 @@ const Text = ({
   weight,
   className,
   color,
+  onClick,
 }) => (
   <StyledText
+    onClick={onClick}
     color={color}
     className={className}
     width={width}
@@ -77,6 +79,7 @@ Text.propTypes = {
   children: PropTypes.node,
   weight: PropTypes.string,
   color: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Text.defaultProps = {
@@ -87,6 +90,7 @@ Text.defaultProps = {
   style: {},
   children: null,
   color: '',
+  onClick: null,
 };
 
 export default Text;

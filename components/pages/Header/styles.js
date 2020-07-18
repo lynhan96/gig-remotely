@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { color } from 'components/utils/color';
+import { Text } from 'components/global';
 
 const fontSize = '18px';
 const responsiveFontSize = '24px';
@@ -102,7 +103,36 @@ export const BurgerMenuGroup = styled.div`
   }
 `;
 
+export const SubMenu = styled.div`
+  min-width: 120px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: ${color.black};
+  padding: 20px 20px;
+  position: absolute;
+  top: 50px;
+`;
+
+export const SubMenuItem = styled(Text)`
+  width: 100%;
+  color: ${color.offWhite};
+  margin-bottom: 15px;
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0
+  };
+
+  &:hover {
+    font-weight: bold;
+  }
+`;
+
 export const MenuItem = styled.div`
+  position: relative;
   display: flex;
   font-weight: bold;
   align-items: center;
@@ -110,16 +140,24 @@ export const MenuItem = styled.div`
   font-size: ${fontSize};
   margin: 0 25px;
   cursor: pointer;
+  height: 100%;
 
   &:last-child {
     margin-right: 0;
   }
 
   @media(max-width: 1024px) {
+    height: auto;
     margin: 0;
     margin-top: 25px;
     font-size: ${responsiveFontSize};
     font-weight: normal;
+  }
+
+  &:hover {
+    ${SubMenu} {
+      display: flex;
+    }
   }
 `;
 

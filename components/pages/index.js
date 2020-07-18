@@ -6,6 +6,8 @@ import Login from 'components/pages/Login';
 import SignUp from 'components/pages/SignUp';
 import Alert from 'components/pages/Alert';
 import SetupAccount from 'components/pages/SetupAccount';
+import Companies from 'components/pages/Companies';
+import CompanyProfile from 'components/pages/Profile/Company';
 import WhoWeAre from 'components/pages/WhoWeAre';
 import GigSubmitted from 'components/pages/GigSubmitted';
 
@@ -20,4 +22,6 @@ export {
   WhoWeAre,
   GigSubmitted,
   SetupAccount,
+  Companies,
+  CompanyProfile,
 };
