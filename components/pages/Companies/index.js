@@ -27,7 +27,7 @@ const Companies = () => {
 
   if (loading) {
     return (
-      <Wrapper loading={loading}>
+      <Wrapper loading={loading.toString()}>
         <Loading showText size='60px' />
       </Wrapper>
     );

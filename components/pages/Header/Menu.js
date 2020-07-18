@@ -11,7 +11,6 @@ const Nav = () => {
   const userType = Cookie.get('__gigtype');
   const token = Cookie.get('__gigtoken');
   const redirectTo = (link) => {
-    console.log(23123213)
     setOpen(false);
     Router.push(link);
   };
