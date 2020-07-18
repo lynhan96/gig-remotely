@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { Text, Button } from 'components/global';
+import { color } from 'components/utils/color';
 
 export const Image = styled.img`
   width: 310px;
   height: 310px;
   margin-bottom: 34px;
-  margin-top:40px;
+  margin-top: 40px;
   object-fit: contain;
 
   @media (max-width: 768px) {
@@ -99,4 +100,8 @@ export const StyledText = styled(Text)`
   @media (max-width: 280px) {
     font-size: 8px;
   }
+`;
+
+export const StyledLink = styled.a`
+  color: ${color.black};
 `;
