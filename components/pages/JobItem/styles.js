@@ -196,7 +196,7 @@ export const Locale = styled.div`
   justify-content: space-between;
 
   @media (min-width: 769px) and (max-width: 1500px){
-    width: 45%
+    width: 47%
   }
 
   @media (max-width: 768px){
@@ -208,9 +208,10 @@ export const Locale = styled.div`
 `;
 
 export const LocaleItem = styled.div`
-  width: 33%;
+  width: 30%;
   display: flex;
   align-items: flex-start;
+  ${({ longText }) => longText && css`width: 36%;`}
 
   @media (max-width: 768px){
     width: 27%
@@ -263,7 +264,7 @@ export const TagGroup = styled.div`
   margin-top: 20px;
 
   @media (min-width: 769px) and (max-width: 1500px){
-    width: 45%
+    width: 47%
   }
 
   @media (max-width: 768px){

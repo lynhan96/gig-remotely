@@ -8,8 +8,9 @@ const Input = ({
   onChange,
   placeholder,
   type,
-  inputRef,
   error,
+  defaultValue,
+  inputRef,
 }) => {
   const [inputType, setInputType] = useState(type);
 
@@ -34,6 +35,7 @@ const Input = ({
   return (
     <InputWrapper>
       <StyledInput
+        defaultValue={defaultValue}
         error={error}
         ref={inputRef}
         type={inputType}
@@ -61,6 +63,7 @@ Input.propTypes = {
   ]),
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
+  defaultValue: PropTypes.string,
   error: PropTypes.bool,
 };
 
@@ -71,6 +74,7 @@ Input.defaultProps = {
   name: '',
   placeholder: '',
   error: false,
+  defaultValue: '',
 };
 
 export default Input;

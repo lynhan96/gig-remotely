@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
   align-items: center;
   margin-bottom: 100px;
 
-  ${({ loading }) => loading && css`
+  ${({ loading }) => loading === 'true' && css`
     height: 70vh;
     padding-bottom: 70px;
     margin-bottom: 0;

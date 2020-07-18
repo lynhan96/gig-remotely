@@ -8,6 +8,7 @@ import Alert from 'components/pages/Alert';
 import SetupAccount from 'components/pages/SetupAccount';
 import Companies from 'components/pages/Companies';
 import CompanyProfile from 'components/pages/Profile/Company';
+import Gigs from 'components/pages/Gigs';
 
 export {
   Footer,
@@ -20,4 +21,5 @@ export {
   SetupAccount,
   Companies,
   CompanyProfile,
+  Gigs,
 };
