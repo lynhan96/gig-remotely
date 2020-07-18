@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { Text, Button } from 'components/global';
 
 export const Image = styled.img`
-  width: 316px;
+  width: 310px;
   height: 310px;
   margin-bottom: 34px;
   margin-top:40px;
+  object-fit: contain;
 
   @media (max-width: 768px) {
     width: 250px;
@@ -81,6 +82,8 @@ export const StyledButton = styled(Button)`
 `;
 
 export const StyledText = styled(Text)`
+  display: inline-block;
+ 
   @media (max-width: 450px) {
     font-size: 13px;
   }
