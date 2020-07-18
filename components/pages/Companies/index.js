@@ -38,7 +38,7 @@ const Companies = () => {
       <ListWrapper>
         {
           data.map((item, index) => (
-            <Item key={index} onClick={() => Router.push(`/companies/${item.id}`)}>
+            <Item key={index} onClick={() => Router.push('/companies/[id]', `/companies/${item.id}`)}>
               <Image src={`https://gigremotely.s3-ap-southeast-1.amazonaws.com/${item.photo}`} />
               <Name size='mmd' weight='bold'>{item.name}</Name>
               <Location size='xs'>{item.location}</Location>

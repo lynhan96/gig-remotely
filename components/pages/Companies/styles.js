@@ -29,6 +29,8 @@ export const Wrapper = styled.div`
 
   ${({ loading }) => loading && css`
     height: 70vh;
+    padding-bottom: 70px;
+    margin-bottom: 0;
   `}
 `;
 

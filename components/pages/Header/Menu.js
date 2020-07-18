@@ -3,7 +3,7 @@ import Router from 'next/router';
 import Cookie from 'js-cookie';
 import { Button } from 'components/global';
 import {
-  Menu, MenuItem, MenuGroup, StyledBurger, BurgerMenuGroup,
+  Menu, MenuItem, MenuGroup, StyledBurger, BurgerMenuGroup, SubMenu, SubMenuItem,
 } from './styles';
 
 const Nav = () => {
@@ -11,6 +11,7 @@ const Nav = () => {
   const userType = Cookie.get('__gigtype');
   const token = Cookie.get('__gigtoken');
   const redirectTo = (link) => {
+    console.log(23123213)
     setOpen(false);
     Router.push(link);
   };
@@ -29,7 +30,12 @@ const Nav = () => {
             <MenuItem>companies</MenuItem>
           </MenuGroup>
           <MenuGroup>
-            <MenuItem>account</MenuItem>
+            <MenuItem>
+              account
+              <SubMenu>
+                <SubMenuItem>logout</SubMenuItem>
+              </SubMenu>
+            </MenuItem>
             <MenuItem>
               <Button>post gig</Button>
             </MenuItem>
@@ -61,7 +67,12 @@ const Nav = () => {
             <MenuItem onClick={() => redirectTo('/companies')}>companies</MenuItem>
           </MenuGroup>
           <MenuGroup>
-            <MenuItem>account</MenuItem>
+            <MenuItem>
+              account
+              <SubMenu>
+                <SubMenuItem size='sm' onClick={() => redirectTo('/login')}>log out</SubMenuItem>
+              </SubMenu>
+            </MenuItem>
             <MenuItem>
               <Button onClick={() => redirectTo('/gigs')}>find gigs</Button>
             </MenuItem>

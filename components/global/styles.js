@@ -42,6 +42,17 @@ export const Container = styled.div`
   }
 `;
 
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    height: 70vh;
+    padding-bottom: 70px;
+    margin-bottom: 0;
+`;
+
 export const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'Proxima Nova';
