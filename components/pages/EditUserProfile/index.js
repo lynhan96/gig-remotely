@@ -1,9 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Form, Button, Loading,
 } from 'components/global';
 import { LoadingWrapper } from 'components/global/styles';
+import { CategoriesSelect } from 'components/pages';
 import {
   Wrapper, Title, RightWrapper, LeftWrapper, ButtonWrapper, SpecialWrapper, SpecialItem,
 } from './styles';
@@ -11,6 +12,7 @@ import {
 const EditUserProfile = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.user.data);
+  const skillRef = useRef([]);
 
   if (Object.keys(data).length === 0) {
     return (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>);
@@ -51,6 +53,7 @@ const EditUserProfile = () => {
           <Form.Item name='linkedin' label='Linkedin' placeholder='Linkedin' background='#efefe4' defaultValue={linkedin} />
           <Form.Item name='instagram' label='Instagram' placeholder='Instagram' background='#efefe4' defaultValue={instagram} />
           <Form.FileInput name='resume' label='Resume' defaultValue={resume} />
+          <CategoriesSelect label='Featured Skills & Tools (Select up to 9)' skillRef={skillRef} selectedSkill={skills} />
         </RightWrapper>
         <ButtonWrapper>
           <Button htmlType='submit' width='200px'>save</Button>

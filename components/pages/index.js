@@ -14,6 +14,7 @@ import JobItem from 'components/pages/JobItem';
 import MainLayout from 'components/pages/Layout';
 import UserProfile from 'components/pages/Profile/User';
 import EditUserProfile from 'components/pages/EditUserProfile';
+import CategoriesSelect from 'components/pages/CategoriesSelect';
 
 export {
   Footer,
@@ -32,4 +33,5 @@ export {
   MainLayout,
   UserProfile,
   EditUserProfile,
+  CategoriesSelect,
 };

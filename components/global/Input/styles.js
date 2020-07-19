@@ -72,11 +72,6 @@ export const StyledTextArea = styled.textarea`
   color: ${color.black};
   position: relative;
 
-  ${({ error }) => error && css`
-    border: solid 1px ${color.red};
-    color: ${color.red};
-  `}
-
   ::placeholder {
     color: ${color.cement};
     opacity: 1;
