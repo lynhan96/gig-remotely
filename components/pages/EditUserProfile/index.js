@@ -50,7 +50,7 @@ const EditUserProfile = () => {
           <Form.Item name='website' label='Website' placeholder='Website' background='#efefe4' defaultValue={website} />
           <Form.Item name='linkedin' label='Linkedin' placeholder='Linkedin' background='#efefe4' defaultValue={linkedin} />
           <Form.Item name='instagram' label='Instagram' placeholder='Instagram' background='#efefe4' defaultValue={instagram} />
-          <Form.Item name='resume' label='Resume' placeholder='Resume' background='#efefe4' />
+          <Form.FileInput name='resume' label='Resume' defaultValue={resume} />
         </RightWrapper>
         <ButtonWrapper>
           <Button htmlType='submit' width='200px'>save</Button>

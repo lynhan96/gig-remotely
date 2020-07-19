@@ -79,8 +79,47 @@ export const FormItem = styled.div`
   }
 `;
 
+export const FileInputLabel = styled(Text)`
+  width: 100%;
+  margin-bottom: 10px;
+  font-weight: bold;
+`;
+
+export const FileInput = styled.div`
+  font-family: 'Proxima Nova', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 17px;
+  width: calc(100% - 40px);
+  height: 50px;
+  outline: none;
+  border-radius: 30px;
+  border: solid 1px ${color.eggshell};
+  background: ${color.eggshell};
+  color: ${color.black};
+  position: relative;
+`;
+
+export const FileInputIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 30px;
+`;
+
+export const FileInputRemove = styled(Text)`
+  width: auto;
+  text-decoration: underline;
+  position: absolute;
+  right: 60px;
+  cursor: pointer;
+  color: ${color.cement};
+  z-index: 999;
+`;
+
 export const PhotoInputWrapper = styled.div`
-  width: 350px;
+  width: 280px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -109,9 +148,19 @@ export const Upload = styled.input`
   width: 150%;
   height: 150%;
   position: absolute;
-  margin-top: -50px;
-  margin-left: -50px;
+  margin-top: -5%;
+  margin-left: -30%;
   cursor: pointer;
+`;
+
+export const FileInputWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
 `;
 
 export const PhotoLabel = styled(Text)`
