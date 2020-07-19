@@ -45,6 +45,11 @@ export const Icon = styled.img`
   -webkit-animation: ${moveRight} 0.8s linear 0.4s infinite alternate;
   animation: ${moveRight} 0.8s linear 0.4s infinite alternate;
   margin-top: 2px;
+  display: none;
+
+  @media(max-width: 767px) {
+    display: block;
+  }
 `;
 
 export const TabItem = styled(Text)`
@@ -107,7 +112,7 @@ export const TabsItemWrapper = styled.div`
     display: none;
   }
 
-  @media(max-width: 768px) {
+  @media(max-width: 767px) {
     width: calc(100% - 40px);
     margin-right: 10px;
   }
@@ -116,8 +121,9 @@ export const TabsItemWrapper = styled.div`
 export const TabScrollAble = styled.div`
   width: 100%;
   display: flex;
+  padding-bottom: 10px;
 
-  @media(max-width: 768px) {
+  @media(max-width: 767px) {
     width: 150%;
     padding-bottom: 10px;
   }
