@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { color } from 'components/utils/color';
 
 export const StyledInput = styled.input`
+  font-family: 'Proxima Nova', sans-serif;
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -10,8 +11,8 @@ export const StyledInput = styled.input`
   ${({ size }) => `height: ${size}px;`}
   outline: none;
   border-radius: 30px;
-  border: solid 1px ${color.black};
-  background: ${color.offWhite};
+  border: solid 1px ${({ background }) => (background || color.black)};
+  background: ${({ background }) => (background || color.offWhite)};
   color: ${color.black};
   position: relative;
 
@@ -54,4 +55,42 @@ export const InputWrapper = styled.span`
   display: flex;
   position: relative;
   align-items: center;
+`;
+
+export const StyledTextArea = styled.textarea`
+  font-family: 'Proxima Nova', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  font-size: 17px;
+  width: calc(100% - 40px);
+  min-height: 400px;
+  outline: none;
+  border-radius: 10px;
+  border: solid 1px ${({ background }) => (background || color.black)};
+  background: ${({ background }) => (background || color.offWhite)};
+  color: ${color.black};
+  position: relative;
+
+  ${({ error }) => error && css`
+    border: solid 1px ${color.red};
+    color: ${color.red};
+  `}
+
+  ::placeholder {
+    color: ${color.cement};
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: ${color.cement};
+  }
+
+  ::-ms-input-placeholder {
+    color: ${color.cement};
+  }
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;

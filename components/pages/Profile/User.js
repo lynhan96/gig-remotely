@@ -55,7 +55,7 @@ const UserProfile = () => {
             edit profile
           </Button>
         </AboutUs>
-        <ContacInfoWrapper>
+        <ContacInfoWrapper maxWidth>
           <StyledText size='mmd' weight='bold' marginBottom='0'>Skills & Specialisations </StyledText>
           <TagsGroup>
             {skills.map((skill, index) => (

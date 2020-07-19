@@ -1,16 +1,22 @@
 import React, {
-  useState, useEffect, createContext, useRef, useContext,
+  useState, useEffect, createContext, useRef, useContext, useCallback,
 } from 'react';
+import { useDispatch } from 'react-redux';
+import { onGetS3Url } from 'saga/upload';
 import { Input } from 'components/global';
 import PropTypes from 'prop-types';
 
 import {
   StyledForm,
   FormItem,
-  EmptyLabel,
   StyledText,
   ErrorLabel,
   FieldWrapper,
+  PhotoInputWrapper,
+  PhotoWrapper,
+  Image,
+  Upload,
+  PhotoLabel,
 } from './styles';
 
 const FormContext = createContext();
@@ -20,11 +26,13 @@ const Form = ({
   children,
   className,
   style,
+  type,
 }) => {
   const errorRef = useRef([]);
   const itemsRef = useRef([]);
   const valuesRef = useRef({});
   const state = {
+    itemType: type,
     errorRef,
     itemsRef,
     valuesRef,
@@ -42,7 +50,7 @@ const Form = ({
 
   return (
     <FormContext.Provider value={state}>
-      <StyledForm style={style} className={className} onSubmit={handleSubmit}>
+      <StyledForm style={style} className={className} onSubmit={handleSubmit} type={type}>
         {children}
       </StyledForm>
     </FormContext.Provider>
@@ -54,11 +62,62 @@ Form.validateEmail = (email) => {
   return re.test(String(email).toLowerCase());
 };
 
+Form.Photo = ({
+  name, label, defaultValue,
+}) => {
+  const dispatch = useDispatch();
+  const [image, setImage] = useState(defaultValue);
+  const { valuesRef } = useContext(FormContext);
+
+  const getS3Url = useCallback((filename, type, callback) => dispatch(
+    onGetS3Url(filename, type, callback),
+  ), [dispatch]);
+
+  const onChange = (event) => {
+    const file = event.target.files[0];
+    // const filename = `${Math.round((new Date()).getTime() / 1000)}-${file.name}`;
+    // console.log(filename);
+    // getS3Url(filename, file.type, (response) => {
+    //   console.log(response);
+    // });
+    // let presignedUrl = await fetch(
+    //   `/api/s3?filename=${filename}&type=${e[i].type}`)
+    // let json = await presignedUrl.json()
+    // let url = json.signedURL
+
+    // await fetch(url, {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Content-Type': e[i].type,
+    //   },
+    //   body: e[i],
+    // })
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImage(e.target.result);
+    };
+    reader.readAsDataURL(file);
+    valuesRef.current[name] = defaultValue;
+  };
+
+  return (
+    <PhotoInputWrapper>
+      <PhotoWrapper>
+        <Image src={image ? image : '/images/icon/upload.svg'} hasImage={image} />
+      </PhotoWrapper>
+      <Upload type='file' onChange={onChange} />
+      <PhotoLabel>{label}</PhotoLabel>
+    </PhotoInputWrapper>
+  );
+};
+
 Form.Item = ({
-  required, name, label, type, placeholder, validateType,
+  required, name, label, type, placeholder, validateType, background, defaultValue,
 }) => {
   const [fieldValidate, setFieldValidate] = useState({ hasError: false, message: '' });
-  const { errorRef, itemsRef, valuesRef } = useContext(FormContext);
+  const {
+    errorRef, itemsRef, valuesRef, itemType,
+  } = useContext(FormContext);
   const fieldRef = useRef();
 
   const executeValidate = (value) => {
@@ -94,10 +153,19 @@ Form.Item = ({
   }, []);
 
   return (
-    <FormItem>
+    <FormItem itemType={itemType}>
       {label && <StyledText size='sm' weight='bold'>{label}</StyledText>}
       <FieldWrapper hasLabel={label}>
-        <Input error={fieldValidate.hasError} type={type} placeholder={placeholder} onChange={onChange} inputRef={fieldRef} />
+        <Input
+          defaultValue={defaultValue}
+          fieldType={type === 'textarea' ? 'textarea' : 'input'}
+          error={fieldValidate.hasError}
+          type={type}
+          placeholder={placeholder}
+          onChange={onChange}
+          inputRef={fieldRef}
+          background={background}
+        />
         {fieldValidate.hasError && <ErrorLabel>{fieldValidate.message}</ErrorLabel>}
       </FieldWrapper>
     </FormItem>
@@ -105,6 +173,7 @@ Form.Item = ({
 };
 
 Form.Item.propTypes = {
+  background: PropTypes.string,
   required: PropTypes.bool,
   name: PropTypes.string,
   label: PropTypes.string,
@@ -113,6 +182,7 @@ Form.Item.propTypes = {
     'email',
     'password',
     'number',
+    'textarea',
   ]),
   placeholder: PropTypes.string,
   validateType: PropTypes.string,
@@ -125,6 +195,7 @@ Form.Item.defaultProps = {
   type: 'text',
   placeholder: '',
   validateType: '',
+  background: '',
 };
 
 Form.propTypes = {
@@ -132,9 +203,11 @@ Form.propTypes = {
   children: PropTypes.node,
   onSubmit: PropTypes.func,
   className: PropTypes.string,
+  type: PropTypes.string,
 };
 
 Form.defaultProps = {
+  type: 'vertical',
   style: {},
   className: '',
   children: null,

@@ -179,6 +179,14 @@ export const ContacInfoWrapper = styled.div`
   @media (max-width: 1023px) {
     margin-top: 25px;
   }
+
+  @media (max-width: 768px) {
+    width: ${({ maxWidth }) => maxWidth ? '100%' : '345px'};
+  }
+
+  @media (max-width: 440px) {
+    width: 100%;
+  }
 `;
 
 export const ContactItem = styled.div`
