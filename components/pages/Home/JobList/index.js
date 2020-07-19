@@ -11,7 +11,7 @@ const JobList = () => {
   const dispatch = useDispatch();
 
   const callback = (jobs) => {
-    setState({ loading: true, data: data.concat(jobs) });
+    setState({ loading: false, data: data.concat(jobs) });
   };
 
   const getJobs = useCallback((params, onCallback) => dispatch(

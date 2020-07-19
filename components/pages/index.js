@@ -11,6 +11,8 @@ import CompanyProfile from 'components/pages/Profile/Company';
 import Gigs from 'components/pages/Gigs';
 import MyGigs from 'components/pages/MyGigs';
 import JobItem from 'components/pages/JobItem';
+import MainLayout from 'components/pages/Layout';
+import UserProfile from 'components/pages/Profile/User';
 
 export {
   Footer,
@@ -26,4 +28,6 @@ export {
   Gigs,
   MyGigs,
   JobItem,
+  MainLayout,
+  UserProfile,
 };

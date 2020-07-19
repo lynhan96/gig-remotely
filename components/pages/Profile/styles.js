@@ -357,3 +357,17 @@ export const GigCompanyTitle = styled(Text)`
     font-size: 16px;
   }
 `;
+
+export const TagsGroup = styled.div`
+  display: flex;
+  width: 100%;
+  flex-flow: wrap row;
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+
+export const ButtonIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+`;
