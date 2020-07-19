@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color } from 'components/utils/color';
 
 export const StyledTag = styled.div`
@@ -12,6 +12,11 @@ export const StyledTag = styled.div`
   margin-right: 10px;
   border-radius: 5px;
   background-color: ${color.eggshell};
+
+  ${({ disabled }) => disabled && css`
+    border: solid 1px ${color.cement};
+    color: ${color.cement};
+  `}
 `;
 
 export default StyledTag;

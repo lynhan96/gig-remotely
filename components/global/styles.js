@@ -133,7 +133,7 @@ export const GlobalStyle = createGlobalStyle`
 
   ::-webkit-scrollbar
   {
-    width: 10px;
+    width: 1px;
     background-color: #F5F5F5;
   }
 
@@ -145,8 +145,8 @@ export const GlobalStyle = createGlobalStyle`
 
   @media (max-width: 767px) {
     ::-webkit-scrollbar {
-        width: 0px;
-        background: transparent; /* make scrollbar transparent */
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
     }
   }
 

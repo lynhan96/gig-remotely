@@ -39,10 +39,14 @@ export const StyledButton = styled.button`
     }
   }}
 
+  &:disabled {
+    background: ${color.cement};
+    cursor: not-allowed;
+  }
+
   &:hover {
     color: ${color.white};
-    background: #F6682F;
-    background-image: linear-gradient(to right, ${color.aquaMarine}, ${color.pumpkinOrange});
+    background-image: ${({ disabled }) => (disabled ? 'transparent' : `linear-gradient(to right, ${color.aquaMarine}, ${color.pumpkinOrange})`)};
     bottom: 0;
     transition: all 0.2s ease-out;
   }

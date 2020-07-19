@@ -35,12 +35,14 @@ const Tag = ({
   style,
   weight,
   className,
+  disabled,
 }) => (
   <StyledTag
     className={className}
     style={style}
     size={fontSize(size)}
     weight={weight}
+    disabled={disabled}
   >
     {children}
   </StyledTag>
@@ -64,9 +66,11 @@ Tag.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   weight: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 Tag.defaultProps = {
+  disabled: false,
   className: '',
   weight: 'normal',
   size: 'sm',

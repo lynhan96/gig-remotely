@@ -11,7 +11,7 @@ const JobList = () => {
   const dispatch = useDispatch();
 
   const callback = (jobs) => {
-    setState({ loading: false, data: data.concat(jobs) });
+    setState({ loading: true, data: data.concat(jobs) });
   };
 
   const getJobs = useCallback((params, onCallback) => dispatch(
@@ -24,7 +24,7 @@ const JobList = () => {
 
   return (
     <Wrapper>
-      <ListWrapper>
+      <ListWrapper loading={loading.toString()}>
         {
           loading ? <Loading showText size='60px' />
             : data.map((item, index) => (

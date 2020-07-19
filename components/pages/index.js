@@ -9,6 +9,8 @@ import SetupAccount from 'components/pages/SetupAccount';
 import Companies from 'components/pages/Companies';
 import CompanyProfile from 'components/pages/Profile/Company';
 import Gigs from 'components/pages/Gigs';
+import MyGigs from 'components/pages/MyGigs';
+import JobItem from 'components/pages/JobItem';
 
 export {
   Footer,
@@ -22,4 +24,6 @@ export {
   Companies,
   CompanyProfile,
   Gigs,
+  MyGigs,
+  JobItem,
 };

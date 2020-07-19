@@ -1,10 +1,11 @@
-import { put as axiosPut } from 'axios';
+import { get, put as axiosPut } from 'axios';
 import Cookie from 'js-cookie';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
 import Router from 'next/router';
 
 const ON_UPDATE_USER_TYPE = 'ON_UPDATE_USER_TYPE';
+const ON_GET_MY_GIGS = 'ON_GET_MY_GIGS';
 
 function* updateUserType({ userType }) {
   try {
@@ -21,10 +22,34 @@ function* updateUserType({ userType }) {
   }
 }
 
+function* getMyGigs({ setState }) {
+  try {
+    const response = yield call(get, '/job/mine');
+
+    const all = response;
+    const applied = response.filter((i) => i.jobApplication);
+    const unapplied = response.filter((i) => !i.jobApplication);
+    const expired = response.filter((i) => i.job.status === 'EXPIRED');
+    setState({
+      loading: false,
+      data: {
+        applied, unapplied, all, expired,
+      },
+    });
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
+
 export const onUpdateUserType = (userType) => ({
   type: ON_UPDATE_USER_TYPE, userType,
 });
 
+export const onGetMyGigs = (setState) => ({
+  type: ON_GET_MY_GIGS, setState,
+});
+
 export default function* userWatcher() {
   yield takeLatest(ON_UPDATE_USER_TYPE, updateUserType);
+  yield takeLatest(ON_GET_MY_GIGS, getMyGigs);
 }

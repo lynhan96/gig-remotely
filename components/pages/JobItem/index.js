@@ -36,15 +36,17 @@ const labelBackground = (type) => {
   }
 };
 
-const JobItem = ({ item }) => {
+const JobItem = ({ item, favorite, applied }) => {
   const {
-    title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, expiredAt, startedAt,
+    title, contractType, company, description, location, skills, duration, timezone, boostStart, startedAt, boostEnd, status
   } = item;
 
   const active = () => boostStart && boostEnd && moment(boostStart) < moment(boostEnd);
 
+  const disabledItem = status === 'EXPIRED';
+
   return (
-    <ItemWrapper>
+    <ItemWrapper disabled={disabledItem}>
       { active() && <Active />}
       <ContentWrapper active={active()}>
         <Information>
@@ -59,25 +61,25 @@ const JobItem = ({ item }) => {
                 <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
               </Title>
               <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
-              <Text size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</Text>
+              <Text color={disabledItem && '#9a9a8b'} size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</Text>
             </TitleWrapper>
             <Locale>
               <LocaleItem>
-                <LocaleImage src='/images/icon/calendar.svg' />
+                <LocaleImage src={disabledItem ? '/images/icon/disabled-calendar.svg' : '/images/icon/calendar.svg'} />
                 <LocaleContent>
                   <LocaleContentTitle size='sm' weight='bold'>Duration</LocaleContentTitle>
                   <LocaleContentText size='sm' style={{ marginTop: 3 }}>{duration}</LocaleContentText>
                 </LocaleContent>
               </LocaleItem>
               <LocaleItem>
-                <LocaleImage src='/images/icon/location.svg' />
+                <LocaleImage src={disabledItem ? '/images/icon/disabled-location.svg' : '/images/icon/location.svg'} />
                 <LocaleContent>
                   <LocaleContentTitle size='sm' weight='bold'>Location</LocaleContentTitle>
                   <LocaleContentText size='sm' style={{ marginTop: 3 }}>{location}</LocaleContentText>
                 </LocaleContent>
               </LocaleItem>
               <LocaleItem longText>
-                <LocaleImage src='/images/icon/time-zone.svg' />
+                <LocaleImage src={disabledItem ? '/images/icon/disabled-time-zone.svg' : '/images/icon/time-zone.svg'} />
                 <LocaleContent>
                   <LocaleContentTitle size='sm' weight='bold'>Time Zone</LocaleContentTitle>
                   <LocaleContentText size='sm' style={{ marginTop: 3 }}>
@@ -92,17 +94,17 @@ const JobItem = ({ item }) => {
             <TagGroup>
               {
                 skills.map(({ name }, index) => (
-                  <Tag size='xxs' key={index}>{name}</Tag>
+                  <Tag size='xxs' key={index} disabled={disabledItem}>{name}</Tag>
                 ))
               }
             </TagGroup>
           </Info>
         </Information>
         <Action>
-          <StyledButton width='200px'>apply</StyledButton>
-          <FavoriteImage src='/images/icon/favorite.svg' />
+          <StyledButton width='200px' disabled={disabledItem || applied}>{applied ? 'applied' : 'apply'}</StyledButton>
+          <FavoriteImage src={favorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} />
         </Action>
-        <Time size='xs' color='#9a9a8b'>{moment(startedAt).fromNow()}</Time>
+        <Time size='xs' color='#9a9a8b' expired={disabledItem}>{status === 'EXPIRED' ? 'expired' : moment(startedAt).fromNow()}</Time>
       </ContentWrapper>
     </ItemWrapper>
   );

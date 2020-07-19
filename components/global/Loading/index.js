@@ -7,7 +7,7 @@ const Loading = ({
   className, size, showText,
 }) => (
   <Wrapper>
-    {showText && <Text size='llg' style={{ marginTop: 22, marginRight: 5 }}>Loading</Text>}
+    {showText && <Text width='auto' size='llg' style={{ marginTop: 22, marginRight: 5 }}>Loading</Text>}
     <StyledLoading
       className={className}
       size={size}
