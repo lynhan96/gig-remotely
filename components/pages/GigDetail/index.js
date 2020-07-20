@@ -51,6 +51,8 @@ const GigDetail = ({ item }) => {
 
   const scrollItem = () => {
     const applyButton = document.getElementById('apply-button');
+    if (!applyButton) return;
+
     if (window.pageYOffset > 690 && !applyButton.classList.contains('show-apply-button')) {
       applyButton.classList.add('show-apply-button');
     }
