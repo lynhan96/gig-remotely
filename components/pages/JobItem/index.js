@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { onAddFavoriteJob, onRemoveFavoriteJob } from 'saga/user';
 import { Tag, Text } from 'components/global';
 import {
   ItemWrapper,
@@ -36,15 +38,37 @@ const labelBackground = (type) => {
   }
 };
 
-const JobItem = ({ item }) => {
+const JobItem = ({ item, favorite, applied }) => {
+  const [isFavorite, setIsFavorite] = useState(favorite);
+  const dispatch = useDispatch();
   const {
-    title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, expiredAt, startedAt,
+    id, title, contractType, company, description, location, skills, duration, timezone, boostStart, startedAt, boostEnd, status,
   } = item;
+
+  const addFavoriteJob = useCallback((jobId) => dispatch(
+    onAddFavoriteJob(jobId, setIsFavorite),
+  ), [dispatch]);
+
+  const removeFavoriteJob = useCallback((jobId) => dispatch(
+    onRemoveFavoriteJob(jobId, setIsFavorite),
+  ), [dispatch]);
 
   const active = () => boostStart && boostEnd && moment(boostStart) < moment(boostEnd);
 
+  const disabledItem = status === 'EXPIRED';
+
+  const toggleFavorite = () => {
+    if (!applied) {
+      if (isFavorite) {
+        removeFavoriteJob(id);
+      } else {
+        addFavoriteJob(id);
+      }
+    }
+  };
+
   return (
-    <ItemWrapper>
+    <ItemWrapper disabled={disabledItem}>
       { active() && <Active />}
       <ContentWrapper active={active()}>
         <Information>
@@ -59,25 +83,25 @@ const JobItem = ({ item }) => {
                 <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
               </Title>
               <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
-              <Text size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</Text>
+              <Text color={disabledItem ? '#9a9a8b' : ''} size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</Text>
             </TitleWrapper>
             <Locale>
               <LocaleItem>
-                <LocaleImage src='/images/icon/calendar.svg' />
+                <LocaleImage src={disabledItem ? '/images/icon/disabled-calendar.svg' : '/images/icon/calendar.svg'} />
                 <LocaleContent>
                   <LocaleContentTitle size='sm' weight='bold'>Duration</LocaleContentTitle>
                   <LocaleContentText size='sm' style={{ marginTop: 3 }}>{duration}</LocaleContentText>
                 </LocaleContent>
               </LocaleItem>
               <LocaleItem>
-                <LocaleImage src='/images/icon/location.svg' />
+                <LocaleImage src={disabledItem ? '/images/icon/disabled-location.svg' : '/images/icon/location.svg'} />
                 <LocaleContent>
                   <LocaleContentTitle size='sm' weight='bold'>Location</LocaleContentTitle>
                   <LocaleContentText size='sm' style={{ marginTop: 3 }}>{location}</LocaleContentText>
                 </LocaleContent>
               </LocaleItem>
               <LocaleItem longText>
-                <LocaleImage src='/images/icon/time-zone.svg' />
+                <LocaleImage src={disabledItem ? '/images/icon/disabled-time-zone.svg' : '/images/icon/time-zone.svg'} />
                 <LocaleContent>
                   <LocaleContentTitle size='sm' weight='bold'>Time Zone</LocaleContentTitle>
                   <LocaleContentText size='sm' style={{ marginTop: 3 }}>
@@ -92,17 +116,17 @@ const JobItem = ({ item }) => {
             <TagGroup>
               {
                 skills.map(({ name }, index) => (
-                  <Tag size='xxs' key={index}>{name}</Tag>
+                  <Tag size='xxs' key={index} disabled={disabledItem}>{name}</Tag>
                 ))
               }
             </TagGroup>
           </Info>
         </Information>
         <Action>
-          <StyledButton width='200px'>apply</StyledButton>
-          <FavoriteImage src='/images/icon/favorite.svg' />
+          <StyledButton width='200px' disabled={disabledItem || applied}>{applied ? 'applied' : 'apply'}</StyledButton>
+          <FavoriteImage src={isFavorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} onClick={toggleFavorite} />
         </Action>
-        <Time size='xs' color='#9a9a8b'>{moment(startedAt).fromNow()}</Time>
+        <Time size='xs' color='#9a9a8b' expired={disabledItem}>{status === 'EXPIRED' ? 'expired' : moment(startedAt).fromNow()}</Time>
       </ContentWrapper>
     </ItemWrapper>
   );

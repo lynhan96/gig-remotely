@@ -3,6 +3,7 @@ import jobWatcher from 'saga/jobs';
 import authenticationWatcher from 'saga/authentication';
 import userWatcher from 'saga/user';
 import companyWatcher from 'saga/company';
+import uploadWatcher from 'saga/upload';
 
 export default function* saga() {
   yield all([
@@ -10,5 +11,6 @@ export default function* saga() {
     authenticationWatcher(),
     userWatcher(),
     companyWatcher(),
+    uploadWatcher(),
   ]);
 }

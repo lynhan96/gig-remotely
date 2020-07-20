@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -15,4 +15,9 @@ export const ListWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 70px;
+
+  ${({ loading }) => loading === 'true' && css`
+    height: 500px;
+    margin-bottom: 0;
+  `}
 `;

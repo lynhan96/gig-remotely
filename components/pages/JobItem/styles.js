@@ -39,20 +39,6 @@ export const Active = styled.div`
   }
 `;
 
-export const ItemWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  position: relative;
-
-  @media (max-width: 768px) {
-    width: calc(100% - 30px);
-  }
-
-  @media (max-width: 440px) {
-    width: 100%;
-  }
-`;
-
 export const ContentWrapper = styled.div`
   z-index: 4;
   width: calc(100% - 60px);
@@ -196,7 +182,7 @@ export const Locale = styled.div`
   justify-content: space-between;
 
   @media (min-width: 769px) and (max-width: 1500px){
-    width: 45%
+    width: 47%
   }
 
   @media (max-width: 768px){
@@ -208,9 +194,10 @@ export const Locale = styled.div`
 `;
 
 export const LocaleItem = styled.div`
-  width: 33%;
+  width: 30%;
   display: flex;
   align-items: flex-start;
+  ${({ longText }) => longText && css`width: 36%;`}
 
   @media (max-width: 768px){
     width: 27%
@@ -263,7 +250,7 @@ export const TagGroup = styled.div`
   margin-top: 20px;
 
   @media (min-width: 769px) and (max-width: 1500px){
-    width: 45%
+    width: 47%
   }
 
   @media (max-width: 768px){
@@ -313,6 +300,15 @@ export const Time = styled(Text)`
   bottom: 30px;
   right: 30px;
 
+  ${({ expired }) => expired && css`
+    top: 30px;
+
+    @media (max-width: 768px) {
+      top: initial;
+    }
+  `
+}
+
   @media (max-width: 768px) {
     bottom: 20px;
   }
@@ -346,4 +342,37 @@ export const LocaleContentText = styled(Text)`
   @media (max-width: 375px) {
     font-size: 10px;
   }
+`;
+
+export const ItemWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  position: relative;
+
+  @media (max-width: 768px) {
+    width: calc(100% - 30px);
+  }
+
+  @media (max-width: 440px) {
+    width: 100%;
+  }
+
+  ${({ disabled }) => disabled && css`
+    ${ContentWrapper} {
+      background: ${color.eggshell};
+    }
+
+    ${Description},
+    ${Title},
+    ${LocaleContentTitle},
+    ${LocaleContentText} {
+      color: ${color.cement};
+    }
+
+    ${Label} {
+      background: ${color.cement};
+      color: ${color.eggshell};
+    }
+  `
+}
 `;

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="prefix__Icon_ionic-md-time" width="18.207" height="18.207" data-name="Icon ionic-md-time" viewBox="0 0 18.207 18.207">
+    <defs>
+        <style>
+            .prefix__cls-1{fill:#9a9a8b}
+        </style>
+    </defs>
+    <path id="prefix__Path_1" d="M12.47 3.375a9.1 9.1 0 1 0 9.112 9.1 9.1 9.1 0 0 0-9.112-9.1zm.009 16.386a7.283 7.283 0 1 1 7.283-7.283 7.283 7.283 0 0 1-7.283 7.283z" class="prefix__cls-1" data-name="Path 1" transform="translate(-3.375 -3.375)"/>
+    <path id="prefix__Path_2" d="M17.9 10.688h-1.362v5.462l4.779 2.867L22 17.9l-4.1-2.429z" class="prefix__cls-1" data-name="Path 2" transform="translate(-8.344 -6.136)"/>
+</svg>

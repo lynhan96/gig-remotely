@@ -11,7 +11,6 @@ const Nav = () => {
   const userType = Cookie.get('__gigtype');
   const token = Cookie.get('__gigtoken');
   const redirectTo = (link) => {
-    console.log(23123213)
     setOpen(false);
     Router.push(link);
   };
@@ -62,8 +61,8 @@ const Nav = () => {
         </StyledBurger>
         <Menu open={open}>
           <MenuGroup>
-            <MenuItem onClick={() => redirectTo('/gigseeker/my-gigs')}>my gigs</MenuItem>
-            <MenuItem onClick={() => redirectTo('/gigseeker/profile')}>profile</MenuItem>
+            <MenuItem onClick={() => redirectTo('/gig-seeker/my-gigs')}>my gigs</MenuItem>
+            <MenuItem onClick={() => redirectTo('/gig-seeker/profile')}>profile</MenuItem>
             <MenuItem onClick={() => redirectTo('/companies')}>companies</MenuItem>
           </MenuGroup>
           <MenuGroup>

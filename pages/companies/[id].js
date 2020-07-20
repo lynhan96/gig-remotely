@@ -6,6 +6,7 @@ import { onGetCompanyProfile } from 'saga/company';
 import { CompanyProfile } from 'components/pages';
 import { Container, LoadingWrapper } from 'components/global/styles';
 import { Loading } from 'components/global';
+import queryString from 'query-string';
 
 const CompanyDetailPage = () => {
   const [state, setState] = useState({ loading: true, data: null });
@@ -21,6 +22,12 @@ const CompanyDetailPage = () => {
     getCompanyProfile(router.query.id);
   }, []);
 
+  const MainView = () => {
+    const searchParams = queryString.parse(router.asPath.split(/\?/)[1]);
+
+    return (<CompanyProfile data={data} type={searchParams.view} />);
+  };
+
   return (
     <>
       <Head>
@@ -29,7 +36,7 @@ const CompanyDetailPage = () => {
       <Container>
         { (loading || !data)
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)
-          : (<CompanyProfile data={data} />)}
+          : <MainView />}
       </Container>
     </>
   );

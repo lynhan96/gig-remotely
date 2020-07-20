@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Wrapper, ItemWrapper,
@@ -8,6 +8,7 @@ const RadioGroup = ({
   items,
   onChange,
   className,
+  defaultValue,
 }) => {
   const [checked, setChecked] = useState('');
   const handleOnchange = (e) => {
@@ -15,12 +16,16 @@ const RadioGroup = ({
     onChange({ name: e.target.name, value: e.target.value });
   };
 
+  useEffect(() => {
+    onChange({ name: defaultValue, value: 'on' });
+  }, []);
+
   return (
     <Wrapper className={className}>
       {
         items.map(({ label, name }, index) => (
           <ItemWrapper key={index}>
-            <input id={name} name={name} type='radio' onChange={handleOnchange} checked={checked === name && 'true'} />
+            <input id={name} name={name} type='radio' onChange={handleOnchange} checked={(defaultValue === name || checked === name) && 'true'} />
             <label htmlFor={name}>{label}</label>
           </ItemWrapper>
         ))
@@ -36,12 +41,14 @@ RadioGroup.propTypes = {
   })),
   onChange: PropTypes.func,
   className: PropTypes.string,
+  defaultValue: PropTypes.string,
 };
 
 RadioGroup.defaultProps = {
   className: '',
   items: [],
   onChange: null,
+  defaultValue: '',
 };
 
 export default RadioGroup;

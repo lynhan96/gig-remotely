@@ -10,6 +10,13 @@ import Companies from 'components/pages/Companies';
 import CompanyProfile from 'components/pages/Profile/Company';
 import WhoWeAre from 'components/pages/WhoWeAre';
 import GigSubmitted from 'components/pages/GigSubmitted';
+import Gigs from 'components/pages/Gigs';
+import MyGigs from 'components/pages/MyGigs';
+import JobItem from 'components/pages/JobItem';
+import MainLayout from 'components/pages/Layout';
+import UserProfile from 'components/pages/Profile/User';
+import EditUserProfile from 'components/pages/EditUserProfile';
+import CategoriesSelect from 'components/pages/CategoriesSelect';
 
 export {
   Footer,
@@ -24,4 +31,11 @@ export {
   SetupAccount,
   Companies,
   CompanyProfile,
+  Gigs,
+  MyGigs,
+  JobItem,
+  MainLayout,
+  UserProfile,
+  EditUserProfile,
+  CategoriesSelect,
 };

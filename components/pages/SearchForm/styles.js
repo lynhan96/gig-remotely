@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { RadioGroup } from 'components/global';
 
 export const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-flow: wrap row;
   margin-bottom: 120px;

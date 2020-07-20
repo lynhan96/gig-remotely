@@ -109,6 +109,42 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .open-select {
+    height: 370px;
+    padding: 20px;
+  }
+
+  .close-select {
+    height: 0;
+    padding: 0 !important;
+  }
+
+  .show-input-error,
+  .show-input-label,
+  .open-select-search {
+    display: flex;
+  }
+
+  .hide-input-label,
+  .close-select-search,
+  .hide-input-error {
+    display: none;
+  }
+
+  .hide-input-label {
+    height: 0;
+    margin: 0;
+  }
+
+  .input-wrapper-width-label {
+    width: calc(100% - 120px);
+  }
+
+  .input-error {
+    border: solid 1px ${color.red};
+    color: ${color.red};
+  }
+
   body {
     margin: 0;
     flex-direction: column;
@@ -145,8 +181,8 @@ export const GlobalStyle = createGlobalStyle`
 
   @media (max-width: 767px) {
     ::-webkit-scrollbar {
-        width: 0px;
-        background: transparent; /* make scrollbar transparent */
+      width: 0px;
+      background: transparent; /* make scrollbar transparent */
     }
   }
 

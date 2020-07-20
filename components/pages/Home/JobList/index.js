@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import JobItem from 'components/pages/JobItem';
-import { Button } from 'components/global';
+import { Button, Loading } from 'components/global';
 import { useDispatch } from 'react-redux';
 import { onGetJobs } from 'saga/jobs';
 import { ListWrapper, Wrapper } from './styles';
@@ -24,14 +24,15 @@ const JobList = () => {
 
   return (
     <Wrapper>
-      <ListWrapper>
+      <ListWrapper loading={loading.toString()}>
         {
-          data.map((item, index) => (
-            <JobItem key={index} item={item} />
-          ))
+          loading ? <Loading showText size='60px' />
+            : data.map((item, index) => (
+              <JobItem key={index} item={item} />
+            ))
          }
       </ListWrapper>
-      <Button type='light' width='220px'>load more</Button>
+      <Button buttonType='light' width='220px'>load more</Button>
     </Wrapper>
   );
 };

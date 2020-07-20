@@ -27,7 +27,7 @@ const Companies = () => {
 
   if (loading) {
     return (
-      <Wrapper loading={loading}>
+      <Wrapper loading={loading.toString()}>
         <Loading showText size='60px' />
       </Wrapper>
     );
@@ -39,7 +39,7 @@ const Companies = () => {
         {
           data.map((item, index) => (
             <Item key={index} onClick={() => Router.push('/companies/[id]', `/companies/${item.id}`)}>
-              <Image src={`https://gigremotely.s3-ap-southeast-1.amazonaws.com/${item.photo}`} />
+              <Image src={item.photo} />
               <Name size='mmd' weight='bold'>{item.name}</Name>
               <Location size='xs'>{item.location}</Location>
             </Item>

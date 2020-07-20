@@ -15,18 +15,89 @@ import {
   ContactInfo,
   Icon,
   ContactItem,
-  GigInfo
+  GigInfo,
+  GigsWrapper,
+  GigPhoto,
+  Gig,
+  GigLocationName,
+  GigCompanyName,
+  GigCompanyTitle,
 } from './styles';
 
-const CompanyProfile = ({ data }) => {
-  console.log(data);
+const CompanyInfo = ({
+  id, email, contact, address, gigsNumber, location, about,
+}) => {
+  const viewGigs = () => Router.push('/companies/[id]', `/companies/${id}?view=gigs`);
+
+  return (
+    <InfoWrapper>
+      <AboutUs>
+        <StyledText size='mmd' weight='bold'>About the Company</StyledText>
+        <StyledText size='mmd' dangerouslySetInnerHTML={{ __html: about }} />
+      </AboutUs>
+      <ContacInfoWrapper>
+        <GigInfo>
+          <GigNumber>{gigsNumber}</GigNumber>
+          <StyledText style={{ textAlign: 'center' }} size='mmd' weight='bold'>gig(s) available</StyledText>
+          <Button onClick={viewGigs}>see gigs</Button>
+        </GigInfo>
+        <ContactItem>
+          <Icon src='/images/icon/email.svg' alt='error' />
+          <ContactInfo>
+            <StyledText size='mmd' weight='bold' marginBottom='5px'>Email</StyledText>
+            <StyledText size='mmd' marginBottom='0'><a href={`mailto:${email}`}>{email}</a></StyledText>
+          </ContactInfo>
+        </ContactItem>
+        <ContactItem>
+          <Icon src='/images/icon/phone.svg' alt='error' />
+          <ContactInfo>
+            <StyledText size='mmd' weight='bold' marginBottom='5px'>Contact No.</StyledText>
+            <StyledText size='mmd' marginBottom='0'>
+              <a href={`tel:${contact}`}>{contact}</a>
+            </StyledText>
+          </ContactInfo>
+        </ContactItem>
+        <ContactItem>
+          <Icon src='/images/icon/earth.svg' alt='error' />
+          <ContactInfo>
+            <StyledText size='mmd' weight='bold' marginBottom='5px'>Location</StyledText>
+            <StyledText size='mmd' marginBottom='0'>{location}</StyledText>
+          </ContactInfo>
+        </ContactItem>
+        <ContactItem>
+          <Icon src='/images/icon/location.svg' alt='error' />
+          <ContactInfo>
+            <StyledText size='mmd' weight='bold' marginBottom='5px'>Address</StyledText>
+            <StyledText size='mmd' marginBottom='0'>{address}</StyledText>
+          </ContactInfo>
+        </ContactItem>
+      </ContacInfoWrapper>
+    </InfoWrapper>
+  );
+};
+
+const GigsInfo = ({ companyName, jobs }) => (
+  <GigsWrapper>
+    { jobs.map(({ title, location }, index) => (
+      <Gig key={index}>
+        <GigPhoto />
+        <GigCompanyTitle size='mmd' weight='bold' marginBottom='5px'>{title}</GigCompanyTitle>
+        <GigCompanyName size='sm' marginBottom='0'>{companyName}</GigCompanyName>
+        <GigLocationName size='xs'>{location}</GigLocationName>
+      </Gig>
+    ))}
+  </GigsWrapper>
+);
+
+const CompanyProfile = ({ data, type }) => {
   const {
-    name, photo, website, about, email, contact, address, location,
+    id, name, photo, website, about, email, contact, address, location, jobs,
   } = data;
+
   return (
     <Wrapper>
-      <HeadWrapper>
-        <Image src={`https://gigremotely.s3-ap-southeast-1.amazonaws.com/${photo}`} />
+      <HeadWrapper type={type}>
+        <Image src={photo} />
         <TitleWrapper>
           <Name size='xl' weight='bold'>{name}</Name>
           <StyledText size='mmd' marginBottom='0' style={{ marginTop: 6 }}>
@@ -34,49 +105,18 @@ const CompanyProfile = ({ data }) => {
           </StyledText>
         </TitleWrapper>
       </HeadWrapper>
-      <InfoWrapper>
-        <AboutUs>
-          <StyledText size='mmd' weight='bold'>About the Company</StyledText>
-          <StyledText size='mmd'>{about}</StyledText>
-        </AboutUs>
-        <ContacInfoWrapper>
-          <GigInfo>
-            <GigNumber>0</GigNumber>
-            <StyledText style={{ textAlign: 'center' }} size='mmd' weight='bold'>gig(s) available</StyledText>
-            <Button >see gigs</Button>
-          </GigInfo>
-          <ContactItem>
-            <Icon src='/images/icon/email.svg' alt='error'/>
-            <ContactInfo>
-              <StyledText size='mmd' weight='bold' marginBottom='5px'>Email</StyledText>
-              <StyledText size='mmd' marginBottom='0'><a href={`mailto:${email}`}>{email}</a></StyledText>
-            </ContactInfo>
-          </ContactItem>
-          <ContactItem>
-            <Icon src='/images/icon/phone.svg' alt='error'/>
-            <ContactInfo>
-              <StyledText size='mmd' weight='bold' marginBottom='5px'>Contact No.</StyledText>
-              <StyledText size='mmd' marginBottom='0'>
-                <a href={`tel:${contact}`}>{contact}</a>
-              </StyledText>
-            </ContactInfo>
-          </ContactItem>
-          <ContactItem>
-            <Icon src='/images/icon/earth.svg' alt='error'/>
-            <ContactInfo>
-              <StyledText size='mmd' weight='bold' marginBottom='5px'>Location</StyledText>
-              <StyledText size='mmd' marginBottom='0'>{location}</StyledText>
-            </ContactInfo>
-          </ContactItem>
-          <ContactItem>
-            <Icon src='/images/icon/location.svg' alt='error' />
-            <ContactInfo>
-              <StyledText size='mmd' weight='bold' marginBottom='5px'>Address</StyledText>
-              <StyledText size='mmd' marginBottom='0'>{address}</StyledText>
-            </ContactInfo>
-          </ContactItem>
-        </ContacInfoWrapper>
-      </InfoWrapper>
+      { type === 'gigs' ? <GigsInfo companyName={name} jobs={jobs} />
+        : (
+          <CompanyInfo
+            id={id}
+            email={email}
+            about={about}
+            contact={contact}
+            address={address}
+            location={location}
+            gigsNumber={jobs.length}
+          />
+        )}
     </Wrapper>
   );
 };
