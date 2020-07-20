@@ -17,6 +17,7 @@ import MainLayout from 'components/pages/Layout';
 import UserProfile from 'components/pages/Profile/User';
 import EditUserProfile from 'components/pages/EditUserProfile';
 import CategoriesSelect from 'components/pages/CategoriesSelect';
+import GivingBack from 'components/pages/GivingBack';
 
 export {
   Footer,
@@ -38,4 +39,5 @@ export {
   UserProfile,
   EditUserProfile,
   CategoriesSelect,
+  GivingBack,
 };

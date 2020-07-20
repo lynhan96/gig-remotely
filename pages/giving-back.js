@@ -1,20 +1,20 @@
 import React from 'react';
 import Head from 'next/head';
 import { Container } from 'components/global/styles';
-import { GigSubmitted, Alert } from 'components/pages';
+import { GivingBack, Alert } from 'components/pages';
 
-const GigSubmittedPage = () => {
+const GivingBackPage = () => {
   return (
     <>
       <Head>
-        <title>Gig Submitted</title>
+        <title>Giving Back</title>
       </Head>
       <Container style={{ alignItems: 'center' }}>
-        <GigSubmitted />
+        <GivingBack />
         <Alert />
       </Container>
     </>
   );
 };
 
-export default GigSubmittedPage;
+export default GivingBackPage;
