@@ -6,7 +6,6 @@ export const Image = styled.img`
   width: 310px;
   height: 310px;
   margin-bottom: 34px;
-  margin-top: 40px;
   object-fit: contain;
 
   @media (max-width: 768px) {
@@ -57,6 +56,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 226px;
+  margin-top: 40px;
 `;
 
 export const ActionWrapper = styled.div`
@@ -65,7 +66,6 @@ export const ActionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  margin-bottom: 226px;
 `;
 
 export const StyledButton = styled(Button)`
