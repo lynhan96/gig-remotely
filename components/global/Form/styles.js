@@ -99,6 +99,7 @@ export const FileInput = styled.div`
   background: ${color.eggshell};
   color: ${color.black};
   position: relative;
+  cursor: pointer;
 `;
 
 export const FileInputIcon = styled.img`
@@ -153,6 +154,15 @@ export const Upload = styled.input`
   cursor: pointer;
 `;
 
+export const FileSelectWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+`;
+
 export const FileInputWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -168,4 +178,75 @@ export const PhotoLabel = styled(Text)`
   margin-left: 20px;
   font-weight: bold;
   width: 70px;
+`;
+
+export const Options = styled.div`
+  width: 100%;
+  height: 300px;
+  overflow: auto;
+  flex-direction: column;
+  display: flex;
+  margin-top: 20px;
+`;
+
+export const SelectWrapper = styled.div`
+  position: absolute;
+  width: calc(100% - 40px);
+  background: ${color.offWhite};
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  top: 85px;
+  opacity: 1;
+  flex-direction: column;
+  display: flex;
+  padding: 20px;
+  height: 0;
+  transition: all 0.3s ease;
+`;
+
+export const Option = styled(Text)`
+  cursor: pointer;
+  font-size: 17px;
+  width: calc(100% - 40px);
+  padding: 10px 20px;
+  font-weight: ${({ active }) => (active ? 'bold' : 'normal')};
+
+  &:hover {
+    font-weight: bold;
+  }
+`;
+
+export const SearchField = styled.div`
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+`;
+
+export const SearchInnputField = styled.input`
+  font-family: 'Proxima Nova', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  font-size: 15px;
+  width: calc(100% - 30px);
+  height: 40px;
+  outline: none;
+  border-radius: 26px;
+  border: 0.5px solid ${color.black};
+  background: ${color.offWhite};
+`;
+
+export const Icon = styled.img`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 35px;
+`;
+
+export const FieldIcon = styled.img`
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 25px;
 `;

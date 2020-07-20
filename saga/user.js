@@ -4,7 +4,7 @@ import {
 import Cookie from 'js-cookie';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
-import { onUpdateProfile } from 'redux/user';
+import { onUpdateProfile, onUpdateTalent } from 'redux/user';
 import Router from 'next/router';
 
 const ON_UPDATE_USER_TYPE = 'ON_UPDATE_USER_TYPE';
@@ -12,6 +12,7 @@ const ON_GET_MY_GIGS = 'ON_GET_MY_GIGS';
 const ON_GET_MY_PROFILE = 'ON_GET_MY_PROFILE';
 const ON_ADD_FAVORITE_JOB = 'ON_ADD_FAVORITE_JOB';
 const ON_REMOVE_FAVORITE_JOB = 'ON_REMOVE_FAVORITE_JOB';
+const ON_UPDATE_TALENT = 'ON_UPDATE_TALENT';
 
 function* updateUserType({ userType }) {
   try {
@@ -59,6 +60,18 @@ function* removeFavoritJob({ jobId, setState }) {
   }
 }
 
+function* updateUserProfile({ params }) {
+  try {
+    const response = yield call(axiosPut, '/talent', params);
+    console.log(response)
+
+    yield put(onUpdateTalent(response));
+    yield put(onOpenAlert('Your profile has successfully changed'));
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
+
 function* getMyGigs({ setState }) {
   try {
     const response = yield call(get, '/job/mine');
@@ -77,6 +90,10 @@ function* getMyGigs({ setState }) {
     yield put(onOpenAlert(error.data.message));
   }
 }
+
+export const onUpdateUserProfile = (params) => ({
+  type: ON_UPDATE_TALENT, params,
+});
 
 export const onUpdateUserType = (userType) => ({
   type: ON_UPDATE_USER_TYPE, userType,
@@ -104,4 +121,5 @@ export default function* userWatcher() {
   yield takeLatest(ON_GET_MY_PROFILE, getMyProfile);
   yield takeLatest(ON_ADD_FAVORITE_JOB, addFavoritJob);
   yield takeLatest(ON_REMOVE_FAVORITE_JOB, removeFavoritJob);
+  yield takeLatest(ON_UPDATE_TALENT, updateUserProfile);
 }

@@ -18,8 +18,8 @@ export const StyledButton = styled.button`
   ${({ size }) => `font-size: ${size}px;`}
   ${({ width }) => `width: ${width};`}
 
-  ${({ type }) => {
-    switch (type) {
+  ${({ buttonType }) => {
+    switch (buttonType) {
       case 'light':
         return css`
             height: 48px;

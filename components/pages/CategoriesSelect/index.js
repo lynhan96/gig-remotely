@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {
+  useEffect, useState, useCallback, useImperativeHandle,
+} from 'react';
 import { useDispatch } from 'react-redux';
 import { onGetJobCategories } from 'saga/jobs';
 import {
@@ -22,7 +24,7 @@ import {
   TagIcon,
 } from './styles';
 
-const CategoriesSelect = ({ skillRef, label, selectedSkill }) => {
+const CategoriesSelect = React.forwardRef(({ skillRef, label, selectedSkill }, ref) => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -30,6 +32,14 @@ const CategoriesSelect = ({ skillRef, label, selectedSkill }) => {
   const [userSkill, setUserSkill] = useState(selectedSkill || []);
   const skillIds = userSkill.map((i) => i.id);
   skillRef.current = skillIds;
+
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      setUserSkill(selectedSkill);
+      setSelectedCategory(0);
+      setKeyword('');
+    },
+  }));
 
   const getCategories = useCallback(() => dispatch(
     onGetJobCategories(setData),
@@ -89,7 +99,7 @@ const CategoriesSelect = ({ skillRef, label, selectedSkill }) => {
               <CategoryItem key='all' active={selectedCategory === 0} onClick={() => setSelectedCategory(0)}>All</CategoryItem>
               {
               data.map((item) => (
-                <CategoryItem active={selectedCategory === item.id} key={item.id} onClick={() => setSelectedCategory(item.id)}>{item.name}</CategoryItem>
+                <CategoryItem active={selectedCategory === item.id} key={item.name} onClick={() => setSelectedCategory(item.id)}>{item.name}</CategoryItem>
               ))
             }
             </Category>
@@ -99,7 +109,7 @@ const CategoriesSelect = ({ skillRef, label, selectedSkill }) => {
               {
                 getSkill().map((item, index) => (
                   <>
-                    <SkillItem key={index} group>{item.group}</SkillItem>
+                    <SkillItem key={item.group} group>{item.group}</SkillItem>
                     {
                       item.children.map((skill) => (
                         <SkillItem active={skillIds.includes(skill.id)} key={skill.id} onClick={() => selectSkill(skill)}>{skill.name}</SkillItem>
@@ -113,7 +123,7 @@ const CategoriesSelect = ({ skillRef, label, selectedSkill }) => {
         </Content>
         <TagsGroup>
           {userSkill.map((skill) => (
-            <Tag key={skill.id}>
+            <Tag key={skill.name}>
               {skill.name}
               <TagIcon src='/images/icon/close-white.svg' onClick={() => removeSkill(skill)} />
             </Tag>
@@ -122,6 +132,6 @@ const CategoriesSelect = ({ skillRef, label, selectedSkill }) => {
       </SelectSkillWrapper>
     </Wrapper>
   );
-};
+});
 
 export default CategoriesSelect;

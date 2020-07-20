@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import { Button, Loading, Tag } from 'components/global';
@@ -24,6 +24,10 @@ import {
 const UserProfile = () => {
   const data = useSelector((state) => state.user.data);
 
+  useEffect(() => {
+    if (!data.talent) Router.push('/gig-seeker/edit-profile');
+  }, [data]);
+
   if (Object.keys(data).length === 0) {
     return (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>);
   }
@@ -34,12 +38,12 @@ const UserProfile = () => {
     },
   } = data;
 
-  const openResume = () => window.open(`https://gigremotely.s3-ap-southeast-1.amazonaws.com/${resume}`, '_blank');
+  const openResume = () => window.open(resume, '_blank');
 
   return (
     <Wrapper>
       <HeadWrapper>
-        <Image src={`https://gigremotely.s3-ap-southeast-1.amazonaws.com/${photo}`} />
+        <Image src={photo} />
         <TitleWrapper>
           <Name size='xl' weight='bold'>{`${firstName} ${lastName}`}</Name>
           <StyledText size='mmd' marginBottom='0' style={{ marginTop: 6 }}>

@@ -40,7 +40,7 @@ const Input = ({
       <StyledTextArea
         background={background}
         defaultValue={defaultValue}
-        error={error}
+        className={error ? 'input-error' : ''}
         ref={inputRef}
         type={inputType}
         name={name}
@@ -56,7 +56,7 @@ const Input = ({
       <StyledInput
         background={background}
         defaultValue={defaultValue}
-        error={error}
+        className={error ? 'input-error' : ''}
         ref={inputRef}
         type={inputType}
         name={name}

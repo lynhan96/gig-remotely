@@ -97,7 +97,7 @@ const CompanyProfile = ({ data, type }) => {
   return (
     <Wrapper>
       <HeadWrapper type={type}>
-        <Image src={`https://gigremotely.s3-ap-southeast-1.amazonaws.com/${photo}`} />
+        <Image src={photo} />
         <TitleWrapper>
           <Name size='xl' weight='bold'>{name}</Name>
           <StyledText size='mmd' marginBottom='0' style={{ marginTop: 6 }}>

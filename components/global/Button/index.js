@@ -9,7 +9,7 @@ const Button = ({
   style,
   onClick,
   className,
-  type,
+  buttonType,
   htmlType,
   disabled,
 }) => {
@@ -34,8 +34,8 @@ const Button = ({
       style={style}
       size={fontSize()}
       onClick={onClick}
-      type={type}
-      htmlType={htmlType}
+      buttonType={buttonType}
+      type={htmlType}
     >
       {children}
     </StyledButton>
@@ -53,13 +53,13 @@ Button.propTypes = {
   children: PropTypes.node,
   width: PropTypes.string,
   className: PropTypes.string,
-  type: PropTypes.string,
+  buttonType: PropTypes.string,
   htmlType: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
 Button.defaultProps = {
-  type: 'default',
+  buttonType: 'default',
   className: '',
   width: 'auto',
   size: 'md',
