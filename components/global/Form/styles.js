@@ -28,6 +28,7 @@ export const StyledText = styled(Text)`
     width: 100%;
     margin-bottom: 10px;
     margin-left: 3px;
+    margin-right: 0;
   }
 `;
 
@@ -100,6 +101,10 @@ export const FileInput = styled.div`
   color: ${color.black};
   position: relative;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const FileInputIcon = styled.img`
@@ -107,6 +112,12 @@ export const FileInputIcon = styled.img`
   height: 20px;
   position: absolute;
   right: 30px;
+
+  @media (max-width: 768px) {
+    width: 15px;
+    height: 15px;
+    right: 20px;
+  }
 `;
 
 export const FileInputRemove = styled(Text)`
@@ -117,6 +128,11 @@ export const FileInputRemove = styled(Text)`
   cursor: pointer;
   color: ${color.cement};
   z-index: 999;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    right: 42px;
+  }
 `;
 
 export const PhotoInputWrapper = styled.div`

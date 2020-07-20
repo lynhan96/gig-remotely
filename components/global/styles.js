@@ -116,7 +116,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .close-select {
     height: 0;
-    padding: 0;
+    padding: 0 !important;
   }
 
   .show-input-error,

@@ -27,6 +27,15 @@ export const SelectSkillWrapper = styled.div`
   background: ${color.eggshell};
   position: relative;
   height: 514px;
+
+  @media (max-width: 1280px) {
+    height: auto;
+  }
+
+  @media (max-width: 375px) {
+    padding: 15px 10px;
+    width: calc(100% - 20px);
+  }
 `;
 
 export const HeadWrapper = styled.div`
@@ -41,6 +50,15 @@ export const Title = styled(Text)`
   font-size: 24px;
   font-weight: bold;
   color: ${color.cement};
+
+  @media (max-width: 1024px) {
+    width: 250px;
+  }
+
+  @media (max-width: 767px) {
+    width: 140px;
+    font-size: 20px;
+  }
 `;
 
 export const SearchField = styled.div`
@@ -49,6 +67,14 @@ export const SearchField = styled.div`
   align-items: center;
   width: calc(100% - 200px);
   position: relative;
+
+  @media (max-width: 1024px) {
+    width: calc(100% - 250px);
+  }
+
+  @media (max-width: 767px) {
+    width: calc(100% - 140px);
+  }
 `;
 
 export const InnputField = styled.input`
@@ -62,7 +88,7 @@ export const InnputField = styled.input`
   outline: none;
   border-radius: 26px;
   border: 0.5px solid ${color.black};
-  background: ${color.offWhite};
+  background: ${color.eggshell};
 `;
 
 export const Icon = styled.img`
@@ -70,6 +96,12 @@ export const Icon = styled.img`
   height: 20px;
   position: absolute;
   right: 20px;
+
+  @media (max-width: 767px) {
+    width: 15px;
+    height: 15px;
+    right: 12px;
+  }
 `;
 
 export const Content = styled.div`
@@ -82,9 +114,16 @@ export const Content = styled.div`
 export const Category = styled.div`
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 170px;
   height: 415px;
-  overflow-y: auto;
+
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    height: 350px;
+  }
+
+  @media (max-width: 767px) {
+    width: 120px;
+  }
 `;
 
 export const CategoryItem = styled(Text)`
@@ -97,14 +136,43 @@ export const CategoryItem = styled(Text)`
   &:hover {
     color: ${color.black};
   }
+
+  @media (max-width: 767px) {
+    font-size: 15px;
+  }
 `;
 
 export const CategoryScrollAble = styled.div`
-  width: 200px;
+  width: 180px;
   display: flex;
   flex-direction: column;
   height: 340px;
+  margin-right: 20px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar
+  {
+    width: 8px;
+    background-color: ${color.eggshell};
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 10px;
+    background: ${color.white};
+  }
+
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    height: 320px;
+  }
+
+  @media (max-width: 1024px) {
+    width: 230px;
+  }
+
+  @media (max-width: 767px) {
+    width: 120px;
+  }
 `;
 
 export const SkillScrollAble = styled.div`
@@ -126,6 +194,15 @@ export const SkillScrollAble = styled.div`
     border-radius: 10px;
     background: ${color.white};
   }
+
+  @media (max-width: 1024px) {
+    width: calc(100% - 250px);
+  }
+
+
+  @media (max-width: 767px) {
+    width: calc(100% - 140px);
+  }
 `;
 
 export const Skill = styled.div`
@@ -144,6 +221,10 @@ export const SkillItem = styled(Text)`
   &:hover {
     font-weight: bold;
   }
+
+  @media (max-width: 767px) {
+    font-size: ${({ group }) => (group ? '17px' : '15px')};
+  }
 `;
 
 export const TagsGroup = styled.div`
@@ -151,6 +232,11 @@ export const TagsGroup = styled.div`
   flex-flow: wrap row;
   width: 100%;
   margin-top: 15px;
+
+  @media (max-width: 767px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const Tag = styled.div`

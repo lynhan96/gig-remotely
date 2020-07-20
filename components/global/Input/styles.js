@@ -80,6 +80,10 @@ export const StyledTextArea = styled.textarea`
     color: ${color.cement};
   }
 
+  @media (max-width: 1024px) {
+    min-height: 200px;
+  }
+
   @media (max-width: 768px) {
     font-size: 15px;
   }
