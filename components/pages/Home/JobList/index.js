@@ -32,7 +32,7 @@ const JobList = () => {
             ))
          }
       </ListWrapper>
-      <Button type='light' width='220px'>load more</Button>
+      <Button buttonType='light' width='220px'>load more</Button>
     </Wrapper>
   );
 };

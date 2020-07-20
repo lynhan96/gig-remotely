@@ -26,8 +26,12 @@ const EditUserProfile = () => {
     onUpdateUserProfile(params),
   ), [dispatch]);
 
+  if (Object.keys(data).length === 0) {
+    return (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>);
+  }
+
   const {
-    firstName, lastName, email, talent,
+    firstName, lastName, email, talent
   } = data;
 
   const {
@@ -46,9 +50,6 @@ const EditUserProfile = () => {
     photoFieldRef.current.reset();
   };
 
-  if (Object.keys(data).length === 0) {
-    return (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>);
-  }
 
   return (
     <Wrapper>

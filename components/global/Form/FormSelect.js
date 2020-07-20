@@ -42,14 +42,21 @@ const FormSelect = React.forwardRef(({
     const newOptions = options.filter((i) => i.toLowerCase().includes(keyword.toLowerCase()));
     setSelectOptions(newOptions);
   };
+  const outSizeClick = (e) => {
+    const element = document.getElementById(selectBoxId);
+
+    if (element === null) return;
+    if (!element && !element.contains(e.target)) setOpen(false);
+  };
 
   useEffect(() => {
     valuesRef.current[name] = seletedValue;
-    window.addEventListener('click', (e) => {
-      if (!document.getElementById(selectBoxId).contains(e.target)) {
-        setOpen(false);
-      }
-    });
+
+    const selectOutSizeToggle = window.addEventListener('click', outSizeClick);
+
+    return () => {
+      window.removeEventListener('click', selectOutSizeToggle);
+    };
   }, []);
 
   return (

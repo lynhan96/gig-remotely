@@ -61,6 +61,7 @@ export const StyledTextArea = styled.textarea`
   width: calc(100% - 40px);
   min-height: 400px;
   outline: none;
+  line-height: 1.2;
   border-radius: 10px;
   border: solid 1px ${({ background }) => (background || color.black)};
   background: ${({ background }) => (background || color.offWhite)};

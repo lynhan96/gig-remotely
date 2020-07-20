@@ -25,7 +25,9 @@ const UserProfile = () => {
   const data = useSelector((state) => state.user.data);
 
   useEffect(() => {
-    if (!data.talent) Router.push('/gig-seeker/edit-profile');
+    if (data.id && (!data.talent || Object.keys(data.talent).length === 0)) {
+      Router.push('/gig-seeker/edit-profile');
+    }
   }, [data]);
 
   if (Object.keys(data).length === 0) {
@@ -33,10 +35,12 @@ const UserProfile = () => {
   }
 
   const {
-    firstName, lastName, email, talent: {
-      about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills,
-    },
+    firstName, lastName, email, talent
   } = data;
+
+  const {
+    about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills,
+  } = talent || {};
 
   const openResume = () => window.open(resume, '_blank');
 
@@ -55,14 +59,14 @@ const UserProfile = () => {
         <AboutUs>
           <StyledText size='mmd' weight='bold'>About me</StyledText>
           <StyledText size='mmd' dangerouslySetInnerHTML={{ __html: about }} />
-          <Button type='light' width='200px' style={{ marginTop: 40 }} onClick={() => Router.push('/gig-seeker/edit-profile')}>
+          <Button buttonType='light' width='200px' style={{ marginTop: 40 }} onClick={() => Router.push('/gig-seeker/edit-profile')}>
             edit profile
           </Button>
         </AboutUs>
         <ContacInfoWrapper maxWidth>
           <StyledText size='mmd' weight='bold' marginBottom='0'>Skills & Specialisations </StyledText>
           <TagsGroup>
-            {skills.map((skill, index) => (
+            {(skills || []).map((skill, index) => (
               <Tag size='xxs' key={index}>{skill.name}</Tag>
             ))}
           </TagsGroup>
