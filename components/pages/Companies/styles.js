@@ -59,7 +59,7 @@ export const Item = styled.div`
 `;
 
 export const Image = styled.div`
-  background-image: url(${({ src }) => src});
+  background-image: url(${({ src }) => `"${src}"`});
   width: 200px;
   height: 200px;
   background-color: ${color.eggshell};
