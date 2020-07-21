@@ -36,7 +36,7 @@ function* getMyProfile({ flag }) {
     Cookie.set('__gigtype', response.userType);
     yield put(onUpdateProfile(response));
   } catch (error) {
-    yield put(onOpenAlert(error.data.message));
+    Router.push('/login');
   }
 }
 
@@ -63,7 +63,7 @@ function* removeFavoritJob({ jobId, setState }) {
 function* updateUserProfile({ params }) {
   try {
     const response = yield call(axiosPut, '/talent', params);
-    console.log(response)
+    console.log(response);
 
     yield put(onUpdateTalent(response));
     yield put(onOpenAlert('Your profile has successfully changed'));

@@ -70,11 +70,15 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
     return <div />;
   }
 
-  const onClose = () => setOpen(false);
+  const onClose = () => {
+    setApplied(false);
+    setOpen(false);
+  };
 
   const onSubmit = (values) => {
     values.resume = valuesRef.current.resume ? user.talent.resume : valuesRef.current.document;
-    applyJob(id, values);
+    // applyJob(id, values);
+    callback(200);
   };
 
   const onSelectResume = (values) => {
