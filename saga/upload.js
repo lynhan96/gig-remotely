@@ -6,8 +6,7 @@ const ON_UPLOAD_FILE_TO_S3 = 'ON_UPLOAD_FILE_TO_S3';
 
 function* uploadFile({ file, callback }) {
   try {
-    const filename = `${Math.round((new Date()).getTime() / 1000)}-${file.name}`;
-    const response = yield call(get, `/upload-signed-url?filename=${filename}&contentType=${file.type}`);
+    const response = yield call(get, `/upload-signed-url?filename=${file.name}&contentType=${file.type}`);
 
     const options = {
       headers: {

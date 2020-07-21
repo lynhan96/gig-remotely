@@ -3,17 +3,27 @@ import { Text, Modal } from 'components/global';
 import { color } from 'components/utils/color';
 
 export const StyledModal = styled(Modal)`
-  width: 750px;
-  padding: 50px 50px;
-
+  width: ${({ applied }) => (applied ? '500px' : '750px')};
+  padding: ${({ applied }) => (applied ? '50px 30px' : '50px 50px')};
   &::-webkit-scrollbar
   {
     width: 5px;
     background-color: #F5F5F5;
   }
+
+  @media (max-width: 1024px) {
+    width: ${({ applied }) => (applied ? '500px' : 'calc(100% - 200px)')};
+    padding: ${({ applied }) => (applied ? '50px 30px' : '50px 50px')};
+  }
+
+  @media (max-width: 768px) {
+    width: 315px;
+    padding: 40px 15px;
+  }
 `;
 
 export const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -44,6 +54,11 @@ export const Resume = styled(Text)`
   padding-left: 33px;
   color: ${color.cement};
   text-align: left;
+  width: calc(100% - 33px);
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -57,7 +72,7 @@ export const InputWrapper = styled.div`
     cursor: pointer;
     position: absolute;
     top: -22px;
-    height: 140%;
+    height: 200%;
     left: -10px;
   }
 `;
@@ -86,4 +101,43 @@ export const FileName = styled(Text)`
   padding-left: 33px;
   color: ${color.cement};
   text-align: left;
+  width: calc(100% - 33px);
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
+`;
+
+export const MessageWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const MessageImage = styled.img`
+  width: 88%;
+  object-fit: contain;
+  margin-top: 50px;
+`;
+
+export const MessageTitle = styled(Text)`
+  margin-top: 30px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 21px;
+  }
+`;
+
+export const MessageText = styled(Text)`
+  width: 355px;
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    width: 295px;
+  }
 `;

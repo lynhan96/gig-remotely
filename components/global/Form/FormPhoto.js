@@ -1,7 +1,6 @@
 import React, {
   useState, useContext, useCallback, useImperativeHandle, useEffect,
 } from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { onGetUploadFile } from 'saga/upload';
 
@@ -30,7 +29,7 @@ const FormPhoto = React.forwardRef(({
     onGetUploadFile(filename, type, callback),
   ), [dispatch]);
 
-  const uploadFileCallback = ({imageUrl}) => {
+  const uploadFileCallback = ({ imageUrl }) => {
     setImage(imageUrl);
     valuesRef.current[name] = imageUrl;
   };
