@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { Tag } from 'components/global';
+import React, { useEffect, useRef } from 'react';
+import { Tag, Text } from 'components/global';
 import moment from 'moment';
+import ApplyModal from './ApplyModal';
 import RelatedGig from './RelatedGig';
 import SubscribeNews from './SubscribeNews';
 import {
@@ -32,6 +33,17 @@ import {
   FooterWrapper,
 } from './styles';
 
+const labelBackground = (type) => {
+  switch (type) {
+    case 'PART_TIME':
+      return '#a5a75a';
+    case 'FULL_TIME':
+      return '#fa7d00';
+    default:
+      return '#4ad3b9';
+  }
+};
+
 const GigDetail = ({ item }) => {
   const {
     company: { photo, name },
@@ -47,7 +59,9 @@ const GigDetail = ({ item }) => {
     roleResponsibility,
     skillsRequirements,
     experience,
+    contractType
   } = item;
+  const modalRef = useRef();
 
   const scrollItem = () => {
     const applyButton = document.getElementById('apply-button');
@@ -62,6 +76,8 @@ const GigDetail = ({ item }) => {
     }
   };
 
+  const openApplyModal = () => modalRef.current.open();
+
   useEffect(() => {
     const scrollCallBack = window.addEventListener('scroll', scrollItem);
     return () => {
@@ -70,6 +86,7 @@ const GigDetail = ({ item }) => {
   }, []);
 
   const disabledItem = status === 'EXPIRED';
+
   return (
     <Wrapper>
       <Card>
@@ -77,7 +94,7 @@ const GigDetail = ({ item }) => {
         <ContentWrapper>
           <TitleWrapper>
             <Title width='auto' size='xl' weight='bold'>{title}</Title>
-            <Label>qweqwe</Label>
+            <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
           </TitleWrapper>
           <CompanyName size='mmd'>{name}</CompanyName>
           <Date size='sm'>{`Posted ${moment(startedAt).fromNow()}`}</Date>
@@ -114,7 +131,7 @@ const GigDetail = ({ item }) => {
             }
           </TagGroup>
           <ActionGroup>
-            <StyledButton width='200px' style={{ marginRight: 20 }}>apply</StyledButton>
+            <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal}>apply</StyledButton>
             <StyledButton buttonType='light' width='200px'>
               <FavoriteImage src='/images/icon/favorite.svg' />
               save
@@ -145,12 +162,13 @@ const GigDetail = ({ item }) => {
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: experience }} />
           </DescriptionWrapper>
           <FooterWrapper id='apply-button'>
-            <FooterButton width='200px' style={{ marginTop: 50 }}>apply</FooterButton>
+            <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal}>apply</FooterButton>
           </FooterWrapper>
         </ContentWrapper>
       </Card>
       <RelatedGig />
       <SubscribeNews />
+      <ApplyModal ref={modalRef} item={item} labelBackground={labelBackground(contractType)} />
     </Wrapper>
   );
 };

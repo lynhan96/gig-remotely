@@ -21,8 +21,17 @@ export const EmptyLabel = styled.div`
 `;
 
 export const StyledText = styled(Text)`
-  width: 100px;
-  margin-right: 20px;
+  ${({ itemType }) => (
+    itemType === 'vertical'
+      ? css`
+        width: 100px;
+        margin-right: 20px;
+
+      `
+      : css`
+        width: 100%;
+      `
+  )}
 
   @media(max-width: 768px) {
     width: 100%;

@@ -3,7 +3,7 @@ import Router from 'next/router';
 import { useSelector } from 'react-redux';
 import { Button, Loading, Tag } from 'components/global';
 import { LoadingWrapper } from 'components/global/styles';
-
+import { s3Url } from 'constant';
 import {
   Wrapper,
   HeadWrapper,
@@ -42,7 +42,7 @@ const UserProfile = () => {
     about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills,
   } = talent || {};
 
-  const openResume = () => window.open(resume, '_blank');
+  const openResume = () => window.open(`${s3Url}${resume}`, '_blank');
 
   return (
     <Wrapper>
@@ -70,7 +70,7 @@ const UserProfile = () => {
               <Tag size='xxs' key={index}>{skill.name}</Tag>
             ))}
           </TagsGroup>
-          <Button type='light' width='200px' style={{ margin: '10px 0' }} onClick={openResume}>
+          <Button buttonType='light' width='200px' style={{ margin: '10px 0' }} onClick={openResume}>
             <ButtonIcon src='/images/icon/resume.svg' alt='error' />
             see resume
           </Button>

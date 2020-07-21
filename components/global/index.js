@@ -7,6 +7,7 @@ import Alert from 'components/global/Alert';
 import Form from 'components/global/Form';
 import Modal from 'components/global/Modal';
 import Loading from 'components/global/Loading';
+import CheckBox from 'components/global/CheckBox';
 
 export {
   Modal,
@@ -18,4 +19,5 @@ export {
   Alert,
   Form,
   Loading,
+  CheckBox,
 };
