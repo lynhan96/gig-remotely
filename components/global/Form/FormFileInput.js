@@ -2,7 +2,7 @@ import React, {
   useState, useContext, useCallback, useImperativeHandle,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { onGetS3Url } from 'saga/upload';
+import { onGetUploadFile } from 'saga/upload';
 
 import {
   FileInputWrapper,
@@ -26,32 +26,19 @@ const FormFileInput = React.forwardRef(({
     },
   }));
 
-  const getS3Url = useCallback((filename, type, callback) => dispatch(
-    onGetS3Url(filename, type, callback),
+  const uploadFile = useCallback((filename, type, callback) => dispatch(
+    onGetUploadFile(filename, type, callback),
   ), [dispatch]);
+
+  const uploadFileCallback = ({filename}) => {
+    setFileName(filename);
+    valuesRef.current[name] = filename;
+  };
 
   const onChange = (event) => {
     const file = event.target.files[0];
     if (!file) return;
-    const filename = `${Math.round((new Date()).getTime() / 1000)}-${file.name}`;
-    // console.log(filename);
-    // getS3Url(filename, file.type, (response) => {
-    //   console.log(response);
-    // });
-    // let presignedUrl = await fetch(
-    //   `/api/s3?filename=${filename}&type=${e[i].type}`)
-    // let json = await presignedUrl.json()
-    // let url = json.signedURL
-
-    // await fetch(url, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': e[i].type,
-    //   },
-    //   body: e[i],
-    // })
-    setFileName(filename);
-    valuesRef.current[name] = defaultValue;
+    uploadFile(file, uploadFileCallback);
   };
 
   const removeFile = () => {
@@ -64,7 +51,7 @@ const FormFileInput = React.forwardRef(({
       <FileInputLabel>{label}</FileInputLabel>
       <FileInput>
         {fileName}
-        {fileName && <FileInputRemove onClick={removeFile}>remove</FileInputRemove>}
+        <FileInputRemove onClick={removeFile} className={fileName ? 'show-input-label' : 'hide-input-label' }>remove</FileInputRemove>
         <FileInputIcon src='/images/icon/document.svg' />
       </FileInput>
       <Upload type='file' onChange={onChange} />

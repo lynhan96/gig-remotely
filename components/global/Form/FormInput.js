@@ -59,7 +59,7 @@ const FormInput = ({
 
   return (
     <FormItem itemType={itemType}>
-      <StyledText size='sm' weight='bold' className={label ? 'show-input-label' : 'hide-input-label'}>{label}</StyledText>
+      <StyledText itemType={itemType} size='sm' weight='bold' className={label ? 'show-input-label' : 'hide-input-label'}>{label}</StyledText>
       <FieldWrapper className={label && 'input-wrapper-width-label'}>
         <Input
           defaultValue={defaultValue}

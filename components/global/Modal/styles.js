@@ -12,6 +12,8 @@ export const StyledModal = styled(Modal)`
   border: none !important;
   position: relative;
   text-align: center;
+  max-height: 85vh;
+  overflow: auto;
 
   &:focus {
     border: none;

@@ -31,7 +31,7 @@ const EditUserProfile = () => {
   }
 
   const {
-    firstName, lastName, email, talent
+    firstName, lastName, email, talent,
   } = data;
 
   const {
@@ -50,7 +50,6 @@ const EditUserProfile = () => {
     photoFieldRef.current.reset();
   };
 
-
   return (
     <Wrapper>
       <Title weight='bold'>Edit Profile</Title>
@@ -66,7 +65,7 @@ const EditUserProfile = () => {
             </SpecialItem>
           </SpecialWrapper>
           <Form.Item name='jobTitle' required label='Job Title*' placeholder='Job Title*' background='#efefe4' defaultValue={jobTitle} />
-          <Form.Item name='email' required label='Email*' placeholder='Email*' background='#efefe4' defaultValue={email} />
+          <Form.Item name='email' required label='Email*' placeholder='Email*' background='#efefe4' defaultValue={email} validateType='email' />
           <Form.Item name='contact' required label='Contact No*' placeholder='Contact No*' background='#efefe4' defaultValue={contact} />
           <Form.Select name='location' required label='Location*' defaultValue={location} options={country} fieldRef={selectFieldRef} />
           <Form.Item name='about' label='About me' placeholder='About me' type='textarea' background='#efefe4' defaultValue={about} />

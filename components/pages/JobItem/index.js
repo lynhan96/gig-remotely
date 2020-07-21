@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import moment from 'moment';
+import Router from 'next/router';
 import { useDispatch } from 'react-redux';
 import { onAddFavoriteJob, onRemoveFavoriteJob } from 'saga/user';
 import { Tag, Text } from 'components/global';
@@ -123,7 +124,13 @@ const JobItem = ({ item, favorite, applied }) => {
           </Info>
         </Information>
         <Action>
-          <StyledButton width='200px' disabled={disabledItem || applied}>{applied ? 'applied' : 'apply'}</StyledButton>
+          <StyledButton
+            width='200px'
+            disabled={disabledItem || applied}
+            onClick={() => Router.push('/gigs/[id]', `/gigs/${id}`)}
+          >
+            {applied ? 'applied' : 'apply'}
+          </StyledButton>
           <FavoriteImage src={isFavorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} onClick={toggleFavorite} />
         </Action>
         <Time size='xs' color='#9a9a8b' expired={disabledItem}>{status === 'EXPIRED' ? 'expired' : moment(startedAt).fromNow()}</Time>

@@ -17,6 +17,10 @@ export const StyledContainer = styled(Container)`
   @media (max-width: 1280px) {
     align-items: flex-start;
   }
+
+  @media (max-width: 768px){
+    justify-content: space-around;
+  }
 `;
 
 export const StyledText = styled(Text)`
@@ -51,7 +55,16 @@ export const Group = styled.div`
     width: ${({ position }) => (position === 'first' ? '55.5%' : '40.5%')};
   }
 
-  @media (max-width: 120px){
-    width: 50%;
+
+  @media (max-width: 1024px){
+    width: ${({ position }) => (position === 'first' ? '52%' : '47%')};
+  }
+
+  @media (max-width: 768px){
+    width: 40%;
+  }
+
+  @media (max-width: 440px){
+    width: ${({ position }) => (position === 'first' ? '52%' : '47%')};
   }
 `;

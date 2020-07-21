@@ -18,6 +18,7 @@ import UserProfile from 'components/pages/Profile/User';
 import EditUserProfile from 'components/pages/EditUserProfile';
 import CategoriesSelect from 'components/pages/CategoriesSelect';
 import GivingBack from 'components/pages/GivingBack';
+import GigDetail from 'components/pages/GigDetail';
 
 export {
   Footer,
@@ -39,5 +40,4 @@ export {
   UserProfile,
   EditUserProfile,
   CategoriesSelect,
-  GivingBack,
 };

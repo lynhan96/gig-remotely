@@ -1,23 +1,40 @@
-import { get, put as axiosPut } from 'axios';
+import axios, { get } from 'axios';
 import { takeLatest, call } from 'redux-saga/effects';
+import { s3Url } from 'constant';
 
-const ON_GET_S3_URL = 'ON_GET_S3_URL';
-const ON_UPLOAD_IMAGE = 'ON_UPLOAD_IMAGE';
+const ON_UPLOAD_FILE_TO_S3 = 'ON_UPLOAD_FILE_TO_S3';
 
-function* getS3Url({ filename, fileType, callback }) {
+function* uploadFile({ file, callback }) {
   try {
-    const response = yield call(get, `/api/s3?filename=${filename}&type=${fileType}`);
+    const response = yield call(get, `/upload-signed-url?filename=${file.name}&contentType=${file.type}`);
 
-    callback(response);
+    const options = {
+      headers: {
+        'Content-Type': file.type,
+      },
+    };
+
+    const instance = axios.create();
+    delete instance.defaults.headers.common.Authorization;
+    instance.put(response.signedUrl, file, options).then(() => {
+      callback(
+        {
+          filename: response.filename,
+          imageUrl: `${s3Url}${response.filename}`,
+        },
+      );
+    }).catch((err) => {
+      console.error(err);
+    });
   } catch (error) {
     console.error(error);
   }
 }
 
-export const onGetS3Url = (filename, fileType, callback) => ({
-  type: ON_GET_S3_URL, filename, fileType, callback,
+export const onGetUploadFile = (file, callback) => ({
+  type: ON_UPLOAD_FILE_TO_S3, file, callback,
 });
 
 export default function* companyWatcher() {
-  yield takeLatest(ON_GET_S3_URL, getS3Url);
+  yield takeLatest(ON_UPLOAD_FILE_TO_S3, uploadFile);
 }

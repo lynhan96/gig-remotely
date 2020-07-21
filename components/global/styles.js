@@ -109,6 +109,10 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .show-apply-button {
+    display: flex;
+  }
+
   .open-select {
     height: 370px;
     padding: 20px;

@@ -4,11 +4,12 @@ import { color } from 'components/utils/color';
 export const Wrapper = styled.div`
   position: relative;
   display: flex;
-  background: ${color.eggshell};
+  background: ${color.offWhite};
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   height: 50px;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 
   @media (max-width: 768px) {
     height: auto;
