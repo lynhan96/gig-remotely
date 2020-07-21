@@ -12,6 +12,20 @@ export const Wrapper = styled.div`
   @media (max-width: 1500px) {
     padding: 0;
   }
+
+  @media (max-width: 1024px) {
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 50px;
+  }
+
+  @media (max-width: 768px) {
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
 `;
 
 export const ImageWrapper = styled.div`
@@ -19,9 +33,21 @@ export const ImageWrapper = styled.div`
   flex-flow: wrap row;
   align-items: center;
   width: 50%;
+  position: relative;
 
   @media (max-width: 1500px) {
     width: 51%;
+  }
+
+  @media (max-width: 1024px) {
+    width: auto;
+    margin-left: -50px;
+  }
+
+  @media (max-width: 440px) {
+    width: 100%;
+    margin-left: 0;
+    overflow: hidden;
   }
 `;
 
@@ -31,7 +57,13 @@ export const TextWrapper = styled.div`
   width: 40%;
 
   @media (max-width: 1500px) {
-    width: 34%;
+    width: 36%;
+  }
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    align-items: center;
+    margin-top: 40px;
   }
 `;
 
@@ -40,120 +72,91 @@ export const LeftImageWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-`;
 
-export const RightImageWrapper = styled.div`
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
+  @media (max-width: 1500px) {
+    width: 44%;
+  }
+
+  @media (max-width: 320px) {
+    width: 40%;
+  }
 `;
 
 export const AboveImage = styled.img`
-  width: 350px;
+  width: 100%;
   height: 230px;
 
   @media (max-width: 1300px) {
-    width: 30vh;
-    height: 25vh;
+    height: 210px;
   }
 
-  @media (max-width: 1000px) {
-    width: 20vh;
-    height: 15vh;
-  }
-
-  @media (max-width: 768px) {
-    width: 15vh;
-    height: 10vh;
-  }
-
-  @media (max-width: 500px) {
-    width: 10vh;
-    height: 5vh;
+  @media (max-width: 1024px) {
+    height: 190px;
   }
 
   @media (max-width: 440px) {
-    width: 200px;
-    height: 200px;
+    height: 150px;
   }
 
   @media (max-width: 375px) {
-    width: 180px;
-    height: 180px;
+    height: 140px;
   }
 
-  @media (max-width: 280px) {
-    width: 150px;
-    height: 150px;
+  @media (max-width: 320px) {
+    height: 120px;
   }
 `;
 
 export const TopImage = styled.img`
-  width: 270px;
+  width: 80%;
   height: 190px;
 
   @media (max-width: 1300px) {
-    width: 25vh;
-    height: 20vh;
+    height: 170px;
   }
 
-  @media (max-width: 1000px) {
-    width: 15vh;
-    height: 10vh;
-  }
-
-  @media (max-width: 768px) {
-    width: 10vh;
-    height: 5vh;
-  }
-
-  @media (max-width: 500px) {
-    width: 5vh;
-    height: 1vh;
+  @media (max-width: 1024px) {
+    height: 150px;
   }
 
   @media (max-width: 440px) {
-    width: 200px;
-    height: 200px;
+    height: 120px;
   }
 
   @media (max-width: 375px) {
-    width: 180px;
-    height: 180px;
+    height: 100px;
   }
 
-  @media (max-width: 280px) {
-    width: 150px;
-    height: 150px;
+  @media (max-width: 320px) {
+    height: 80px;
   }
 `;
 
 export const MidImage = styled.img`
   width: 230px;
   height: 350px;
-  object-fit: contain;
 
   @media (max-width: 1300px) {
     width: 25vh;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     width: 20vh;
   }
 
-  @media (max-width: 768px) {
-    width: 15vh;
+  @media (max-width: 440px) {
+    height: 230px;
+    width: 140px;
   }
 
   @media (max-width: 375px) {
-    width: 180px;
-    height: 180px;
+    height: 200px;
+    width: 120px;
   }
 
-  @media (max-width: 280px) {
-    width: 150px;
-    height: 150px;
+  @media (max-width: 320px) {
+    width: 110px;
+    height: 170px;
   }
 `;
 
@@ -161,37 +164,35 @@ export const RightImage = styled.img`
   width: 280px;
   height: 440px;
   object-fit: contain;
-  right: -180px;
+  right: -100px;
   position: absolute;
 
   @media (max-width: 1300px) {
-    height: 40vh;
-    right: -160px;
+    height: 400px;
   }
 
-  @media (max-width: 1000px) {
-    height: 35vh;
-    right: -160px;
+  @media (max-width: 1024px) {
+    height: 370px;
+    right: -80px;
   }
 
   @media (max-width: 768px) {
-    height: 30vh;
-    right: -160px;
+    height: 370px;
+    right: -50px;
   }
 
   @media (max-width: 440px) {
-    width: 200px;
-    height: 200px;
+    height: 270px;
+    right: -80px;
   }
 
   @media (max-width: 375px) {
-    width: 180px;
-    height: 180px;
+    height: 230px;
+    right: -89px;
   }
 
-  @media (max-width: 280px) {
-    width: 150px;
-    height: 150px;
+  @media (max-width: 320px) {
+    height: 200px;
   }
 `;
 
@@ -201,72 +202,66 @@ export const Title = styled(Text)`
   width: auto;
   margin-bottom: 46px;
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1500px) {
     font-size: 60px;
   }
 
-  @media (max-width: 1000px) {
-    font-size: 40px;
+  @media (max-width: 1300px) {
+    font-size: 52px;
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 60px;
   }
 
   @media (max-width: 768px) {
-    font-size: 18px;
+    font-size: 50px;
   }
 
-  @media (max-width: 450px) {
-    font-size: 22px;
+  @media (max-width: 440px) {
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 20px;
   }
 
   @media (max-width: 375px) {
-    font-size: 20px;
+    font-size: 33px;
   }
 
   @media (max-width: 320px) {
-    font-size: 18px;
-  }
-
-  @media (max-width: 280px) {
-    font-size: 16px;
+    font-size: 28px;
   }
 `;
 
 export const StyledButton = styled(Button)`
   margin-top: 50px;
   width: 135px;
-
-  @media (max-width: 768px) {
-    font-size: 13px;
-    height: 30px;
-    width: 120px;
-  }
-
-  @media (max-width: 375px) {
-    font-size: 11px;
-    height: 30px;
-  }
 `;
 
-export const StyledText = styled(Text)`
+export const StyledText = styled.div`
+  @media (max-width: 1024px) {
+    padding: 0 50px;
+  }
+
+  @media (max-width: 440px) {
+    padding: 0;
+  }
 `;
 
 export const InText = styled(Text)`
-  @media (max-width: 1000px) {
-    font-size: 14px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
   }
 
-  @media (max-width: 768px) {
-    font-size: 12px;
+  @media (max-width: 440px) {
+    font-size: 17px;
   }
 
   @media (max-width: 375px) {
-    font-size: 11px;
+    font-size: 14px;
   }
 
   @media (max-width: 320px) {
-    font-size: 9px;
-  }
-
-  @media (max-width: 280px) {
-    font-size: 8px;
+    font-size: 12px;
   }
 `;

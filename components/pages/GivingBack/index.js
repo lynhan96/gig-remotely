@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  Wrapper, ImageWrapper, LeftImageWrapper, RightImageWrapper,
+  Wrapper, ImageWrapper, LeftImageWrapper,
   TextWrapper, Title, StyledButton, StyledText, InText,
   TopImage, AboveImage, RightImage, MidImage,
 } from './styles';
@@ -13,10 +13,8 @@ const GivingBack = () => (
         <TopImage src='/images/givingback1.png' />
         <AboveImage src='/images/givingback2.png' />
       </LeftImageWrapper>
-      <RightImageWrapper>
-        <MidImage src='/images/givingback3.png' />
-        <RightImage src='/images/givingback4.png' />
-      </RightImageWrapper>
+      <MidImage src='/images/givingback3.png' />
+      <RightImage src='/images/givingback4.png' />
     </ImageWrapper>
     <TextWrapper>
       <Title>

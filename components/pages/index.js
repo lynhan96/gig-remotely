@@ -40,4 +40,6 @@ export {
   UserProfile,
   EditUserProfile,
   CategoriesSelect,
+  GivingBack,
+  GigDetail,
 };
