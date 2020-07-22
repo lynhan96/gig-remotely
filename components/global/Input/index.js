@@ -15,6 +15,7 @@ const Input = ({
   inputRef,
   background,
   fieldType,
+  minHeight,
 }) => {
   const [inputType, setInputType] = useState(type);
   const fontSize = () => {
@@ -38,6 +39,7 @@ const Input = ({
   if (fieldType === 'textarea') {
     return (
       <StyledTextArea
+        minHeight={minHeight}
         background={background}
         defaultValue={defaultValue}
         className={error ? 'input-error' : ''}

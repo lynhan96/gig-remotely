@@ -16,6 +16,7 @@ import UserProfile from 'components/pages/Profile/User';
 import EditUserProfile from 'components/pages/EditUserProfile';
 import CategoriesSelect from 'components/pages/CategoriesSelect';
 import GigDetail from 'components/pages/GigDetail';
+import EditCompanyProfile from 'components/pages/EditCompanyProfile';
 
 export {
   Footer,
@@ -36,4 +37,5 @@ export {
   EditUserProfile,
   CategoriesSelect,
   GigDetail,
+  EditCompanyProfile,
 };

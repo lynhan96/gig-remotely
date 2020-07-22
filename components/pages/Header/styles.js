@@ -93,18 +93,8 @@ export const MenuGroup = styled.div`
   }
 `;
 
-export const BurgerMenuGroup = styled.div`
-  display: none;
-  flex-direction: column;
-  align-items: center;
-
-  @media(max-width: 1024px) {
-    display: flex;
-  }
-`;
-
 export const SubMenu = styled.div`
-  min-width: 120px;
+  min-width: 140px;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -114,6 +104,12 @@ export const SubMenu = styled.div`
   padding: 20px 20px;
   position: absolute;
   top: 50px;
+
+  @media(max-width: 1024px) {
+    position: relative;
+    top: 0;
+    margin-top: 20px;
+  }
 `;
 
 export const SubMenuItem = styled(Text)`
@@ -152,11 +148,14 @@ export const MenuItem = styled.div`
     margin-top: 25px;
     font-size: ${responsiveFontSize};
     font-weight: normal;
+    flex-direction: column;
   }
 
   &:hover {
-    ${SubMenu} {
-      display: flex;
+    @media(min-width: 1025px) {
+      ${SubMenu} {
+        display: flex;
+      }
     }
   }
 `;

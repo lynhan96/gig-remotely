@@ -17,7 +17,7 @@ const validateEmail = (email) => {
 };
 
 const FormInput = ({
-  required, name, label, type, placeholder, validateType, background, defaultValue, context,
+  required, name, label, type, placeholder, validateType, background, defaultValue, context, minHeight
 }) => {
   const [fieldValidate, setFieldValidate] = useState({ hasError: false, message: '' });
   const {
@@ -62,6 +62,7 @@ const FormInput = ({
       <StyledText itemType={itemType} size='sm' weight='bold' className={label ? 'show-input-label' : 'hide-input-label'}>{label}</StyledText>
       <FieldWrapper className={label && 'input-wrapper-width-label'}>
         <Input
+          minHeight={minHeight}
           defaultValue={defaultValue}
           fieldType={type === 'textarea' ? 'textarea' : 'input'}
           error={fieldValidate.hasError}
@@ -78,6 +79,7 @@ const FormInput = ({
 };
 
 FormInput.propTypes = {
+  minHeight: PropTypes.string,
   background: PropTypes.string,
   required: PropTypes.bool,
   name: PropTypes.string,
@@ -103,6 +105,7 @@ FormInput.defaultProps = {
   validateType: '',
   background: '',
   defaultValue: '',
+  minHeight: '',
 };
 
 export default FormInput;

@@ -1,8 +1,24 @@
-import { get } from 'axios';
-import { takeLatest, call } from 'redux-saga/effects';
+import { get, put as axiosPut } from 'axios';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import { onOpenAlert } from 'redux/alert';
+import { onUpdateUserCompany } from 'redux/user';
 
 const ON_GET_COMPANIES = 'ON_GET_COMPANIES';
 const ON_GET_COMPANY_PROFILE = 'ON_GET_COMPANY_PROFILE';
+const ON_UPDATE_COMPANY_PROFILE = 'ON_UPDATE_COMPANY_PROFILE';
+
+function* updateCompanyProfile({ params }) {
+  try {
+    const response = yield call(axiosPut, '/company', params);
+
+    console.log(response)
+
+    yield put(onUpdateUserCompany(response));
+    yield put(onOpenAlert('Your profile has successfully changed'));
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
 
 function* getCompanies({ callback }) {
   try {
@@ -32,7 +48,12 @@ export const onGetCompanies = (callback) => ({
   type: ON_GET_COMPANIES, callback,
 });
 
+export const onUpdateCompanyProfile = (params) => ({
+  type: ON_UPDATE_COMPANY_PROFILE, params,
+});
+
 export default function* companyWatcher() {
   yield takeLatest(ON_GET_COMPANIES, getCompanies);
   yield takeLatest(ON_GET_COMPANY_PROFILE, getCompanyProfile);
+  yield takeLatest(ON_UPDATE_COMPANY_PROFILE, updateCompanyProfile);
 }

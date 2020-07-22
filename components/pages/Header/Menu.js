@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Cookie from 'js-cookie';
 import { Button } from 'components/global';
 import {
-  Menu, MenuItem, MenuGroup, StyledBurger, BurgerMenuGroup, SubMenu, SubMenuItem,
+  Menu, MenuItem, MenuGroup, StyledBurger, SubMenu, SubMenuItem,
 } from './styles';
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
+  const [showSubMenu, setShowSubMenu] = useState(false);
   const userType = Cookie.get('__gigtype');
   const token = Cookie.get('__gigtoken');
   const redirectTo = (link) => {
     setOpen(false);
     Router.push(link);
   };
+
+  useEffect(() => {
+    setShowSubMenu(false);
+  }, [open]);
 
   if (token && userType === 'COMPANY') {
     return (
@@ -25,27 +30,23 @@ const Nav = () => {
         </StyledBurger>
         <Menu open={open}>
           <MenuGroup>
-            <MenuItem>find gigs</MenuItem>
-            <MenuItem>companies</MenuItem>
+            <MenuItem onClick={() => redirectTo('/company/dashboard')}>dashboard</MenuItem>
+            <MenuItem onClick={() => redirectTo('/company/profile')}>profile</MenuItem>
           </MenuGroup>
           <MenuGroup>
-            <MenuItem>
+            <MenuItem onClick={() => setShowSubMenu(!showSubMenu)}>
               account
-              <SubMenu>
-                <SubMenuItem>logout</SubMenuItem>
+              <SubMenu className={showSubMenu ? 'show-sub-menu' : 'hide-sub-menu'}>
+                <SubMenuItem size='sm' onClick={() => redirectTo('/company/account-setting')}>account settings</SubMenuItem>
+                <SubMenuItem size='sm' onClick={() => redirectTo('/company/payment-options')}>payment options</SubMenuItem>
+                <SubMenuItem size='sm' onClick={() => redirectTo('/help')}>help</SubMenuItem>
+                <SubMenuItem size='sm' onClick={() => redirectTo('/login')}>log out</SubMenuItem>
               </SubMenu>
             </MenuItem>
             <MenuItem>
               <Button>post gig</Button>
             </MenuItem>
           </MenuGroup>
-
-          <BurgerMenuGroup>
-            <MenuItem onClick={redirectTo('/post-gig')}>post gig</MenuItem>
-            <MenuItem>find gigs</MenuItem>
-            <MenuItem>companies</MenuItem>
-            <MenuItem onClick={() => redirectTo('/login')}>account</MenuItem>
-          </BurgerMenuGroup>
         </Menu>
       </>
     );

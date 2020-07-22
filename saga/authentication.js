@@ -10,7 +10,7 @@ const ON_VERIFY_EMAIL = 'ON_VERIFY_EMAIL';
 
 function* verificationEmail({ id }) {
   try {
-    const response = yield call(get, `/users/confirm-email?id=${id}`);
+    yield call(get, `/users/confirm-email?id=${id}`);
     Cookie.set('__gigtoken', id);
     Router.push('/setup-account');
   } catch (error) {
@@ -36,9 +36,12 @@ function* login({ params }) {
     Cookie.set('__gigtoken', response.access_token);
     if (!response.userType) {
       Router.push('/setup-account');
-    } else {
+    } else if (response.userType === 'TALENT') {
       Cookie.set('__gigtype', response.userType);
       Router.push('/gig-seeker/profile');
+    } else if (response.userType === 'COMPANY') {
+      Cookie.set('__gigtype', response.userType);
+      Router.push('/company/profile');
     }
   } catch (error) {
     if (error.status === 401) {

@@ -59,7 +59,7 @@ export const StyledTextArea = styled.textarea`
   padding: 20px;
   font-size: 17px;
   width: calc(100% - 40px);
-  min-height: 400px;
+  min-height: ${({ minHeight }) => minHeight || '400px'};
   outline: none;
   line-height: 1.2;
   border-radius: 10px;

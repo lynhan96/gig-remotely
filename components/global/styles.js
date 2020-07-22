@@ -123,6 +123,19 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0 !important;
   }
 
+
+  .show-sub-menu {
+    @media (max-width: 1024px) {
+      display: flex;
+    }
+  }
+
+  .hide-sub-menu {
+    @media (max-width: 1024px) {
+      display: none;
+    }
+  }
+
   .show-input-error,
   .show-input-label,
   .open-select-search {
