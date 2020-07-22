@@ -75,7 +75,7 @@ const EditUserProfile = () => {
           <Form.Item name='linkedin' label='Linkedin' placeholder='Linkedin' background='#efefe4' defaultValue={linkedin} />
           <Form.Item name='instagram' label='Instagram' placeholder='Instagram' background='#efefe4' defaultValue={instagram} />
           <Form.FileInput name='resume' label='Resume' defaultValue={resume} fieldRef={inputFileFieldRef} />
-          <CategoriesSelect label='Featured Skills & Tools (Select up to 9)' skillRef={skillRef} selectedSkill={skills} ref={skillFieldRef} />
+          <CategoriesSelect label='Featured Skills & Tools (Select up to 9)' skillRef={skillRef} selectedSkill={skills} ref={skillFieldRef} maxSelect={9} />
         </RightWrapper>
         <ButtonWrapper>
           <Button htmlType='submit' width='200px'>save</Button>

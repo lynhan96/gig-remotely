@@ -24,7 +24,9 @@ import {
   TagIcon,
 } from './styles';
 
-const CategoriesSelect = React.forwardRef(({ skillRef, label, selectedSkill }, ref) => {
+const CategoriesSelect = React.forwardRef(({
+  skillRef, label, selectedSkill, maxSelect = 5,
+}, ref) => {
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -73,7 +75,7 @@ const CategoriesSelect = React.forwardRef(({ skillRef, label, selectedSkill }, r
   };
 
   const selectSkill = (item) => {
-    if (!skillIds.includes(item.id) && skillIds.length < 9) {
+    if (!skillIds.includes(item.id) && skillIds.length < maxSelect) {
       setUserSkill((state) => state.concat([item]));
     }
   };
@@ -98,10 +100,10 @@ const CategoriesSelect = React.forwardRef(({ skillRef, label, selectedSkill }, r
             <Category>
               <CategoryItem key='all' active={selectedCategory === 0} onClick={() => setSelectedCategory(0)}>All</CategoryItem>
               {
-              data.map((item) => (
-                <CategoryItem active={selectedCategory === item.id} key={item.name} onClick={() => setSelectedCategory(item.id)}>{item.name}</CategoryItem>
-              ))
-            }
+                data.map((item) => (
+                  <CategoryItem active={selectedCategory === item.id} key={item.name} onClick={() => setSelectedCategory(item.id)}>{item.name}</CategoryItem>
+                ))
+              }
             </Category>
           </CategoryScrollAble>
           <SkillScrollAble>

@@ -18,6 +18,7 @@ import CategoriesSelect from 'components/pages/CategoriesSelect';
 import GigDetail from 'components/pages/GigDetail';
 import EditCompanyProfile from 'components/pages/EditCompanyProfile';
 import Dashboard from 'components/pages/Dashboard';
+import PostGig from 'components/pages/PostGig';
 
 export {
   Footer,
@@ -40,4 +41,5 @@ export {
   GigDetail,
   EditCompanyProfile,
   Dashboard,
+  PostGig,
 };

@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useRef, useEffect,
+  useCallback, useRef
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { country } from 'constant';
@@ -12,7 +12,7 @@ import {
   Wrapper, Title, RightWrapper, LeftWrapper, ButtonWrapper,
 } from './styles';
 
-const EditUserProfile = () => {
+const EditCompanyProfile = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.user.data);
   const selectFieldRef = useRef();
@@ -64,4 +64,4 @@ const EditUserProfile = () => {
   );
 };
 
-export default EditUserProfile;
+export default EditCompanyProfile;
