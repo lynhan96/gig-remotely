@@ -69,7 +69,7 @@ const JobItem = ({ item, favorite, applied }) => {
   };
 
   return (
-    <ItemWrapper disabled={disabledItem} onClick={() => Router.push('/gigs/[id]', `/gigs/${id}`)}>
+    <ItemWrapper>
       { active() && <Active />}
       <ContentWrapper active={active()}>
         <Information>

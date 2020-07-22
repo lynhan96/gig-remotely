@@ -14,13 +14,35 @@ export const Wrapper = styled.div`
     margin-bottom: 100px;
     margin-top: 45px;
   }
+
+  .textarea-input {
+    min-height: 175px;
+  }
+
+  @media (min-width: 1280px) and (max-width: 1500px){
+    .textarea-input {
+      min-height: 187px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1280px) {
+    .textarea-input {
+      min-height: 183px;
+    }
+  }
 `;
 
 export const Title = styled(Text)`
   font-size: 50px;
   margin-bottom: 50px;
 
+  @media (max-width: 1024px) {
+    padding: 0 20px;
+    width: calc(100% - 40px);
+  }
+
   @media (max-width: 440px) {
+    width: 100%;
     font-size: 38px;
     margin-bottom: 20px;
   }
@@ -78,6 +100,10 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 80px;
+
+  @media (max-width: 1024px) {
+    margin-top: 40px;
+  }
 `;
 
 export const HintTitle = styled(Text)`

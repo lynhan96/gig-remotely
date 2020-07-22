@@ -80,6 +80,10 @@ const PaymentForm = ({}) => {
             </LeftContent>
             <RightContent>
               <Image src='/images/boost.png' />
+              <PriceWrapper>
+                <Price>$49.90</Price>
+                <Hint>for 7 days</Hint>
+              </PriceWrapper>
               <StyledButton>boost</StyledButton>
             </RightContent>
           </ContentWrapper>

@@ -30,7 +30,9 @@ function* applyJob({ jobId, params, callback }) {
 
 function* getJobs({ params, callback }) {
   try {
-    const url = params.limit ? `/job?limit=${params.limit}` : '/job';
+    let url = params.limit ? `/job?limit=${params.limit}` : '/job?limit=10';
+
+    if (params.page) url += `&page=${params.page}`;
     const response = yield call(get, url);
 
     callback(response);

@@ -52,7 +52,7 @@ const PostGig = ({ data }) => {
             type='textarea'
             background='#efefe4'
             defaultValue={about}
-            minHeight='175px'
+            className='textarea-input'
           />
           <Form.Item
             name='description'
@@ -61,7 +61,7 @@ const PostGig = ({ data }) => {
             type='textarea'
             background='#efefe4'
             defaultValue={description}
-            minHeight='175px'
+            className='textarea-input'
           />
           <Form.Item
             name='roleResponsibility'
@@ -70,7 +70,7 @@ const PostGig = ({ data }) => {
             type='textarea'
             background='#efefe4'
             defaultValue={roleResponsibility}
-            minHeight='175px'
+            className='textarea-input'
           />
           <Form.Item
             name='skillsRequirements'
@@ -79,7 +79,7 @@ const PostGig = ({ data }) => {
             type='textarea'
             background='#efefe4'
             defaultValue={skillsRequirements}
-            minHeight='175px'
+            className='textarea-input'
           />
           <Form.Item
             name='experience'
@@ -88,7 +88,7 @@ const PostGig = ({ data }) => {
             type='textarea'
             background='#efefe4'
             defaultValue={experience}
-            minHeight='175px'
+            className='textarea-input'
           />
         </RightWrapper>
         <PaymentForm />

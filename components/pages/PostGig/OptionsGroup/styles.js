@@ -52,4 +52,11 @@ export const Item = styled.div`
     color: ${color.offWhite};
     border: 1px solid ${color.black};
   }
+
+  @media (max-width: 767px){
+    font-size: 15px;
+    height: 40px;
+    margin-right: 10px;
+    padding: 0 15px;
+  }
 `;
