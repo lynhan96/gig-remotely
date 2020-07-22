@@ -149,7 +149,7 @@ export const Title = styled(Text)`
 
     ${Label} {
       margin-left: 10px;
-      margin-top: -3px;
+      vertical-align: middle;
       display: initial !important;
     }
   }

@@ -31,11 +31,11 @@ const EditUserProfile = () => {
   }
 
   const {
-    firstName, lastName, email, talent,
+    firstName, lastName, talent,
   } = data;
 
   const {
-    about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills,
+    about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills, email,
   } = talent || {};
 
   const onSubmit = (values) => {
@@ -79,7 +79,7 @@ const EditUserProfile = () => {
         </RightWrapper>
         <ButtonWrapper>
           <Button htmlType='submit' width='200px'>save</Button>
-          <Button htmlType='reset' type='light' width='200px' style={{ marginTop: 20 }}>cancel</Button>
+          <Button htmlType='reset' buttonType='light' width='200px' style={{ marginTop: 20 }}>cancel</Button>
         </ButtonWrapper>
       </Form>
     </Wrapper>

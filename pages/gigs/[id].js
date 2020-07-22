@@ -25,7 +25,7 @@ const CompanyDetailPage = () => {
   return (
     <>
       <Head>
-        {/* <title>{data ? data.name : 'Gig Detail' }</title> */}
+        <title>{data ? data.title : 'Gig Detail' }</title>
       </Head>
       <Container>
         { (loading || !data)

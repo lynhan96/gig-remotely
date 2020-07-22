@@ -177,7 +177,7 @@ export const StyledButton = styled(Button)`
     width: 120px;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 440px) {
     width: 45%;
   }
 `;
@@ -210,7 +210,7 @@ export const ActionGroup = styled.div`
   margin-top: 50px;
   margin-bottom: 40px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 440px) {
     justify-content: center;
   }
 `;
@@ -233,7 +233,7 @@ export const ShareButton = styled.div`
   margin-left: 20px;
   height: 50px;
 
-  @media (max-width: 375px) {
+  @media (max-width: 440px) {
     margin-left: 0;
     margin-top: 20px;
   }

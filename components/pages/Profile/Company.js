@@ -25,15 +25,20 @@ import {
 } from './styles';
 
 const CompanyInfo = ({
-  id, email, contact, address, gigsNumber, location, about,
+  id, email, contact, address, gigsNumber, location, about, isCompany,
 }) => {
-  const viewGigs = () => Router.push('/companies/[id]', `/companies/${id}?view=gigs`);
+  const viewGigs = () => (isCompany ? Router.push('/company/dashboard') : Router.push('/companies/[id]', `/companies/${id}?view=gigs`));
 
   return (
     <InfoWrapper>
       <AboutUs>
         <StyledText size='mmd' weight='bold'>About the Company</StyledText>
         <StyledText size='mmd' dangerouslySetInnerHTML={{ __html: about }} />
+        { isCompany && (
+          <Button buttonType='light' width='200px' style={{ marginTop: 40 }} onClick={() => Router.push('/company/edit-profile')}>
+            edit profile
+          </Button>
+        )}
       </AboutUs>
       <ContacInfoWrapper>
         <GigInfo>
@@ -79,7 +84,7 @@ const CompanyInfo = ({
 const GigsInfo = ({ companyName, jobs }) => (
   <GigsWrapper>
     { jobs.map(({ title, location }, index) => (
-      <Gig key={index}>
+      <Gig key={title}>
         <GigPhoto />
         <GigCompanyTitle size='mmd' weight='bold' marginBottom='5px'>{title}</GigCompanyTitle>
         <GigCompanyName size='sm' marginBottom='0'>{companyName}</GigCompanyName>
@@ -89,10 +94,12 @@ const GigsInfo = ({ companyName, jobs }) => (
   </GigsWrapper>
 );
 
-const CompanyProfile = ({ data, type }) => {
+const CompanyProfile = ({ data, type, isCompany }) => {
   const {
-    id, name, photo, website, about, email, contact, address, location, jobs,
+    id, name, photo, website, about, email, contact, address, location,
   } = data;
+
+  const jobs = isCompany ? [] : data.jobs;
 
   return (
     <Wrapper>
@@ -115,6 +122,7 @@ const CompanyProfile = ({ data, type }) => {
             address={address}
             location={location}
             gigsNumber={jobs.length}
+            isCompany={isCompany}
           />
         )}
     </Wrapper>

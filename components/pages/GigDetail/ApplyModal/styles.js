@@ -17,7 +17,7 @@ export const StyledModal = styled(Modal)`
   }
 
   @media (max-width: 768px) {
-    width: 315px;
+    width: calc(100% - 40px);
     padding: 40px 15px;
   }
 `;
