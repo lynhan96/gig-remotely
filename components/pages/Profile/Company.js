@@ -97,7 +97,7 @@ const GigsInfo = ({ companyName, jobs }) => (
 const CompanyProfile = ({ data, type, isCompany }) => {
   const {
     id, name, photo, website, about, email, contact, address, location,
-  } = data;
+  } = data || {};
 
   const jobs = isCompany ? [] : data.jobs;
 

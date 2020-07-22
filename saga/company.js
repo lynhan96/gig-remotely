@@ -6,6 +6,7 @@ import { onUpdateUserCompany } from 'redux/user';
 const ON_GET_COMPANIES = 'ON_GET_COMPANIES';
 const ON_GET_COMPANY_PROFILE = 'ON_GET_COMPANY_PROFILE';
 const ON_UPDATE_COMPANY_PROFILE = 'ON_UPDATE_COMPANY_PROFILE';
+const ON_GET_COMPANY_GIGS = 'ON_GET_COMPANY_GIGS';
 
 function* updateCompanyProfile({ params }) {
   try {
@@ -27,6 +28,25 @@ function* getCompanies({ callback }) {
     callback(response);
   } catch (error) {
     console.error(error);
+  }
+}
+
+function* getOwnedGig({ setState }) {
+  try {
+    const response = yield call(get, '/job/mine');
+
+    const all = response;
+    const active = response.filter((i) => i.status === 'ACTIVE');
+    const expired = response.filter((i) => i.status === 'EXPIRED');
+    setState({
+      loading: false,
+      data: {
+        active, all, expired,
+      },
+    });
+  } catch (error) {
+    console.log(error)
+    yield put(onOpenAlert(error.data.message));
   }
 }
 
@@ -52,8 +72,13 @@ export const onUpdateCompanyProfile = (params) => ({
   type: ON_UPDATE_COMPANY_PROFILE, params,
 });
 
+export const onGetOwnedGigs = (setState) => ({
+  type: ON_GET_COMPANY_GIGS, setState,
+});
+
 export default function* companyWatcher() {
   yield takeLatest(ON_GET_COMPANIES, getCompanies);
   yield takeLatest(ON_GET_COMPANY_PROFILE, getCompanyProfile);
   yield takeLatest(ON_UPDATE_COMPANY_PROFILE, updateCompanyProfile);
+  yield takeLatest(ON_GET_COMPANY_GIGS, getOwnedGig);
 }
