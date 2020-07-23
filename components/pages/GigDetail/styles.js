@@ -179,6 +179,7 @@ export const StyledButton = styled(Button)`
 
   @media (max-width: 440px) {
     width: 45%;
+    margin-top: 20px;
   }
 `;
 
@@ -212,6 +213,10 @@ export const ActionGroup = styled.div`
 
   @media (max-width: 440px) {
     justify-content: center;
+  }
+
+  @media (max-width: 440px) {
+    margin-top: 20px;
   }
 `;
 

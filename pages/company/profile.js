@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const data = useSelector((state) => state.user.data);
 
   useEffect(() => {
-    if (data.id && (!data.company || Object.keys(data.company).length === 0)) {
+    if (data.userType && data.userType === 'COMPANY' && (!data.company || Object.keys(data.company).length === 0)) {
       Router.push('/company/edit-profile');
     }
   }, [data]);

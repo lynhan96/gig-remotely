@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { color } from 'components/utils/color';
 
 export const Layout = styled.div`
@@ -51,6 +51,18 @@ export const LoadingWrapper = styled.div`
     height: 70vh;
     padding-bottom: 70px;
     margin-bottom: 0;
+`;
+
+const animation = keyframes`
+  0% {
+    box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.0);
+  }
+  50% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    box-shadow: 0px 0px 0px 15px rgba(0, 0, 0, 0);
+  }
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -109,6 +121,16 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .active-switch {
+    background: black;
+    transform: scale(1);
+    animation: ${animation} 0.2s linear forwards;
+  }
+
+  .active-switch-icon {
+    margin-left: 25px;
+  }
+
   .show-apply-button {
     display: flex;
   }
@@ -136,12 +158,14 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .show-field,
   .show-input-error,
   .show-input-label,
   .open-select-search {
     display: flex;
   }
 
+  .hide-field,
   .hide-input-label,
   .close-select-search,
   .hide-input-error {
@@ -155,6 +179,10 @@ export const GlobalStyle = createGlobalStyle`
 
   .input-wrapper-width-label {
     width: calc(100% - 120px);
+
+    @media(max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .input-error {

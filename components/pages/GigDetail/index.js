@@ -60,6 +60,8 @@ const GigDetail = ({ item }) => {
     skillsRequirements,
     experience,
     contractType,
+    isApplied,
+    isFavorite,
   } = item;
 
   const modalRef = useRef();
@@ -132,11 +134,15 @@ const GigDetail = ({ item }) => {
             }
           </TagGroup>
           <ActionGroup>
-            <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal}>apply</StyledButton>
-            <StyledButton buttonType='light' width='200px'>
-              <FavoriteImage src='/images/icon/favorite.svg' />
-              save
-            </StyledButton>
+            <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</StyledButton>
+            {
+              !isApplied && (
+                <StyledButton buttonType='light' width='200px'>
+                  <FavoriteImage src='/images/icon/favorite.svg' />
+                  save
+                </StyledButton>
+              )
+            }
             <ShareButton>
               <ShareImage src='/images/icon/share.svg' />
               share
@@ -163,7 +169,7 @@ const GigDetail = ({ item }) => {
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: experience }} />
           </DescriptionWrapper>
           <FooterWrapper id='apply-button'>
-            <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal}>apply</FooterButton>
+            <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</FooterButton>
           </FooterWrapper>
         </ContentWrapper>
       </Card>

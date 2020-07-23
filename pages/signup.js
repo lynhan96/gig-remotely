@@ -11,7 +11,6 @@ const SignUpPage = () => (
     </Head>
     <Container style={{ alignItems: 'center' }}>
       <SignUp />
-      <Alert />
     </Container>
   </>
 );

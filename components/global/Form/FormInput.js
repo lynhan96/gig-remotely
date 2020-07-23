@@ -17,7 +17,7 @@ const validateEmail = (email) => {
 };
 
 const FormInput = ({
-  required, name, label, type, placeholder, validateType, background, defaultValue, context, minHeight, className,
+  required, name, label, type, placeholder, validateType, background, defaultValue, context, minHeight, className, itemClass, labelStyle
 }) => {
   const [fieldValidate, setFieldValidate] = useState({ hasError: false, message: '' });
   const {
@@ -58,8 +58,8 @@ const FormInput = ({
   }, []);
 
   return (
-    <FormItem itemType={itemType}>
-      <StyledText itemType={itemType} size='sm' weight='bold' className={label ? 'show-input-label' : 'hide-input-label'}>{label}</StyledText>
+    <FormItem itemType={itemType} className={itemClass}>
+      <StyledText style={labelStyle} itemType={itemType} size='sm' weight='bold' className={label ? 'show-input-label' : 'hide-input-label'}>{label}</StyledText>
       <FieldWrapper className={label && 'input-wrapper-width-label'}>
         <Input
           minHeight={minHeight}

@@ -34,7 +34,7 @@ export const StyledText = styled(Text)`
   )}
 
   @media(max-width: 768px) {
-    width: 100%;
+    width: 100% !important;
     margin-bottom: 10px;
     margin-left: 3px;
     margin-right: 0;
@@ -46,7 +46,6 @@ export const FieldWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   position: relative;
-  width: ${({ hasLabel }) => (hasLabel ? 'calc(100% - 120px)' : '100%')};
 
   @media(max-width: 768px) {
     width: 100%;

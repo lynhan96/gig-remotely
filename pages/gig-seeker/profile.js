@@ -11,7 +11,7 @@ const ProfilePage = () => {
   const data = useSelector((state) => state.user.data);
 
   useEffect(() => {
-    if (data.id && (!data.talent || Object.keys(data.talent).length === 0)) {
+    if (data.userType && data.userType === 'TALENT' && (!data.talent || Object.keys(data.talent).length === 0)) {
       Router.push('/gig-seeker/edit-profile');
     }
   }, [data]);

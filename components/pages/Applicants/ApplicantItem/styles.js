@@ -170,13 +170,13 @@ export const Footer = styled.div`
 export const Time = styled(Text)`
   font-size: 14px;
   color: ${color.cement};
-  width: auto;
 
   @media(max-width: 1500px) {
     font-size: 13px;
   }
 
   @media (max-width: 440px){
+    width: auto;
     position: absolute;
     left: 15px;
   }
