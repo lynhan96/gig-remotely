@@ -17,7 +17,7 @@ const validateEmail = (email) => {
 };
 
 const FormInput = ({
-  required, name, label, type, placeholder, validateType, background, defaultValue, context, minHeight
+  required, name, label, type, placeholder, validateType, background, defaultValue, context, minHeight, className,
 }) => {
   const [fieldValidate, setFieldValidate] = useState({ hasError: false, message: '' });
   const {
@@ -71,8 +71,9 @@ const FormInput = ({
           onChange={onChange}
           inputRef={fieldRef}
           background={background}
+          className={className}
         />
-        <ErrorLabel className={fieldValidate.hasError ? 'show-input-error' : 'hide-input-error'} >{fieldValidate.message}</ErrorLabel>
+        <ErrorLabel className={fieldValidate.hasError ? 'show-input-error' : 'hide-input-error'}>{fieldValidate.message}</ErrorLabel>
       </FieldWrapper>
     </FormItem>
   );
@@ -94,9 +95,11 @@ FormInput.propTypes = {
   placeholder: PropTypes.string,
   validateType: PropTypes.string,
   defaultValue: PropTypes.string,
+  className: PropTypes.string,
 };
 
 FormInput.defaultProps = {
+  className: '',
   required: false,
   name: '',
   label: '',

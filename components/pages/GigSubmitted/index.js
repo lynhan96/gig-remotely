@@ -1,8 +1,5 @@
 import React from 'react';
-
-import {
-  Button,
-} from 'components/global';
+import Router from 'next/router';
 import {
   Wrapper, Image, ActionWrapper, Title, StyledButton, StyledText, StyledLink,
 } from './styles';
@@ -14,9 +11,9 @@ const Verification = () => (
     <ActionWrapper>
       <StyledText width='auto' size='sm'>
         This also means half of what you paid has been given to the less fortunate! You can learn about gigremotely’s cause
-        <StyledLink href='#'> here.</StyledLink>
+        <StyledLink> here.</StyledLink>
       </StyledText>
-      <StyledButton>view gig</StyledButton>
+      <StyledButton onClick={() => Router.push('/company/dashboard')}>view gig</StyledButton>
     </ActionWrapper>
   </Wrapper>
 );

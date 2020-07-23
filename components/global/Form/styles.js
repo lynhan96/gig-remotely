@@ -270,8 +270,8 @@ export const Icon = styled.img`
 `;
 
 export const FieldIcon = styled.img`
-  width: 25px;
-  height: 25px;
+  width: 17px;
+  height: 17px;
   position: absolute;
-  right: 25px;
+  right: 20px;
 `;

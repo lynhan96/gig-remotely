@@ -16,6 +16,7 @@ const Input = ({
   background,
   fieldType,
   minHeight,
+  className
 }) => {
   const [inputType, setInputType] = useState(type);
   const fontSize = () => {
@@ -42,7 +43,7 @@ const Input = ({
         minHeight={minHeight}
         background={background}
         defaultValue={defaultValue}
-        className={error ? 'input-error' : ''}
+        className={error ? `${className} input-error` : className}
         ref={inputRef}
         type={inputType}
         name={name}
@@ -58,7 +59,7 @@ const Input = ({
       <StyledInput
         background={background}
         defaultValue={defaultValue}
-        className={error ? 'input-error' : ''}
+        className={error ? `${className} input-error` : className}
         ref={inputRef}
         type={inputType}
         name={name}
@@ -90,6 +91,7 @@ Input.propTypes = {
   error: PropTypes.bool,
   background: PropTypes.string,
   fieldType: PropTypes.string,
+  className: PropTypes.string,
 };
 
 Input.defaultProps = {
@@ -102,6 +104,7 @@ Input.defaultProps = {
   defaultValue: '',
   background: '',
   fieldType: 'input',
+  className: '',
 };
 
 export default Input;

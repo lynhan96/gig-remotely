@@ -73,7 +73,7 @@ export const Menu = styled.div`
     flex-direction: column;
     justify-content: center;
     background: ${color.offWhite};
-    height: ${({ open }) => (open ? 'calc(100vh - 65px)' : 0)};
+    height: ${({ open }) => (open ? 'calc(100vh - 50px)' : 0)};
     overflow: hidden;
     position: absolute;
     top: 65px;

@@ -21,7 +21,7 @@ const RelatedGig = () => {
   const dispatch = useDispatch();
 
   const callback = (response) => {
-    setState({ loading: false, data: response });
+    setState({ loading: false, data: response.items });
   };
 
   const getJobs = useCallback((params, callback) => dispatch(

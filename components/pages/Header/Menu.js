@@ -44,7 +44,7 @@ const Nav = () => {
               </SubMenu>
             </MenuItem>
             <MenuItem>
-              <Button>post gig</Button>
+              <Button onClick={() => redirectTo('/company/post-gig')}>post gig</Button>
             </MenuItem>
           </MenuGroup>
         </Menu>

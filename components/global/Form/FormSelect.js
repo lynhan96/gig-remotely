@@ -18,7 +18,13 @@ import {
 const FormSelect = React.forwardRef(({
   name, label, defaultValue, options, context,
 }, ref) => {
-  const [seletedValue, setSeletedValue] = useState(defaultValue || options[0]);
+  const getDefaultValue = () => {
+    let defaultOption = options.filter((i) => i.value === defaultValue)[0];
+    if (!defaultOption) defaultOption = options[0];
+    return defaultOption;
+  };
+
+  const [seleted, setSeleted] = useState(getDefaultValue());
   const [open, setOpen] = useState(false);
   const [selectOptions, setSelectOptions] = useState(options);
   const { valuesRef } = useContext(context);
@@ -26,20 +32,20 @@ const FormSelect = React.forwardRef(({
 
   useImperativeHandle(ref, () => ({
     reset: () => {
-      setSeletedValue(defaultValue);
+      setSeleted(getDefaultValue());
       setOpen(false);
     },
   }));
 
-  const onSelect = (value) => {
-    setSeletedValue(value);
+  const onSelect = (item) => {
+    setSeleted(item);
     setOpen(false);
-    valuesRef.current[name] = value;
+    valuesRef.current[name] = item.value;
   };
 
   const onSearch = (e) => {
     const keyword = e.target.value;
-    const newOptions = options.filter((i) => i.toLowerCase().includes(keyword.toLowerCase()));
+    const newOptions = options.filter((i) => i.name.toLowerCase().includes(keyword.toLowerCase()));
     setSelectOptions(newOptions);
   };
   const outSizeClick = (e) => {
@@ -50,7 +56,7 @@ const FormSelect = React.forwardRef(({
   };
 
   useEffect(() => {
-    valuesRef.current[name] = seletedValue;
+    valuesRef.current[name] = seleted.value;
 
     const selectOutSizeToggle = window.addEventListener('click', outSizeClick);
 
@@ -63,7 +69,7 @@ const FormSelect = React.forwardRef(({
     <FileSelectWrapper id={selectBoxId}>
       <FileInputLabel>{label}</FileInputLabel>
       <FileInput onClick={() => setOpen(!open)}>
-        {seletedValue}
+        {seleted.name}
         <FieldIcon src='/images/icon/input-select.svg' />
       </FileInput>
       <SelectWrapper className={ open ? 'open-select' : 'close-select'}>
@@ -74,7 +80,7 @@ const FormSelect = React.forwardRef(({
         <Options>
           {
             selectOptions.map((item) => (
-              <Option key={item} active={item === seletedValue} onClick={() => onSelect(item)}>{item}</Option>
+              <Option key={item.value} active={item.value === seleted.value} onClick={() => onSelect(item)}>{item.name}</Option>
             ))
           }
         </Options>

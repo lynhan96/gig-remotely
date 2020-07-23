@@ -70,21 +70,17 @@ export const ActionWrapper = styled.div`
 
 export const StyledButton = styled(Button)`
   margin-top: 20px;
-
-  @media (max-width: 450px) {
-    font-size: 14px;
-    height: 35px;
-  }
-
-  @media (max-width: 375px) {
-    font-size: 11px;
-    height: 30px;
-  }
 `;
 
 export const StyledText = styled(Text)`
   display: inline-block;
- 
+  width: 490px;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
   @media (max-width: 450px) {
     font-size: 13px;
   }
@@ -104,4 +100,6 @@ export const StyledText = styled(Text)`
 
 export const StyledLink = styled.a`
   color: ${color.black};
+  text-decoration: underline;
+  margin-left: 3px;
 `;

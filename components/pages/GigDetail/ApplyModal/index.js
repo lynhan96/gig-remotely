@@ -77,8 +77,7 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
 
   const onSubmit = (values) => {
     values.resume = valuesRef.current.resume ? user.talent.resume : valuesRef.current.document;
-    // applyJob(id, values);
-    callback(200);
+    applyJob(id, values);
   };
 
   const onSelectResume = (values) => {

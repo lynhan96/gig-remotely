@@ -25,7 +25,6 @@ const SearchForm = ({ onSearch, keyword, option }) => {
 
   const onChangeRadio = (values) => {
     searchValue.current.option = values.name;
-    console.log(searchValue);
   };
 
   const search = () => {

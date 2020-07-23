@@ -180,6 +180,13 @@ export const GlobalStyle = createGlobalStyle`
     color: ${color.red};
   }
 
+  .payment-input-field {
+    width: 90%;
+    position: absolute;
+    top: 43px;
+    left: 23px;
+  }
+
   body {
     margin: 0;
     flex-direction: column;

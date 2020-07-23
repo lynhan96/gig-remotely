@@ -8,7 +8,7 @@ export const StyledButton = styled.button`
   border: none;
   border-radius: 30px;
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
-
+  font-family: 'Proxima Nova', sans-serif;
   padding: 0 30px;
   height: 50px;
   display: flex;

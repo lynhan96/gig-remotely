@@ -20,6 +20,9 @@ import CategoriesSelect from 'components/pages/CategoriesSelect';
 import GivingBack from 'components/pages/GivingBack';
 import GigDetail from 'components/pages/GigDetail';
 import EditCompanyProfile from 'components/pages/EditCompanyProfile';
+import Dashboard from 'components/pages/Dashboard';
+import PostGig from 'components/pages/PostGig';
+import Applicants from 'components/pages/Applicants';
 import FAQ from 'components/pages/FAQ';
 
 export {
@@ -46,4 +49,7 @@ export {
   GigDetail,
   EditCompanyProfile,
   FAQ,
+  Dashboard,
+  PostGig,
+  Applicants,
 };

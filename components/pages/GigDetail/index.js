@@ -59,8 +59,9 @@ const GigDetail = ({ item }) => {
     roleResponsibility,
     skillsRequirements,
     experience,
-    contractType
+    contractType,
   } = item;
+
   const modalRef = useRef();
 
   const scrollItem = () => {

@@ -23,9 +23,9 @@ const RadioGroup = ({
   return (
     <Wrapper className={className}>
       {
-        items.map(({ label, name }, index) => (
-          <ItemWrapper key={index}>
-            <input id={name} name={name} type='radio' onChange={handleOnchange} checked={(defaultValue === name || checked === name) && 'true'} />
+        items.map(({ label, name }) => (
+          <ItemWrapper key={name}>
+            <input id={name} name={name} type='radio' onChange={handleOnchange} checked={(defaultValue === name || checked === name)&& 'true'} />
             <label htmlFor={name}>{label}</label>
           </ItemWrapper>
         ))
