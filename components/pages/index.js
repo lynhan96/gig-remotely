@@ -20,6 +20,7 @@ import CategoriesSelect from 'components/pages/CategoriesSelect';
 import GivingBack from 'components/pages/GivingBack';
 import GigDetail from 'components/pages/GigDetail';
 import EditCompanyProfile from 'components/pages/EditCompanyProfile';
+import FAQ from 'components/pages/FAQ';
 
 export {
   Footer,
@@ -44,4 +45,5 @@ export {
   GivingBack,
   GigDetail,
   EditCompanyProfile,
+  FAQ,
 };

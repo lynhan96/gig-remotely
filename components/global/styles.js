@@ -157,6 +157,24 @@ export const GlobalStyle = createGlobalStyle`
     width: calc(100% - 120px);
   }
 
+  .collapse-show {
+    height: 130px;
+    opacity: 1;
+
+    @media (max-width: 1500px) {
+      height: 120px;
+    }
+
+    @media (max-width: 320px) {
+      height: 105px;
+    }
+  }
+
+  .collapse-hidden {
+    height: 0;
+    opacity: 0;
+  }
+
   .input-error {
     border: solid 1px ${color.red};
     color: ${color.red};
