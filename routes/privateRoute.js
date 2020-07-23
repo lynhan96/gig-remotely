@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode';
 export const privateRoute = (WrappedComponent, status = 'all') => class extends Component {
   static async getInitialProps(ctx) {
     const { __gigtoken, __gigtype } = ServerCookie(ctx);
+
     let expiresAt = false;
     if (__gigtoken) {
       const auth = jwtDecode(__gigtoken);
