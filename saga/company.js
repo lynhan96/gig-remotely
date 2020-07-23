@@ -1,4 +1,6 @@
-import axios, { get, post, put as axiosPut } from 'axios';
+import axios, {
+  get, post, put as axiosPut, delete as axiosDelete,
+} from 'axios';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
 import { onUpdateUserCompany } from 'redux/user';
@@ -9,6 +11,7 @@ const ON_GET_COMPANY_PROFILE = 'ON_GET_COMPANY_PROFILE';
 const ON_UPDATE_COMPANY_PROFILE = 'ON_UPDATE_COMPANY_PROFILE';
 const ON_GET_COMPANY_GIGS = 'ON_GET_COMPANY_GIGS';
 const ON_COMPANY_POST_GIG = 'ON_COMPANY_POST_GIG';
+const ON_COMPANY_DELETE_GIG = 'ON_COMPANY_DELETE_GIG';
 
 function* updateCompanyProfile({ params }) {
   try {
@@ -31,14 +34,23 @@ function* getCompanies({ callback }) {
   }
 }
 
+function* deleteGig({ id, callback }) {
+  try {
+    yield call(axiosDelete, `/job/${id}`);
+    if (callback) callback();
+  } catch (error) {
+    console.log('------------------------')
+    console.log(error)
+    // yield put(onOpenAlert(error.data.message));
+  }
+}
+
 function* postGig({ params, paymentIntentId }) {
   try {
     const response = yield call(post, '/job', params);
-    console.log(response);
 
     axios.post(`/job/${response.id}/payment-intent`, { paymentIntentId }).then((a) => {
       Router.push('/gig-submitted');
-      console.log(a);
     });
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
@@ -93,10 +105,15 @@ export const onGetOwnedGigs = (setState) => ({
   type: ON_GET_COMPANY_GIGS, setState,
 });
 
+export const onDeleteGig = (id, callback) => ({
+  type: ON_COMPANY_DELETE_GIG, id, callback,
+});
+
 export default function* companyWatcher() {
   yield takeLatest(ON_GET_COMPANIES, getCompanies);
   yield takeLatest(ON_GET_COMPANY_PROFILE, getCompanyProfile);
   yield takeLatest(ON_UPDATE_COMPANY_PROFILE, updateCompanyProfile);
   yield takeLatest(ON_GET_COMPANY_GIGS, getOwnedGig);
   yield takeLatest(ON_COMPANY_POST_GIG, postGig);
+  yield takeLatest(ON_COMPANY_DELETE_GIG, deleteGig);
 }

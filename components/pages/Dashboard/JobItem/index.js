@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import moment from 'moment';
 import Router from 'next/router';
 import { Tag, Text } from 'components/global';
@@ -38,7 +38,7 @@ const labelBackground = (type) => {
   }
 };
 
-const JobItem = ({ item }) => {
+const JobItem = ({ item, removeItem }) => {
   const {
     id, title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, status, expiredAt,
   } = item;
@@ -58,7 +58,13 @@ const JobItem = ({ item }) => {
 
   const disabledItem = status === 'EXPIRED';
 
-  const editGig = () => Router.push('/company/edit-gig');
+  const editGig = () => {
+    if (disabledItem) {
+      removeItem(id);
+    } else {
+      Router.push('/company/edit-gig');
+    }
+  };
   const viewApplicant = () => Router.push('/company/applicant/[id]', `/company/applicant/${id}`);
 
   return (
