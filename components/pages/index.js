@@ -24,6 +24,7 @@ import Dashboard from 'components/pages/Dashboard';
 import PostGig from 'components/pages/PostGig';
 import Applicants from 'components/pages/Applicants';
 import FAQ from 'components/pages/FAQ';
+import TermConditions from 'components/pages/TermConditions';
 
 export {
   Footer,
@@ -52,4 +53,5 @@ export {
   Dashboard,
   PostGig,
   Applicants,
+  TermConditions,
 };

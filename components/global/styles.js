@@ -175,6 +175,29 @@ export const GlobalStyle = createGlobalStyle`
     opacity: 0;
   }
 
+  .conditions-show {
+    opacity: 1;
+  }
+
+  .conditions-hidden {
+    opacity: 0;
+    height: 0;
+
+    @media (max-width: 440px) {
+    opacity: 1;
+    height: auto;
+    margin-top: 20px;
+    }
+  }
+
+  .condition-choose {
+    text-decoration: underline;
+  }
+
+  .condition-not-choose {
+    text-decoration: none;
+  }
+
   .input-error {
     border: solid 1px ${color.red};
     color: ${color.red};
