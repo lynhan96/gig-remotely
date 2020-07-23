@@ -10,16 +10,18 @@ import {
 } from 'constant';
 import { onOpenAlert } from 'redux/alert';
 import { Form } from 'components/global';
-import { onPostGig } from 'saga/company';
+import { onPostGig, onUpdateGig } from 'saga/company';
 import { CategoriesSelect } from 'components/pages';
 import PaymentForm from './PaymentForm';
 import Options from './OptionsGroup';
 import ButtonAction from './ButtonAction';
+import DeleteGigPopup from './DeleteGigPopup';
+
 import {
   Wrapper, Title, RightWrapper, LeftWrapper,
 } from './styles';
 
-const PostGig = ({ data }) => {
+const PostGig = ({ data, isEdit }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const skillRef = useRef([]);
@@ -27,8 +29,9 @@ const PostGig = ({ data }) => {
   const durationRef = useRef();
   const boostRef = useRef(false);
   const buttonRef = useRef();
-  const stripe = useStripe();
-  const elements = useElements();
+  const deletePopupRef = useRef();
+  const stripe = !isEdit ? useStripe() : null;
+  const elements = !isEdit ? useElements() : null;
 
   const showError = useCallback((message) => dispatch(
     onOpenAlert(message),
@@ -36,6 +39,10 @@ const PostGig = ({ data }) => {
 
   const postGig = useCallback((params, paymentIntentId) => dispatch(
     onPostGig(params, paymentIntentId),
+  ), [dispatch]);
+
+  const updateGig = useCallback((id, params, callback) => dispatch(
+    onUpdateGig(id, params, callback),
   ), [dispatch]);
 
   const confirmPayment = async (clientSecret, params) => {
@@ -63,7 +70,7 @@ const PostGig = ({ data }) => {
   };
 
   const {
-    title, category, roleLevel, location, timezone, skills, about, description, roleResponsibility, skillsRequirements, experience, contractType, duration,
+    id, title, category, roleLevel, location, timezone, skills, about, description, roleResponsibility, skillsRequirements, experience, contractType, duration, expiredAt,
   } = data || {};
 
   const defaultAbout = about || (user.company ? user.company.about : '');
@@ -74,14 +81,22 @@ const PostGig = ({ data }) => {
     values.contractType = contractTypeRef.current;
     values.duration = durationRef.current;
 
-    console.log(values);
+    if (isEdit) {
+      updateGig(id, values, () => {
+        buttonRef.current.available();
+      });
+    } else {
+      paymentAndPostGig(values);
+    }
 
-    paymentAndPostGig(values);
     buttonRef.current.submitting();
   };
 
+  const showDeletePopUp = () => deletePopupRef.current.open();
+
   return (
     <Wrapper>
+      {isEdit && <DeleteGigPopup ref={deletePopupRef} jobId={id} expiredAt={expiredAt} />}
       <Title weight='bold'>Post Gig</Title>
       <Form onSubmit={onSubmit} type='horizontal'>
         <LeftWrapper>
@@ -141,8 +156,8 @@ const PostGig = ({ data }) => {
             className='textarea-input'
           />
         </RightWrapper>
-        <PaymentForm boostRef={boostRef} buttonRef={buttonRef} />
-        <ButtonAction ref={buttonRef} />
+        { !isEdit && <PaymentForm boostRef={boostRef} buttonRef={buttonRef} />}
+        <ButtonAction ref={buttonRef} isEdit={isEdit} showDeletePopUp={showDeletePopUp}/>
       </Form>
     </Wrapper>
   );

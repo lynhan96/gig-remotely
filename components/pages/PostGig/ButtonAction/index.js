@@ -6,7 +6,22 @@ import {
   ButtonWrapper, Hint, HintTitle,
 } from '../styles';
 
-const ButtonAction = React.forwardRef(({}, ref) => {
+const ButtonGroup = ({ status, isEdit, showDeletePopUp }) => {
+  if (isEdit) {
+    return [
+      <Button key='delete' width='200px' buttonType='light' onClick={showDeletePopUp}>delete gig</Button>,
+      <Button key='save' htmlType='submit' width='200px' style={{ marginTop: 20 }} disabled={status === 'submitting'}>{status === 'submitting' ? 'saving...' : 'save'}</Button>,
+    ];
+  }
+  return (
+    <Button htmlType='submit' width={status === 'submitting' ? 'auto' : '200px'} disabled={status === 'disable' || status === 'submitting'}>
+      {(status === 'disable' || status === 'available') && 'pay & post'}
+      {status === 'submitting' && 'processing payment & submitting your job post'}
+    </Button>
+  );
+};
+
+const ButtonAction = React.forwardRef(({ isEdit, showDeletePopUp }, ref) => {
   const [status, setStatus] = useState('disable');
 
   useImperativeHandle(ref, () => ({
@@ -17,10 +32,7 @@ const ButtonAction = React.forwardRef(({}, ref) => {
 
   return (
     <ButtonWrapper>
-      <Button htmlType='submit' width={status === 'submitting' ? 'auto' : '200px'} disabled={status === 'disable' || status === 'submitting'}>
-        {(status === 'disable' || status === 'available') && 'pay & post'}
-        {status === 'submitting' && 'processing payment & submitting your job post'}
-      </Button>
+      <ButtonGroup status={status} isEdit={isEdit} showDeletePopUp={showDeletePopUp} />
       <HintTitle>All gigs will be listed for 30 days.</HintTitle>
       <Hint>
         By posting, you agree to our

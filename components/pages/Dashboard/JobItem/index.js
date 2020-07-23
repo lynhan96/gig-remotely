@@ -62,7 +62,7 @@ const JobItem = ({ item, removeItem }) => {
     if (disabledItem) {
       removeItem(id);
     } else {
-      Router.push('/company/edit-gig');
+      Router.push('/company/edit-gig/[id]', `/company/edit-gig/${id}`);
     }
   };
   const viewApplicant = () => Router.push('/company/applicant/[id]', `/company/applicant/${id}`);

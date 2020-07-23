@@ -12,6 +12,7 @@ const ON_UPDATE_COMPANY_PROFILE = 'ON_UPDATE_COMPANY_PROFILE';
 const ON_GET_COMPANY_GIGS = 'ON_GET_COMPANY_GIGS';
 const ON_COMPANY_POST_GIG = 'ON_COMPANY_POST_GIG';
 const ON_COMPANY_DELETE_GIG = 'ON_COMPANY_DELETE_GIG';
+const ON_COMPANY_UPDATE_GIG = 'ON_COMPANY_UPDATE_GIG';
 
 function* updateCompanyProfile({ params }) {
   try {
@@ -34,14 +35,23 @@ function* getCompanies({ callback }) {
   }
 }
 
+function* updateGig({ id, params, callback }) {
+  try {
+    yield call(axiosPut, `/job/${id}`, params);
+    // if (callback) callback();
+    yield put(onOpenAlert('Your post has successfully changed'));
+    if (callback) callback()
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
+
 function* deleteGig({ id, callback }) {
   try {
     yield call(axiosDelete, `/job/${id}`);
     if (callback) callback();
   } catch (error) {
-    console.log('------------------------')
-    console.log(error)
-    // yield put(onOpenAlert(error.data.message));
+    yield put(onOpenAlert(error.data.message));
   }
 }
 
@@ -97,6 +107,10 @@ export const onUpdateCompanyProfile = (params) => ({
   type: ON_UPDATE_COMPANY_PROFILE, params,
 });
 
+export const onUpdateGig = (id, params, callback) => ({
+  type: ON_COMPANY_UPDATE_GIG, id, params, callback
+});
+
 export const onPostGig = (params, paymentIntentId) => ({
   type: ON_COMPANY_POST_GIG, params, paymentIntentId,
 });
@@ -116,4 +130,5 @@ export default function* companyWatcher() {
   yield takeLatest(ON_GET_COMPANY_GIGS, getOwnedGig);
   yield takeLatest(ON_COMPANY_POST_GIG, postGig);
   yield takeLatest(ON_COMPANY_DELETE_GIG, deleteGig);
+  yield takeLatest(ON_COMPANY_UPDATE_GIG, updateGig);
 }

@@ -10,6 +10,7 @@ const Header = () => {
   const userType = Cookie.get('__gigtype');
   const headerScroll = () => {
     const header = document.getElementById('header');
+    if (!header) return;
     if (window.pageYOffset > 50 && !header.classList.contains('sticky')) {
       header.classList.add('sticky');
     }
