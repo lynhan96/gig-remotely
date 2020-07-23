@@ -29,7 +29,7 @@ const Empty = () => (
   </EmptyWrapper>
 );
 
-const MyGigs = () => {
+const Dashboard = () => {
   const deletePopupRef = useRef();
   const [state, setState] = useState({
     loading: true,
@@ -110,4 +110,4 @@ const MyGigs = () => {
     </Wrapper>
   );
 };
-export default MyGigs;
+export default Dashboard;

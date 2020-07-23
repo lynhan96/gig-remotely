@@ -22,6 +22,7 @@ import GigDetail from 'components/pages/GigDetail';
 import EditCompanyProfile from 'components/pages/EditCompanyProfile';
 import Dashboard from 'components/pages/Dashboard';
 import PostGig from 'components/pages/PostGig';
+import Applicants from 'components/pages/Applicants';
 
 export {
   Footer,
@@ -48,4 +49,5 @@ export {
   EditCompanyProfile,
   Dashboard,
   PostGig,
+  Applicants,
 };

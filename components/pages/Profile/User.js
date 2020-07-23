@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Router from 'next/router';
-import { useSelector } from 'react-redux';
-import { Button, Loading, Tag } from 'components/global';
-import { LoadingWrapper } from 'components/global/styles';
+import { Button, Tag } from 'components/global';
 import { s3Url } from 'constant';
 import {
   Wrapper,
@@ -21,21 +19,9 @@ import {
   ButtonIcon,
 } from './styles';
 
-const UserProfile = () => {
-  const data = useSelector((state) => state.user.data);
-
-  useEffect(() => {
-    if (data.id && (!data.talent || Object.keys(data.talent).length === 0)) {
-      Router.push('/gig-seeker/edit-profile');
-    }
-  }, [data]);
-
-  if (Object.keys(data).length === 0) {
-    return (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>);
-  }
-
+const UserProfile = ({ data }) => {
   const {
-    firstName, lastName, email, talent
+    firstName, lastName, email, talent,
   } = data;
 
   const {

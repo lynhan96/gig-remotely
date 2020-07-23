@@ -6,6 +6,7 @@ const ON_GET_JOBS = 'ON_GET_JOBS';
 const ON_GET_JOB_CATEGORIES = 'ON_GET_JOB_CATEGORIES';
 const ON_GET_JOB_DETAIL = 'ON_GET_JOB_DETAIL';
 const ON_APPLY_JOB = 'ON_APPLY_JOB';
+const ON_GET_JOB_APPLICANT = 'ON_GET_JOB_APPLICANT';
 
 function* getJobDetail({ id, setState }) {
   try {
@@ -41,6 +42,16 @@ function* getJobs({ params, callback }) {
   }
 }
 
+function* getJobApplicant({ id, setState }) {
+  try {
+    const response = yield call(get, `/job/${id}/applicants`);
+
+    setState({ loading: false, data: response });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 function* getJobCategories({ setState }) {
   try {
     const response = yield call(get, '/skill/categories');
@@ -67,9 +78,14 @@ export const onGetJobCategories = (setState) => ({
   type: ON_GET_JOB_CATEGORIES, setState,
 });
 
+export const onGetJobApplicant = (id, setState) => ({
+  type: ON_GET_JOB_APPLICANT, id, setState,
+});
+
 export default function* accountSettingWatcher() {
   yield takeLatest(ON_GET_JOBS, getJobs);
   yield takeLatest(ON_GET_JOB_CATEGORIES, getJobCategories);
   yield takeLatest(ON_GET_JOB_DETAIL, getJobDetail);
   yield takeLatest(ON_APPLY_JOB, applyJob);
+  yield takeLatest(ON_GET_JOB_APPLICANT, getJobApplicant);
 }
