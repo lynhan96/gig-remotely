@@ -8,16 +8,16 @@ const Footer = () => (
   <Wrapper>
     <StyledContainer>
       <Group position='first'>
-        <StyledText size='xs'>Who We Are</StyledText>
-        <StyledText size='xs'>Recruiter’s Sign Up</StyledText>
-        <StyledText size='xs'>Gig Seeker’s Sign Up</StyledText>
-        <StyledText size='xs'>Pricing</StyledText>
-        <StyledText size='xs'>Giving Back</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/who-we-are')}>Who We Are</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/signup')}>Recruiter’s Sign Up</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/signup')}>Gig Seeker’s Sign Up</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/pricing')}>Pricing</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/giving-back')}>Giving Back</StyledText>
       </Group>
       <Group>
-        <StyledText size='xs'>FAQ</StyledText>
-        <StyledText size='xs'>Terms of Use</StyledText>
-        <StyledText size='xs'>Privacy Policy</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/faq')}>FAQ</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/term-conditions')}>Terms of Use</StyledText>
+        <StyledText size='xs' onClick={() => Router.push('/privacy-policy')}>Privacy Policy</StyledText>
         <StyledText size='xs' weight='bold'>&#169; 2020 gigremotely</StyledText>
       </Group>
     </StyledContainer>

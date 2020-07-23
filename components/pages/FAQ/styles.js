@@ -48,8 +48,10 @@ export const CollapseTitle = styled.div`
   display: flex;
   flex-flow: wrap row;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
   margin-top: 20px;
+  cursor: pointer;
 `;
 
 export const Title = styled(Text)`
@@ -80,20 +82,17 @@ export const Description = styled(Text)`
   height: 0;
   opacity: 0;
   transition: all 0.3s ease;
-  width: 80%;
+  width: 100%;
 
   @media (max-width: 440px) {
     font-size: 13px;
-    width: 90%;
   }
 
   @media (max-width: 360px) {
-    width: 93%;
   }
 
   @media (max-width: 320px) {
     font-size: 12px;
-    width: 100%;
   }
 `;
 

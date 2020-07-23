@@ -5,7 +5,15 @@ import {
 } from './styles';
 
 const FAQ = () => {
-  const [status, changeStatus] = useState('');
+  const [status, setStatus] = useState('');
+
+  const changeStatus = (newStatus) => {
+    if (newStatus === status) {
+      setStatus('');
+    } else {
+      setStatus(newStatus);
+    }
+  };
 
   return (
     <Wrapper>

@@ -201,6 +201,7 @@ export const GlobalStyle = createGlobalStyle`
   .collapse-hidden {
     height: 0;
     opacity: 0;
+    z-index: -1;
   }
 
   .conditions-show {
@@ -212,9 +213,9 @@ export const GlobalStyle = createGlobalStyle`
     height: 0;
 
     @media (max-width: 440px) {
-    opacity: 1;
-    height: auto;
-    margin-top: 20px;
+      opacity: 1;
+      height: auto;
+      margin-top: 20px;
     }
   }
 

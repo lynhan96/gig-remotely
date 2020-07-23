@@ -28,7 +28,7 @@ export const StyledText = styled(Text)`
   color: ${color.offWhite};
   margin-top: 15px;
   margin-right: 20px;
-
+  cursor: pointer;
   &:last-child {
     margin-right: 0;
   }
