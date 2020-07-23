@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Router from 'next/router';
 import {
   Wrapper, StyledContainer, StyledText, Group,
 } from './styles';

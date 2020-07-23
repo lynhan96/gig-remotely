@@ -185,6 +185,47 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .collapse-show {
+    height: 130px;
+    opacity: 1;
+
+    @media (max-width: 1500px) {
+      height: 120px;
+    }
+
+    @media (max-width: 320px) {
+      height: 105px;
+    }
+  }
+
+  .collapse-hidden {
+    height: 0;
+    opacity: 0;
+  }
+
+  .conditions-show {
+    opacity: 1;
+  }
+
+  .conditions-hidden {
+    opacity: 0;
+    height: 0;
+
+    @media (max-width: 440px) {
+    opacity: 1;
+    height: auto;
+    margin-top: 20px;
+    }
+  }
+
+  .condition-choose {
+    text-decoration: underline;
+  }
+
+  .condition-not-choose {
+    text-decoration: none;
+  }
+
   .input-error {
     border: solid 1px ${color.red};
     color: ${color.red};

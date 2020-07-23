@@ -23,6 +23,8 @@ import EditCompanyProfile from 'components/pages/EditCompanyProfile';
 import Dashboard from 'components/pages/Dashboard';
 import PostGig from 'components/pages/PostGig';
 import Applicants from 'components/pages/Applicants';
+import FAQ from 'components/pages/FAQ';
+import TermConditions from 'components/pages/TermConditions';
 import PreviewFileModal from 'components/pages/PreviewFileModal';
 import AccountSetting from 'components/pages/AccountSetting';
 import ChangePassword from 'components/pages/ChangePassword';
@@ -50,9 +52,11 @@ export {
   GivingBack,
   GigDetail,
   EditCompanyProfile,
+  FAQ,
   Dashboard,
   PostGig,
   Applicants,
+  TermConditions,
   PreviewFileModal,
   AccountSetting,
   ChangePassword,
