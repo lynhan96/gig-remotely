@@ -175,6 +175,7 @@ export const CompanyName = styled(Text)`
 export const Title = styled(Text)`
   margin-right: 10px;
   margin: 5px 0;
+  margin-right: 5px;
 
   ${Label} {
     display: none;

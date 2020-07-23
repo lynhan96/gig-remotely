@@ -17,7 +17,7 @@ const ButtonAction = React.forwardRef(({}, ref) => {
 
   return (
     <ButtonWrapper>
-      <Button htmlType='submit' width='200px' disabled={status === 'disable' || status === 'submitting'}>
+      <Button htmlType='submit' width={status === 'submitting' ? 'auto' : '200px'} disabled={status === 'disable' || status === 'submitting'}>
         {(status === 'disable' || status === 'available') && 'pay & post'}
         {status === 'submitting' && 'processing payment & submitting your job post'}
       </Button>

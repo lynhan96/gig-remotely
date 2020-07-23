@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   CardNumberElement,
   CardExpiryElement,
@@ -67,14 +67,13 @@ const PaymentForm = ({ boostRef, buttonRef }) => {
   };
 
   const onChangeCardNumber = (e) => {
-    console.log(e);
     if (!e.complete && !e.empty && e.error) {
       setError(e.error.message);
       buttonRef.current.disable();
     } else if (e.empty) {
       setError('Plese fill your Credit Card Number');
       buttonRef.current.disable();
-    } else if(e.complete) {
+    } else if (e.complete) {
       setError('');
       buttonRef.current.available();
     } else {

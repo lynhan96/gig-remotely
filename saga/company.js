@@ -1,7 +1,8 @@
-import { get, post, put as axiosPut } from 'axios';
+import axios, { get, post, put as axiosPut } from 'axios';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
 import { onUpdateUserCompany } from 'redux/user';
+import Router from 'next/router';
 
 const ON_GET_COMPANIES = 'ON_GET_COMPANIES';
 const ON_GET_COMPANY_PROFILE = 'ON_GET_COMPANY_PROFILE';
@@ -30,12 +31,16 @@ function* getCompanies({ callback }) {
   }
 }
 
-function* postGig({ params }) {
+function* postGig({ params, paymentIntentId }) {
   try {
-    yield call(post, '/job', params);
+    const response = yield call(post, '/job', params);
+    console.log(response);
 
+    axios.post(`/job/${response.id}/payment-intent`, { paymentIntentId }).then((a) => {
+      Router.push('/gig-submitted');
+      console.log(a);
+    });
   } catch (error) {
-    console.log(error)
     yield put(onOpenAlert(error.data.message));
   }
 }
@@ -80,8 +85,8 @@ export const onUpdateCompanyProfile = (params) => ({
   type: ON_UPDATE_COMPANY_PROFILE, params,
 });
 
-export const onPostGig = (params) => ({
-  type: ON_COMPANY_POST_GIG, params,
+export const onPostGig = (params, paymentIntentId) => ({
+  type: ON_COMPANY_POST_GIG, params, paymentIntentId,
 });
 
 export const onGetOwnedGigs = (setState) => ({

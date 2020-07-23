@@ -34,8 +34,8 @@ const PostGig = ({ data }) => {
     onOpenAlert(message),
   ), [dispatch]);
 
-  const postGig = useCallback((params) => dispatch(
-    onPostGig(params),
+  const postGig = useCallback((params, paymentIntentId) => dispatch(
+    onPostGig(params, paymentIntentId),
   ), [dispatch]);
 
   const confirmPayment = async (clientSecret, params) => {
@@ -48,7 +48,7 @@ const PostGig = ({ data }) => {
       },
     }).then((response) => {
       console.log(response);
-      postGig(params);
+      postGig(params, response.paymentIntent.id);
     }).catch((err) => {
       showError(`Payment failed ${err.message}`);
     });
@@ -62,14 +62,18 @@ const PostGig = ({ data }) => {
     });
   };
 
-
   const {
     title, category, roleLevel, location, timezone, skills, about, description, roleResponsibility, skillsRequirements, experience, contractType, duration,
   } = data || {};
 
+  const defaultAbout = about || (user.company ? user.company.about : '');
+
   const onSubmit = (values) => {
-    values.skill = skillRef.current;
+    values.skills = skillRef.current;
     values.boost = boostRef.current;
+    values.contractType = contractTypeRef.current;
+    values.duration = durationRef.current;
+
     console.log(values);
 
     paymentAndPostGig(values);
@@ -88,7 +92,7 @@ const PostGig = ({ data }) => {
           <Options fieldRef={durationRef} label='Duration' options={listDuration} defaultValue={duration} />
           <Form.Select name='location' required label='Location' defaultValue={location} options={country} />
           <Form.Select name='timezone' required label='Time Zone' defaultValue={timezone} options={listTimezone} />
-          <CategoriesSelect label='Featured Skills & Tools (Select up to 9)' skillRef={skillRef} selectedSkill={skills} />
+          <CategoriesSelect label='Featured Skills & Tools (Select up to 5)' skillRef={skillRef} selectedSkill={skills} />
         </LeftWrapper>
         <RightWrapper>
           <Form.Item
@@ -97,7 +101,7 @@ const PostGig = ({ data }) => {
             placeholder='About the company'
             type='textarea'
             background='#efefe4'
-            defaultValue={about}
+            defaultValue={defaultAbout}
             className='textarea-input'
           />
           <Form.Item
