@@ -1,33 +1,79 @@
 import React, { useCallback, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+
+import {
+  useStripe, useElements, CardNumberElement,
+} from '@stripe/react-stripe-js';
 import {
   country, jobCategory, listTimezone, listRoleLevel, listContractType, listDuration,
 } from 'constant';
-import { Form, Button } from 'components/global';
-import { onUpdateCompanyProfile } from 'saga/company';
+import { onOpenAlert } from 'redux/alert';
+import { Form } from 'components/global';
+import { onPostGig } from 'saga/company';
 import { CategoriesSelect } from 'components/pages';
 import PaymentForm from './PaymentForm';
 import Options from './OptionsGroup';
+import ButtonAction from './ButtonAction';
 import {
-  Wrapper, Title, RightWrapper, LeftWrapper, ButtonWrapper, Hint, HintTitle,
+  Wrapper, Title, RightWrapper, LeftWrapper,
 } from './styles';
 
 const PostGig = ({ data }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.data);
   const skillRef = useRef([]);
   const contractTypeRef = useRef();
   const durationRef = useRef();
+  const boostRef = useRef(false);
+  const buttonRef = useRef();
+  const stripe = useStripe();
+  const elements = useElements();
 
-  const updateCompanyProfile = useCallback((params) => dispatch(
-    onUpdateCompanyProfile(params),
+  const showError = useCallback((message) => dispatch(
+    onOpenAlert(message),
   ), [dispatch]);
+
+  const postGig = useCallback((params) => dispatch(
+    onPostGig(params),
+  ), [dispatch]);
+
+  const confirmPayment = async (clientSecret, params) => {
+    stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: elements.getElement(CardNumberElement),
+        billing_details: {
+          name: user.company ? user.company.name : `${user.firstName} ${user.lastName}`,
+        },
+      },
+    }).then((response) => {
+      console.log(response);
+      postGig(params);
+    }).catch((err) => {
+      showError(`Payment failed ${err.message}`);
+    });
+  };
+
+  const paymentAndPostGig = (params) => {
+    axios.post('/payment/create-payment-intent', { boost: boostRef.current }).then((response) => {
+      confirmPayment(response.clientSecret, params);
+    }).catch((err) => {
+      showError(err.data.message);
+    });
+  };
+
 
   const {
     title, category, roleLevel, location, timezone, skills, about, description, roleResponsibility, skillsRequirements, experience, contractType, duration,
   } = data || {};
 
   const onSubmit = (values) => {
+    values.skill = skillRef.current;
+    values.boost = boostRef.current;
     console.log(values);
+
+    paymentAndPostGig(values);
+    buttonRef.current.submitting();
   };
 
   return (
@@ -91,21 +137,8 @@ const PostGig = ({ data }) => {
             className='textarea-input'
           />
         </RightWrapper>
-        <PaymentForm />
-        <ButtonWrapper>
-          <Button htmlType='submit' width='200px' disabled={true}>pay & post</Button>
-          <HintTitle>All gigs will be listed for 30 days.</HintTitle>
-          <Hint>
-            By posting, you agree to our
-            <a>Terms of Service,</a>
-          </Hint>
-          <Hint>
-            <a>Code of Conduct,</a>
-            {' '}
-            and
-            <a>Privacy Policy.</a>
-          </Hint>
-        </ButtonWrapper>
+        <PaymentForm boostRef={boostRef} buttonRef={buttonRef} />
+        <ButtonAction ref={buttonRef} />
       </Form>
     </Wrapper>
   );

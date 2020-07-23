@@ -17,7 +17,7 @@ const validateEmail = (email) => {
 };
 
 const FormInput = ({
-  required, name, label, type, placeholder, validateType, background, defaultValue, context, minHeight, className
+  required, name, label, type, placeholder, validateType, background, defaultValue, context, minHeight, className,
 }) => {
   const [fieldValidate, setFieldValidate] = useState({ hasError: false, message: '' });
   const {
@@ -73,7 +73,7 @@ const FormInput = ({
           background={background}
           className={className}
         />
-        <ErrorLabel className={fieldValidate.hasError ? 'show-input-error' : 'hide-input-error'} >{fieldValidate.message}</ErrorLabel>
+        <ErrorLabel className={fieldValidate.hasError ? 'show-input-error' : 'hide-input-error'}>{fieldValidate.message}</ErrorLabel>
       </FieldWrapper>
     </FormItem>
   );
