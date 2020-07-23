@@ -8,6 +8,8 @@ import Alert from 'components/pages/Alert';
 import SetupAccount from 'components/pages/SetupAccount';
 import Companies from 'components/pages/Companies';
 import CompanyProfile from 'components/pages/Profile/Company';
+import WhoWeAre from 'components/pages/WhoWeAre';
+import GigSubmitted from 'components/pages/GigSubmitted';
 import Gigs from 'components/pages/Gigs';
 import MyGigs from 'components/pages/MyGigs';
 import JobItem from 'components/pages/JobItem';
@@ -15,6 +17,7 @@ import MainLayout from 'components/pages/Layout';
 import UserProfile from 'components/pages/Profile/User';
 import EditUserProfile from 'components/pages/EditUserProfile';
 import CategoriesSelect from 'components/pages/CategoriesSelect';
+import GivingBack from 'components/pages/GivingBack';
 import GigDetail from 'components/pages/GigDetail';
 import EditCompanyProfile from 'components/pages/EditCompanyProfile';
 import Dashboard from 'components/pages/Dashboard';
@@ -28,6 +31,8 @@ export {
   Login,
   SignUp,
   Alert,
+  WhoWeAre,
+  GigSubmitted,
   SetupAccount,
   Companies,
   CompanyProfile,
@@ -38,6 +43,7 @@ export {
   UserProfile,
   EditUserProfile,
   CategoriesSelect,
+  GivingBack,
   GigDetail,
   EditCompanyProfile,
   Dashboard,
