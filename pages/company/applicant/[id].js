@@ -21,8 +21,6 @@ const ApplicantPage = () => {
     getJobApplicant(router.query.id);
   }, [router.asPath]);
 
-  console.log(data)
-
   return (
     <>
       <Head>

@@ -154,6 +154,7 @@ export const TagGroup = styled.div`
   display: flex;
   flex-flow: wrap row;
   margin-top: 20px;
+  margin-bottom: 50px;
 
   @media (max-width: 1024px) {
     width: 100%;
@@ -208,7 +209,6 @@ export const ActionGroup = styled.div`
   width: 100%;
   display: flex;
   flex-flow: wrap row;
-  margin-top: 50px;
   margin-bottom: 40px;
 
   @media (max-width: 440px) {

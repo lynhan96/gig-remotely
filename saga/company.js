@@ -13,6 +13,7 @@ const ON_GET_COMPANY_GIGS = 'ON_GET_COMPANY_GIGS';
 const ON_COMPANY_POST_GIG = 'ON_COMPANY_POST_GIG';
 const ON_COMPANY_DELETE_GIG = 'ON_COMPANY_DELETE_GIG';
 const ON_COMPANY_UPDATE_GIG = 'ON_COMPANY_UPDATE_GIG';
+const ON_COMPANY_UPDATE_SHORT_LISTED = 'ON_COMPANY_UPDATE_SHORT_LISTED';
 
 function* updateCompanyProfile({ params }) {
   try {
@@ -38,9 +39,8 @@ function* getCompanies({ callback }) {
 function* updateGig({ id, params, callback }) {
   try {
     yield call(axiosPut, `/job/${id}`, params);
-    // if (callback) callback();
     yield put(onOpenAlert('Your post has successfully changed'));
-    if (callback) callback()
+    if (callback) callback();
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }
@@ -95,6 +95,15 @@ function* getCompanyProfile({ id, setState }) {
   }
 }
 
+function* updateApplicantSortListed({ id, shortListed, callback }) {
+  try {
+    const response = yield call(axiosPut, `/job/application/${id}/shortlisted`, { shortlisted: shortListed });
+    callback(response, shortListed);
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
+
 export const onGetCompanyProfile = (id, setState) => ({
   type: ON_GET_COMPANY_PROFILE, id, setState,
 });
@@ -108,7 +117,7 @@ export const onUpdateCompanyProfile = (params) => ({
 });
 
 export const onUpdateGig = (id, params, callback) => ({
-  type: ON_COMPANY_UPDATE_GIG, id, params, callback
+  type: ON_COMPANY_UPDATE_GIG, id, params, callback,
 });
 
 export const onPostGig = (params, paymentIntentId) => ({
@@ -123,6 +132,10 @@ export const onDeleteGig = (id, callback) => ({
   type: ON_COMPANY_DELETE_GIG, id, callback,
 });
 
+export const onUpdateApplicantSortListed = (id, shortListed, callback) => ({
+  type: ON_COMPANY_UPDATE_SHORT_LISTED, id, shortListed, callback,
+});
+
 export default function* companyWatcher() {
   yield takeLatest(ON_GET_COMPANIES, getCompanies);
   yield takeLatest(ON_GET_COMPANY_PROFILE, getCompanyProfile);
@@ -131,4 +144,5 @@ export default function* companyWatcher() {
   yield takeLatest(ON_COMPANY_POST_GIG, postGig);
   yield takeLatest(ON_COMPANY_DELETE_GIG, deleteGig);
   yield takeLatest(ON_COMPANY_UPDATE_GIG, updateGig);
+  yield takeLatest(ON_COMPANY_UPDATE_SHORT_LISTED, updateApplicantSortListed);
 }

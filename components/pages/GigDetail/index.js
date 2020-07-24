@@ -1,6 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import { Tag, Text } from 'components/global';
+import React, {
+  useEffect, useRef, useState, useCallback,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+
+import { Tag, Text } from 'components/global';
+import { onAddFavoriteJob, onRemoveFavoriteJob } from 'saga/user';
 import ApplyModal from './ApplyModal';
 import RelatedGig from './RelatedGig';
 import SubscribeNews from './SubscribeNews';
@@ -45,7 +50,9 @@ const labelBackground = (type) => {
 };
 
 const GigDetail = ({ item }) => {
+  const user = useSelector((state) => state.user.data);
   const {
+    id,
     company: { photo, name },
     title,
     duration,
@@ -63,6 +70,9 @@ const GigDetail = ({ item }) => {
     isApplied,
     isFavorite,
   } = item;
+  const dispatch = useDispatch();
+  const [favorite, setFavorite] = useState(isFavorite);
+  const isLogged = Object.keys(user).length !== 0;
 
   const modalRef = useRef();
 
@@ -80,6 +90,22 @@ const GigDetail = ({ item }) => {
   };
 
   const openApplyModal = () => modalRef.current.open();
+
+  const addFavoriteJob = useCallback((jobId) => dispatch(
+    onAddFavoriteJob(jobId, setFavorite),
+  ), [dispatch]);
+
+  const removeFavoriteJob = useCallback((jobId) => dispatch(
+    onRemoveFavoriteJob(jobId, setFavorite),
+  ), [dispatch]);
+
+  const toggleSave = () => {
+    if (favorite) {
+      removeFavoriteJob(id);
+    } else {
+      addFavoriteJob(id);
+    }
+  };
 
   useEffect(() => {
     const scrollCallBack = window.addEventListener('scroll', scrollItem);
@@ -133,21 +159,24 @@ const GigDetail = ({ item }) => {
               ))
             }
           </TagGroup>
-          <ActionGroup>
-            <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</StyledButton>
-            {
-              !isApplied && (
-                <StyledButton buttonType='light' width='200px'>
-                  <FavoriteImage src='/images/icon/favorite.svg' />
-                  save
-                </StyledButton>
-              )
-            }
-            <ShareButton>
-              <ShareImage src='/images/icon/share.svg' />
-              share
-            </ShareButton>
-          </ActionGroup>
+          { isLogged
+            && (
+              <ActionGroup>
+                <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</StyledButton>
+                {
+                  !isApplied && (
+                    <StyledButton buttonType='light' width='200px' onClick={toggleSave}>
+                      <FavoriteImage src={ favorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} />
+                      { favorite ? 'unsave' : 'save' }
+                    </StyledButton>
+                  )
+                }
+                <ShareButton>
+                  <ShareImage src='/images/icon/share.svg' />
+                  share
+                </ShareButton>
+              </ActionGroup>
+            )}
           <DescriptionWrapper>
             <DescriptionTitle size='mmd'>About the company</DescriptionTitle>
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: about }} />
@@ -168,9 +197,12 @@ const GigDetail = ({ item }) => {
             <DescriptionTitle size='mmd'>Experience Prerequisites</DescriptionTitle>
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: experience }} />
           </DescriptionWrapper>
-          <FooterWrapper id='apply-button'>
-            <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</FooterButton>
-          </FooterWrapper>
+          { isLogged
+            && (
+              <FooterWrapper id='apply-button'>
+                <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</FooterButton>
+              </FooterWrapper>
+            )}
         </ContentWrapper>
       </Card>
       <RelatedGig />

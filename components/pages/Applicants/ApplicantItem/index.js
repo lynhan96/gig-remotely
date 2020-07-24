@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import moment from 'moment';
+import { useDispatch } from 'react-redux';
 import { s3Url } from 'constant';
-
+import { onUpdateApplicantSortListed } from 'saga/company';
 import {
   ItemWrapper,
   HeadWrapper,
@@ -16,35 +18,61 @@ import {
   Footer,
   Time,
   ViewResume,
+  EmptyWrapper,
+  EmptyImage,
+  EmptyText,
 } from './styles';
 
-const ApplicantItem = ({ item }) => {
-  const viewResume = () => window.open(`${s3Url}${'1595398131-91QaH64bUVL.jpg'}`, '_blank');
+const Empty = () => (
+  <EmptyWrapper>
+    <EmptyImage src='/images/empty-jobs.png' />
+    <EmptyText>You don't have any cover letter</EmptyText>
+  </EmptyWrapper>
+);
+
+const ApplicantItem = ({ item, setShortListedData, shortlistedItem }) => {
+  const dispatch = useDispatch();
+
+  const {
+    id, talent, resume, coverLetter, date, shortlisted,
+  } = item;
+
+  const {
+    photo, name, contact, location, email, jobTitle,
+  } = talent;
+
+  const [isShortListed, setIsShortListed] = useState(shortlistedItem || shortlisted);
+  const viewResume = () => window.open(`${s3Url}${resume}`, '_blank');
+
+  const callback = (response, shortListed) => {
+    setIsShortListed(shortListed);
+    setShortListedData(response, shortListed);
+  };
+
+  const updateShortListed = useCallback((shortListed, callback) => dispatch(
+    onUpdateApplicantSortListed(id, shortListed, callback),
+  ), [dispatch]);
+
+  const toggleShortListed = () => updateShortListed(!isShortListed, callback)
+
   return (
     <ItemWrapper>
       <HeadWrapper>
-        <Image src='/images/givingback1.png' />
+        <Image src={photo} />
         <InfoWrapper>
           <Info>
-            <Name size='xs'>Gig Seeker Name</Name>
-            <Position>Art Director</Position>
-            <StyledText>gigseeker@gmail.com</StyledText>
-            <StyledText>+65 6888 5566</StyledText>
-            <StyledText>Singapore</StyledText>
+            <Name size='xs'>{name}</Name>
+            <Position>{jobTitle}</Position>
+            <StyledText>{email}</StyledText>
+            <StyledText>{contact}</StyledText>
+            <StyledText>{location}</StyledText>
           </Info>
-          <FavoriteIcon src='/images/icon/favorite.svg' />
+          <FavoriteIcon src={isShortListed ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} onClick={toggleShortListed} />
         </InfoWrapper>
       </HeadWrapper>
-      <Description>
-        Dear Hiring Manager,
-
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidun. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor rebum. Stet clita kasd gubergren…
-        {' '}
-      </Description>
+      <Description>{ coverLetter || <Empty />}</Description>
       <Footer>
-        <Time>12 hours ago</Time>
+        <Time>{moment(date).fromNow()}</Time>
         <ViewResume onClick={viewResume}>
           <Icon src='/images/icon/file.svg' />
           see resume

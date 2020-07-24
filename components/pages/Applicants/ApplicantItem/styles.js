@@ -139,13 +139,32 @@ export const FavoriteIcon = styled.img`
 `;
 
 export const Description = styled(Text)`
+  height: 230px;
   font-size: 14px;
   white-space: pre-line;
   margin-top: 25px;
   line-height: 1.23;
+  overflow: auto;
+
+  &::-webkit-scrollbar
+  {
+    width: 2px;
+    background-color: ${color.eggshell};
+  }
+
+  &::-webkit-scrollbar-thumb
+  {
+    border-radius: 5px;
+    background: ${color.white};
+  }
 
   @media(max-width: 1500px) {
     font-size: 13px;
+  }
+
+  @media(max-width: 768px) {
+    min-height: 120px;
+    height: auto;
   }
 
   @media (max-width: 440px){
@@ -225,4 +244,24 @@ export const Icon = styled.img`
     width: 13px;
     height: 13px;
   }
+`;
+
+export const EmptyWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const EmptyImage = styled.img`
+  width: 70px;
+  height: 70px;
+  margin-bottom: 15px;
+`;
+
+export const EmptyText = styled(Text)`
+  text-align: center;
+  font-size: 14px;
 `;

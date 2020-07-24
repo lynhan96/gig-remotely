@@ -19,20 +19,28 @@ import {
 const Empty = () => (
   <EmptyWrapper>
     <EmptyImage src='/images/empty-jobs.png' />
-    <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'> You do have any applicants</Text>
+    <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'> You don't have any applicants</Text>
   </EmptyWrapper>
 );
 
-const Applicants = ({ data: { job } }) => {
+const Applicants = ({ data: { job, jobApplications } }) => {
+  const shortListed = () => jobApplications.filter((i) => i.shortlisted);
+
   const [state, setState] = useState({
-    all: [], shortlisted: [],
+    all: jobApplications, shortlisted: shortListed(),
   });
 
   const { all, shortlisted } = state;
 
   const [openTab, setOpenTab] = useState(0);
 
-  console.log(job);
+  const setShortListedData = (response, isShortListed) => {
+    if (isShortListed) {
+      setState({ all, shortlisted: all.filter((i) => i.shortlisted || i.id === response.id) });
+    } else {
+      setState({ all, shortlisted: shortlisted.filter((i) => i.id !== response.id) });
+    }
+  };
 
   return (
     <Wrapper>
@@ -48,11 +56,16 @@ const Applicants = ({ data: { job } }) => {
       </Tabs>
       <TabContentWrapper>
         <TabContent open={openTab === 0}>
-          <ApplicantItem />
-          <ApplicantItem />
-          <ApplicantItem />
-          <ApplicantItem />
-          <ApplicantItem />
+          { all.length === 0 ? <Empty />
+            : all.map((item) => (
+              <ApplicantItem key={`all${item.id}`} item={item} setShortListedData={setShortListedData} />
+            ))}
+        </TabContent>
+        <TabContent open={openTab === 1}>
+          { shortlisted.length === 0 ? <Empty />
+            : shortlisted.map((item) => (
+              <ApplicantItem key={`shortlisted${item.id}`} item={item} setShortListedData={setShortListedData} shortlistedItem/>
+            ))}
         </TabContent>
       </TabContentWrapper>
     </Wrapper>

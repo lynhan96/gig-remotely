@@ -133,8 +133,10 @@ export const TabContent = styled.div`
   position: absolute;
   opacity: 0;
   transition: all 0.3s ease;
+  z-index: -1;
 
   ${({ open }) => open && css`
+    z-index: 10;
     opacity: 1;
     position: relative;
   `}
