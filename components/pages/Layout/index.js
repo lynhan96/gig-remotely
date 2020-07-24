@@ -5,6 +5,7 @@ import Cookie from 'js-cookie';
 import { Alert } from 'components/pages';
 import { Layout } from 'components/global/styles';
 import { onGetMyProfile } from 'saga/user';
+import { onResetUser } from 'redux/user';
 
 const companyRoute = [
   '/company/dashboard',
@@ -33,11 +34,21 @@ const MainLayout = ({ Component, pageProps }) => {
     onGetMyProfile(fetchProfileFlag),
   ), [dispatch]);
 
-  useEffect(() => {
-    if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
-  }, []);
+  const resetProfile = useCallback(() => dispatch(
+    onResetUser(),
+  ), [dispatch]);
 
   useEffect(() => {
+    if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
+  }, [fetchProfileFlag.current]);
+
+  useEffect(() => {
+    if (router.pathname === '/login' || router.pathname === '/signup') {
+      resetProfile();
+      fetchProfileFlag.current = false;
+      return;
+    }
+
     if (router.pathname === '/_error') return;
     if (Cookie.get('__gigtype') !== 'COMPANY' && companyRoute.includes(router.pathname)) {
       Router.push('/403');

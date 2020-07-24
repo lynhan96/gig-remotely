@@ -1,6 +1,7 @@
 const ON_UPDATE_USER_PROFILE = 'ON_UPDATE_USER_PROFILE';
 const ON_UPDATE_USER_TALEN = 'ON_UPDATE_USER_TALEN';
 const ON_UPDATE_USER_COMPANY = 'ON_UPDATE_USER_COMPANY';
+const ON_RESET_USER_INFO = 'ON_RESET_USER_INFO';
 
 const INITIAL_STATE = {
   data: {},
@@ -18,6 +19,8 @@ export default (state = INITIAL_STATE, action = {}) => {
     case ON_UPDATE_USER_COMPANY:
       state.data.company = action.payload.company;
       return state;
+    case ON_RESET_USER_INFO:
+      return { data: {} };
     default:
       return state;
   }
@@ -42,4 +45,8 @@ export const onUpdateUserCompany = (company) => ({
   payload: {
     company,
   },
+});
+
+export const onResetUser = () => ({
+  type: ON_RESET_USER_INFO,
 });

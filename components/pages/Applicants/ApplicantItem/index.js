@@ -34,11 +34,11 @@ const ApplicantItem = ({ item, setShortListedData, shortlistedItem }) => {
   const dispatch = useDispatch();
 
   const {
-    id, talent, resume, coverLetter, date, shortlisted,
+    id, talent, resume, coverLetter, date, shortlisted, name, email,
   } = item;
 
   const {
-    photo, name, contact, location, email, jobTitle,
+    photo, contact, location, jobTitle,
   } = talent;
 
   const [isShortListed, setIsShortListed] = useState(shortlistedItem || shortlisted);
@@ -53,7 +53,7 @@ const ApplicantItem = ({ item, setShortListedData, shortlistedItem }) => {
     onUpdateApplicantSortListed(id, shortListed, callback),
   ), [dispatch]);
 
-  const toggleShortListed = () => updateShortListed(!isShortListed, callback)
+  const toggleShortListed = () => updateShortListed(!isShortListed, callback);
 
   return (
     <ItemWrapper>

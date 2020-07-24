@@ -31,11 +31,11 @@ const EditUserProfile = () => {
   }
 
   const {
-    firstName, lastName, talent,
+    firstName, lastName, talent, email,
   } = data;
 
   const {
-    about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills, email,
+    about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills,
   } = talent || {};
 
   const onSubmit = (values) => {
