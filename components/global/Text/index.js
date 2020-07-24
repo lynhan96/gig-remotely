@@ -53,7 +53,7 @@ const Text = ({
     style={style}
     size={fontSize(size)}
     weight={weight}
-    dangerouslySetInnerHTML={dangerouslySetInnerHTML}
+    {...(dangerouslySetInnerHTML && { dangerouslySetInnerHTML })}
   >
     {children}
   </StyledText>

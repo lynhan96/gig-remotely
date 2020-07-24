@@ -34,7 +34,7 @@ const MainLayout = ({ Component, pageProps }) => {
 
   useEffect(() => {
     if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
-  });
+  }, []);
 
   useEffect(() => {
     if (router.pathname === '/_error') return;

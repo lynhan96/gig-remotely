@@ -172,6 +172,10 @@ export const GlobalStyle = createGlobalStyle`
     display: none;
   }
 
+  .bold {
+    font-weight: bold !important;
+  }
+
   .hide-input-label {
     height: 0;
     margin: 0;

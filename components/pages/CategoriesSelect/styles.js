@@ -211,11 +211,11 @@ export const Skill = styled.div`
   width: 100%;
 `;
 
-export const SkillItem = styled(Text)`
+export const SkillItem = styled.div`
   cursor: pointer;
   font-size: ${({ group }) => (group ? '20px' : '17px')};
   color: ${({ group }) => (!group ? color.black : color.cement)};
-  font-weight: ${({ active, group }) => ((active || group) ? 'bold' : 'normal')};
+  font-weight: ${({ group }) => ((group) ? 'bold' : 'normal')};
   margin-top: 10px;
 
   &:hover {

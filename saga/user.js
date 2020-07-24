@@ -32,7 +32,7 @@ function* updateUserType({ userType }) {
 function* getMyProfile({ flag }) {
   try {
     const response = yield call(get, '/users/profile');
-
+    flag.current = true;
     Cookie.set('__gigtype', response.userType);
     yield put(onUpdateProfile(response));
   } catch (error) {

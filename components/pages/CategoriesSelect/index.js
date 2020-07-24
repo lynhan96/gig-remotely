@@ -84,6 +84,7 @@ const CategoriesSelect = React.forwardRef(({
     setUserSkill((state) => state.filter((i) => i.id !== item.id));
   };
 
+
   return (
     <Wrapper>
       <Label>{label}</Label>
@@ -114,7 +115,7 @@ const CategoriesSelect = React.forwardRef(({
                     <SkillItem key={item.group} group>{item.group}</SkillItem>
                     {
                       item.children.map((skill) => (
-                        <SkillItem active={skillIds.includes(skill.id)} key={skill.id} onClick={() => selectSkill(skill)}>{skill.name}</SkillItem>
+                        <SkillItem className={skillIds.includes(skill.id) ? 'bold' : ''} key={skill.id} onClick={() => selectSkill(skill)}>{skill.name}</SkillItem>
                       ))
                     }
                   </>

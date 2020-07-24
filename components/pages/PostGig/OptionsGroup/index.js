@@ -28,7 +28,7 @@ const OptionsGroup = ({
       <GroupButton>
         {
           options.map((item) => (
-            <Item active={item.value === selected.value} onClick={() => onSelect(item)} background={item.background}>{item.name}</Item>
+            <Item key={item.value} active={item.value === selected.value} onClick={() => onSelect(item)} background={item.background}>{item.name}</Item>
           ))
         }
       </GroupButton>
