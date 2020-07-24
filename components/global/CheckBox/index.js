@@ -35,7 +35,10 @@ CheckBox.propTypes = {
   onChange: PropTypes.func,
   className: PropTypes.string,
   defaultValue: PropTypes.bool,
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+  ]),
 };
 
 CheckBox.defaultProps = {

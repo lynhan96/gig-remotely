@@ -15,23 +15,56 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 100px 0 200px 0;
+
+  @media (max-width: 1280px) {
+    width: calc(100% - 40px);
+    padding: 0 20px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 0;
+    margin: 80px 0;
+  }
 `;
 
 export const Title = styled(Text)`
   font-size: 60px;
   margin-bottom: 50px;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const ContentWrapper = styled.div`
   display: flex;
   flex-flow: wrap row;
+
+  @media (max-width: 1280px) {
+    justify-content: space-between;
+  }
 `;
 
 export const LeftWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 35%;
+
+  @media (max-width: 1280px) {
+    width: 45%;
+  }
+
+
+  @media (max-width: 1023px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const RightWrapper = styled.div`
@@ -39,6 +72,16 @@ export const RightWrapper = styled.div`
   flex-direction: column;
   width: 450px;
   margin-left: 100px;
+
+  @media (max-width: 1280px) {
+    width: 45%;
+    margin-left: 0;
+  }
+
+  @media (max-width: 1023px) {
+    width: 100%;
+    margin-top: 40px;
+  }
 `;
 
 export const PasswordField = styled.div`

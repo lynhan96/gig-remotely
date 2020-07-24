@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="63" height="37" viewBox="0 0 63 37">
+    <g id="prefix__Group_824" data-name="Group 824" transform="translate(-1016 -1939)">
+        <g id="prefix__Rectangle_122" data-name="Rectangle 122" transform="translate(1016 1939)" style="stroke:#000;fill:none">
+            <rect width="63" height="37" rx="5" style="stroke:none"/>
+            <rect width="62" height="36" x=".5" y=".5" rx="4.5" style="fill:none"/>
+        </g>
+        <path id="prefix__Icon_simple-mastercard" d="M17.014 27.046c.087.073.18.147.271.219a11.125 11.125 0 1 1 0-18.532 2.3 2.3 0 0 0-.247.225 11.965 11.965 0 0 0-.02 18.089zm7.861-20.17a11.067 11.067 0 0 0-6.157 1.857 2.3 2.3 0 0 1 .247.225 11.965 11.965 0 0 1 .02 18.089c-.087.073-.18.147-.271.219a11.125 11.125 0 1 0 6.162-20.39zM18 9.261c-.144.113-.284.225-.42.347a11.117 11.117 0 0 0 0 16.785c.135.12.278.237.42.348.144-.111.284-.228.42-.348a11.117 11.117 0 0 0 0-16.785c-.135-.12-.276-.235-.42-.347z" data-name="Icon simple-mastercard" transform="translate(1030 1939.736)" style="fill:#9a9a8b"/>
+    </g>
+</svg>

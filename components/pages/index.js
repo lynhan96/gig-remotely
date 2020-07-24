@@ -28,6 +28,7 @@ import TermConditions from 'components/pages/TermConditions';
 import PreviewFileModal from 'components/pages/PreviewFileModal';
 import AccountSetting from 'components/pages/AccountSetting';
 import ChangePassword from 'components/pages/ChangePassword';
+import PaymentOptions from 'components/pages/PaymentOptions';
 
 export {
   Footer,
@@ -60,4 +61,5 @@ export {
   PreviewFileModal,
   AccountSetting,
   ChangePassword,
+  PaymentOptions,
 };

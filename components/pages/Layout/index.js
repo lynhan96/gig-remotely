@@ -15,6 +15,7 @@ const companyRoute = [
   '/company/change-password/',
   '/company/edit-gig/[id]',
   '/company/applicant/[id]',
+  '/company/payment-options',
 ];
 
 const talentRoute = [
