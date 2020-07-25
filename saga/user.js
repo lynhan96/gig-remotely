@@ -4,7 +4,7 @@ import {
 import Cookie from 'js-cookie';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
-import { onUpdateProfile, onUpdateTalent } from 'redux/user';
+import { onUpdateProfile, onUpdateTalent, onUpdateUserAccountSetting } from 'redux/user';
 import Router from 'next/router';
 
 const ON_UPDATE_USER_TYPE = 'ON_UPDATE_USER_TYPE';
@@ -19,10 +19,17 @@ function* updateAccountSetting({ params, callback }) {
   try {
     const response = yield call(axiosPut, '/users/account-setting', params);
 
-
-    console.log(response)
     callback();
     yield put(onOpenAlert('Your account setting has successfully changed'));
+    yield put(onUpdateUserAccountSetting({
+      name: params.companyName,
+      applyNotification: response.applyNotification,
+      boostAboutToEnd: response.boostAboutToEnd,
+      boostEnded: response.boostEnded,
+      listingAboutToExpire: response.listingAboutToExpire,
+      listingExpired: response.listingExpired,
+      promotionalUpdates: response.promotionalUpdates,
+    }));
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }
