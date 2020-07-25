@@ -29,6 +29,8 @@ import PreviewFileModal from 'components/pages/PreviewFileModal';
 import AccountSetting from 'components/pages/AccountSetting';
 import ChangePassword from 'components/pages/ChangePassword';
 import PaymentOptions from 'components/pages/PaymentOptions';
+import ForgotPassword from 'components/pages/ForgotPassword';
+import ResetPassword from 'components/pages/ResetPassword';
 
 export {
   Footer,
@@ -62,4 +64,6 @@ export {
   AccountSetting,
   ChangePassword,
   PaymentOptions,
+  ForgotPassword,
+  ResetPassword,
 };

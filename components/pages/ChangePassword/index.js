@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { onSignUp } from 'saga/authentication';
+import { onUpdatePassword } from 'saga/user';
 import { onOpenAlert } from 'redux/alert';
 import {
   Form, Button,
@@ -12,8 +12,8 @@ import {
 const ChangePassword = () => {
   const dispatch = useDispatch();
 
-  const signUp = useCallback((params, onCallback) => dispatch(
-    onSignUp(params, onCallback),
+  const changePassword = useCallback((params) => dispatch(
+    onUpdatePassword(params),
   ), [dispatch]);
 
   const showAlert = useCallback((message) => dispatch(
@@ -21,10 +21,13 @@ const ChangePassword = () => {
   ), [dispatch]);
 
   const onSubmit = (values) => {
-    if (values.confirmPassword !== values.newsPassword) {
+    if (values.confirmPassword !== values.newPassword) {
       showAlert('New Password and Confirm Password not match!');
     } else {
-      console.log(values);
+      changePassword({
+        currentPassword: values.currentPassword,
+        newPassword: values.newPassword,
+      });
     }
   };
 
@@ -32,9 +35,9 @@ const ChangePassword = () => {
     <Wrapper>
       <Title weight='bold'>Change Password</Title>
       <Form onSubmit={onSubmit}>
-        <Form.Item label='Old Password' name='oldPassword' required placeholder='Old Password' type='password' labelStyle={{ width: 127 }}/>
-        <Form.Item label='New Password' name='newsPassword' required placeholder='News Password' type='password' labelStyle={{ width: 127 }}/>
-        <Form.Item label='Confirm Password' name='confirmPassword' required placeholder='Confirm Password' type='password' labelStyle={{ width: 127 }}/>
+        <Form.Item label='Old Password' name='currentPassword' required placeholder='Old Password' type='password' labelStyle={{ width: 127 }} />
+        <Form.Item label='New Password' name='newPassword' required placeholder='News Password' type='password' labelStyle={{ width: 127 }} />
+        <Form.Item label='Confirm Password' name='confirmPassword' required placeholder='Confirm Password' type='password' labelStyle={{ width: 127 }} />
         <ContentWrapper>
           <Button width='200px' htmlType='submit'>save</Button>
         </ContentWrapper>

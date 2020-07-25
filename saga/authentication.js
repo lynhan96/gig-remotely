@@ -1,4 +1,4 @@
-import { post, get } from 'axios';
+import { post, get, put as axiosPut } from 'axios';
 import Cookie from 'js-cookie';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
@@ -7,6 +7,31 @@ import Router from 'next/router';
 const ON_LOGIN = 'ON_LOGIN';
 const ON_SIGN_UP = 'ON_SIGN_UP';
 const ON_VERIFY_EMAIL = 'ON_VERIFY_EMAIL';
+const ON_SEND_RESET_PASSWORD_LINK = 'ON_SEND_RESET_PASSWORD_LINK';
+const ON_RESET_PASSWORD = 'ON_RESET_PASSWORD';
+
+function* sendResetPasswordLink({ params, callback }) {
+  try {
+    yield call(post, '/users/forgot-password', params);
+    callback(200);
+  } catch (error) {
+    callback(400);
+    yield put(onOpenAlert(error.data.message));
+  }
+}
+
+function* resetPassword({ params, callback }) {
+  try {
+    const response = yield call(axiosPut, '/users/forgot-password', params);
+    console.log(response);
+
+    yield put(onOpenAlert('Your password has successfully changed'));
+    Router.push('/login');
+  } catch (error) {
+    callback(400);
+    yield put(onOpenAlert(error.data.message));
+  }
+}
 
 function* verificationEmail({ id }) {
   try {
@@ -66,8 +91,18 @@ export const onSignUp = (params, callback) => ({
   type: ON_SIGN_UP, params, callback,
 });
 
+export const onSendResetPassword = (params, callback) => ({
+  type: ON_SEND_RESET_PASSWORD_LINK, params, callback,
+});
+
+export const onResetPassword = (params, callback) => ({
+  type: ON_RESET_PASSWORD, params, callback,
+});
+
 export default function* authenticationWatcher() {
   yield takeLatest(ON_LOGIN, login);
   yield takeLatest(ON_SIGN_UP, signUp);
   yield takeLatest(ON_VERIFY_EMAIL, verificationEmail);
+  yield takeLatest(ON_SEND_RESET_PASSWORD_LINK, sendResetPasswordLink);
+  yield takeLatest(ON_RESET_PASSWORD, resetPassword);
 }

@@ -13,7 +13,23 @@ const ON_GET_MY_PROFILE = 'ON_GET_MY_PROFILE';
 const ON_ADD_FAVORITE_JOB = 'ON_ADD_FAVORITE_JOB';
 const ON_REMOVE_FAVORITE_JOB = 'ON_REMOVE_FAVORITE_JOB';
 const ON_UPDATE_TALENT = 'ON_UPDATE_TALENT';
+const ON_UPDATE_PASSWORD = 'ON_UPDATE_PASSWORD';
 const ON_UPDATE_ACCOUNT_SETTING = 'ON_UPDATE_ACCOUNT_SETTING';
+
+function* updatePassword({ params }) {
+  try {
+    yield call(axiosPut, '/users/password', params);
+
+    yield put(onOpenAlert('Your password has successfully changed'));
+    Router.push('/company/account-setting');
+  } catch (error) {
+    if (error.data.statusCode) {
+      yield put(onOpenAlert('Incorrect current password'));
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
+  }
+}
 
 function* updateAccountSetting({ params, callback }) {
   try {
@@ -139,6 +155,10 @@ export const onUpdateAccountSetting = (params, callback) => ({
   type: ON_UPDATE_ACCOUNT_SETTING, params, callback,
 });
 
+export const onUpdatePassword = (params) => ({
+  type: ON_UPDATE_PASSWORD, params,
+});
+
 export default function* userWatcher() {
   yield takeLatest(ON_UPDATE_USER_TYPE, updateUserType);
   yield takeLatest(ON_GET_MY_GIGS, getMyGigs);
@@ -147,4 +167,5 @@ export default function* userWatcher() {
   yield takeLatest(ON_REMOVE_FAVORITE_JOB, removeFavoritJob);
   yield takeLatest(ON_UPDATE_TALENT, updateUserProfile);
   yield takeLatest(ON_UPDATE_ACCOUNT_SETTING, updateAccountSetting);
+  yield takeLatest(ON_UPDATE_PASSWORD, updatePassword);
 }
