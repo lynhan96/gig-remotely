@@ -96,10 +96,8 @@ const GigsInfo = ({ companyName, jobs }) => (
 
 const CompanyProfile = ({ data, type, isCompany }) => {
   const {
-    id, name, photo, website, about, email, contact, address, location,
+    id, name, photo, website, about, email, contact, address, location, jobs,
   } = data || {};
-
-  const jobs = isCompany ? [] : data.jobs;
 
   return (
     <Wrapper>
@@ -112,7 +110,7 @@ const CompanyProfile = ({ data, type, isCompany }) => {
           </StyledText>
         </TitleWrapper>
       </HeadWrapper>
-      { type === 'gigs' ? <GigsInfo companyName={name} jobs={jobs} />
+      { type === 'gigs' ? <GigsInfo companyName={name} jobs={(jobs || [])} />
         : (
           <CompanyInfo
             id={id}
@@ -121,7 +119,7 @@ const CompanyProfile = ({ data, type, isCompany }) => {
             contact={contact}
             address={address}
             location={location}
-            gigsNumber={jobs.length}
+            gigsNumber={(jobs || []).length}
             isCompany={isCompany}
           />
         )}

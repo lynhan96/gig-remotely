@@ -13,6 +13,20 @@ const ON_GET_MY_PROFILE = 'ON_GET_MY_PROFILE';
 const ON_ADD_FAVORITE_JOB = 'ON_ADD_FAVORITE_JOB';
 const ON_REMOVE_FAVORITE_JOB = 'ON_REMOVE_FAVORITE_JOB';
 const ON_UPDATE_TALENT = 'ON_UPDATE_TALENT';
+const ON_UPDATE_ACCOUNT_SETTING = 'ON_UPDATE_ACCOUNT_SETTING';
+
+function* updateAccountSetting({ params, callback }) {
+  try {
+    const response = yield call(axiosPut, '/users/account-setting', params);
+
+
+    console.log(response)
+    callback();
+    yield put(onOpenAlert('Your account setting has successfully changed'));
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
 
 function* updateUserType({ userType }) {
   try {
@@ -63,7 +77,6 @@ function* removeFavoritJob({ jobId, setState }) {
 function* updateUserProfile({ params }) {
   try {
     const response = yield call(axiosPut, '/talent', params);
-    console.log(response);
 
     yield put(onUpdateTalent(response));
     yield put(onOpenAlert('Your profile has successfully changed'));
@@ -115,6 +128,10 @@ export const onGetMyProfile = (flag) => ({
   type: ON_GET_MY_PROFILE, flag,
 });
 
+export const onUpdateAccountSetting = (params, callback) => ({
+  type: ON_UPDATE_ACCOUNT_SETTING, params, callback,
+});
+
 export default function* userWatcher() {
   yield takeLatest(ON_UPDATE_USER_TYPE, updateUserType);
   yield takeLatest(ON_GET_MY_GIGS, getMyGigs);
@@ -122,4 +139,5 @@ export default function* userWatcher() {
   yield takeLatest(ON_ADD_FAVORITE_JOB, addFavoritJob);
   yield takeLatest(ON_REMOVE_FAVORITE_JOB, removeFavoritJob);
   yield takeLatest(ON_UPDATE_TALENT, updateUserProfile);
+  yield takeLatest(ON_UPDATE_ACCOUNT_SETTING, updateAccountSetting);
 }

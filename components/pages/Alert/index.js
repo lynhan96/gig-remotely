@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Modal, Button, Text } from 'components/global';
+import { Modal, Button } from 'components/global';
 import { onCloseAlert } from 'redux/alert';
 import { Wrapper, StyledText } from './styles';
 
