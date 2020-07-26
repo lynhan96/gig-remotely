@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text } from 'components/global';
+import { BackButton } from 'components/pages';
 import JobItem from './JobItem';
 import ApplicantItem from './ApplicantItem';
 
@@ -44,7 +45,10 @@ const Applicants = ({ data: { job, jobApplications } }) => {
 
   return (
     <Wrapper>
-      <Title weight='bold'>Applicants for:</Title>
+      <Title weight='bold'>
+        <BackButton url='/company/dashboard' />
+        Applicants for:
+      </Title>
       <JobItem item={job} />
       <Tabs>
         <TabsItemWrapper>

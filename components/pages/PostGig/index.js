@@ -11,7 +11,7 @@ import {
 import { onOpenAlert } from 'redux/alert';
 import { Form } from 'components/global';
 import { onPostGig, onUpdateGig } from 'saga/company';
-import { CategoriesSelect } from 'components/pages';
+import { CategoriesSelect, BackButton } from 'components/pages';
 import PaymentForm from './PaymentForm';
 import Options from './OptionsGroup';
 import ButtonAction from './ButtonAction';
@@ -97,7 +97,10 @@ const PostGig = ({ data, isEdit }) => {
   return (
     <Wrapper>
       {isEdit && <DeleteGigPopup ref={deletePopupRef} jobId={id} expiredAt={expiredAt} />}
-      <Title weight='bold'>Post Gig</Title>
+      <Title weight='bold'>
+        <BackButton url='/company/dashboard' />
+        {isEdit ? 'Edit Gig' : 'Post Gig'}
+      </Title>
       <Form onSubmit={onSubmit} type='horizontal'>
         <LeftWrapper>
           <Form.Item name='title' required label='Job Title*' placeholder='Job Title' background='#efefe4' defaultValue={title} />
@@ -157,7 +160,7 @@ const PostGig = ({ data, isEdit }) => {
           />
         </RightWrapper>
         { !isEdit && <PaymentForm boostRef={boostRef} buttonRef={buttonRef} />}
-        <ButtonAction ref={buttonRef} isEdit={isEdit} showDeletePopUp={showDeletePopUp}/>
+        <ButtonAction ref={buttonRef} isEdit={isEdit} showDeletePopUp={showDeletePopUp} />
       </Form>
     </Wrapper>
   );

@@ -40,7 +40,7 @@ const MainLayout = ({ Component, pageProps }) => {
 
   useEffect(() => {
     if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
-  }, [fetchProfileFlag.current]);
+  }, [router.asPath]);
 
   useEffect(() => {
     if (router.pathname === '/login' || router.pathname === '/signup') {

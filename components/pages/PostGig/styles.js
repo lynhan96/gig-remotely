@@ -35,6 +35,7 @@ export const Wrapper = styled.div`
 export const Title = styled(Text)`
   font-size: 50px;
   margin-bottom: 50px;
+  position: relative;
 
   @media (max-width: 1024px) {
     padding: 0 20px;

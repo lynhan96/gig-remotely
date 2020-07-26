@@ -31,6 +31,7 @@ import ChangePassword from 'components/pages/ChangePassword';
 import PaymentOptions from 'components/pages/PaymentOptions';
 import ForgotPassword from 'components/pages/ForgotPassword';
 import ResetPassword from 'components/pages/ResetPassword';
+import BackButton from 'components/pages/BackButton';
 
 export {
   Footer,
@@ -66,4 +67,5 @@ export {
   PaymentOptions,
   ForgotPassword,
   ResetPassword,
+  BackButton,
 };

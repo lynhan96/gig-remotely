@@ -17,11 +17,12 @@ export const Wrapper = styled.div`
 
 export const Title = styled(Text)`
   width: 100%;
-  font-size: 60px;
+  font-size: 50px;
   margin-bottom: 50px;
+  position: relative;
 
   @media(max-width: 768px) {
-    font-size: 45px;
+    font-size: 40px;
   }
 `;
 
