@@ -103,6 +103,7 @@ function* updateUserProfile({ params }) {
 
     yield put(onUpdateTalent(response));
     yield put(onOpenAlert('Your profile has successfully changed'));
+    Router.push('/gig-seeker/profile');
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }

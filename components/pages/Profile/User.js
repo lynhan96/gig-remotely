@@ -30,6 +30,14 @@ const UserProfile = ({ data }) => {
 
   const openResume = () => window.open(`${s3Url}${resume}`, '_blank');
 
+  const getLink = (url) => {
+    const external = RegExp(`^((f|ht)tps?:)?//(?!${location.host})`);
+    if (external.test(url)) {
+      return url;
+    }
+    return `http://${url}`;
+  };
+
   return (
     <Wrapper>
       <HeadWrapper>
@@ -88,7 +96,7 @@ const UserProfile = ({ data }) => {
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Website</StyledText>
               <StyledText size='mmd' marginBottom='0'>
-                <a href={website} target='_blank' rel='noreferrer'>{website}</a>
+                <a href={getLink(website)} target='_blank' rel='noreferrer'>{website}</a>
               </StyledText>
             </ContactInfo>
           </ContactItem>
@@ -97,7 +105,7 @@ const UserProfile = ({ data }) => {
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Linkedin</StyledText>
               <StyledText size='mmd' marginBottom='0'>
-                <a href={linkedin} target='_blank' rel='noreferrer'>{linkedin}</a>
+                <a href={getLink(linkedin)} target='_blank' rel='noreferrer'>{linkedin}</a>
               </StyledText>
             </ContactInfo>
           </ContactItem>
@@ -106,7 +114,7 @@ const UserProfile = ({ data }) => {
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Instagram</StyledText>
               <StyledText size='mmd' marginBottom='0'>
-                <a href={instagram} target='_blank' rel='noreferrer'>{instagram}</a>
+                <a href={getLink(instagram)} target='_blank' rel='noreferrer'>{instagram}</a>
               </StyledText>
             </ContactInfo>
           </ContactItem>
