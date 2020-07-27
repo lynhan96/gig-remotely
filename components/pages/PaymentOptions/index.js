@@ -104,8 +104,6 @@ const PaymentOptions = () => {
     }
   };
 
-  console.log(paymentMethod);
-
   const onChangeCardNumber = (e) => {
     if (!e.complete && !e.empty && e.error) {
       setCarNumberError(e.error.message);
@@ -144,6 +142,10 @@ const PaymentOptions = () => {
     if (cardCvcError) setCardCvcError('');
     if (cardExpiryError) setCardExpiryError('');
     if (carNumberError) setCarNumberError('');
+
+    if (!selectedOption) {
+      paymentMethod.filter((i) => i.default_source && setSelectedOption(i.id));
+    }
   }, [paymentMethod]);
 
   const inputStyle = {
@@ -180,7 +182,7 @@ const PaymentOptions = () => {
             {
               paymentMethod.map(({ id, card, default_source }) => (
                 <PaymentItem key={id}>
-                  <Selected>{(selectedOption === id || default_source) && 'primary'}</Selected>
+                  {selectedOption && <Selected>{(selectedOption === id) && 'primary'}</Selected>}
                   <CheckBox
                     name={id}
                     label={(
@@ -191,7 +193,7 @@ const PaymentOptions = () => {
                     )}
                     onChange={onSelectOption}
                     className='custom-checkbox'
-                    defaultValue={selectedOption === id || default_source}
+                    defaultValue={selectedOption === id}
                   />
                   <RemoveLink onClick={() => removePaymentMethod(id, getPaymentMethod)}>remove</RemoveLink>
                 </PaymentItem>

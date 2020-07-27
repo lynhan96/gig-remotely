@@ -13,7 +13,7 @@ const CheckBox = ({
 }) => {
   const [checked, setChecked] = useState(defaultValue);
   const handleOnchange = (e) => {
-    setChecked(!checked);
+    setChecked(true);
     onChange({ name, value: !checked });
   };
 
