@@ -77,6 +77,15 @@ export const InputWrapper = styled.div`
   }
 `;
 
+export const Alert = styled.div`
+  font-size: 15px;
+  color: ${color.red};
+  margin-top: 5px;
+  width: 100%;
+  text-align: left;
+  padding-left: 30px;
+`;
+
 export const Icon = styled.img`
   width: 25px;
   height: 25px;

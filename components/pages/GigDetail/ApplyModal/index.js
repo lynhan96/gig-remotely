@@ -18,6 +18,7 @@ import {
   MessageImage,
   MessageText,
   MessageTitle,
+  Alert,
 } from './styles';
 
 import {
@@ -36,6 +37,7 @@ import {
 const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
   const [open, setOpen] = useState(false);
   const [applied, setApplied] = useState(false);
+  const [alert, setAlert] = useState('');
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
   const valuesRef = useRef({});
@@ -77,15 +79,21 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
 
   const onSubmit = (values) => {
     values.resume = valuesRef.current.resume ? user.talent.resume : valuesRef.current.document;
-    applyJob(id, values);
+    if (!values.resume) {
+      setAlert('Please upload resume.');
+    } else {
+      applyJob(id, values);
+    }
   };
 
   const onSelectResume = (values) => {
     valuesRef.current.resume = values.value;
+    setAlert('');
   };
 
   const onChangeDocument = (values) => {
     valuesRef.current.document = values;
+    setAlert('');
   };
 
   return (
@@ -148,6 +156,7 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
               </CheckBoxWrapper>
 
               <ResumeInput onChangeDocument={onChangeDocument} />
+              <Alert>{alert}</Alert>
               <Button htmlType='submit' width='200px' style={{ marginTop: 40 }}>send</Button>
             </Form>
           </Wrapper>
