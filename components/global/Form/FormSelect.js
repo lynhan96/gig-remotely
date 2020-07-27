@@ -28,7 +28,7 @@ const FormSelect = React.forwardRef(({
   const [open, setOpen] = useState(false);
   const [selectOptions, setSelectOptions] = useState(options);
   const { valuesRef } = useContext(context);
-  const selectBoxId = 'select-field';
+  const selectBoxId = `select-field${name}`;
 
   useImperativeHandle(ref, () => ({
     reset: () => {
@@ -80,7 +80,7 @@ const FormSelect = React.forwardRef(({
         <Options>
           {
             selectOptions.map((item) => (
-              <Option key={item.value} active={item.value === seleted.value} onClick={() => onSelect(item)}>{item.name}</Option>
+              <Option key={item.value + item.name} active={item.value === seleted.value} onClick={() => onSelect(item)}>{item.name}</Option>
             ))
           }
         </Options>
