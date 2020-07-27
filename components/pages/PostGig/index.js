@@ -46,15 +46,12 @@ const PostGig = ({ data, isEdit }) => {
     onUpdateGig(id, params, callback),
   ), [dispatch]);
 
-  const confirmPayment = async (clientSecret, params) => {
+  const confirmPayment = async (clientSecret, params, paymentMethod) => {
     if (paymentOptionRef.current) {
-      console.log(paymentOptionRef.current[0]);
       stripe.confirmCardPayment(clientSecret, {
-        payment_method: paymentOptionRef.current[0].id,
+        payment_method: paymentMethod,
       }).then((response) => {
-        console.log(response);
-        console.log('success');
-        // postGig(params, response.paymentIntent.id);
+        postGig(params, response.paymentIntent.id);
       }).catch((err) => {
         showError(`Payment failed ${err.message}`);
       });
@@ -81,8 +78,7 @@ const PostGig = ({ data, isEdit }) => {
         paymentMethodId: paymentOptionRef.current[0].id,
         customerId: paymentOptionRef.current[0].customer,
       }).then((response) => {
-        console.log(response);
-        // confirmPayment(response.clientSecret, params);
+        confirmPayment(response.clientSecret, params, response.paymentMethod);
       }).catch((err) => {
         showError(err.data.message);
       });

@@ -295,7 +295,7 @@ export const TagGroup = styled.div`
 `;
 
 export const Action = styled.div`
-  width: 200px;
+  width: 210px;
   display: flex;
   flex-direction: column;
   align-items: center;
