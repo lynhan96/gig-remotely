@@ -63,7 +63,7 @@ export const StyledText = styled(Text)`
 
   a{
     color: ${color.black};
-    text-decoration: unset;
+    text-decoration: ${({ noUnderline }) => (noUnderline ? 'unset' : 'underline')};
   }
 
   @media (max-width: 768px){
@@ -181,7 +181,7 @@ export const ContacInfoWrapper = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: ${({ maxWidth }) => maxWidth ? '100%' : '345px'};
+    width: ${({ maxWidth }) => (maxWidth ? '100%' : '345px')};
   }
 
   @media (max-width: 440px) {

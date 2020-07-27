@@ -71,7 +71,7 @@ const UserProfile = ({ data }) => {
             <Icon src='/images/icon/phone.svg' alt='error' />
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Contact No.</StyledText>
-              <StyledText size='mmd' marginBottom='0'>
+              <StyledText size='mmd' marginBottom='0' noUnderline>
                 <a href={`tel:${contact}`}>{contact}</a>
               </StyledText>
             </ContactInfo>
@@ -96,14 +96,18 @@ const UserProfile = ({ data }) => {
             <Icon src='/images/icon/linkedin-dark.svg' alt='error' />
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Linkedin</StyledText>
-              <StyledText size='mmd' marginBottom='0'>{linkedin}</StyledText>
+              <StyledText size='mmd' marginBottom='0'>
+                <a href={linkedin} target='_blank' rel='noreferrer'>{linkedin}</a>
+              </StyledText>
             </ContactInfo>
           </ContactItem>
           <ContactItem>
             <Icon src='/images/icon/instagram.svg' alt='error' />
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Instagram</StyledText>
-              <StyledText size='mmd' marginBottom='0'>{instagram}</StyledText>
+              <StyledText size='mmd' marginBottom='0'>
+                <a href={instagram} target='_blank' rel='noreferrer'>{instagram}</a>
+              </StyledText>
             </ContactInfo>
           </ContactItem>
         </ContacInfoWrapper>

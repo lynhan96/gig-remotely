@@ -57,7 +57,7 @@ const CompanyInfo = ({
           <Icon src='/images/icon/phone.svg' alt='error' />
           <ContactInfo>
             <StyledText size='mmd' weight='bold' marginBottom='5px'>Contact No.</StyledText>
-            <StyledText size='mmd' marginBottom='0'>
+            <StyledText size='mmd' marginBottom='0' noUnderline>
               <a href={`tel:${contact}`}>{contact}</a>
             </StyledText>
           </ContactInfo>
