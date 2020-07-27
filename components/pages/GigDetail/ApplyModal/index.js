@@ -151,7 +151,7 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
               <Form.Item name='contact' required label='Phone Number*' placeholder='Phone Number' background='#efefe4' defaultValue={`${user.talent.contact}`} />
               <Form.Item name='coverLetter' label='Cover letter (optional)' placeholder='Cover letter' type='textarea' background='#efefe4' />
               <CheckBoxWrapper>
-                <CheckBox label='Use resume from gig_remotely' name='resume' onChange={onSelectResume} defaultValue={!!user.talent.resume} />
+                <CheckBox label='Use resume from gig_remotely' name='resume' onChange={onSelectResume} defaultValue={!!user.talent.resume} cantoggle/>
                 <Resume size='sm'>{user.talent.resume}</Resume>
               </CheckBoxWrapper>
 

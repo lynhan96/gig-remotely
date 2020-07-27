@@ -115,7 +115,11 @@ export const Position = styled(Text)`
   font-size: 14px;
   margin-top: 5px;
   margin-bottom: 15px;
-
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   @media(max-width: 1500px) {
     font-size: 13px;
   }

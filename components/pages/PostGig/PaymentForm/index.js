@@ -54,7 +54,6 @@ const CreditCardForm = ({ buttonRef }) => {
   };
 
   const onChangeCardNumber = (e) => {
-    console.log(e)
     if (!e.complete && !e.empty && e.error) {
       setError(e.error.message);
       buttonRef.current.disable();

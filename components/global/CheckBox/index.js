@@ -10,10 +10,15 @@ const CheckBox = ({
   className,
   defaultValue,
   label,
+  cantoggle,
 }) => {
   const [checked, setChecked] = useState(defaultValue);
   const handleOnchange = (e) => {
-    setChecked(true);
+    if (cantoggle) {
+      setChecked(!checked);
+    } else {
+      setChecked(true);
+    }
     onChange({ name, value: !checked });
   };
 

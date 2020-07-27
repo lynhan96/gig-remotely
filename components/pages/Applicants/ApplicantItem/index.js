@@ -1,5 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import moment from 'moment';
+import axios from 'axios';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 import { useDispatch } from 'react-redux';
 import { s3Url } from 'constant';
 import { onUpdateApplicantSortListed } from 'saga/company';
@@ -42,7 +45,39 @@ const ApplicantItem = ({ item, setShortListedData, shortlistedItem }) => {
   } = talent;
 
   const [isShortListed, setIsShortListed] = useState(shortlistedItem || shortlisted);
-  const viewResume = () => window.open(`${s3Url}${resume}`, '_blank');
+  const viewResume = async () => {
+    const blobFile = [];
+
+    const instance = axios.create();
+    delete instance.defaults.headers.common.Authorization;
+
+    if (talent.resume) {
+      await instance({
+        url: `${s3Url}${talent.resume}`,
+        method: 'GET',
+        responseType: 'blob',
+      }).then((response) => {
+        blobFile.push({ name: talent.resume, blod: response.data });
+      });
+    }
+
+    await instance({
+      url: `${s3Url}${resume}`,
+      method: 'GET',
+      responseType: 'blob',
+    }).then((response) => {
+      blobFile.push({ name: resume, blod: response.data });
+    });
+
+    const zip = new JSZip();
+    blobFile.map((item) => {
+      zip.file(item.name, item.blod);
+    });
+
+    zip.generateAsync({ type: 'blob' }).then((content) => {
+      saveAs(content, 'resume.zip');
+    });
+  };
 
   const callback = (response, shortListed) => {
     setIsShortListed(shortListed);
@@ -75,7 +110,7 @@ const ApplicantItem = ({ item, setShortListedData, shortlistedItem }) => {
         <Time>{moment(date).fromNow()}</Time>
         <ViewResume onClick={viewResume}>
           <Icon src='/images/icon/file.svg' />
-          see resume
+          see all
         </ViewResume>
       </Footer>
     </ItemWrapper>
