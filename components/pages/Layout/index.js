@@ -17,12 +17,14 @@ const companyRoute = [
   '/company/edit-gig/[id]',
   '/company/applicant/[id]',
   '/company/payment-options',
+  '/setup-account',
 ];
 
 const talentRoute = [
   '/gig-seeker/edit-profile',
   '/gig-seeker/my-gigs',
   '/gig-seeker/profile',
+  '/setup-account',
 ];
 
 const MainLayout = ({ Component, pageProps }) => {
