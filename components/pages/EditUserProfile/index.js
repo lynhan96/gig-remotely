@@ -1,7 +1,8 @@
 import React, {
-  useCallback, useRef, useEffect,
+  useCallback, useRef,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { onOpenAlert } from 'redux/alert';
 import { country } from 'constant';
 import {
   Form, Button, Loading,
@@ -26,6 +27,10 @@ const EditUserProfile = () => {
     onUpdateUserProfile(params),
   ), [dispatch]);
 
+  const showError = useCallback((message) => dispatch(
+    onOpenAlert(message),
+  ), [dispatch]);
+
   if (Object.keys(data).length === 0) {
     return (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>);
   }
@@ -40,7 +45,12 @@ const EditUserProfile = () => {
 
   const onSubmit = (values) => {
     values.skills = skillRef.current;
-    updateProfile(values);
+
+    if (!values.photo) {
+      showError('Display photo is required, please upload.');
+    } else {
+      updateProfile(values);
+    }
   };
 
   const onReset = () => {

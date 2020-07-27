@@ -96,8 +96,10 @@ const GigsInfo = ({ companyName, jobs }) => (
 
 const CompanyProfile = ({ data, type, isCompany }) => {
   const {
-    id, name, photo, website, about, email, contact, address, location, jobs,
+    id, name, photo, website, about, email, contact, address, jobs,
   } = data || {};
+
+  const companyLocation = data ? data.location : '';
 
   const getLink = (url) => {
     const external = RegExp(`^((f|ht)tps?:)?//(?!${location.host})`);
@@ -126,7 +128,7 @@ const CompanyProfile = ({ data, type, isCompany }) => {
             about={about}
             contact={contact}
             address={address}
-            location={location}
+            location={companyLocation}
             gigsNumber={(jobs || []).length}
             isCompany={isCompany}
           />

@@ -25,8 +25,10 @@ const UserProfile = ({ data }) => {
   } = data;
 
   const {
-    about, photo, resume, linkedin, contact, location, website, instagram, jobTitle, skills,
+    about, photo, resume, linkedin, contact, website, instagram, jobTitle, skills,
   } = talent || {};
+
+  const userLocation = talent ? talent.location : '';
 
   const openResume = () => window.open(`${s3Url}${resume}`, '_blank');
 
@@ -88,7 +90,7 @@ const UserProfile = ({ data }) => {
             <Icon src='/images/icon/location.svg' alt='error' />
             <ContactInfo>
               <StyledText size='mmd' weight='bold' marginBottom='5px'>Location</StyledText>
-              <StyledText size='mmd' marginBottom='0'>{location}</StyledText>
+              <StyledText size='mmd' marginBottom='0'>{userLocation}</StyledText>
             </ContactInfo>
           </ContactItem>
           <ContactItem>

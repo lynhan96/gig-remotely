@@ -1,7 +1,8 @@
 import React, {
-  useCallback, useRef
+  useCallback, useRef,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { onOpenAlert } from 'redux/alert';
 import { country } from 'constant';
 import {
   Form, Button, Loading,
@@ -22,16 +23,24 @@ const EditCompanyProfile = () => {
     onUpdateCompanyProfile(params),
   ), [dispatch]);
 
+  const showError = useCallback((message) => dispatch(
+    onOpenAlert(message),
+  ), [dispatch]);
+
   if (Object.keys(data).length === 0) {
     return (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>);
   }
 
   const {
-    email, photo, name, contact, location, address, website, about,
+    photo, name, contact, location, address, website, about,
   } = data.company || {};
 
   const onSubmit = (values) => {
-    updateCompanyProfile(values);
+    if (!values.photo) {
+      showError('Display photo is required, please upload.');
+    } else {
+      updateCompanyProfile(values);
+    }
   };
 
   const onReset = () => {
@@ -46,7 +55,7 @@ const EditCompanyProfile = () => {
         <LeftWrapper>
           <Form.Photo name='photo' label='Display Photo' defaultValue={photo} fieldRef={photoFieldRef} />
           <Form.Item name='name' required label='Company Name*' placeholder='Company Name*' background='#efefe4' defaultValue={name} />
-          <Form.Item name='email' required label='Email*' placeholder='Email*' background='#efefe4' defaultValue={email} validateType='email' />
+          <Form.Item name='email' required label='Email*' placeholder='Email*' background='#efefe4' defaultValue={data.email} validateType='email' />
           <Form.Item name='contact' required label='Contact No*' placeholder='Contact No*' background='#efefe4' defaultValue={contact} />
           <Form.Item name='about' label='About the company' placeholder='About me' type='textarea' background='#efefe4' defaultValue={about} />
         </LeftWrapper>

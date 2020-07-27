@@ -117,7 +117,7 @@ export const listTimezone = [{ name: '(GMT-11:00) Midway Island, Samoa', value: 
   { name: '(GMT+12:00) Fiji, Kamchatka, Marshall Is.', value: '12:00' },
   { name: '(GMT+12:45) Chatham Islands', value: '12:45' },
   { name: '(GMT+13:00) Nuku\'alofa', value: '13:00' },
-  { name: '(GMT+14:00) Kiritimati', value: '14:00' }
+  { name: '(GMT+14:00) Kiritimati', value: '14:00' },
 ];
 export const country = [
   { value: 'Afghanistan', name: 'Afghanistan' },
