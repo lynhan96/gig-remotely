@@ -10,7 +10,7 @@ import {
 const SubscribeNews = () => (
   <Wrapper>
     <Title size='xl' weight='bold'>Stay updated on all new gigs.</Title>
-    <Form style={{ alignItems: 'center' }}>
+    <Form style={{ justifyContent: 'center' }} type='horizontal'>
       <FormWrapper>
         <Form.Item name='email' required placeholder='Email' type='email' />
         <StyledButton htmlType='submit' width='200px'>subscribe</StyledButton>

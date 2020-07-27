@@ -81,9 +81,9 @@ const JobItem = ({ item, favorite, applied }) => {
                 size='llg'
               >
                 {title}
-                <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
+                <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
               </Title>
-              <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
+              <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
               <Text color={disabledItem ? '#9a9a8b' : ''} size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</Text>
             </TitleWrapper>
             <Locale>

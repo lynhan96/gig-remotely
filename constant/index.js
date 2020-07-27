@@ -1,6 +1,6 @@
 export const s3Url = 'https://gigremotely.s3-ap-southeast-1.amazonaws.com/';
 export const listContractType = [
-  { value: 'FREELANCE', name: 'Freelance', background: '#4ad3b9' },
+  { value: 'FREELANCE', name: 'Projects', background: '#4ad3b9' },
   { value: 'PART_TIME', name: 'Part Time', background: '#a5a75a' },
   { value: 'FULL_TIME', name: 'Full Time', background: '#fa7d00' },
 ];

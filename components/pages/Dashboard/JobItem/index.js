@@ -76,9 +76,9 @@ const JobItem = ({ item, removeItem }) => {
             <TitleWrapper>
               <Title width='auto' weight='bold' size='llg'>
                 {title}
-                <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
+                <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
               </Title>
-              <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
+              <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
               <Time size='xs' color='#9a9a8b'>{timeText()}</Time>
               <CompanyName color={disabledItem ? '#9a9a8b' : ''} size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</CompanyName>
             </TitleWrapper>

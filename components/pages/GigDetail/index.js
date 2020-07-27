@@ -123,7 +123,7 @@ const GigDetail = ({ item }) => {
         <ContentWrapper>
           <TitleWrapper>
             <Title width='auto' size='xl' weight='bold'>{title}</Title>
-            <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType)}</Label>
+            <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
           </TitleWrapper>
           <CompanyName size='mmd'>{name}</CompanyName>
           <Date size='sm'>{`Posted ${moment(startedAt).fromNow()}`}</Date>
