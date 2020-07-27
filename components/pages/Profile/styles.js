@@ -63,7 +63,9 @@ export const StyledText = styled(Text)`
 
   a{
     color: ${color.black};
-    text-decoration: ${({ noUnderline }) => (noUnderline ? 'unset' : 'underline')};
+    text-decoration: unset;
+    padding-bottom: 1px;
+    border-bottom: 1px solid ${({ noUnderline }) => (noUnderline ? 'transaparent' : color.black)};
   }
 
   @media (max-width: 768px){

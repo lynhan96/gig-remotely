@@ -21,6 +21,7 @@ function* updateCompanyProfile({ params }) {
 
     yield put(onUpdateUserCompany(response));
     yield put(onOpenAlert('Your profile has successfully changed'));
+    Router.push('/company/profile');
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }

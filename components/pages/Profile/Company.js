@@ -99,6 +99,14 @@ const CompanyProfile = ({ data, type, isCompany }) => {
     id, name, photo, website, about, email, contact, address, location, jobs,
   } = data || {};
 
+  const getLink = (url) => {
+    const external = RegExp(`^((f|ht)tps?:)?//(?!${location.host})`);
+    if (external.test(url)) {
+      return url;
+    }
+    return `http://${url}`;
+  };
+
   return (
     <Wrapper>
       <HeadWrapper type={type}>
@@ -106,7 +114,7 @@ const CompanyProfile = ({ data, type, isCompany }) => {
         <TitleWrapper>
           <Name size='xl' weight='bold'>{name}</Name>
           <StyledText size='mmd' marginBottom='0' style={{ marginTop: 6 }}>
-            <a href={website} target='_blank' rel='noreferrer'>{website}</a>
+            <a href={getLink(website)} target='_blank' rel='noreferrer'>{website}</a>
           </StyledText>
         </TitleWrapper>
       </HeadWrapper>
