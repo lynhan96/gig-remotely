@@ -14,12 +14,15 @@ const CheckBox = ({
   const [checked, setChecked] = useState(defaultValue);
   const handleOnchange = (e) => {
     setChecked(!checked);
-    onChange({ name: e.target.name, value: !checked });
+    onChange({ name, value: !checked });
   };
 
   useEffect(() => {
-    onChange({ name, value: defaultValue });
   }, []);
+
+  useEffect(() => {
+    setChecked(defaultValue);
+  }, [defaultValue]);
 
   return (
     <ChexBoxWrapper className={className}>

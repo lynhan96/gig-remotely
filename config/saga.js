@@ -4,6 +4,7 @@ import authenticationWatcher from 'saga/authentication';
 import userWatcher from 'saga/user';
 import companyWatcher from 'saga/company';
 import uploadWatcher from 'saga/upload';
+import paymentWatcher from 'saga/payment';
 
 export default function* saga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* saga() {
     userWatcher(),
     companyWatcher(),
     uploadWatcher(),
+    paymentWatcher(),
   ]);
 }

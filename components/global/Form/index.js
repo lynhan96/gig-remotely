@@ -30,12 +30,16 @@ const Form = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    Promise.all(itemsRef.current.map((validate) => validate()))
-      .then(() => {
-        if (errorRef.current.length === 0 && onSubmit) {
-          onSubmit(valuesRef.current, event);
-        }
-      });
+    if (itemsRef.current.length === 0) {
+      onSubmit(valuesRef.current, event);
+    } else {
+      Promise.all(itemsRef.current.map((validate) => validate()))
+        .then(() => {
+          if (errorRef.current.length === 0 && onSubmit) {
+            onSubmit(valuesRef.current, event);
+          }
+        });
+    }
   };
 
   return (

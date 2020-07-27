@@ -57,9 +57,9 @@ function* updateUserType({ userType }) {
 
     Cookie.set('__gigtype', userType);
     if (userType === 'TALENT') {
-      Router.push('/gig-seeker/profile');
+      Router.push('/gig-seeker/edit-profile');
     } else if (userType === 'COMPANY') {
-      Router.push('/company/profile');
+      Router.push('/company/edit-profile');
     }
   } catch (error) {
     yield put(onOpenAlert(error.data.message));

@@ -98,7 +98,7 @@ export const SelectWrapper = styled.div`
   flex-direction: column;
   margin-top: 30px;
   .custom-checkbox {
-    width: 100%;
+    width: 270px;
 
     span {
       top: 2px !important;
@@ -124,7 +124,7 @@ export const Selected = styled(Text)`
   font-size: 17px;
   color: ${color.cement};
   margin-right: 20px;
-  width: auto;
+  width: 75px;
 
   @media (max-width: 767px) {
     display: none;
@@ -132,6 +132,11 @@ export const Selected = styled(Text)`
 `;
 
 export const CardLabel = styled(Text)`
+  display: flex;
+  align-items: center;
+`;
+
+export const CardText = styled(Text)`
   display: flex;
   align-items: center;
   font-size: 17px;
@@ -157,6 +162,7 @@ export const RemoveLink = styled(Text)`
   text-decoration: underline;
   width: auto;
   margin-left: 15px;
+  cursor: pointer;
 `;
 
 export const Card = styled(Text)`
@@ -168,7 +174,7 @@ export const Card = styled(Text)`
   @media (max-width: 767px) {
     padding: 20px 15px;
   }
-`
+`;
 
 export const CardTitle = styled(Text)`
   font-weight: bold;
