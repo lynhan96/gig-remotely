@@ -1,8 +1,4 @@
 import React from 'react';
-
-import {
-  Text,
-} from 'components/global';
 import {
   Wrapper, Image, ContentWrapper, Title, WrapperText, StyledText,
 } from './styles';
@@ -13,13 +9,13 @@ const WhoWeAre = () => (
     <ContentWrapper>
       <WrapperText>
         <StyledText width='auto' size='sm'>
-          Formed by a team of remote workers from around the world, we understand the importance of finding the right gig and finding the right channels to get there. That’s why we orem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.
+          We believe that more and more companies are embarking on the modular and flexible hiring of workers. And with a never-ending demand for work, it’s about putting supply and demand together.
         </StyledText>
         <StyledText width='auto' size='sm'>
-          Nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          GigRemotely is here to simplify remote working; we connect the highest quality individuals to the right companies, regardless of where they are in the world and where they want to be in the world.
         </StyledText>
         <StyledText width='auto' size='sm'>
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+          It is our responsibility to provide the crucial data on our GigSeekers; and from then on out, it’s down to the company to make the decisions and form their own dynamic team.
         </StyledText>
       </WrapperText>
       <Image src='/images/whoweare.png' />
@@ -28,3 +24,5 @@ const WhoWeAre = () => (
 );
 
 export default WhoWeAre;
+
+
