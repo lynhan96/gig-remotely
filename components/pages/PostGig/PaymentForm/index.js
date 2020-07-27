@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   CardNumberElement,
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
+import { useDispatch, useSelector } from 'react-redux';
+import { onGetPaymentMethod } from 'saga/payment';
+import PaymentOptions from './PaymentOptions';
 import {
   Wrapper,
   LeftWrapper,
@@ -33,10 +36,8 @@ import {
   TotalPrice,
 } from './styles';
 
-const PaymentForm = ({ boostRef, buttonRef }) => {
-  const [boost, setBoots] = useState(false);
+const CreditCardForm = (buttonRef) => {
   const [error, setError] = useState('');
-  const [totalPrice, serTotalPrice] = useState(49.90);
 
   const inputStyle = {
     style: {
@@ -52,20 +53,6 @@ const PaymentForm = ({ boostRef, buttonRef }) => {
     },
   };
 
-  const tooglePrice = (increase) => {
-    if (increase) {
-      serTotalPrice((state) => state + 5);
-    } else {
-      serTotalPrice((state) => state - 5);
-    }
-  };
-
-  const updateBoost = () => {
-    boostRef.current = !boost;
-    setBoots(!boost);
-    tooglePrice(!boost);
-  };
-
   const onChangeCardNumber = (e) => {
     if (!e.complete && !e.empty && e.error) {
       setError(e.error.message);
@@ -79,6 +66,62 @@ const PaymentForm = ({ boostRef, buttonRef }) => {
     } else {
       buttonRef.current.disable();
     }
+  };
+
+  return [
+    <FieldInput key='first'>
+      <Label>Credit Card Number</Label>
+      <Input />
+      <CardNumberElement options={inputStyle} className='payment-input-field' onChange={onChangeCardNumber} />
+      <Error className={error ? 'show-input-error' : 'hide-input-error'}>{error}</Error>
+    </FieldInput>,
+    <FieldGroupInput key='second'>
+      <FieldInput>
+        <Label>Expiration</Label>
+        <Input />
+        <CardExpiryElement options={inputStyle} className='payment-input-field' />
+      </FieldInput>
+      <FieldInput>
+        <Label>CVC Code</Label>
+        <Input />
+        <CardCvcElement options={inputStyle} className='payment-input-field' />
+      </FieldInput>
+    </FieldGroupInput>,
+  ];
+};
+
+const PaymentForm = ({ boostRef, buttonRef, paymentOptionRef }) => {
+  const dispatch = useDispatch();
+  const [boost, setBoots] = useState(false);
+
+  const [totalPrice, serTotalPrice] = useState(49.90);
+  const [state, setState] = useState({ loading: true, data: [] });
+  const { loading, data } = state;
+
+  const callback = (response) => {
+    setState({ loading: false, data: response });
+  };
+
+  const getPaymentMethod = useCallback((callback) => dispatch(
+    onGetPaymentMethod(callback),
+  ), [dispatch]);
+
+  useEffect(() => {
+    getPaymentMethod(callback);
+  }, []);
+
+  const tooglePrice = (increase) => {
+    if (increase) {
+      serTotalPrice((state) => state + 5);
+    } else {
+      serTotalPrice((state) => state - 5);
+    }
+  };
+
+  const updateBoost = () => {
+    boostRef.current = !boost;
+    setBoots(!boost);
+    tooglePrice(!boost);
   };
 
   return (
@@ -110,24 +153,8 @@ const PaymentForm = ({ boostRef, buttonRef }) => {
       <RightWrapper>
         <Circle />
         <Title>Payment Confirmation</Title>
-        <FieldInput>
-          <Label>Credit Card Number</Label>
-          <Input />
-          <CardNumberElement options={inputStyle} className='payment-input-field' onChange={onChangeCardNumber} />
-          <Error className={error ? 'show-input-error' : 'hide-input-error'}>{error}</Error>
-        </FieldInput>
-        <FieldGroupInput>
-          <FieldInput>
-            <Label>Expiration</Label>
-            <Input />
-            <CardExpiryElement options={inputStyle} className='payment-input-field' />
-          </FieldInput>
-          <FieldInput>
-            <Label>CVC Code</Label>
-            <Input />
-            <CardCvcElement options={inputStyle} className='payment-input-field' />
-          </FieldInput>
-        </FieldGroupInput>
+        { !loading && data.length > 0 && <PaymentOptions buttonRef={buttonRef} paymentOptionRef={paymentOptionRef} paymentMethod={data} />}
+        { !loading && data.length === 0 && <CreditCardForm buttonRef={buttonRef} />}
         <PaymentPrice>
           <FieldInput>
             <Label>Promo Code</Label>

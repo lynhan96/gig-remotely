@@ -1,5 +1,5 @@
 import React, {
-  useState, useCallback, useEffect, useRef,
+  useState, useCallback, useEffect,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -180,7 +180,7 @@ const PaymentOptions = () => {
           <Button width='250px' onClick={addPaymentMethod}>add payment option</Button>
           <SelectWrapper>
             {
-              paymentMethod.map(({ id, card, default_source }) => (
+              paymentMethod.map(({ id, card }) => (
                 <PaymentItem key={id}>
                   {selectedOption && <Selected>{(selectedOption === id) && 'primary'}</Selected>}
                   <CheckBox

@@ -25,6 +25,7 @@ const PostGig = ({ data, isEdit }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const skillRef = useRef([]);
+  const paymentOptionRef = useRef();
   const contractTypeRef = useRef();
   const durationRef = useRef();
   const boostRef = useRef(false);
@@ -46,27 +47,52 @@ const PostGig = ({ data, isEdit }) => {
   ), [dispatch]);
 
   const confirmPayment = async (clientSecret, params) => {
-    stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardNumberElement),
-        billing_details: {
-          name: user.company ? user.company.name : `${user.firstName} ${user.lastName}`,
+    if (paymentOptionRef.current) {
+      console.log(paymentOptionRef.current[0]);
+      stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentOptionRef.current[0].id,
+      }).then((response) => {
+        console.log(response);
+        console.log('success');
+        // postGig(params, response.paymentIntent.id);
+      }).catch((err) => {
+        showError(`Payment failed ${err.message}`);
+      });
+    } else {
+      stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+          billing_details: {
+            name: user.company ? user.company.name : `${user.firstName} ${user.lastName}`,
+          },
         },
-      },
-    }).then((response) => {
-      console.log(response);
-      postGig(params, response.paymentIntent.id);
-    }).catch((err) => {
-      showError(`Payment failed ${err.message}`);
-    });
+      }).then((response) => {
+        postGig(params, response.paymentIntent.id);
+      }).catch((err) => {
+        showError(`Payment failed ${err.message}`);
+      });
+    }
   };
 
   const paymentAndPostGig = (params) => {
-    axios.post('/payment/create-payment-intent', { boost: boostRef.current }).then((response) => {
-      confirmPayment(response.clientSecret, params);
-    }).catch((err) => {
-      showError(err.data.message);
-    });
+    if (paymentOptionRef.current) {
+      axios.post('/payment/create-saved-payment-intent', {
+        boost: boostRef.current,
+        paymentMethodId: paymentOptionRef.current[0].id,
+        customerId: paymentOptionRef.current[0].customer,
+      }).then((response) => {
+        console.log(response);
+        // confirmPayment(response.clientSecret, params);
+      }).catch((err) => {
+        showError(err.data.message);
+      });
+    } else {
+      axios.post('/payment/create-payment-intent', { boost: boostRef.current }).then((response) => {
+        confirmPayment(response.clientSecret, params);
+      }).catch((err) => {
+        showError(err.data.message);
+      });
+    }
   };
 
   const {
@@ -159,7 +185,7 @@ const PostGig = ({ data, isEdit }) => {
             className='textarea-input'
           />
         </RightWrapper>
-        { !isEdit && <PaymentForm boostRef={boostRef} buttonRef={buttonRef} />}
+        { !isEdit && <PaymentForm boostRef={boostRef} buttonRef={buttonRef} paymentOptionRef={paymentOptionRef} />}
         <ButtonAction ref={buttonRef} isEdit={isEdit} showDeletePopUp={showDeletePopUp} />
       </Form>
     </Wrapper>
