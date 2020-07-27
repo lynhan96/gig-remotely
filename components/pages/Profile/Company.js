@@ -83,8 +83,8 @@ const CompanyInfo = ({
 
 const GigsInfo = ({ companyName, jobs }) => (
   <GigsWrapper>
-    { jobs.map(({ title, location }, index) => (
-      <Gig key={title}>
+    { jobs.map(({ id, title, location }, index) => (
+      <Gig key={title} onClick={() => Router.push('/gigs/[id]', `/gigs/${id}`)}>
         <GigPhoto />
         <GigCompanyTitle size='mmd' weight='bold' marginBottom='5px'>{title}</GigCompanyTitle>
         <GigCompanyName size='sm' marginBottom='0'>{companyName}</GigCompanyName>

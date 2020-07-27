@@ -10,9 +10,11 @@ export const ListWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   margin: 40px 0;
+  margin-bottom: 150px;
 
   @media(max-width: 1024px) {
     width: 100%;
+    margin-bottom: 50px;
   }
 
   @media(max-width: 768px) {
