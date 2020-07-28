@@ -6,7 +6,7 @@ import { Container } from 'components/global/styles';
 
 const Main = () => {
   const search = ({ keyword, option }) => {
-    Router.push(`/gigs?keyword=${keyword}&option=${option}`);
+    Router.push(`/gigs?keyword=${keyword || ''}&option=${option || ''}`);
   };
 
   return (
