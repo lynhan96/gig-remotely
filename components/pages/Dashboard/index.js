@@ -25,7 +25,7 @@ const Empty = () => (
   <EmptyWrapper>
     <EmptyImage src='/images/empty-jobs.png' />
     <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'> You don't have any gis</Text>
-    <Button onClick={() => Router.push('/post-gigs')}>post your first gig</Button>
+    <Button onClick={() => Router.push('/company/post-gigs')}>post your first gig</Button>
   </EmptyWrapper>
 );
 
