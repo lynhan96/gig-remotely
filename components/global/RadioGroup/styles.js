@@ -63,7 +63,7 @@ export const ItemWrapper = styled.div`
     }
   }
 
-  input[type="radio"] {
+  input[type="checkbox"] {
     display: none;
     &:checked + label:before {
       border: 1px solid ${color.black} !important;
