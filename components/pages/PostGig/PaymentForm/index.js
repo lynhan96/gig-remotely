@@ -1,11 +1,13 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState, useCallback, useEffect, useRef,
+} from 'react';
 import {
   CardNumberElement,
   CardExpiryElement,
   CardCvcElement,
 } from '@stripe/react-stripe-js';
 import { useDispatch, useSelector } from 'react-redux';
-import { onGetPaymentMethod } from 'saga/payment';
+import { onGetPaymentMethod, onCheckPromotionCode } from 'saga/payment';
 import PaymentOptions from './PaymentOptions';
 import {
   Wrapper,
@@ -34,6 +36,8 @@ import {
   TotalPriceWrapper,
   TotalPriceText,
   TotalPrice,
+  PromotionText,
+  PromotionIcon,
 } from './styles';
 
 const CreditCardForm = ({ buttonRef }) => {
@@ -90,25 +94,69 @@ const CreditCardForm = ({ buttonRef }) => {
   ];
 };
 
-const PaymentForm = ({ boostRef, buttonRef, paymentOptionRef }) => {
+const PaymentForm = ({
+  boostRef, buttonRef, paymentOptionRef, promotionRef,
+}) => {
   const dispatch = useDispatch();
   const [boost, setBoots] = useState(false);
-
   const [totalPrice, serTotalPrice] = useState(49.90);
+  const [promotionValid, setPromotionValid] = useState('default');
   const [state, setState] = useState({ loading: true, data: [] });
   const { loading, data } = state;
+  const inputRef = useRef();
+  let typing = 0;
 
   const callback = (response) => {
     setState({ loading: false, data: response });
+  };
+
+  const calulatedPrice = (isValid, response) => {
+    const currentPrice = boost ? 54.9 : 49.9;
+    if (!isValid) {
+      serTotalPrice(currentPrice);
+    } else if (response.promo_type === 'amount') {
+      serTotalPrice(currentPrice - parseFloat(response.amount));
+    } else {
+      serTotalPrice(currentPrice * (1.0 - (parseFloat(response.amount) / 100.0)));
+    }
+  };
+
+  const checkPromotionCallback = (status, response) => {
+    if (status === 200) {
+      setPromotionValid('valid');
+      promotionRef.current.isValid = true;
+      promotionRef.current.code = response.code;
+      calulatedPrice(true, response);
+    } else {
+      promotionRef.current.isValid = false;
+      setPromotionValid('invalid');
+      calulatedPrice(false);
+    }
+
+    promotionRef.current.checking = false;
   };
 
   const getPaymentMethod = useCallback((callback) => dispatch(
     onGetPaymentMethod(callback),
   ), [dispatch]);
 
+  const checkPromotionCode = useCallback((code, callback) => dispatch(
+    onCheckPromotionCode(code, callback),
+  ), [dispatch]);
+
   useEffect(() => {
     getPaymentMethod(callback);
   }, []);
+
+  useEffect(() => {
+    if (promotionValid === 'default') {
+      inputRef.current.value = '';
+      promotionRef.current.isValid = true;
+      promotionRef.current.code = '';
+      promotionRef.current.checking = false;
+      calulatedPrice(false);
+    }
+  }, [promotionValid]);
 
   const tooglePrice = (increase) => {
     if (increase) {
@@ -122,6 +170,21 @@ const PaymentForm = ({ boostRef, buttonRef, paymentOptionRef }) => {
     boostRef.current = !boost;
     setBoots(!boost);
     tooglePrice(!boost);
+  };
+
+  const clearCode = () => setPromotionValid('default');
+
+  const onInputPromotion = (e) => {
+    promotionRef.current.checking = true;
+    const searchText = e.target.value; // this is the search text
+    if (typing) clearTimeout(typing);
+    typing = setTimeout(() => {
+      if (searchText === '') {
+        setPromotionValid('default');
+      } else {
+        checkPromotionCode(searchText, checkPromotionCallback);
+      }
+    }, 400);
   };
 
   return (
@@ -158,7 +221,9 @@ const PaymentForm = ({ boostRef, buttonRef, paymentOptionRef }) => {
         <PaymentPrice>
           <FieldInput>
             <Label>Promo Code</Label>
-            <PromoInput />
+            <PromoInput onChange={onInputPromotion} className={`promotion-${promotionValid}`} ref={inputRef} />
+            <PromotionText className={`promotion-text-${promotionValid}`}>{promotionValid === 'valid' ? 'Applied' : 'Invalid' }</PromotionText>
+            <PromotionIcon className={`promotion-icon-${promotionValid}`} src='/images/icon/close-white.svg' onClick={clearCode} />
           </FieldInput>
           <TotalPriceWrapper>
             <TotalPriceText>Total</TotalPriceText>

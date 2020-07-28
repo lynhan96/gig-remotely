@@ -385,11 +385,55 @@ export const PaymentPrice = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
+  position: relative;
+
+  .promotion-valid {
+    border: solid 1px ${color.aquaMarine};
+  }
+
+  .promotion-invalid {
+    border: solid 1px #fa7d00;
+  }
+
+  .promotion-text-valid {
+    color: ${color.aquaMarine};
+  }
+
+  .promotion-text-invalid {
+    color: #fa7d00;
+  }
+
+  .promotion-icon-valid {
+    left: 158px;
+  }
+
+  .promotion-icon-default,
+  .promotion-text-default {
+    display: none;
+  }
+`;
+
+export const PromotionIcon = styled.img`
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  cursor: pointer;
+  top: 45px;
+  left: 158px;
+`;
+
+export const PromotionText = styled(Text)`
+  font-size: 13px;
+  position: absolute;
+  width: auto;
+  top: 45px;
+  left: 105px;
 `;
 
 export const PromoInput = styled.input`
-  width: 160px;
+  width: 80px;
   padding: 0 20px;
+  padding-right: 80px;
   height: 48px;
   display: flex;
   align-items: center;
@@ -412,8 +456,6 @@ export const TotalPriceWrapper = styled.div`
   flex-direction: column;
   align-items: flex-end;
   padding-top: 15px;
-
-
 `;
 
 export const TotalPriceText = styled(Text)`

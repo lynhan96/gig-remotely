@@ -5,6 +5,7 @@ import { onOpenAlert } from 'redux/alert';
 const ON_GET_PAYMENT_METHOD = 'ON_GET_PAYMENT_METHOD';
 const ON_REMOVE_PAYMENT_OPTION = 'ON_REMOVE_PAYMENT_OPTION';
 const ON_SET_DEFAULT_PAYMENT_OPTION = 'ON_SET_DEFAULT_PAYMENT_OPTION';
+const ON_CHECK_PROMOTION_CODE = 'ON_CHECK_PROMOTION_CODE';
 
 function* getPaymentMethod({ setState }) {
   try {
@@ -12,6 +13,17 @@ function* getPaymentMethod({ setState }) {
 
     setState(response);
   } catch (error) {
+    console.error(error);
+  }
+}
+
+function* checkPromotionCode({ code, callback }) {
+  try {
+    const response = yield call(get, `/promotion/check-code?code=${code}`);
+
+    callback(200, response);
+  } catch (error) {
+    callback(400);
     console.error(error);
   }
 }
@@ -48,8 +60,13 @@ export const onSetDefaultPaymentOption = (id) => ({
   type: ON_SET_DEFAULT_PAYMENT_OPTION, id,
 });
 
+export const onCheckPromotionCode = (code, callback) => ({
+  type: ON_CHECK_PROMOTION_CODE, code, callback,
+});
+
 export default function* paymentWatcher() {
   yield takeLatest(ON_GET_PAYMENT_METHOD, getPaymentMethod);
   yield takeLatest(ON_REMOVE_PAYMENT_OPTION, removePaymentOption);
   yield takeLatest(ON_SET_DEFAULT_PAYMENT_OPTION, setDefaultPaymentOption);
+  yield takeLatest(ON_CHECK_PROMOTION_CODE, checkPromotionCode);
 }

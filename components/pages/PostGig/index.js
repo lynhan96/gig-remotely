@@ -31,6 +31,7 @@ const PostGig = ({ data, isEdit }) => {
   const boostRef = useRef(false);
   const buttonRef = useRef();
   const deletePopupRef = useRef();
+  const promotionRef = useRef({ code: '', isValid: true, checking: false });
   const stripe = !isEdit ? useStripe() : null;
   const elements = !isEdit ? useElements() : null;
 
@@ -72,18 +73,31 @@ const PostGig = ({ data, isEdit }) => {
   };
 
   const paymentAndPostGig = (params) => {
-    if (paymentOptionRef.current) {
+    if (promotionRef.current.checking) {
+      showError('We are checking your promotion code.');
+      buttonRef.current.available();
+      return;
+    }
+    if (!promotionRef.current.isValid) {
+      showError('Please remove invalid promotion code.');
+      buttonRef.current.available();
+    } else if (paymentOptionRef.current) {
       axios.post('/payment/create-saved-payment-intent', {
         boost: boostRef.current,
         paymentMethodId: paymentOptionRef.current[0].id,
         customerId: paymentOptionRef.current[0].customer,
+        promotionCode: promotionRef.current.code,
       }).then((response) => {
         confirmPayment(response.clientSecret, params, response.paymentMethod);
       }).catch((err) => {
+        buttonRef.current.available();
         showError(err.data.message);
       });
     } else {
-      axios.post('/payment/create-payment-intent', { boost: boostRef.current }).then((response) => {
+      axios.post('/payment/create-payment-intent', {
+        boost: boostRef.current,
+        promotionCode: promotionRef.current.code,
+      }).then((response) => {
         confirmPayment(response.clientSecret, params);
       }).catch((err) => {
         showError(err.data.message);
@@ -103,6 +117,7 @@ const PostGig = ({ data, isEdit }) => {
     values.contractType = contractTypeRef.current;
     values.duration = durationRef.current;
 
+    buttonRef.current.submitting();
     if (isEdit) {
       updateGig(id, values, () => {
         buttonRef.current.available();
@@ -110,8 +125,6 @@ const PostGig = ({ data, isEdit }) => {
     } else {
       paymentAndPostGig(values);
     }
-
-    buttonRef.current.submitting();
   };
 
   const showDeletePopUp = () => deletePopupRef.current.open();
@@ -181,7 +194,7 @@ const PostGig = ({ data, isEdit }) => {
             className='textarea-input'
           />
         </RightWrapper>
-        { !isEdit && <PaymentForm boostRef={boostRef} buttonRef={buttonRef} paymentOptionRef={paymentOptionRef} />}
+        { !isEdit && <PaymentForm boostRef={boostRef} buttonRef={buttonRef} paymentOptionRef={paymentOptionRef} promotionRef={promotionRef} />}
         <ButtonAction ref={buttonRef} isEdit={isEdit} showDeletePopUp={showDeletePopUp} />
       </Form>
     </Wrapper>
