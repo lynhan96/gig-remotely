@@ -5,15 +5,15 @@ import { Wrapper, InputWrapper, StyledRadioGroup } from './styles';
 const radioOptions = [
   {
     label: 'Freelance',
-    name: 'freelance',
+    name: 'FREELANCE',
   },
   {
     label: 'Part Time',
-    name: 'part_time',
+    name: 'PART_TIME',
   },
   {
     label: 'Full Time',
-    name: 'full_time',
+    name: 'FULL_TIME',
   },
 ];
 const SearchForm = ({ onSearch, keyword, option }) => {
@@ -21,6 +21,7 @@ const SearchForm = ({ onSearch, keyword, option }) => {
 
   const onChange = (e) => {
     searchValue.current.keyword = e.target.value;
+    console.log(e.target.value)
   };
 
   const onChangeRadio = (values) => {

@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 `;
 
 export const ListWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   position: relative;

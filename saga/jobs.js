@@ -34,8 +34,9 @@ function* getJobs({ params, callback }) {
     let url = params.limit ? `/job?limit=${params.limit}` : '/job?limit=10';
 
     if (params.page) url += `&page=${params.page}`;
+    if (params.keyword) url += `&keyword=${params.keyword}`;
+    if (params.type) url += `&type=${params.type}`;
     const response = yield call(get, url);
-
     callback(response);
   } catch (error) {
     console.error(error);

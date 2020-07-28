@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState, useEffect, useCallback, useRef,
+} from 'react';
 import queryString from 'query-string';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import JobItem from 'components/pages/JobItem';
 import { Button, Loading } from 'components/global';
 import { useDispatch } from 'react-redux';
@@ -19,6 +21,7 @@ const Gigs = () => {
   const router = useRouter();
   const query = queryString.parse(router.asPath.split(/\?/)[1]);
   const dispatch = useDispatch();
+  const paramsRef = useRef({ keyword: query.keyword, type: query.type });
 
   const callback = (jobs) => {
     if (jobs.meta.currentPage > 1) setLoadMore(false);
@@ -29,24 +32,33 @@ const Gigs = () => {
 
   const getJobs = useCallback((params, onCallback) => dispatch(
     onGetJobs(params, onCallback),
-  ), [dispatch]);
+  ), [dispatch, state]);
 
   const onLoadMore = () => {
     setLoadMore(true);
-    getJobs({ page: meta.currentPage + 1 }, callback);
+    getJobs({ page: meta.currentPage + 1, keyword: paramsRef.current.keyword, type: paramsRef.current.type }, callback);
   };
 
   useEffect(() => {
-    getJobs({}, callback);
-  }, []);
+    getJobs({ keyword: query.keyword, type: query.type }, callback);
+  }, [router.asPath]);
 
   const search = ({ keyword, option }) => {
-    console.log(keyword, option);
+    if (keyword === paramsRef.current.keyword && option === paramsRef.current.type) {
+      return;
+    }
+    paramsRef.current.keyword = keyword;
+    paramsRef.current.type = option;
+    setLoadMore(false);
+    setState({
+      loading: true, data: [], meta: {},
+    });
+    Router.push(`/gigs?keyword=${keyword || ''}&type=${option || ''}`, `/gigs?keyword=${keyword || ''}&type=${option || ''}`);
   };
 
   return (
     <Wrapper>
-      <SearchForm onSearch={search} keyword={query.keyword} option={query.option} />
+      <SearchForm onSearch={search} keyword={query.keyword} option={query.type} />
       <ListWrapper loading={loading.toString()}>
         {loading ? <Loading showText size='60px' />
           : (
@@ -56,7 +68,14 @@ const Gigs = () => {
           )}
         {loadMore && <Loading showText size='60px' />}
       </ListWrapper>
-      <Button buttonType='light' width='220px' onClick={onLoadMore} style={{ display: parseInt(meta.currentPage, 10) === parseInt(meta.totalPages, 10) ? 'none' : 'flex' }}>load more</Button>
+      <Button
+        buttonType='light'
+        width='220px'
+        onClick={onLoadMore}
+        style={{ display: parseInt(meta.currentPage, 10) === parseInt(meta.totalPages, 10) || parseInt(meta.totalPages, 10) === 0 ? 'none' : 'flex' }}
+      >
+        load more
+      </Button>
       <PopularSearch />
     </Wrapper>
   );

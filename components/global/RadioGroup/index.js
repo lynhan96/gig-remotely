@@ -10,9 +10,14 @@ const RadioGroup = ({
   className,
   defaultValue,
 }) => {
-  const [checked, setChecked] = useState('');
+  const [checked, setChecked] = useState(defaultValue);
   const handleOnchange = (e) => {
-    setChecked(e.target.name);
+    if (checked === e.target.name) {
+      setChecked('');
+    } else {
+      setChecked(e.target.name);
+    }
+
     onChange({ name: e.target.name, value: e.target.value });
   };
 
@@ -25,7 +30,7 @@ const RadioGroup = ({
       {
         items.map(({ label, name }) => (
           <ItemWrapper key={name}>
-            <input id={name} name={name} type='radio' onChange={handleOnchange} checked={(defaultValue === name || checked === name)&& 'true'} />
+            <input id={name} name={name} type='radio' onChange={handleOnchange} checked={(checked === name) && 'true'} />
             <label htmlFor={name}>{label}</label>
           </ItemWrapper>
         ))
