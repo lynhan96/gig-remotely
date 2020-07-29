@@ -35,7 +35,6 @@ function* updateAccountSetting({ params, callback }) {
   try {
     const response = yield call(axiosPut, '/users/account-setting', params);
 
-    callback();
     yield put(onOpenAlert('Your account setting has successfully changed'));
     yield put(onUpdateUserAccountSetting({
       name: params.companyName,
@@ -49,6 +48,8 @@ function* updateAccountSetting({ params, callback }) {
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }
+
+  callback();
 }
 
 function* updateUserType({ userType }) {
