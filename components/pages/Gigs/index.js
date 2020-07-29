@@ -22,6 +22,7 @@ const Gigs = () => {
   const query = queryString.parse(router.asPath.split(/\?/)[1]);
   const dispatch = useDispatch();
   const paramsRef = useRef({ keyword: query.keyword, type: query.type });
+  const inputRef = useRef();
 
   const callback = (jobs) => {
     if (jobs.meta.currentPage > 1) setLoadMore(false);
@@ -43,7 +44,7 @@ const Gigs = () => {
     setState({
       loading: true, data: [], meta: {},
     });
-
+    inputRef.current.value = query.keyword;
     getJobs({ keyword: query.keyword }, callback);
   }, [router.asPath]);
 
@@ -62,7 +63,7 @@ const Gigs = () => {
 
   return (
     <Wrapper>
-      <SearchForm onSearch={search} keyword={query.keyword} option={query.type} />
+      <SearchForm onSearch={search} keyword={query.keyword} option={query.type} inputRef={inputRef} />
       <ListWrapper loading={loading.toString()}>
         {loading ? <Loading showText size='60px' />
           : (

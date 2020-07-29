@@ -16,7 +16,9 @@ const radioOptions = [
     name: 'FULL_TIME',
   },
 ];
-const SearchForm = ({ onSearch, keyword, option }) => {
+const SearchForm = ({
+  onSearch, keyword, option, inputRef,
+}) => {
   const searchValue = useRef({ keyword, option });
 
   const onChange = (e) => {
@@ -34,7 +36,7 @@ const SearchForm = ({ onSearch, keyword, option }) => {
   return (
     <Wrapper>
       <InputWrapper>
-        <Input defaultValue={keyword} onChange={onChange} placeholder='Type in a keyword…' />
+        <Input defaultValue={keyword} onChange={onChange} placeholder='Type in a keyword…' inputRef={inputRef} />
         <StyledRadioGroup
           defaultValue={option}
           items={radioOptions}
