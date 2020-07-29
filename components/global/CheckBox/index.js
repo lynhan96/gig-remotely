@@ -27,6 +27,7 @@ const CheckBox = ({
 
   useEffect(() => {
     setChecked(defaultValue);
+    onChange({ name, value: defaultValue });
   }, [defaultValue]);
 
   return (

@@ -57,7 +57,11 @@ function* updateUserType({ userType }) {
 
     Cookie.set('__gigtype', userType);
     if (userType === 'TALENT') {
-      Router.push('/gig-seeker/edit-profile');
+      if (Cookie.get('__lastApplyGigJob')) {
+        Router.push('/gigs/[id]', Cookie.get('__lastApplyGigJob'));
+      } else {
+        Router.push('/gig-seeker/edit-profile');
+      }
     } else if (userType === 'COMPANY') {
       Router.push('/company/edit-profile');
     }
@@ -83,7 +87,11 @@ function* addFavoritJob({ jobId, setState }) {
 
     setState(true);
   } catch (error) {
-    yield put(onOpenAlert(error.data.message));
+    if (error.status === 404) {
+      yield put(onOpenAlert('Please complete your profile!'));
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
   }
 }
 
@@ -93,7 +101,11 @@ function* removeFavoritJob({ jobId, setState }) {
 
     setState(false);
   } catch (error) {
-    yield put(onOpenAlert(error.data.message));
+    if (error.status === 404) {
+      yield put(onOpenAlert('Please complete your profile!'));
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
   }
 }
 

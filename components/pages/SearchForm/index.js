@@ -4,7 +4,7 @@ import { Wrapper, InputWrapper, StyledRadioGroup } from './styles';
 
 const radioOptions = [
   {
-    label: 'Freelance',
+    label: 'Project Basis',
     name: 'FREELANCE',
   },
   {

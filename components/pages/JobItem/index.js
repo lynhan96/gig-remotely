@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { useDispatch } from 'react-redux';
 import { onAddFavoriteJob, onRemoveFavoriteJob } from 'saga/user';
 import { Tag, Text } from 'components/global';
+import Cookie from 'js-cookie';
 import {
   ItemWrapper,
   ContentWrapper,
@@ -68,10 +69,19 @@ const JobItem = ({ item, favorite, applied }) => {
     }
   };
 
-  const onClick = () => Router.push('/gigs/[id]', `/gigs/${id}`);
+  const onClick = (checkScreenSize) => {
+    if ((window.innerWidth < 768 && checkScreenSize) || (window.innerWidth >= 768 && !checkScreenSize)) {
+      if (!Cookie.get('__gigtoken') || !Cookie.get('__gigtype')) {
+        Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
+        Router.push('signup');
+      } else {
+        Router.push('/gigs/[id]', `/gigs/${id}`);
+      }
+    }
+  };
 
   return (
-    <ItemWrapper onClick={onClick}>
+    <ItemWrapper onClick={() => onClick(true)}>
       { active() && <Active />}
       <ContentWrapper active={active()}>
         <Information>
@@ -129,7 +139,7 @@ const JobItem = ({ item, favorite, applied }) => {
           <StyledButton
             width='200px'
             disabled={disabledItem || applied}
-            onClick={() => Router.push('/gigs/[id]', `/gigs/${id}`)}
+            onClick={() => onClick(false)}
           >
             {applied ? 'applied' : 'apply'}
           </StyledButton>

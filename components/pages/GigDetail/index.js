@@ -3,7 +3,8 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-
+import Cookie from 'js-cookie';
+import Router from 'next/router';
 import { Tag, Text } from 'components/global';
 import { onAddFavoriteJob, onRemoveFavoriteJob } from 'saga/user';
 import ApplyModal from './ApplyModal';
@@ -89,7 +90,14 @@ const GigDetail = ({ item }) => {
     }
   };
 
-  const openApplyModal = () => modalRef.current.open();
+  const openApplyModal = () => {
+    if (isLogged) {
+      modalRef.current.open();
+    } else {
+      Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
+      Router.push('signup');
+    }
+  };
 
   const addFavoriteJob = useCallback((jobId) => dispatch(
     onAddFavoriteJob(jobId, setFavorite),
@@ -159,24 +167,21 @@ const GigDetail = ({ item }) => {
               ))
             }
           </TagGroup>
-          { isLogged
-            && (
-              <ActionGroup>
-                <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</StyledButton>
-                {
-                  !isApplied && (
-                    <StyledButton buttonType='light' width='200px' onClick={toggleSave}>
-                      <FavoriteImage src={ favorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} />
-                      { favorite ? 'unsave' : 'save' }
-                    </StyledButton>
-                  )
-                }
-                <ShareButton>
-                  <ShareImage src='/images/icon/share.svg' />
-                  share
-                </ShareButton>
-              </ActionGroup>
-            )}
+          <ActionGroup>
+            <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</StyledButton>
+            {
+              !isApplied && (
+                <StyledButton buttonType='light' width='200px' onClick={toggleSave}>
+                  <FavoriteImage src={ favorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} />
+                  { favorite ? 'unsave' : 'save' }
+                </StyledButton>
+              )
+            }
+            <ShareButton>
+              <ShareImage src='/images/icon/share.svg' />
+              share
+            </ShareButton>
+          </ActionGroup>
           <DescriptionWrapper>
             <DescriptionTitle size='mmd'>About the company</DescriptionTitle>
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: about }} />
@@ -197,12 +202,9 @@ const GigDetail = ({ item }) => {
             <DescriptionTitle size='mmd'>Experience Prerequisites</DescriptionTitle>
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: experience }} />
           </DescriptionWrapper>
-          { isLogged
-            && (
-              <FooterWrapper id='apply-button'>
-                <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</FooterButton>
-              </FooterWrapper>
-            )}
+          <FooterWrapper id='apply-button'>
+            <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</FooterButton>
+          </FooterWrapper>
         </ContentWrapper>
       </Card>
       <RelatedGig />

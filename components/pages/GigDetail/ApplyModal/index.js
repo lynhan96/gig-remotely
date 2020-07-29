@@ -52,6 +52,8 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
     contractType,
   } = item;
 
+  const { contact, resume } = user.talent || {};
+
   useImperativeHandle(ref, () => ({
     open: () => setOpen(true),
   }));
@@ -78,7 +80,9 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
   };
 
   const onSubmit = (values) => {
-    values.resume = valuesRef.current.resume ? user.talent.resume : valuesRef.current.document;
+    values.resume = valuesRef.current.resume ? resume : '';
+    values.resume = valuesRef.current.document ? valuesRef.current.document : values.resume;
+
     if (!values.resume) {
       setAlert('Please upload resume.');
     } else {
@@ -148,11 +152,11 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
             <Form onSubmit={onSubmit} type='horizontal' style={{ justifyContent: 'center' }}>
               <Form.Item name='name' required label='Name*' placeholder='Name' background='#efefe4' defaultValue={`${user.firstName} ${user.lastName}`} />
               <Form.Item name='email' required label='Email*' placeholder='Email' validateType='email' background='#efefe4' defaultValue={`${user.email}`} />
-              <Form.Item name='contact' required label='Phone Number*' placeholder='Phone Number' background='#efefe4' defaultValue={`${user.talent.contact}`} />
+              <Form.Item name='contact' required label='Phone Number*' placeholder='Phone Number' background='#efefe4' defaultValue={`${contact || ''}`} />
               <Form.Item name='coverLetter' label='Cover letter (optional)' placeholder='Cover letter' type='textarea' background='#efefe4' />
               <CheckBoxWrapper>
-                <CheckBox label='Use resume from gig_remotely' name='resume' onChange={onSelectResume} defaultValue={!!user.talent.resume} cantoggle/>
-                <Resume size='sm'>{user.talent.resume}</Resume>
+                <CheckBox label='Use resume from gig_remotely' name='resume' onChange={onSelectResume} defaultValue={!!resume} cantoggle />
+                <Resume size='sm'>{resume}</Resume>
               </CheckBoxWrapper>
 
               <ResumeInput onChangeDocument={onChangeDocument} />

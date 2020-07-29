@@ -63,7 +63,11 @@ function* login({ params }) {
       Router.push('/setup-account');
     } else if (response.userType === 'TALENT') {
       Cookie.set('__gigtype', response.userType);
-      Router.push('/gig-seeker/profile');
+      if (Cookie.get('__lastApplyGigJob')) {
+        Router.push('/gigs/[id]', Cookie.get('__lastApplyGigJob'));
+      } else {
+        Router.push('/gig-seeker/profile');
+      }
     } else if (response.userType === 'COMPANY') {
       Cookie.set('__gigtype', response.userType);
       Router.push('/company/profile');
