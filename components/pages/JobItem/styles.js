@@ -348,9 +348,11 @@ export const ItemWrapper = styled.div`
   width: 100%;
   display: flex;
   position: relative;
+  pointer-events: none;
 
   @media (max-width: 768px) {
     width: calc(100% - 30px);
+    pointer-events: visible;
   }
 
   @media (max-width: 440px) {

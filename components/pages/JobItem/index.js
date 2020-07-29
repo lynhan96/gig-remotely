@@ -68,8 +68,10 @@ const JobItem = ({ item, favorite, applied }) => {
     }
   };
 
+  const onClick = () => Router.push('/gigs/[id]', `/gigs/${id}`);
+
   return (
-    <ItemWrapper>
+    <ItemWrapper onClick={onClick}>
       { active() && <Active />}
       <ContentWrapper active={active()}>
         <Information>
