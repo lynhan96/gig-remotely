@@ -32,8 +32,10 @@ const EditCompanyProfile = () => {
   }
 
   const {
-    photo, name, contact, location, address, website, about,
+    photo, name, contact, location, address, website, about, email,
   } = data.company || {};
+
+  const companyEmail = email || data.email;
 
   const onSubmit = (values) => {
     if (!values.photo) {
@@ -55,7 +57,7 @@ const EditCompanyProfile = () => {
         <LeftWrapper>
           <Form.Photo name='photo' label='Display Photo' defaultValue={photo} fieldRef={photoFieldRef} />
           <Form.Item name='name' required label='Company Name*' placeholder='Company Name*' background='#efefe4' defaultValue={name} />
-          <Form.Item name='email' required label='Email*' placeholder='Email*' background='#efefe4' defaultValue={data.email} validateType='email' />
+          <Form.Item name='email' required label='Email*' placeholder='Email*' background='#efefe4' defaultValue={companyEmail} validateType='email' />
           <Form.Item name='contact' required label='Contact No*' placeholder='Contact No*' background='#efefe4' defaultValue={contact} />
           <Form.Item name='about' label='About the company' placeholder='About me' type='textarea' background='#efefe4' defaultValue={about} />
         </LeftWrapper>
