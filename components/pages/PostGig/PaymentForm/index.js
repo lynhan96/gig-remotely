@@ -104,6 +104,7 @@ const PaymentForm = ({
   const [state, setState] = useState({ loading: true, data: [] });
   const { loading, data } = state;
   const inputRef = useRef();
+  const currentPromotion = useRef(null);
   let typing = 0;
 
   const callback = (response) => {
@@ -111,13 +112,15 @@ const PaymentForm = ({
   };
 
   const calulatedPrice = (isValid, response) => {
-    const currentPrice = boost ? 57.9 : 49.9;
+    const currentPrice = boostRef.current ? 57.9 : 49.9;
     if (!isValid) {
       serTotalPrice(currentPrice);
     } else if (response.promo_type === 'amount') {
-      serTotalPrice(currentPrice - parseFloat(response.amount));
+      const calculatedPrice = currentPrice - parseFloat(response.amount);
+      serTotalPrice(calculatedPrice < 2 ? parseFloat(2.00).toFixed(2) : calculatedPrice);
     } else {
-      serTotalPrice(currentPrice * (1.0 - (parseFloat(response.amount) / 100.0)));
+      const calculatedPrice = currentPrice * (1.0 - (parseFloat(response.amount) / 100.0));
+      serTotalPrice(calculatedPrice < 2 ? parseFloat(2.00).toFixed(2) : calculatedPrice);
     }
   };
 
@@ -127,6 +130,7 @@ const PaymentForm = ({
       promotionRef.current.isValid = true;
       promotionRef.current.code = response.code;
       calulatedPrice(true, response);
+      currentPromotion.current = response;
     } else {
       promotionRef.current.isValid = false;
       setPromotionValid('invalid');
@@ -160,16 +164,20 @@ const PaymentForm = ({
 
   const tooglePrice = (increase) => {
     if (increase) {
-      serTotalPrice((state) => state + 8);
+      serTotalPrice((state) => parseFloat(state) + 8);
     } else {
-      serTotalPrice((state) => state - 8);
+      serTotalPrice((state) => parseFloat(state) - 8);
     }
   };
 
   const updateBoost = () => {
     boostRef.current = !boost;
     setBoots(!boost);
-    tooglePrice(!boost);
+    if (!currentPromotion.current || !promotionRef.current.isValid) {
+      tooglePrice(!boost);
+    } else {
+      calulatedPrice(promotionRef.current.isValid, currentPromotion.current);
+    }
   };
 
   const clearCode = () => setPromotionValid('default');
@@ -206,8 +214,8 @@ const PaymentForm = ({
           <RightContent>
             <Image src='/images/boost.png' />
             <PriceWrapper>
-              <Price>$49.90</Price>
-              <Hint>for 7 days</Hint>
+              <Price>$8.00</Price>
+              <Hint>for 8 days</Hint>
             </PriceWrapper>
             <StyledButton onClick={updateBoost}>{boost ? 'unboost' : 'boost' }</StyledButton>
           </RightContent>
