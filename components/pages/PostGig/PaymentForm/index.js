@@ -111,7 +111,7 @@ const PaymentForm = ({
   };
 
   const calulatedPrice = (isValid, response) => {
-    const currentPrice = boost ? 54.9 : 49.9;
+    const currentPrice = boost ? 57.9 : 49.9;
     if (!isValid) {
       serTotalPrice(currentPrice);
     } else if (response.promo_type === 'amount') {
@@ -160,9 +160,9 @@ const PaymentForm = ({
 
   const tooglePrice = (increase) => {
     if (increase) {
-      serTotalPrice((state) => state + 5);
+      serTotalPrice((state) => state + 8);
     } else {
-      serTotalPrice((state) => state - 5);
+      serTotalPrice((state) => state - 8);
     }
   };
 
@@ -199,8 +199,8 @@ const PaymentForm = ({
               <a>sample.</a>
             </Description>
             <PriceWrapper>
-              <Price>$49.90</Price>
-              <Hint>for 7 days</Hint>
+              <Price>$8.00</Price>
+              <Hint>for 8 days</Hint>
             </PriceWrapper>
           </LeftContent>
           <RightContent>

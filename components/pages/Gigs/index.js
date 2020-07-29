@@ -25,9 +25,9 @@ const Gigs = () => {
 
   const callback = (jobs) => {
     if (jobs.meta.currentPage > 1) setLoadMore(false);
-    setState({
-      loading: false, data: data.concat(jobs.items), meta: jobs.meta,
-    });
+    setState((state) => ({
+      loading: false, data: state.data.concat(jobs.items), meta: jobs.meta,
+    }));
   };
 
   const getJobs = useCallback((params, onCallback) => dispatch(
@@ -40,7 +40,11 @@ const Gigs = () => {
   };
 
   useEffect(() => {
-    getJobs({ keyword: query.keyword, type: query.type }, callback);
+    setState({
+      loading: true, data: [], meta: {},
+    });
+
+    getJobs({ keyword: query.keyword }, callback);
   }, [router.asPath]);
 
   const search = ({ keyword, option }) => {

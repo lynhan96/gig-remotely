@@ -36,6 +36,7 @@ const Tag = ({
   weight,
   className,
   disabled,
+  onClick,
 }) => (
   <StyledTag
     className={className}
@@ -43,6 +44,7 @@ const Tag = ({
     size={fontSize(size)}
     weight={weight}
     disabled={disabled}
+    onClick={onClick}
   >
     {children}
   </StyledTag>
@@ -67,6 +69,7 @@ Tag.propTypes = {
   children: PropTypes.node,
   weight: PropTypes.string,
   disabled: PropTypes.bool,
+  onCLick: PropTypes.func,
 };
 
 Tag.defaultProps = {
@@ -76,6 +79,7 @@ Tag.defaultProps = {
   size: 'sm',
   style: {},
   children: null,
+  onClick: () => {},
 };
 
 export default Tag;
