@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   StyledTextArea, StyledInput, ShowPasswordText, InputWrapper,
@@ -16,9 +16,10 @@ const Input = ({
   background,
   fieldType,
   minHeight,
-  className
+  className,
 }) => {
   const [inputType, setInputType] = useState(type);
+  const [inputDefaultValue, setInputDefaultValue] = useState(defaultValue);
   const fontSize = () => {
     switch (size) {
       case 'sm':
@@ -37,12 +38,16 @@ const Input = ({
     if (inputType === 'text') setInputType('password');
   };
 
+  useEffect(() => {
+    setInputDefaultValue(defaultValue);
+  }, [defaultValue]);
+
   if (fieldType === 'textarea') {
     return (
       <StyledTextArea
         minHeight={minHeight}
         background={background}
-        defaultValue={defaultValue}
+        defaultValue={inputDefaultValue}
         className={error ? `${className} input-error` : className}
         ref={inputRef}
         type={inputType}
