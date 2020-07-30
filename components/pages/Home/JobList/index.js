@@ -47,7 +47,14 @@ const JobList = () => {
          }
         {loadMore && <Loading showText size='60px' />}
       </ListWrapper>
-      <Button buttonType='light' width='220px' onClick={onLoadMore} style={{ display: parseInt(meta.currentPage, 10) === parseInt(meta.totalPages, 10) ? 'none' : 'flex' }}>load more</Button>
+      <Button
+        buttonType='light'
+        width='220px'
+        onClick={onLoadMore}
+        style={{ display: parseInt(meta.currentPage, 10) === parseInt(meta.totalPages, 10) || parseInt(meta.totalPages, 10) === 0 ? 'none' : 'flex' }}
+      >
+        load more
+      </Button>
     </Wrapper>
   );
 };
