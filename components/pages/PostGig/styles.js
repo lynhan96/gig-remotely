@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { Text } from 'components/global';
+import { color } from 'components/utils/color';
+
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -124,6 +126,7 @@ export const Hint = styled(Text)`
   font-size: 13px;
   margin-top: 7px;
   a {
+    color: ${color.black};
     margin-left: 3px;
     text-decoration: underline;
   }

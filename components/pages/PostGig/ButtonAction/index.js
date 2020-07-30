@@ -36,13 +36,13 @@ const ButtonAction = React.forwardRef(({ isEdit, showDeletePopUp }, ref) => {
       <HintTitle>All gigs will be listed for 30 days.</HintTitle>
       <Hint>
         By posting, you agree to our
-        <a>Terms of Service,</a>
+        <a href='/term-conditions' target='_blank'>Terms of Service,</a>
       </Hint>
       <Hint>
         <a>Code of Conduct,</a>
         {' '}
         and
-        <a>Privacy Policy.</a>
+        <a href='/privacy-policy' target='_blank'>Privacy Policy.</a>
       </Hint>
     </ButtonWrapper>
   );

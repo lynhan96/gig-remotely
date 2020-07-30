@@ -4,20 +4,47 @@ import { Text } from 'components/global';
 export const Wrapper = styled.div`
   display: flex;
   flex-flow: wrap row;
-  margin-bottom: 226px;
+  margin-bottom: 120px;
   margin-top: 40px;
   width: 100%;
-  justify-content: space-between;
+  position: relative;
 
   @media (max-width: 440px) {
     margin-top: 0;
   }
 `;
 
+export const ConditionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  position: fixed;
+
+  &.side-bar {
+    top: 120px;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+    position: relative;
+  }
+`;
+
 export const DescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(70% - 30px);
+  margin-left: calc(30% + 30px);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-left: 0;
+  }
 `;
 
 export const Title = styled(Text)`
@@ -26,25 +53,35 @@ export const Title = styled(Text)`
   margin-bottom: 30px;
 
   @media (max-width: 440px) {
-    font-size: 27px;
+    font-size: 22px;
     margin-bottom: 15px;
   }
 
-  @media (max-width: 360px) {
-    font-size: 23px;
-    margin-bottom: 10px;
-  }
-
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     font-size: 20px;
   }
 `;
 
-export const Description = styled(Text)`
+export const Content = styled(Text)`
   font-size: 17px;
   display: flex;
+  flex-direction: column;
   line-height: 1.24;
   white-space: pre-line;
+  margin-top: 10px;
+
+  ul {
+    margin: 0;
+
+    li {
+      margin-top: 10px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
 
   @media (max-width: 440px) {
     font-size: 14px;
@@ -58,7 +95,8 @@ export const Description = styled(Text)`
 export const StyledText = styled(Text)`
   font-weight: bold;
   font-size: 17px;
-  margin-top: 5px;
+  margin-top: 10px;
+  cursor: pointer;
 `;
 
 export const SubText = styled(Text)`
@@ -67,15 +105,13 @@ export const SubText = styled(Text)`
   white-space: pre-wrap;
   margin-left: 20px;
   margin-top: 5px;
+  cursor: pointer;
 `;
 
 export const ContentWrapper = styled.div`
-  opacity: 0;
-  height: 0;
+  margin-top: ${({ nomargin }) => nomargin ? '10px' : '30px'} ;
 
-  @media (max-width: 440px) {
-    opacity: 1;
-    height: auto;
-    margin-top: 20px;
+  &:first-child {
+    margin-top: 0
   }
 `;
