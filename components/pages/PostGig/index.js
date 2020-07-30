@@ -21,7 +21,7 @@ import {
   Wrapper, Title, RightWrapper, LeftWrapper,
 } from './styles';
 
-const PostGig = ({ data, isEdit }) => {
+const PostGig = ({ data, isEdit, title: pageTitle, payWithSripe }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const skillRef = useRef([]);
@@ -32,8 +32,8 @@ const PostGig = ({ data, isEdit }) => {
   const buttonRef = useRef();
   const deletePopupRef = useRef();
   const promotionRef = useRef({ code: '', isValid: true, checking: false });
-  const stripe = !isEdit ? useStripe() : null;
-  const elements = !isEdit ? useElements() : null;
+  const stripe = payWithSripe ? useStripe() : null;
+  const elements = payWithSripe ? useElements() : null;
 
   const showError = useCallback((message) => dispatch(
     onOpenAlert(message),
@@ -134,7 +134,7 @@ const PostGig = ({ data, isEdit }) => {
       {isEdit && <DeleteGigPopup ref={deletePopupRef} jobId={id} expiredAt={expiredAt} />}
       <Title weight='bold'>
         <BackButton url='/company/dashboard' />
-        {isEdit ? 'Edit Gig' : 'Post Gig'}
+        {pageTitle}
       </Title>
       <Form onSubmit={onSubmit} type='horizontal'>
         <LeftWrapper>

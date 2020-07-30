@@ -15,7 +15,7 @@ const PostGigPage = () => (
     </Head>
     <Container>
       <Elements stripe={promise}>
-        <PostGig />
+        <PostGig payWithSripe title='Post Gig'/>
       </Elements>
     </Container>
   </>

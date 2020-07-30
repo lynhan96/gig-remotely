@@ -60,7 +60,8 @@ const JobItem = ({ item, removeItem }) => {
 
   const editGig = () => {
     if (disabledItem) {
-      removeItem(id);
+      // removeItem(id); }
+      Router.push(`/company/repost-gig?id=${id}`);
     } else {
       Router.push('/company/edit-gig/[id]', `/company/edit-gig/${id}`);
     }

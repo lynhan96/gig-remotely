@@ -12,7 +12,9 @@ const ON_GET_JOB_APPLICANT = 'ON_GET_JOB_APPLICANT';
 
 function* getJobDetail({ id, setState }) {
   try {
-    const response = yield call(get, `/job/${id}`);
+    const url = typeof id === 'object' ? `/job/${id.id}?repostJob=${id.repostJob}` : `/job/${id}`;
+
+    const response = yield call(get, url);
 
     setState({ loading: false, data: response });
   } catch (error) {
