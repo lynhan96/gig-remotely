@@ -2,6 +2,7 @@ import { get, post } from 'axios';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
 import Router from 'next/router';
+import Cookie from 'js-cookie';
 
 const ON_GET_JOBS = 'ON_GET_JOBS';
 const ON_GET_JOB_CATEGORIES = 'ON_GET_JOB_CATEGORIES';
@@ -15,7 +16,7 @@ function* getJobDetail({ id, setState }) {
 
     setState({ loading: false, data: response });
   } catch (error) {
-    if (error.status === 404) {
+    if (error.status === 404 && Cookie.get('__gigtype') === 'TALENT') {
       Router.push('/gig-seeker/edit-profile');
       yield put(onOpenAlert('Please complete your profile!'));
     } else {
