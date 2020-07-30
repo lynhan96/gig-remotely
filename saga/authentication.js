@@ -70,7 +70,11 @@ function* login({ params }) {
       }
     } else if (response.userType === 'COMPANY') {
       Cookie.set('__gigtype', response.userType);
-      Router.push('/company/profile');
+      if (Cookie.get('__appllicantJobUrl')) {
+        Router.push(Cookie.get('__appllicantJobUrl'));
+      } else {
+        Router.push('/company/profile');
+      }
     }
   } catch (error) {
     if (error.status === 401) {

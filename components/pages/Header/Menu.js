@@ -16,6 +16,12 @@ const Nav = () => {
     Router.push(link);
   };
 
+  const logout = () => {
+    Cookie.remove('__lastApplyGigJob');
+    Cookie.remove('__appllicantJobUrl');
+    redirectTo('/login');
+  };
+
   useEffect(() => {
     setShowSubMenu(false);
   }, [open]);
@@ -40,7 +46,7 @@ const Nav = () => {
                 <SubMenuItem size='sm' onClick={() => redirectTo('/company/account-setting')}>account settings</SubMenuItem>
                 <SubMenuItem size='sm' onClick={() => redirectTo('/company/payment-options')}>payment options</SubMenuItem>
                 <SubMenuItem size='sm' onClick={() => redirectTo('/help')}>help</SubMenuItem>
-                <SubMenuItem size='sm' onClick={() => redirectTo('/login')}>log out</SubMenuItem>
+                <SubMenuItem size='sm' onClick={logout}>log out</SubMenuItem>
               </SubMenu>
             </MenuItem>
             <MenuItem>
@@ -70,7 +76,7 @@ const Nav = () => {
             <MenuItem>
               account
               <SubMenu>
-                <SubMenuItem size='sm' onClick={() => redirectTo('/login')}>log out</SubMenuItem>
+                <SubMenuItem size='sm' onClick={logout}>log out</SubMenuItem>
               </SubMenu>
             </MenuItem>
             <MenuItem>

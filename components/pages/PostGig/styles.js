@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { Text } from 'components/global';
 import { color } from 'components/utils/color';
 
-
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;

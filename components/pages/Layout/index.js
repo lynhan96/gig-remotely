@@ -6,6 +6,7 @@ import { Alert } from 'components/pages';
 import { Layout } from 'components/global/styles';
 import { onGetMyProfile } from 'saga/user';
 import { onResetUser } from 'redux/user';
+import queryString from 'query-string';
 
 const companyRoute = [
   '/company/dashboard',
@@ -47,6 +48,15 @@ const MainLayout = ({ Component, pageProps }) => {
       resetProfile();
       fetchProfileFlag.current = false;
       return;
+    }
+
+    if ((router.pathname === '/company/dashboard' || router.pathname === '/company/applicant/[id]')) {
+      const query = queryString.parse(router.asPath.split(/\?/)[1]);
+      if (query.from === 'email' && Cookie.get('__gigtype') !== 'COMPANY') {
+        Cookie.set('__appllicantJobUrl', router.asPath);
+        Router.push('/login');
+        return;
+      }
     }
 
     if (router.pathname === '/_error') return;
