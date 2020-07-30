@@ -333,7 +333,7 @@ export const Circle = styled.div`
 export const FieldInput = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-flow: wrap row;
   margin-top: 15px;
   position: relative;
 `;
@@ -403,10 +403,16 @@ export const PaymentPrice = styled.div`
     color: #fa7d00;
   }
 
-  .promotion-icon-valid {
-    left: 158px;
+  .promotion-input-valid,
+  .promotion-input-invalid {
+    display: none;
   }
 
+  .promotion-input-default {
+    display: flex;
+  }
+
+  .promotion-result-default,
   .promotion-icon-default,
   .promotion-text-default {
     display: none;
@@ -416,34 +422,47 @@ export const PaymentPrice = styled.div`
 export const PromotionIcon = styled.img`
   width: 12px;
   height: 12px;
-  position: absolute;
   cursor: pointer;
-  top: 45px;
-  left: 158px;
 `;
 
 export const PromotionText = styled(Text)`
-  font-size: 13px;
-  position: absolute;
+  font-size: 17px;
   width: auto;
-  top: 45px;
-  left: 105px;
+  margin: 0 10px;
 `;
 
-export const PromoInput = styled.input`
-  width: 80px;
+export const PromoResult = styled(Text)`
+  color: ${color.offWhite};
+  font-size: 15px;
+`;
+
+export const PromoInput = styled.div`
+  width: auto;
   padding: 0 20px;
-  padding-right: 80px;
   height: 48px;
   display: flex;
   align-items: center;
-  justify-content: center;
   background: ${color.black};
   border-radius: 26px;
   border: 1px solid ${color.offWhite};
   color: ${color.offWhite};
   outline: none;
-  font-size: 17px;
+  font-size: 15px;
+
+  input {
+    width: 100%;
+    color: ${color.offWhite};
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 15px;
+
+    &:disabled {
+      border: none;
+      background: transparent;
+      outline: none;
+    }
+  }
 
   @media (max-width: 767px){
     width: 140px;

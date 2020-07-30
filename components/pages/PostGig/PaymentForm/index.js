@@ -38,6 +38,7 @@ import {
   TotalPrice,
   PromotionText,
   PromotionIcon,
+  PromoResult,
 } from './styles';
 
 const CreditCardForm = ({ buttonRef }) => {
@@ -102,6 +103,7 @@ const PaymentForm = ({
   const [totalPrice, serTotalPrice] = useState(49.90);
   const [promotionValid, setPromotionValid] = useState('default');
   const [state, setState] = useState({ loading: true, data: [] });
+  const [promotionResult, serPromotionResult] = useState('');
   const { loading, data } = state;
   const inputRef = useRef();
   const currentPromotion = useRef(null);
@@ -131,8 +133,12 @@ const PaymentForm = ({
       promotionRef.current.code = response.code;
       calulatedPrice(true, response);
       currentPromotion.current = response;
+
+      const type = response.promo_type === 'amount' ? '$' : '%';
+      serPromotionResult(`${response.code} (-${type}${response.amount} discount)`);
     } else {
       promotionRef.current.isValid = false;
+      serPromotionResult(inputRef.current.value);
       setPromotionValid('invalid');
       calulatedPrice(false);
     }
@@ -229,9 +235,12 @@ const PaymentForm = ({
         <PaymentPrice>
           <FieldInput>
             <Label>Promo Code</Label>
-            <PromoInput onChange={onInputPromotion} className={`promotion-${promotionValid}`} ref={inputRef} />
-            <PromotionText className={`promotion-text-${promotionValid}`}>{promotionValid === 'valid' ? 'Applied' : 'Invalid' }</PromotionText>
-            <PromotionIcon className={`promotion-icon-${promotionValid}`} src='/images/icon/close-white.svg' onClick={clearCode} />
+            <PromoInput className={`promotion-${promotionValid}`}>
+              <input className={`promotion-input-${promotionValid}`} onChange={onInputPromotion} ref={inputRef} />
+              <PromoResult className={`promotion-result-${promotionValid}`}>{promotionResult}</PromoResult>
+              <PromotionText className={`promotion-text-${promotionValid}`}>{promotionValid === 'valid' ? 'Applied' : 'Invalid' }</PromotionText>
+              <PromotionIcon className={`promotion-icon-${promotionValid}`} src='/images/icon/close-white.svg' onClick={clearCode} />
+            </PromoInput>
           </FieldInput>
           <TotalPriceWrapper>
             <TotalPriceText>Total</TotalPriceText>
