@@ -23,7 +23,6 @@ function* sendResetPasswordLink({ params, callback }) {
 function* resetPassword({ params, callback }) {
   try {
     const response = yield call(axiosPut, '/users/forgot-password', params);
-    console.log(response);
 
     yield put(onOpenAlert('Your password has successfully changed'));
     Router.push('/login');

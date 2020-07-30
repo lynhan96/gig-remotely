@@ -58,11 +58,7 @@ function* updateUserType({ userType }) {
 
     Cookie.set('__gigtype', userType);
     if (userType === 'TALENT') {
-      if (Cookie.get('__lastApplyGigJob')) {
-        Router.push('/gigs/[id]', Cookie.get('__lastApplyGigJob'));
-      } else {
-        Router.push('/gig-seeker/edit-profile');
-      }
+      Router.push('/gig-seeker/edit-profile');
     } else if (userType === 'COMPANY') {
       Router.push('/company/edit-profile');
     }
