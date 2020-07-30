@@ -95,7 +95,7 @@ const GigDetail = ({ item }) => {
       modalRef.current.open();
     } else {
       Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
-      Router.push('signup');
+      Router.push('login');
     }
   };
 

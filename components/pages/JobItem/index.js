@@ -73,7 +73,7 @@ const JobItem = ({ item, favorite, applied }) => {
     if ((window.innerWidth < 768 && checkScreenSize) || (window.innerWidth >= 768 && !checkScreenSize)) {
       if (!Cookie.get('__gigtoken') || !Cookie.get('__gigtype')) {
         Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
-        Router.push('signup');
+        Router.push('login');
       } else {
         Router.push('/gigs/[id]', `/gigs/${id}`);
       }
