@@ -48,7 +48,7 @@ const JobItem = ({ item }) => {
     const timeLeftText = `${moment.duration(moment(expiredAt).diff(moment())).days()} days left`;
     let boostLeftText = '';
     if (boostStart && boostEnd) {
-      boostLeftText = `${moment.duration(moment(boostEnd).diff(moment(boostStart))).days()} days boot left, `;
+      boostLeftText = `${moment.duration(moment(boostEnd).diff(moment(boostStart))).days()} days boost left, `;
     }
 
     return boostLeftText + timeLeftText;
