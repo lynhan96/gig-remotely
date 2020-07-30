@@ -95,7 +95,15 @@ const GigDetail = ({ item }) => {
       modalRef.current.open();
     } else {
       Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
-      Router.push('login');
+      Router.push('/login');
+    }
+  };
+
+  const share = () => {
+    if (isLogged) {
+    } else {
+      Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
+      Router.push('/login');
     }
   };
 
@@ -177,7 +185,7 @@ const GigDetail = ({ item }) => {
                 </StyledButton>
               )
             }
-            <ShareButton>
+            <ShareButton onClick={share}>
               <ShareImage src='/images/icon/share.svg' />
               share
             </ShareButton>

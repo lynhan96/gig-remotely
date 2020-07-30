@@ -1,17 +1,17 @@
 import React from 'react';
 import Head from 'next/head';
 import { Container } from 'components/global/styles';
-import { TermCondition } from 'components/pages';
+import { PrivacyPolicy } from 'components/pages';
 
-const TermConditionsPage = () => (
+const PrivacyPolicyPage = () => (
   <>
     <Head>
-      <title>Term Conditions</title>
+      <title>Privacy Policy</title>
     </Head>
     <Container style={{ alignItems: 'center' }}>
-      <TermCondition />
+      <PrivacyPolicy />
     </Container>
   </>
 );
 
-export default TermConditionsPage;
+export default PrivacyPolicyPage;

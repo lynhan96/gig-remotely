@@ -24,7 +24,8 @@ import Dashboard from 'components/pages/Dashboard';
 import PostGig from 'components/pages/PostGig';
 import Applicants from 'components/pages/Applicants';
 import FAQ from 'components/pages/FAQ';
-import TermConditions from 'components/pages/TermConditions';
+import TermCondition from 'components/pages/TermCondition';
+import PrivacyPolicy from 'components/pages/PrivacyPolicy';
 import PreviewFileModal from 'components/pages/PreviewFileModal';
 import AccountSetting from 'components/pages/AccountSetting';
 import ChangePassword from 'components/pages/ChangePassword';
@@ -60,7 +61,6 @@ export {
   Dashboard,
   PostGig,
   Applicants,
-  TermConditions,
   PreviewFileModal,
   AccountSetting,
   ChangePassword,
@@ -68,4 +68,6 @@ export {
   ForgotPassword,
   ResetPassword,
   BackButton,
+  TermCondition,
+  PrivacyPolicy,
 };

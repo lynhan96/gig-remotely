@@ -45,14 +45,14 @@ export const StyledText = styled(Text)`
 `;
 
 export const Group = styled.div`
-  width: ${({ position }) => (position === 'first' ? '55%' : '40%')};
+  width: ${({ position }) => (position === 'first' ? '40%' : '53%')};
   display: flex;
   flex-flow: wrap row;
   justify-content: space-between;
   align-items: center;
 
   @media (min-width: 1280px) and (max-width: 1500px){
-    width: ${({ position }) => (position === 'first' ? '55.5%' : '40.5%')};
+    width: ${({ position }) => (position === 'first' ? '42%' : '51%')};
   }
 
 

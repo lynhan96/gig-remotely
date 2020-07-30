@@ -4,6 +4,7 @@ import React, {
 import { useDispatch, useSelector } from 'react-redux';
 import { onOpenAlert } from 'redux/alert';
 import { country } from 'constant';
+import Router from 'next/router';
 import {
   Form, Button, Loading,
 } from 'components/global';
@@ -67,7 +68,7 @@ const EditCompanyProfile = () => {
           <Form.Item name='website' label='Website' placeholder='Website' background='#efefe4' defaultValue={website} />
           <ButtonWrapper>
             <Button htmlType='submit' width='200px'>save</Button>
-            <Button htmlType='reset' buttonType='light' width='200px' style={{ marginTop: 20 }}>cancel</Button>
+            <Button onClick={() => Router.push('/company/profile')} buttonType='light' width='200px' style={{ marginTop: 20 }}>cancel</Button>
           </ButtonWrapper>
         </RightWrapper>
       </Form>
