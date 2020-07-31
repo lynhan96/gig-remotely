@@ -131,6 +131,10 @@ export const GlobalStyle = createGlobalStyle`
     margin-left: 25px;
   }
 
+  .hide-job-item {
+    display: none;
+  }
+
   .show-apply-button {
     display: flex;
   }

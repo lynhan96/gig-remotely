@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import moment from 'moment';
 import Router from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -40,7 +40,9 @@ const labelBackground = (type) => {
   }
 };
 
-const JobItem = ({ item, favorite, applied }) => {
+const JobItem = ({
+  item, favorite, applied, myGigs,
+}) => {
   const [isFavorite, setIsFavorite] = useState(favorite);
   const dispatch = useDispatch();
   const {
@@ -51,8 +53,16 @@ const JobItem = ({ item, favorite, applied }) => {
     onAddFavoriteJob(jobId, setIsFavorite),
   ), [dispatch]);
 
+  const removeFavoriteJobCallback = (value) => {
+    if (myGigs) {
+      myGigs();
+    } else {
+      setIsFavorite(value);
+    }
+  };
+
   const removeFavoriteJob = useCallback((jobId) => dispatch(
-    onRemoveFavoriteJob(jobId, setIsFavorite),
+    onRemoveFavoriteJob(jobId, removeFavoriteJobCallback),
   ), [dispatch]);
 
   const active = () => boostStart && boostEnd && moment(boostStart) < moment(boostEnd);
@@ -69,13 +79,20 @@ const JobItem = ({ item, favorite, applied }) => {
     }
   };
 
-  const onClick = () => {
+  const onClick = (e) => {
+    if (e.target && e.target.id === 'heart-icon') {
+      return;
+    }
     if (disabledItem) return;
     window.open(`/gigs/${id}`, '_blank');
   };
 
+  useEffect(() => {
+    setIsFavorite(favorite);
+  }, [favorite]);
+
   return (
-    <ItemWrapper onClick={() => onClick()}>
+    <ItemWrapper onClick={(e) => onClick(e)}>
       { active() && <Active />}
       <ContentWrapper active={active()}>
         <Information>
@@ -133,11 +150,11 @@ const JobItem = ({ item, favorite, applied }) => {
           <StyledButton
             width='200px'
             disabled={disabledItem || applied}
-            onClick={() => onClick()}
+            onClick={(e) => onClick(e)}
           >
             {applied ? 'applied' : 'apply'}
           </StyledButton>
-          <FavoriteImage src={isFavorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} onClick={toggleFavorite} />
+          <FavoriteImage id='heart-icon' src={isFavorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} onClick={toggleFavorite} />
         </Action>
         <Time size='xs' color='#9a9a8b' expired={disabledItem}>{status === 'EXPIRED' ? 'expired' : moment(startedAt).fromNow()}</Time>
       </ContentWrapper>

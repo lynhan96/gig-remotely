@@ -76,25 +76,25 @@ const MyGigs = () => {
               <TabContent open={openTab === 0}>
                 { all.length === 0 ? <Empty type='all' />
                   : all.map((item, index) => (
-                    <JobItem key={index} item={item.job} favorite={item.favorite} applied={!!item.jobApplication} />
+                    <JobItem key={index} item={item.job} favorite={item.favorite} applied={!!item.jobApplication} myGigs={getMyGig} />
                   ))}
               </TabContent>
               <TabContent open={openTab === 1}>
                 { applied.length === 0 ? <Empty type='applied' />
                   : applied.map((item, index) => (
-                    <JobItem key={index} item={item.job} favorite={item.favorite} applied={true} />
+                    <JobItem key={index} item={item.job} favorite={item.favorite} applied={true} myGigs={getMyGig} />
                   ))}
               </TabContent>
               <TabContent open={openTab === 2}>
                 { unapplied.length === 0 ? <Empty type='unapplied' />
                   : unapplied.map((item, index) => (
-                    <JobItem key={index} item={item.job} favorite={item.favorite} />
+                    <JobItem key={index} item={item.job} favorite={item.favorite} myGigs={getMyGig} />
                   ))}
               </TabContent>
               <TabContent open={openTab === 3}>
                 { expired.length === 0 ? <Empty type='expired' />
                   : expired.map((item, index) => (
-                    <JobItem key={index} item={item.job} favorite={item.favorite} />
+                    <JobItem key={index} item={item.job} favorite={item.favorite} myGigs={getMyGig} />
                   ))}
               </TabContent>
             </>
