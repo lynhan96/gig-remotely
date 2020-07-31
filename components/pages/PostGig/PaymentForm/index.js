@@ -186,7 +186,10 @@ const PaymentForm = ({
     }
   };
 
-  const clearCode = () => setPromotionValid('default');
+  const clearCode = () => {
+    promotionRef.current.checking = false;
+    setPromotionValid('default')
+  };
 
   const onInputPromotion = (e) => {
     promotionRef.current.checking = true;
