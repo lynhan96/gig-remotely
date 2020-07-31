@@ -60,11 +60,11 @@ const MainLayout = ({ Component, pageProps }) => {
     }
 
     if (router.pathname === '/_error') return;
-    if (Cookie.get('__gigtype') !== 'COMPANY' && companyRoute.includes(router.pathname)) {
+    if (Cookie.get('__gigtype') && Cookie.get('__gigtype') !== 'COMPANY' && companyRoute.includes(router.pathname)) {
       Router.push('/403');
     }
 
-    if (Cookie.get('__gigtype') !== 'TALENT' && talentRoute.includes(router.pathname)) {
+    if (Cookie.get('__gigtype') && 'TALENT' && talentRoute.includes(router.pathname)) {
       Router.push('/403');
     }
   }, [router.asPath]);
