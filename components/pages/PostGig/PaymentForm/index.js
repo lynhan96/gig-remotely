@@ -201,7 +201,7 @@ const PaymentForm = ({
       } else {
         checkPromotionCode(searchText, checkPromotionCallback);
       }
-    }, 400);
+    }, 1000);
   };
 
   return (
