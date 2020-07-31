@@ -40,7 +40,7 @@ const MainLayout = ({ Component, pageProps }) => {
   ), [dispatch]);
 
   useEffect(() => {
-    if (companyRoute.includes(router.pathname) || talentRoute.includes(router.pathname)) {
+    if (Cookie.get('__gigtype') === 'TALENT' || Cookie.get('__gigtype') === 'COMPANY') {
       if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
     }
   }, [router.asPath]);
