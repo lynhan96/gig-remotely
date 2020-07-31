@@ -12,11 +12,13 @@ export const privateRoute = (WrappedComponent, status = 'all') => class extends 
       expiresAt = new Date() > new Date(auth.exp * 1000);
     }
 
-    if ((status === 'all' && !__gigtype) || (status === 'onlyToken' && __gigtype) || !__gigtoken || expiresAt) {
-      ctx.res.writeHead(302, {
-        Location: '/login?redirected=true',
-      });
-      ctx.res.end();
+    if ((status === 'all' && !__gigtype) || (status === 'onlyToken' && __gigtype !== 'INVIDUAL') || !__gigtoken || expiresAt) {
+      if (ctx.res) {
+        ctx.res.writeHead(302, {
+          Location: '/login?redirected=true',
+        });
+        ctx.res.end();
+      }
     }
 
     if (WrappedComponent.getInitialProps) return WrappedComponent.getInitialProps();

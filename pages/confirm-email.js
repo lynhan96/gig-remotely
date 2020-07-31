@@ -25,7 +25,14 @@ const VerificationPage = () => {
         <title>Verifying</title>
       </Head>
       <Container style={{ alignItems: 'center', padding: '255px 0 300px 0;' }}>
-        <Text style={{ textAlign: 'center', display: 'inline-block' }} width='auto' size='xl' weight='bold'>
+        <Text
+          style={{
+            textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+          width='auto'
+          size='xl'
+          weight='bold'
+        >
           Your email is verifying
           <Loading />
         </Text>

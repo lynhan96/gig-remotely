@@ -5,7 +5,7 @@ import {
   Form, Button, Text,
 } from 'components/global';
 import {
-  Wrapper, Title, StyledContainer, NoticeTitle,
+  Wrapper, Title, StyledContainer, NoticeTitle, Hint,
 } from './styles';
 
 const ForgotPassword = () => {
@@ -33,9 +33,9 @@ const ForgotPassword = () => {
   if (showNotice) {
     return (
       <StyledContainer>
-        <NoticeTitle style={{ textAlign: 'center' }} size='xl' weight='bold'>Reset password link has been sent to your email</NoticeTitle>
+        <NoticeTitle style={{ textAlign: 'center' }} size='xl' weight='bold'>Password reset sent!</NoticeTitle>
         <Text size='md' style={{ textAlign: 'center' }}>
-          Please log in to your email account and find the email we have just sent you. It may be in your Spam/Bulk/Junk folder. To complete the process of being added to our mailing list, just click the link in that email.
+          We have sent a password reset link to the email you provided. Please check your inbox and spam folder, and follow the instructions.
         </Text>
       </StyledContainer>
     );
@@ -44,9 +44,11 @@ const ForgotPassword = () => {
   return (
     <Wrapper>
       <Title weight='bold'>Forgot Password</Title>
+
       <Form onSubmit={onSubmit} type='horizontal' style={{ justifyContent: 'center' }}>
+        <Hint>(*) To request a password reset, please enter your email.</Hint>
         <Form.Item label='Email*' name='email' required placeholder='Email' validateType='email' />
-        <Button width='200px' htmlType='submit' style={{ marginTop: 20 }} disabled={sending}>{sending ? 'sending...' : 'send'}</Button>
+        <Button width='250px' htmlType='submit' style={{ marginTop: 20 }} disabled={sending}>{sending ? 'sending...' : 'send password reset'}</Button>
       </Form>
     </Wrapper>
   );

@@ -16,13 +16,18 @@ function* sendResetPasswordLink({ params, callback }) {
     callback(200);
   } catch (error) {
     callback(400);
-    yield put(onOpenAlert(error.data.message));
+
+    if (error.status === 404) {
+      yield put(onOpenAlert('It looks like this email has not been registered on GigRemotely.'));
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
   }
 }
 
 function* resetPassword({ params, callback }) {
   try {
-    const response = yield call(axiosPut, '/users/forgot-password', params);
+    yield call(axiosPut, '/users/forgot-password', params);
 
     yield put(onOpenAlert("We've successfully changed your password"));
     Router.push('/login');
@@ -34,12 +39,15 @@ function* resetPassword({ params, callback }) {
 
 function* verificationEmail({ id }) {
   try {
-    yield call(get, `/users/confirm-email?id=${id}`);
-    Cookie.set('__gigtoken', id);
+    const respone = yield call(get, `/users/confirm-email?id=${id}`);
+
+    Cookie.set('__gigtoken', respone.access_token);
+    Cookie.set('__gigtype', 'INVIDUAL');
     Router.push('/setup-account');
   } catch (error) {
     if (error.status === 401) {
-      Router.push('/resend-verification');
+      yield put(onOpenAlert(error.data.message));
+      Router.push('/login');
     }
   }
 }
@@ -79,7 +87,8 @@ function* login({ params }) {
     if (error.status === 401) {
       yield put(onOpenAlert('Oops! The email or password is incorrect. Please try again or request a password reset.'));
     } else if (error.status === 403) {
-      Router.push('/resend-verification');
+      // Router.push('/resend-verification');
+      yield put(onOpenAlert(error.data.message));
     } else {
       yield put(onOpenAlert(error.data.message));
     }

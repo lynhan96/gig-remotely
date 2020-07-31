@@ -8,6 +8,15 @@ export const StyledContainer = styled(Container)`
   margin-top: 70px;
 `;
 
+export const Hint = styled(Text)`
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.2;
+  @media (max-width: 440px) {
+    font-size: 12px;
+  }
+`;
+
 export const NoticeTitle = styled(Text)`
   margin-bottom: 20px;
 `;

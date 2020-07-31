@@ -18,14 +18,21 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const SubTitle = styled(Text)`
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.2;
+  @media (max-width: 440px) {
+    font-size: 12px;
+  }
+`;
 export const Title = styled(Text)`
   font-size: 50px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   @media (max-width: 440px) {
     font-size: 38px;
-    margin-bottom: 10px;
   }
 `;
 

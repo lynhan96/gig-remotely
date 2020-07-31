@@ -135,7 +135,7 @@ const JobItem = ({ item, favorite, applied }) => {
             disabled={disabledItem || applied}
             onClick={() => onClick()}
           >
-            {applied ? 'applied' : 'view'}
+            {applied ? 'applied' : 'apply'}
           </StyledButton>
           <FavoriteImage src={isFavorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} onClick={toggleFavorite} />
         </Action>

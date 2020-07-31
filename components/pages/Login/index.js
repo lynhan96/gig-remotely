@@ -7,7 +7,7 @@ import {
   Form, Button, Text,
 } from 'components/global';
 import {
-  Wrapper, Title, StyledLink, SocialGroup, Image,
+  Wrapper, Title, StyledLink, SocialGroup, Image, SubTitle,
 } from './styles';
 
 const Login = () => {
@@ -24,6 +24,7 @@ const Login = () => {
   return (
     <Wrapper>
       <Title weight='bold'>Welcome back.</Title>
+      <SubTitle>Stay connected to GigRemotely to make sure you're not missing out on any opportunities.</SubTitle>
       <Form onSubmit={onSubmit}>
         <Form.Item name='username' required placeholder='Email' validateType='email' />
         <Form.Item name='password' required placeholder='Password' type='password' />

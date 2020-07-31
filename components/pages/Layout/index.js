@@ -40,7 +40,9 @@ const MainLayout = ({ Component, pageProps }) => {
   ), [dispatch]);
 
   useEffect(() => {
-    if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
+    if (companyRoute.includes(router.pathname) || talentRoute.includes(router.pathname)) {
+      if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
+    }
   }, [router.asPath]);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ const MainLayout = ({ Component, pageProps }) => {
       return;
     }
 
-    if ((router.pathname === '/company/dashboard' || router.pathname === '/company/applicant/[id]')) {
+    if (router.pathname === '/company/dashboard' || router.pathname === '/company/applicant/[id]') {
       const query = queryString.parse(router.asPath.split(/\?/)[1]);
       if (query.from === 'email' && Cookie.get('__gigtype') !== 'COMPANY') {
         Cookie.set('__appllicantJobUrl', router.asPath);
@@ -64,7 +66,7 @@ const MainLayout = ({ Component, pageProps }) => {
       Router.push('/403');
     }
 
-    if (Cookie.get('__gigtype') && 'TALENT' && talentRoute.includes(router.pathname)) {
+    if (Cookie.get('__gigtype') && Cookie.get('__gigtype') !== 'TALENT' && talentRoute.includes(router.pathname)) {
       Router.push('/403');
     }
   }, [router.asPath]);
