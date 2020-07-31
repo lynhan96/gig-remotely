@@ -10,12 +10,14 @@ const ON_GET_JOB_DETAIL = 'ON_GET_JOB_DETAIL';
 const ON_APPLY_JOB = 'ON_APPLY_JOB';
 const ON_GET_JOB_APPLICANT = 'ON_GET_JOB_APPLICANT';
 
-function* getJobDetail({ id, setState }) {
+function* getJobDetail({ params, setState }) {
   try {
-    const url = typeof id === 'object' ? `/job/${id.id}?repostJob=${id.repostJob}` : `/job/${id}`;
+    let url = `/job/${params.id}`;
+    if (params.repostJob) {
+      url += `?repostJob=${params.repostJob}`;
+    }
 
     const response = yield call(get, url);
-
     setState({ loading: false, data: response });
   } catch (error) {
     if (error.status === 404 && Cookie.get('__gigtype') === 'TALENT') {
@@ -76,8 +78,8 @@ export const onApplyJob = (jobId, params, callback) => ({
   type: ON_APPLY_JOB, jobId, params, callback,
 });
 
-export const onGetJobDetail = (id, setState) => ({
-  type: ON_GET_JOB_DETAIL, id, setState,
+export const onGetJobDetail = (params, setState) => ({
+  type: ON_GET_JOB_DETAIL, params, setState,
 });
 
 export const onGetJobs = (params, callback) => ({

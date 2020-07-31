@@ -13,12 +13,12 @@ const EditGigPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const getGig = useCallback((id) => dispatch(
-    onGetJobDetail(id, setState),
+  const getGig = useCallback((params) => dispatch(
+    onGetJobDetail(params, setState),
   ), [dispatch]);
 
   useEffect(() => {
-    getGig(router.query.id);
+    getGig({ id: router.query.id });
   }, [router.asPath]);
 
   return (
