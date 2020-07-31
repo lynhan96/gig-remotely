@@ -63,7 +63,7 @@ const Gigs = () => {
 
   return (
     <Wrapper>
-      <SearchForm onSearch={search} keyword={query.keyword} option={query.type} inputRef={inputRef} />
+      <SearchForm onSearch={search} keyword={query.keyword || ''} option={query.type} inputRef={inputRef} />
       <ListWrapper loading={loading.toString()}>
         {loading ? <Loading showText size='60px' />
           : (
