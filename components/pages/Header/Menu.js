@@ -88,7 +88,7 @@ const Nav = () => {
     );
   }
 
-  if ((!token && !userType) || (token && userType === 'INVIDUAL')) {
+  if ((!token && !userType) || (token && userType !== 'INVIDUAL')) {
     return (
       <>
         <StyledBurger open={open} onClick={() => setOpen(!open)}>

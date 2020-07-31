@@ -39,8 +39,6 @@ const ButtonAction = React.forwardRef(({ isEdit, showDeletePopUp }, ref) => {
         <a href='/term-conditions' target='_blank'>Terms of Service,</a>
       </Hint>
       <Hint>
-        <a>Code of Conduct,</a>
-        {' '}
         and
         <a href='/privacy-policy' target='_blank'>Privacy Policy.</a>
       </Hint>

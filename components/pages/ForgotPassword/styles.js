@@ -15,6 +15,14 @@ export const Hint = styled(Text)`
   @media (max-width: 440px) {
     font-size: 12px;
   }
+
+  a {
+    margin-left: 3px;
+    text-decoration: unset;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 1px;
+    color: #000000;
+  }
 `;
 
 export const NoticeTitle = styled(Text)`

@@ -48,7 +48,11 @@ const ForgotPassword = () => {
       <Form onSubmit={onSubmit} type='horizontal' style={{ justifyContent: 'center' }}>
         <Hint>(*) To request a password reset, please enter your email.</Hint>
         <Form.Item label='Email*' name='email' required placeholder='Email' validateType='email' />
-        <Button width='250px' htmlType='submit' style={{ marginTop: 20 }} disabled={sending}>{sending ? 'sending...' : 'send password reset'}</Button>
+        <Button width='250px' htmlType='submit' style={{ marginTop: 20, marginBottom: 20 }} disabled={sending}>{sending ? 'sending...' : 'send password reset'}</Button>
+        <Hint>
+          Still experiencing problems? Email us at
+          <a href='mailto:team@gigremotely.com'>team@gigremotely.com.</a>
+        </Hint>
       </Form>
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { color } from 'components/utils/color';
 
 export const StyledInput = styled.input`
@@ -15,6 +15,12 @@ export const StyledInput = styled.input`
   background: ${({ background }) => (background || color.offWhite)};
   color: ${color.black};
   position: relative;
+
+  ${({ disabled }) => disabled && css`
+    border: solid 1px #F5F5F5;
+    background: #F5F5F5;
+  `}
+
 
   ::placeholder {
     color: ${color.cement};

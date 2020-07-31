@@ -17,6 +17,7 @@ const Input = ({
   fieldType,
   minHeight,
   className,
+  disabled
 }) => {
   const [inputType, setInputType] = useState(type);
   const fontSize = () => {
@@ -40,6 +41,7 @@ const Input = ({
   if (fieldType === 'textarea') {
     return (
       <StyledTextArea
+        disabled={disabled}
         minHeight={minHeight}
         background={background}
         defaultValue={defaultValue}
@@ -57,6 +59,7 @@ const Input = ({
   return (
     <InputWrapper>
       <StyledInput
+        disabled={disabled}
         background={background}
         defaultValue={defaultValue}
         className={error ? `${className} input-error` : className}
@@ -92,6 +95,7 @@ Input.propTypes = {
   background: PropTypes.string,
   fieldType: PropTypes.string,
   className: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -100,6 +104,7 @@ Input.defaultProps = {
   onChange: () => {},
   name: '',
   placeholder: '',
+  disabled: false,
   error: false,
   defaultValue: '',
   background: '',

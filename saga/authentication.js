@@ -85,7 +85,7 @@ function* login({ params }) {
     }
   } catch (error) {
     if (error.status === 401) {
-      yield put(onOpenAlert('Oops! The email or password is incorrect. Please try again or request a password reset.'));
+      yield put(onOpenAlert('Oops! This is an invalid login. Please try again or request a password reset.'));
     } else if (error.status === 403) {
       // Router.push('/resend-verification');
       yield put(onOpenAlert(error.data.message));
