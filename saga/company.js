@@ -20,7 +20,7 @@ function* updateCompanyProfile({ params }) {
     const response = yield call(axiosPut, '/company', params);
 
     yield put(onUpdateUserCompany(response));
-    yield put(onOpenAlert('Your profile has successfully changed'));
+    yield put(onOpenAlert("We've successfully changed your profile"));
     Router.push('/company/profile');
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
@@ -40,7 +40,7 @@ function* getCompanies({ callback }) {
 function* updateGig({ id, params, callback }) {
   try {
     yield call(axiosPut, `/job/${id}`, params);
-    yield put(onOpenAlert('Your post has successfully changed'));
+    yield put(onOpenAlert("We've successfully changed your post"));
     if (callback) callback();
   } catch (error) {
     yield put(onOpenAlert(error.data.message));

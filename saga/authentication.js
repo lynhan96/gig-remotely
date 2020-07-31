@@ -24,7 +24,7 @@ function* resetPassword({ params, callback }) {
   try {
     const response = yield call(axiosPut, '/users/forgot-password', params);
 
-    yield put(onOpenAlert('Your password has successfully changed'));
+    yield put(onOpenAlert("We've successfully changed your password"));
     Router.push('/login');
   } catch (error) {
     callback(400);
@@ -77,7 +77,7 @@ function* login({ params }) {
     }
   } catch (error) {
     if (error.status === 401) {
-      yield put(onOpenAlert('Wrong email or password!'));
+      yield put(onOpenAlert('Oops! The email or password is incorrect. Please try again or request a password reset.'));
     } else if (error.status === 403) {
       Router.push('/resend-verification');
     } else {

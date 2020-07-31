@@ -20,7 +20,7 @@ function* updatePassword({ params }) {
   try {
     yield call(axiosPut, '/users/password', params);
 
-    yield put(onOpenAlert('Your password has successfully changed'));
+    yield put(onOpenAlert("We've successfully changed your password"));
     Router.push('/company/account-setting');
   } catch (error) {
     if (error.data.statusCode) {
@@ -35,7 +35,7 @@ function* updateAccountSetting({ params, callback }) {
   try {
     const response = yield call(axiosPut, '/users/account-setting', params);
 
-    yield put(onOpenAlert('Your account setting has successfully changed'));
+    yield put(onOpenAlert("We've successfully changed your account setting"));
     yield put(onUpdateUserAccountSetting({
       name: params.companyName,
       applyNotification: response.applyNotification,
@@ -111,7 +111,7 @@ function* updateUserProfile({ params }) {
     const response = yield call(axiosPut, '/talent', params);
 
     yield put(onUpdateTalent(response));
-    yield put(onOpenAlert('Your profile has successfully changed'));
+    yield put(onOpenAlert("We've successfully changed your profile"));
     Router.push('/gig-seeker/profile');
   } catch (error) {
     yield put(onOpenAlert(error.data.message));

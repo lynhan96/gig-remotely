@@ -21,7 +21,9 @@ import {
   Wrapper, Title, RightWrapper, LeftWrapper,
 } from './styles';
 
-const PostGig = ({ data, isEdit, title: pageTitle, payWithSripe }) => {
+const PostGig = ({
+  data, isEdit, title: pageTitle, payWithSripe,
+}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
   const skillRef = useRef([]);
@@ -151,7 +153,7 @@ const PostGig = ({ data, isEdit, title: pageTitle, payWithSripe }) => {
           <Form.Item
             name='about'
             label='About the company'
-            placeholder='About the company'
+            placeholder='Tell us about your company'
             type='textarea'
             background='#efefe4'
             defaultValue={defaultAbout}
@@ -160,7 +162,7 @@ const PostGig = ({ data, isEdit, title: pageTitle, payWithSripe }) => {
           <Form.Item
             name='description'
             label='Job Description'
-            placeholder='What is the job role about and what is needed? What are some of the draws for the applicant?'
+            placeholder="What are the applicant's roles and responsibilities for this job?"
             type='textarea'
             background='#efefe4'
             defaultValue={description}
@@ -169,7 +171,7 @@ const PostGig = ({ data, isEdit, title: pageTitle, payWithSripe }) => {
           <Form.Item
             name='roleResponsibility'
             label='Role & Responsibilities'
-            placeholder='What is the applicant’s roles and responsibilities for this job?'
+            placeholder='What kind of past experiences are required of the applicant for this job?'
             type='textarea'
             background='#efefe4'
             defaultValue={roleResponsibility}

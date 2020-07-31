@@ -21,11 +21,18 @@ import {
   TabScrollAble,
 } from './styles';
 
-const Empty = () => (
+const Empty = ({ type }) => (
   <EmptyWrapper>
     <EmptyImage src='/images/empty-jobs.png' />
-    <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'> You don't have any gis</Text>
-    <Button onClick={() => Router.push('/company/post-gig')}>post your first gig</Button>
+    <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'>
+      {type === 'all' && 'Uh-oh! You do not have any gigs'}
+      {type === 'expired' && 'Yay! You do not have any expired gigs'}
+      {type === 'active' && 'Uh-oh! You do not have any active gigs'}
+    </Text>
+    <Button onClick={() => Router.push('/company/post-gig')}>
+      {type === 'all' && 'post a gigs'}
+      {(type === 'expired' || type === 'active') && 'post more gigs'}
+    </Button>
   </EmptyWrapper>
 );
 
@@ -76,9 +83,9 @@ const Dashboard = () => {
       <Tabs>
         <TabsItemWrapper>
           <TabScrollAble>
-            <TabItem size='mmd' onClick={() => setOpenTab(0)} active={openTab === 0}>{`all jobs (${all.length})`}</TabItem>
-            <TabItem size='mmd' onClick={() => setOpenTab(1)} active={openTab === 1}>{`active jobs (${active.length})`}</TabItem>
-            <TabItem size='mmd' onClick={() => setOpenTab(3)} active={openTab === 3}>{`expired jobs (${expired.length})`}</TabItem>
+            <TabItem size='mmd' onClick={() => setOpenTab(0)} active={openTab === 0}>{`all gigs (${all.length})`}</TabItem>
+            <TabItem size='mmd' onClick={() => setOpenTab(1)} active={openTab === 1}>{`active gigs (${active.length})`}</TabItem>
+            <TabItem size='mmd' onClick={() => setOpenTab(3)} active={openTab === 3}>{`expired gigs (${expired.length})`}</TabItem>
           </TabScrollAble>
         </TabsItemWrapper>
       </Tabs>
@@ -87,19 +94,19 @@ const Dashboard = () => {
           : (
             <>
               <TabContent open={openTab === 0}>
-                { all.length === 0 ? <Empty />
+                { all.length === 0 ? <Empty type='all' />
                   : all.map((item) => (
                     <JobItem key={item.id} item={item} removeItem={deleteGig} />
                   ))}
               </TabContent>
               <TabContent open={openTab === 1}>
-                { active.length === 0 ? <Empty />
+                { active.length === 0 ? <Empty type='active' />
                   : active.map((item) => (
                     <JobItem key={item.id} item={item} />
                   ))}
               </TabContent>
               <TabContent open={openTab === 3}>
-                { expired.length === 0 ? <Empty />
+                { expired.length === 0 ? <Empty type='expired' />
                   : expired.map((item) => (
                     <JobItem key={item.id} item={item} removeItem={deleteGig} />
                   ))}
