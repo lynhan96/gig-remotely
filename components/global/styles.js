@@ -303,4 +303,9 @@ export const GlobalStyle = createGlobalStyle`
     opacity: 0 !important;
     transition: all 0.3s ease;
   }
+
+  #nprogress .bar {
+    background: #171E44 !important;
+    z-index: 999999;
+  }
 `;

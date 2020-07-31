@@ -69,19 +69,13 @@ const JobItem = ({ item, favorite, applied }) => {
     }
   };
 
-  const onClick = (checkScreenSize) => {
-    if ((window.innerWidth < 768 && checkScreenSize) || (window.innerWidth >= 768 && !checkScreenSize)) {
-      if (!Cookie.get('__gigtoken') || !Cookie.get('__gigtype')) {
-        Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
-        Router.push('login');
-      } else {
-        Router.push('/gigs/[id]', `/gigs/${id}`);
-      }
-    }
+  const onClick = () => {
+    if (disabledItem) return;
+    window.open(`/gigs/${id}`, '_blank');
   };
 
   return (
-    <ItemWrapper onClick={() => onClick(true)}>
+    <ItemWrapper onClick={() => onClick()}>
       { active() && <Active />}
       <ContentWrapper active={active()}>
         <Information>
@@ -139,9 +133,9 @@ const JobItem = ({ item, favorite, applied }) => {
           <StyledButton
             width='200px'
             disabled={disabledItem || applied}
-            onClick={() => onClick(false)}
+            onClick={() => onClick()}
           >
-            {applied ? 'applied' : 'apply'}
+            {applied ? 'applied' : 'view'}
           </StyledButton>
           <FavoriteImage src={isFavorite ? '/images/icon/favorite-active.svg' : '/images/icon/favorite.svg'} onClick={toggleFavorite} />
         </Action>

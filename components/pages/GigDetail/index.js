@@ -74,7 +74,7 @@ const GigDetail = ({ item }) => {
   const dispatch = useDispatch();
   const [favorite, setFavorite] = useState(isFavorite);
   const isLogged = Object.keys(user).length !== 0;
-
+  const isCompany = Cookie.get('__gigtype') === 'COMPANY';
   const modalRef = useRef();
 
   const scrollItem = () => {
@@ -116,6 +116,12 @@ const GigDetail = ({ item }) => {
   ), [dispatch]);
 
   const toggleSave = () => {
+    if (!isLogged) {
+      Cookie.set('__lastApplyGigJob', `/gigs/${id}`);
+      Router.push('/login');
+      return;
+    }
+
     if (favorite) {
       removeFavoriteJob(id);
     } else {
@@ -175,6 +181,8 @@ const GigDetail = ({ item }) => {
               ))
             }
           </TagGroup>
+          {!isCompany
+          && (
           <ActionGroup>
             <StyledButton width='200px' style={{ marginRight: 20 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</StyledButton>
             {
@@ -190,6 +198,7 @@ const GigDetail = ({ item }) => {
               share
             </ShareButton>
           </ActionGroup>
+          )}
           <DescriptionWrapper>
             <DescriptionTitle size='mmd'>About the company</DescriptionTitle>
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: about }} />
@@ -210,9 +219,11 @@ const GigDetail = ({ item }) => {
             <DescriptionTitle size='mmd'>Experience Prerequisites</DescriptionTitle>
             <Description size='mmd' dangerouslySetInnerHTML={{ __html: experience }} />
           </DescriptionWrapper>
+          {!isCompany && (
           <FooterWrapper id='apply-button'>
             <FooterButton width='200px' style={{ marginTop: 50 }} onClick={openApplyModal} disabled={isApplied}>{isApplied ? 'applied' : 'apply'}</FooterButton>
           </FooterWrapper>
+          )}
         </ContentWrapper>
       </Card>
       <RelatedGig />

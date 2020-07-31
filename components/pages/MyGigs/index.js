@@ -21,7 +21,7 @@ import {
 const Empty = () => (
   <EmptyWrapper>
     <EmptyImage src='/images/empty-jobs.png' />
-    <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'> You do have any gis</Text>
+    <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'> You do have any gigs</Text>
     <Button onClick={() => Router.push('/gigs')}>find your first gig</Button>
   </EmptyWrapper>
 );

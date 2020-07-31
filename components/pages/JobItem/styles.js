@@ -348,6 +348,7 @@ export const ItemWrapper = styled.div`
   width: 100%;
   display: flex;
   position: relative;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     width: calc(100% - 30px);
