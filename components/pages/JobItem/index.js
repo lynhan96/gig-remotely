@@ -84,7 +84,7 @@ const JobItem = ({
       return;
     }
     if (disabledItem) return;
-    window.open(`/gigs/${id}`, '_blank');
+    window.open(`/gigs/${id}?gigId=${id}`, '_blank');
   };
 
   useEffect(() => {
