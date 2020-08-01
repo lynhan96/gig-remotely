@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Cookie from 'js-cookie';
 
-// const baseUrl = 'https://api.gigremotely.com/';
-const baseUrl = 'http://localhost:8000/';
+const baseUrl = 'https://api.gigremotely.com/';
+// const baseUrl = 'http://localhost:8000/';
 
 axios.interceptors.request.use(
   (config) => {
