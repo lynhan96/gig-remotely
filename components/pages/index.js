@@ -33,6 +33,7 @@ import PaymentOptions from 'components/pages/PaymentOptions';
 import ForgotPassword from 'components/pages/ForgotPassword';
 import ResetPassword from 'components/pages/ResetPassword';
 import BackButton from 'components/pages/BackButton';
+import ResendVerification from 'components/pages/ResendVerification';
 
 export {
   Footer,
@@ -70,4 +71,5 @@ export {
   BackButton,
   TermCondition,
   PrivacyPolicy,
+  ResendVerification,
 };

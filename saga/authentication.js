@@ -9,6 +9,23 @@ const ON_SIGN_UP = 'ON_SIGN_UP';
 const ON_VERIFY_EMAIL = 'ON_VERIFY_EMAIL';
 const ON_SEND_RESET_PASSWORD_LINK = 'ON_SEND_RESET_PASSWORD_LINK';
 const ON_RESET_PASSWORD = 'ON_RESET_PASSWORD';
+const ON_RENSEND_VERIFICATION = 'ON_RENSEND_VERIFICATION';
+
+function* resendEmailVerification({ email, setState }) {
+  try {
+    yield call(post, '/users/resend-email-verification', { email });
+    Router.push('/login');
+    yield put(onOpenAlert("We've sent your verification email. Please see your email inbox"));
+  } catch (error) {
+    if (error.status === 404) {
+      yield put(onOpenAlert('It looks like this email has not been registered on GigRemotely.'));
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
+  }
+
+  setState(false);
+}
 
 function* sendResetPasswordLink({ params, callback }) {
   try {
@@ -57,7 +74,16 @@ function* signUp({ params, callback }) {
     const response = yield call(post, '/users', params);
     callback(response);
   } catch (error) {
-    yield put(onOpenAlert(error.data.message));
+    if (error.status === 403) {
+      Router.push({
+        pathname: '/resend-verification',
+        query: {
+          email: params.email,
+        },
+      });
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
   }
 }
 
@@ -87,8 +113,12 @@ function* login({ params }) {
     if (error.status === 401) {
       yield put(onOpenAlert('Oops! This is an invalid login. Please try again or request a password reset.'));
     } else if (error.status === 403) {
-      // Router.push('/resend-verification');
-      yield put(onOpenAlert(error.data.message));
+      Router.push({
+        pathname: '/resend-verification',
+        query: {
+          email: params.username,
+        },
+      });
     } else {
       yield put(onOpenAlert(error.data.message));
     }
@@ -97,6 +127,10 @@ function* login({ params }) {
 
 export const onVerifyEmail = (id) => ({
   type: ON_VERIFY_EMAIL, id,
+});
+
+export const onResendEmailVerification = (email, setState) => ({
+  type: ON_RENSEND_VERIFICATION, email, setState,
 });
 
 export const onLogin = (params, callback) => ({
@@ -121,4 +155,5 @@ export default function* authenticationWatcher() {
   yield takeLatest(ON_VERIFY_EMAIL, verificationEmail);
   yield takeLatest(ON_SEND_RESET_PASSWORD_LINK, sendResetPasswordLink);
   yield takeLatest(ON_RESET_PASSWORD, resetPassword);
+  yield takeLatest(ON_RENSEND_VERIFICATION, resendEmailVerification);
 }
