@@ -94,6 +94,7 @@ function* login({ params }) {
     Cookie.set('__gigtoken', response.access_token);
     if (!response.userType) {
       Router.push('/setup-account');
+      Cookie.set('__gigtype', 'INVIDUAL');
     } else if (response.userType === 'TALENT') {
       Cookie.set('__gigtype', response.userType);
       if (Cookie.get('__lastApplyGigJob')) {

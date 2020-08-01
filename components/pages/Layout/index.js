@@ -49,6 +49,9 @@ const MainLayout = ({ Component, pageProps }) => {
   useEffect(() => {
     if (Cookie.get('__gigtype') === 'TALENT' || Cookie.get('__gigtype') === 'COMPANY') {
       if (!fetchProfileFlag.current && Cookie.get('__gigtoken')) getProfile();
+    } else if (Cookie.get('__gigtype') === 'INVIDUAL' && router.pathname !== '/setup-account') {
+      Cookie.remove('__gigtype');
+      Cookie.remove('__gigtoken');
     }
   }, [router.asPath]);
 
