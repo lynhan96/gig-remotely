@@ -27,7 +27,7 @@ const SignUp = () => {
   return (
     <StyledContainer>
       <NoticeTitle size='xl' weight='bold'>Your email address has not be verified</NoticeTitle>
-      <Text width='auto' size='md' style={{ marginBottom: 30 }}>Please see your email inbox for the verification link. Alternatively, you can click on the button below to resend the link again.</Text>
+      <Text width='auto' size='md' style={{ marginBottom: 30, textAlign: 'center' }}>Please see your email inbox for the verification link. Alternatively, you can click on the button below to resend the link again.</Text>
       <Button width='200px' onClick={resendLink} disabled={sending}>{sending ? 'sending...' : 'resend link'}</Button>
     </StyledContainer>
   );
