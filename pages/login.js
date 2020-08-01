@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import { publicRoute } from 'routes';
 import { Container } from 'components/global/styles';
 import { Login } from 'components/pages';
 
@@ -15,4 +14,4 @@ const LoginPage = () => (
   </>
 );
 
-export default publicRoute(LoginPage);
+export default LoginPage;

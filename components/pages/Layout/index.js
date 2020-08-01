@@ -26,6 +26,13 @@ const talentRoute = [
   '/gig-seeker/profile',
 ];
 
+const publicRoute = [
+  '/reset-password',
+  '/login',
+  '/signup',
+  '/forgot-password',
+];
+
 const MainLayout = ({ Component, pageProps }) => {
   const router = useRouter();
   const fetchProfileFlag = useRef(false);
@@ -46,7 +53,9 @@ const MainLayout = ({ Component, pageProps }) => {
   }, [router.asPath]);
 
   useEffect(() => {
-    if (router.pathname === '/login' || router.pathname === '/signup') {
+    if (publicRoute.includes(router.pathname)) {
+      Cookie.remove('__gigtoken');
+      Cookie.remove('__gigtype');
       resetProfile();
       fetchProfileFlag.current = false;
       return;
