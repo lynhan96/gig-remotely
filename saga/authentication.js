@@ -15,7 +15,7 @@ function* resendEmailVerification({ email, setState }) {
   try {
     yield call(post, '/users/resend-email-verification', { email });
     Router.push('/login');
-    yield put(onOpenAlert("We've sent your verification email. Please see your email inbox"));
+    yield put(onOpenAlert("We've sent you the verification email. Please see your inbox."));
   } catch (error) {
     if (error.status === 404) {
       yield put(onOpenAlert('It looks like this email has not been registered on GigRemotely.'));
