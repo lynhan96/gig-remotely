@@ -34,6 +34,7 @@ import ForgotPassword from 'components/pages/ForgotPassword';
 import ResetPassword from 'components/pages/ResetPassword';
 import BackButton from 'components/pages/BackButton';
 import ResendVerification from 'components/pages/ResendVerification';
+import SeekerAccountSetting from 'components/pages/SeekerAccountSetting';
 
 export {
   Footer,
@@ -72,4 +73,5 @@ export {
   TermCondition,
   PrivacyPolicy,
   ResendVerification,
+  SeekerAccountSetting,
 };

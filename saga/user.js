@@ -4,7 +4,7 @@ import {
 import Cookie from 'js-cookie';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { onOpenAlert } from 'redux/alert';
-import { onUpdateProfile, onUpdateTalent, onUpdateUserAccountSetting } from 'redux/user';
+import { onUpdateProfile, onUpdateTalent, onUpdateUserAccountSetting, onUpdateUserEmail } from 'redux/user';
 import Router from 'next/router';
 
 const ON_UPDATE_USER_TYPE = 'ON_UPDATE_USER_TYPE';
@@ -21,7 +21,11 @@ function* updatePassword({ params }) {
     yield call(axiosPut, '/users/password', params);
 
     yield put(onOpenAlert("We've successfully changed your password"));
-    Router.push('/company/account-setting');
+    if (Cookie.get('__gigtype') === 'COMPANY') {
+      Router.push('/company/account-setting');
+    } else {
+      Router.push('/gig-seeker/account-setting');
+    }
   } catch (error) {
     if (error.data.statusCode) {
       yield put(onOpenAlert('Incorrect current password'));
@@ -36,15 +40,20 @@ function* updateAccountSetting({ params, callback }) {
     const response = yield call(axiosPut, '/users/account-setting', params);
 
     yield put(onOpenAlert("We've successfully changed your account setting"));
-    yield put(onUpdateUserAccountSetting({
-      name: params.companyName,
-      applyNotification: response.applyNotification,
-      boostAboutToEnd: response.boostAboutToEnd,
-      boostEnded: response.boostEnded,
-      listingAboutToExpire: response.listingAboutToExpire,
-      listingExpired: response.listingExpired,
-      promotionalUpdates: response.promotionalUpdates,
-    }));
+
+    yield put(onUpdateUserEmail(params.newEmail));
+
+    if (response.userType === 'COMPANY') {
+      yield put(onUpdateUserAccountSetting({
+        name: params.companyName,
+        applyNotification: response.applyNotification,
+        boostAboutToEnd: response.boostAboutToEnd,
+        boostEnded: response.boostEnded,
+        listingAboutToExpire: response.listingAboutToExpire,
+        listingExpired: response.listingExpired,
+        promotionalUpdates: response.promotionalUpdates,
+      }));
+    }
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }
@@ -86,6 +95,8 @@ function* addFavoritJob({ jobId, setState }) {
   } catch (error) {
     if (error.status === 404) {
       yield put(onOpenAlert('Please complete your profile!'));
+    } else if (error.status === 401) {
+      Router.push('/login');
     } else {
       yield put(onOpenAlert(error.data.message));
     }

@@ -76,6 +76,7 @@ const Nav = () => {
             <MenuItem>
               account
               <SubMenu>
+                <SubMenuItem size='sm' onClick={() => redirectTo('/gig-seeker/account-setting')}>account settings</SubMenuItem>
                 <SubMenuItem size='sm' onClick={logout}>log out</SubMenuItem>
               </SubMenu>
             </MenuItem>

@@ -106,6 +106,7 @@ const PaymentForm = ({
   const [promotionResult, serPromotionResult] = useState('');
   const { loading, data } = state;
   const inputRef = useRef();
+  const promotionTextRef = useRef('');
   const currentPromotion = useRef(null);
   let typing = 0;
 
@@ -188,18 +189,19 @@ const PaymentForm = ({
 
   const clearCode = () => {
     promotionRef.current.checking = false;
-    setPromotionValid('default')
+    setPromotionValid('default');
   };
 
   const onInputPromotion = (e) => {
     promotionRef.current.checking = true;
-    const searchText = e.target.value; // this is the search text
+    promotionTextRef.current = e.target.value; // this is the search text
+    console.log(promotionTextRef.current);
     if (typing) clearTimeout(typing);
     typing = setTimeout(() => {
-      if (searchText === '') {
+      if (promotionTextRef.current === '') {
         setPromotionValid('default');
       } else {
-        checkPromotionCode(searchText, checkPromotionCallback);
+        checkPromotionCode(promotionTextRef.current, checkPromotionCallback);
       }
     }, 1000);
   };

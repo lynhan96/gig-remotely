@@ -24,6 +24,7 @@ const talentRoute = [
   '/gig-seeker/edit-profile',
   '/gig-seeker/my-gigs',
   '/gig-seeker/profile',
+  '/gig-seeker/account-setting',
 ];
 
 const publicRoute = [

@@ -1,6 +1,7 @@
 const ON_UPDATE_USER_PROFILE = 'ON_UPDATE_USER_PROFILE';
 const ON_UPDATE_USER_TALEN = 'ON_UPDATE_USER_TALEN';
 const ON_UPDATE_USER_COMPANY = 'ON_UPDATE_USER_COMPANY';
+const ON_UPDATE_USER_EMAIL = 'ON_UPDATE_USER_EMAIL';
 const ON_RESET_USER_INFO = 'ON_RESET_USER_INFO';
 const ON_UPDATE_USER_ACCOUNT_SETTING = 'ON_UPDATE_USER_ACCOUNT_SETTING';
 
@@ -10,6 +11,9 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
+    case ON_UPDATE_USER_EMAIL:
+      state.data.email = action.payload.email;
+      return state;
     case ON_UPDATE_USER_PROFILE:
       return {
         data: action.payload.profile,
@@ -54,6 +58,13 @@ export const onUpdateUserCompany = (company) => ({
   type: ON_UPDATE_USER_COMPANY,
   payload: {
     company,
+  },
+});
+
+export const onUpdateUserEmail = (email) => ({
+  type: ON_UPDATE_USER_EMAIL,
+  payload: {
+    email,
   },
 });
 
