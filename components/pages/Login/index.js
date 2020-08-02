@@ -1,10 +1,11 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Router from 'next/router';
-import { onLogin, onServiceLogin } from 'saga/authentication';
+import { onLogin, onServiceLogin, onLoginWithLinkedin } from 'saga/authentication';
 import { onOpenAlert } from 'redux/alert';
 import FacebookLogin from 'react-facebook-login';
+
 import {
   Form, Button, Text,
 } from 'components/global';
@@ -25,6 +26,11 @@ const Login = () => {
     onServiceLogin(params),
   ), [dispatch]);
 
+  const loginWithLinkedIn = useCallback((params) => dispatch(
+    onLoginWithLinkedin(params),
+  ), [dispatch]);
+
+
   const showError = useCallback((message) => dispatch(
     onOpenAlert(message),
   ), [dispatch]);
@@ -32,6 +38,17 @@ const Login = () => {
   const onSubmit = (values) => {
     login(values);
   };
+
+  const linkAuthentication = ({ data }) => {
+    if (data.type === 'linkedin') {
+      alertRef.current.open();
+      loginWithLinkedIn(data.query);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('message', linkAuthentication);
+  }, []);
 
   const facebookLoginCallback = (response) => {
     if (response.email && response.id) {
@@ -48,6 +65,26 @@ const Login = () => {
     }
   };
 
+  const linkedInRequestToken = () => {
+    const oauthUrl = 'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=863nizmny7l8qt&scope=r_liteprofile%20r_emailaddress&state=123456&redirect_uri=https://e40fe8b39cd2.ngrok.io/linkedin';
+    const width = 450;
+    const height = 730;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+
+    window.open(
+      oauthUrl,
+      'Linkedin',
+      `menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=${
+        width
+      }, height=${
+        height
+      }, top=${
+        top
+      }, left=${
+        left}`,
+    );
+  };
   return (
     <Wrapper>
       <AlertServiceLogin ref={alertRef} />
@@ -63,11 +100,9 @@ const Login = () => {
       </Link>
       <Text weight='bold' size='mmd' style={{ textAlign: 'center' }}>or sign in with</Text>
       <SocialGroup>
-        <Image src='/images/icon/linkedin.svg' />
+        <Image src='/images/icon/linkedin.svg' onClick={linkedInRequestToken} />
         <FacebookLogin
-          onClick={() => console.log('onClick')}
-          onFailure={(e) => console.log(e)}
-          isDisabled={false}
+          autoLoad={false}
           appId='612438743009066'
           fields='first_name,last_name,email,picture.type(large)'
           scope='public_profile'

@@ -11,6 +11,29 @@ const ON_SEND_RESET_PASSWORD_LINK = 'ON_SEND_RESET_PASSWORD_LINK';
 const ON_RESET_PASSWORD = 'ON_RESET_PASSWORD';
 const ON_RENSEND_VERIFICATION = 'ON_RENSEND_VERIFICATION';
 const ON_SERVICE_LOGIN = 'ON_SERVICE_LOGIN';
+const ON_LOGIN_WITH_LINKED_IN = 'ON_LOGIN_WITH_LINKED_IN';
+
+const afterLogin = (response) => {
+  Cookie.set('__gigtoken', response.access_token);
+  if (!response.userType) {
+    Router.push('/setup-account');
+    Cookie.set('__gigtype', 'INVIDUAL');
+  } else if (response.userType === 'TALENT') {
+    Cookie.set('__gigtype', response.userType);
+    if (Cookie.get('__lastApplyGigJob')) {
+      Router.push('/gigs/[id]', Cookie.get('__lastApplyGigJob'));
+    } else {
+      Router.push('/gig-seeker/profile');
+    }
+  } else if (response.userType === 'COMPANY') {
+    Cookie.set('__gigtype', response.userType);
+    if (Cookie.get('__appllicantJobUrl')) {
+      Router.push(Cookie.get('__appllicantJobUrl'));
+    } else {
+      Router.push('/company/profile');
+    }
+  }
+};
 
 function* resendEmailVerification({ email, setState }) {
   try {
@@ -88,29 +111,21 @@ function* signUp({ params, callback }) {
   }
 }
 
+function* loginWithLinkedin({ params }) {
+  try {
+    const response = yield call(post, '/users/linkedin-login', params);
+
+    afterLogin(response);
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
+
 function* serviceLogin({ params }) {
   try {
     const response = yield call(post, '/users/service-login', params);
 
-    Cookie.set('__gigtoken', response.access_token);
-    if (!response.userType) {
-      Router.push('/setup-account');
-      Cookie.set('__gigtype', 'INVIDUAL');
-    } else if (response.userType === 'TALENT') {
-      Cookie.set('__gigtype', response.userType);
-      if (Cookie.get('__lastApplyGigJob')) {
-        Router.push('/gigs/[id]', Cookie.get('__lastApplyGigJob'));
-      } else {
-        Router.push('/gig-seeker/profile');
-      }
-    } else if (response.userType === 'COMPANY') {
-      Cookie.set('__gigtype', response.userType);
-      if (Cookie.get('__appllicantJobUrl')) {
-        Router.push(Cookie.get('__appllicantJobUrl'));
-      } else {
-        Router.push('/company/profile');
-      }
-    }
+    afterLogin(response);
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }
@@ -120,25 +135,7 @@ function* login({ params }) {
   try {
     const response = yield call(post, '/users/login', params);
 
-    Cookie.set('__gigtoken', response.access_token);
-    if (!response.userType) {
-      Router.push('/setup-account');
-      Cookie.set('__gigtype', 'INVIDUAL');
-    } else if (response.userType === 'TALENT') {
-      Cookie.set('__gigtype', response.userType);
-      if (Cookie.get('__lastApplyGigJob')) {
-        Router.push('/gigs/[id]', Cookie.get('__lastApplyGigJob'));
-      } else {
-        Router.push('/gig-seeker/profile');
-      }
-    } else if (response.userType === 'COMPANY') {
-      Cookie.set('__gigtype', response.userType);
-      if (Cookie.get('__appllicantJobUrl')) {
-        Router.push(Cookie.get('__appllicantJobUrl'));
-      } else {
-        Router.push('/company/profile');
-      }
-    }
+    afterLogin(response);
   } catch (error) {
     if (error.status === 401) {
       yield put(onOpenAlert('Oops! This is an invalid login. Please try again or request a password reset.'));
@@ -183,6 +180,10 @@ export const onServiceLogin = (params) => ({
   type: ON_SERVICE_LOGIN, params,
 });
 
+export const onLoginWithLinkedin = (params) => ({
+  type: ON_LOGIN_WITH_LINKED_IN, params,
+});
+
 export default function* authenticationWatcher() {
   yield takeLatest(ON_LOGIN, login);
   yield takeLatest(ON_SIGN_UP, signUp);
@@ -191,4 +192,5 @@ export default function* authenticationWatcher() {
   yield takeLatest(ON_RESET_PASSWORD, resetPassword);
   yield takeLatest(ON_RENSEND_VERIFICATION, resendEmailVerification);
   yield takeLatest(ON_SERVICE_LOGIN, serviceLogin);
+  yield takeLatest(ON_LOGIN_WITH_LINKED_IN, loginWithLinkedin);
 }

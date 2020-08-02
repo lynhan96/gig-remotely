@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import configureStore from 'config/store';
 import 'config/axiosConfig';
 import { Header, Footer, MainLayout } from 'components/pages';
@@ -17,9 +17,17 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const store = configureStore();
 
 const App = ({ Component, pageProps }) => {
+  const router = useRouter();
   useEffect(() => {
     window.scrollTo(0, 0);
   });
+
+  if (router.pathname === '/linkedin') {
+    <Provider store={store}>
+      <MainLayout Component={Component} pageProps={pageProps} />
+      <GlobalStyle />
+    </Provider>;
+  }
 
   return (
     <Provider store={store}>
