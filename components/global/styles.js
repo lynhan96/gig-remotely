@@ -312,4 +312,14 @@ export const GlobalStyle = createGlobalStyle`
     background: #171E44 !important;
     z-index: 999999;
   }
+
+  .facebook-button-class {
+    padding: 0;
+    margin-right: 15px;
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 50px;
+    height: 50px;
+  }
 `;

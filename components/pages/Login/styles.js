@@ -52,6 +52,10 @@ export const SocialGroup = styled.div`
   justify-content: center;
   margin-bottom: 70px;
   margin-top: 15px;
+
+  span {
+    height: 50px;
+  }
 `;
 
 export const Image = styled.img`

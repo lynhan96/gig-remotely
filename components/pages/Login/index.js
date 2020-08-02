@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Router from 'next/router';
 import { onLogin } from 'saga/authentication';
+import FacebookLogin from 'react-facebook-login';
+
 import {
   Form, Button, Text,
 } from 'components/global';
@@ -21,6 +23,10 @@ const Login = () => {
     login(values);
   };
 
+  const facebookLoginCallback = (response) => {
+    console.log(response);
+  };
+
   return (
     <Wrapper>
       <Title weight='bold'>Welcome back.</Title>
@@ -36,7 +42,15 @@ const Login = () => {
       <Text weight='bold' size='mmd' style={{ textAlign: 'center' }}>or sign in with</Text>
       <SocialGroup>
         <Image src='/images/icon/linkedin.svg' />
-        <Image src='/images/icon/facebook.svg' />
+        <FacebookLogin
+          appId='612438743009066'
+          fields='first_name,last_name,email,picture.type(large)'
+          scope='public_profile'
+          cssClass='facebook-button-class'
+          callback={facebookLoginCallback}
+          textButton=''
+          icon={<Image src='/images/icon/facebook.svg' />}
+        />
         <Image src='/images/icon/gmail.svg' />
       </SocialGroup>
       <Text weight='bold' size='mmd' style={{ marginBottom: 15, textAlign: 'center' }}>New to gig_remotely?</Text>
