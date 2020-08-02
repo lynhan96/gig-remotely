@@ -10,6 +10,7 @@ const ON_VERIFY_EMAIL = 'ON_VERIFY_EMAIL';
 const ON_SEND_RESET_PASSWORD_LINK = 'ON_SEND_RESET_PASSWORD_LINK';
 const ON_RESET_PASSWORD = 'ON_RESET_PASSWORD';
 const ON_RENSEND_VERIFICATION = 'ON_RENSEND_VERIFICATION';
+const ON_SERVICE_LOGIN = 'ON_SERVICE_LOGIN';
 
 function* resendEmailVerification({ email, setState }) {
   try {
@@ -87,6 +88,34 @@ function* signUp({ params, callback }) {
   }
 }
 
+function* serviceLogin({ params }) {
+  try {
+    const response = yield call(post, '/users/service-login', params);
+
+    Cookie.set('__gigtoken', response.access_token);
+    if (!response.userType) {
+      Router.push('/setup-account');
+      Cookie.set('__gigtype', 'INVIDUAL');
+    } else if (response.userType === 'TALENT') {
+      Cookie.set('__gigtype', response.userType);
+      if (Cookie.get('__lastApplyGigJob')) {
+        Router.push('/gigs/[id]', Cookie.get('__lastApplyGigJob'));
+      } else {
+        Router.push('/gig-seeker/profile');
+      }
+    } else if (response.userType === 'COMPANY') {
+      Cookie.set('__gigtype', response.userType);
+      if (Cookie.get('__appllicantJobUrl')) {
+        Router.push(Cookie.get('__appllicantJobUrl'));
+      } else {
+        Router.push('/company/profile');
+      }
+    }
+  } catch (error) {
+    yield put(onOpenAlert(error.data.message));
+  }
+}
+
 function* login({ params }) {
   try {
     const response = yield call(post, '/users/login', params);
@@ -150,6 +179,10 @@ export const onResetPassword = (params, callback) => ({
   type: ON_RESET_PASSWORD, params, callback,
 });
 
+export const onServiceLogin = (params) => ({
+  type: ON_SERVICE_LOGIN, params,
+});
+
 export default function* authenticationWatcher() {
   yield takeLatest(ON_LOGIN, login);
   yield takeLatest(ON_SIGN_UP, signUp);
@@ -157,4 +190,5 @@ export default function* authenticationWatcher() {
   yield takeLatest(ON_SEND_RESET_PASSWORD_LINK, sendResetPasswordLink);
   yield takeLatest(ON_RESET_PASSWORD, resetPassword);
   yield takeLatest(ON_RENSEND_VERIFICATION, resendEmailVerification);
+  yield takeLatest(ON_SERVICE_LOGIN, serviceLogin);
 }

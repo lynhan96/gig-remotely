@@ -1,22 +1,32 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Router from 'next/router';
-import { onLogin } from 'saga/authentication';
+import { onLogin, onServiceLogin } from 'saga/authentication';
+import { onOpenAlert } from 'redux/alert';
 import FacebookLogin from 'react-facebook-login';
-
 import {
   Form, Button, Text,
 } from 'components/global';
+import AlertServiceLogin from './AlertServiceLogin';
 import {
   Wrapper, Title, StyledLink, SocialGroup, Image, SubTitle,
 } from './styles';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const alertRef = useRef();
 
   const login = useCallback((params) => dispatch(
     onLogin(params),
+  ), [dispatch]);
+
+  const serviceLogin = useCallback((params) => dispatch(
+    onServiceLogin(params),
+  ), [dispatch]);
+
+  const showError = useCallback((message) => dispatch(
+    onOpenAlert(message),
   ), [dispatch]);
 
   const onSubmit = (values) => {
@@ -24,11 +34,23 @@ const Login = () => {
   };
 
   const facebookLoginCallback = (response) => {
-    console.log(response);
+    if (response.email && response.id) {
+      alertRef.current.open();
+      serviceLogin({
+        registerType: 'FACEBOOK',
+        firstName: response.first_name,
+        lastName: response.last_name,
+        email: response.email,
+        loginServiceClientId: response.id,
+      });
+    } else {
+      showError('Facebook service error');
+    }
   };
 
   return (
     <Wrapper>
+      <AlertServiceLogin ref={alertRef} />
       <Title weight='bold'>Welcome back.</Title>
       <SubTitle>Stay connected to GigRemotely to make sure you're not missing out on any opportunities.</SubTitle>
       <Form onSubmit={onSubmit}>
@@ -43,6 +65,9 @@ const Login = () => {
       <SocialGroup>
         <Image src='/images/icon/linkedin.svg' />
         <FacebookLogin
+          onClick={() => console.log('onClick')}
+          onFailure={(e) => console.log(e)}
+          isDisabled={false}
           appId='612438743009066'
           fields='first_name,last_name,email,picture.type(large)'
           scope='public_profile'
