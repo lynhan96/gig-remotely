@@ -26,7 +26,7 @@ const Alert = () => {
     <Modal
       showCloseIcon={false}
       onClose={closeModal}
-      isOpen={open}
+      isOpen={open && message}
     >
       <Wrapper>
         <StyledText size='xl' weight='bold' width='auto'>{message}</StyledText>
