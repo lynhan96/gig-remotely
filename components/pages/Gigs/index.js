@@ -44,8 +44,9 @@ const Gigs = () => {
     setState({
       loading: true, data: [], meta: {},
     });
-    inputRef.current.value = query.keyword;
-    getJobs({ keyword: query.keyword }, callback);
+    inputRef.current.value = query.keyword || '';
+
+    getJobs({ keyword: query.keyword, type: query.type }, callback);
   }, [router.asPath]);
 
   const search = ({ keyword, option }) => {

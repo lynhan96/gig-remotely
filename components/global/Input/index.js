@@ -17,7 +17,7 @@ const Input = ({
   fieldType,
   minHeight,
   className,
-  disabled
+  disabled,
 }) => {
   const [inputType, setInputType] = useState(type);
   const fontSize = () => {
@@ -56,12 +56,14 @@ const Input = ({
     );
   }
 
+  console.log(defaultValue);
+
   return (
     <InputWrapper>
       <StyledInput
         disabled={disabled}
         background={background}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue || ''}
         className={error ? `${className} input-error` : className}
         ref={inputRef}
         type={inputType}

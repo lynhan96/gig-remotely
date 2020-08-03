@@ -36,7 +36,7 @@ const SearchForm = ({
   return (
     <Wrapper>
       <InputWrapper>
-        <Input defaultValue={keyword} onChange={onChange} placeholder='Type in a keyword…' inputRef={inputRef} />
+        <Input defaultValue={keyword || ''} onChange={onChange} placeholder='Type in a keyword…' inputRef={inputRef} />
         <StyledRadioGroup
           defaultValue={option}
           items={radioOptions}
