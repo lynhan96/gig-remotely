@@ -122,7 +122,8 @@ const PaymentForm = ({
       const calculatedPrice = currentPrice - parseFloat(response.amount);
       serTotalPrice(calculatedPrice < 2 ? parseFloat(2.00).toFixed(2) : calculatedPrice);
     } else {
-      const calculatedPrice = currentPrice * (1.0 - (parseFloat(response.amount) / 100.0));
+      const priceAfterDiscount = 49.90 * (1.0 - (parseFloat(response.amount) / 100.0));
+      const calculatedPrice = boostRef.current ? priceAfterDiscount + 8 : priceAfterDiscount;
       serTotalPrice(calculatedPrice < 2 ? parseFloat(2.00).toFixed(2) : calculatedPrice);
     }
   };
@@ -136,7 +137,8 @@ const PaymentForm = ({
       currentPromotion.current = response;
 
       const type = response.promo_type === 'amount' ? '$' : '%';
-      serPromotionResult(`${response.code} (-${type}${response.amount} discount)`);
+      // serPromotionResult(`${response.code} (-${type}${response.amount} discount)`);
+      serPromotionResult(`${response.code} (promo applied)`);
     } else {
       promotionRef.current.isValid = false;
       serPromotionResult(inputRef.current.value);
