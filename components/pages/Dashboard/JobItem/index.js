@@ -63,7 +63,7 @@ const JobItem = ({ item, removeItem }) => {
       // removeItem(id); }
       Router.push(`/company/repost-gig?id=${id}`);
     } else {
-      Router.push('/company/edit-gig/[id]', `/company/edit-gig/${id}`);
+      Router.push('/company/edit-gig/[id]', `/company/edit-gig/${id}?gigId=${id}`);
     }
   };
   const viewApplicant = () => Router.push('/company/applicant/[id]', `/company/applicant/${id}`);

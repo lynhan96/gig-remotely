@@ -6,6 +6,7 @@ import { onGetJobDetail } from 'saga/jobs';
 import { PostGig } from 'components/pages';
 import { Container, LoadingWrapper } from 'components/global/styles';
 import { Loading } from 'components/global';
+import queryString from 'query-string';
 
 const EditGigPage = () => {
   const [state, setState] = useState({ loading: true, data: null });
@@ -18,7 +19,10 @@ const EditGigPage = () => {
   ), [dispatch]);
 
   useEffect(() => {
-    getGig({ id: router.query.id });
+    const query = queryString.parse(router.asPath.split(/\?/)[1]);
+    const id = Number.isNaN(parseInt(router.query.id, 10)) ? query.gigId : parseInt(router.query.id, 10);
+
+    getGig({ id });
   }, [router.asPath]);
 
   return (
