@@ -57,7 +57,7 @@ const AccountSetting = () => {
           <Form onSubmit={onSubmit} type='horizontal'>
             <HeadTitle size='llg'>
               Account Information
-              <span onClick={toggleView}>{editView ? 'view' : 'edit'}</span>
+              <span onClick={toggleView}>{editView ? 'cancel' : 'edit'}</span>
             </HeadTitle>
             <Form.Item name='companyName' label='Company Name' required placeholder='Company Name' className={editView ? 'show-field' : 'hide-field'} defaultValue={name} />
             <Text size='sm' className={editView ? 'hide-field' : 'show-field'}>{name}</Text>

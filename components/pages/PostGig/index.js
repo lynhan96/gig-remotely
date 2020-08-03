@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -76,6 +76,13 @@ const PostGig = ({
   };
 
   const paymentAndPostGig = (params) => {
+    // trick for our user post no need payment
+    if (user.email === 'hello@chanceupon.co') {
+      params.boost = boostRef.current;
+      postGig(params, 'hello@chanceupon.co');
+      return;
+    }
+
     if (promotionRef.current.checking) {
       showError('We are checking your promotion code.');
       buttonRef.current.available();
@@ -131,6 +138,11 @@ const PostGig = ({
   };
 
   const showDeletePopUp = () => deletePopupRef.current.open();
+
+  useEffect(() => {
+    // trick for our user post no need payment
+    if (user.email === 'hello@chanceupon.co') buttonRef.current.available();
+  }, []);
 
   return (
     <Wrapper>

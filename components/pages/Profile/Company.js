@@ -46,22 +46,26 @@ const CompanyInfo = ({
           <StyledText style={{ textAlign: 'center' }} size='mmd' weight='bold'>gig(s) available</StyledText>
           <Button onClick={viewGigs}>see gigs</Button>
         </GigInfo>
-        <ContactItem>
-          <Icon src='/images/icon/email.svg' alt='error' />
-          <ContactInfo>
-            <StyledText size='mmd' weight='bold' marginBottom='5px'>Email</StyledText>
-            <StyledText size='mmd' marginBottom='0'><a href={`mailto:${email}`}>{email}</a></StyledText>
-          </ContactInfo>
-        </ContactItem>
-        <ContactItem>
-          <Icon src='/images/icon/phone.svg' alt='error' />
-          <ContactInfo>
-            <StyledText size='mmd' weight='bold' marginBottom='5px'>Contact No.</StyledText>
-            <StyledText size='mmd' marginBottom='0' noUnderline>
-              <a href={`tel:${contact}`}>{contact}</a>
-            </StyledText>
-          </ContactInfo>
-        </ContactItem>
+        { isCompany && (
+          <>
+            <ContactItem>
+              <Icon src='/images/icon/email.svg' alt='error' />
+              <ContactInfo>
+                <StyledText size='mmd' weight='bold' marginBottom='5px'>Email</StyledText>
+                <StyledText size='mmd' marginBottom='0'><a href={`mailto:${email}`}>{email}</a></StyledText>
+              </ContactInfo>
+            </ContactItem>
+            <ContactItem>
+              <Icon src='/images/icon/phone.svg' alt='error' />
+              <ContactInfo>
+                <StyledText size='mmd' weight='bold' marginBottom='5px'>Contact No.</StyledText>
+                <StyledText size='mmd' marginBottom='0' noUnderline>
+                  <a href={`tel:${contact}`}>{contact}</a>
+                </StyledText>
+              </ContactInfo>
+            </ContactItem>
+          </>
+        )}
         <ContactItem>
           <Icon src='/images/icon/earth.svg' alt='error' />
           <ContactInfo>
