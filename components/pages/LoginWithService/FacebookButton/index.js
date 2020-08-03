@@ -34,7 +34,7 @@ const FacebookButton = ({ icon, alertRef }) => {
   return (
     <FacebookLogin
       autoLoad={false}
-      appId='612438743009066'
+      appId={process.env.NODE_ENV === 'development' ? '612438743009066' : '300287254307825'}
       fields='first_name,last_name,email,picture.type(large)'
       scope='public_profile'
       cssClass='facebook-button-class'
