@@ -39,10 +39,9 @@ const SignUp = () => {
   if (showNotice) {
     return (
       <StyledContainer>
-        <NoticeTitle size='xl' weight='bold'>Please Verify Your Email Address</NoticeTitle>
-        <Text size='md' style={{ marginBottom: 15 }}>To ensure that our mailing list contains only those who wish to be on it, we have sent a confirmation link to your email address.</Text>
+        <NoticeTitle size='xl' weight='bold'>Nearly there!</NoticeTitle>
         <Text size='md'>
-          Please log in to your email account and find the email we have just sent you. It may be in your Spam/Bulk/Junk folder. To complete the process of being added to our mailing list, just click the link in that email.
+          We have sent a confirmation link to the email address you provided. Please check your email and follow the instructions to be added to our mailing list. If the email is not there, be sure to check your spam box!
         </Text>
       </StyledContainer>
     );
