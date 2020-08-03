@@ -115,7 +115,7 @@ const PaymentForm = ({
   };
 
   const calulatedPrice = (isValid, response) => {
-    const currentPrice = boostRef.current ? 57.9 : 49.9;
+    const currentPrice = boostRef.current ? 57.90 : 49.90;
     if (!isValid) {
       serTotalPrice(currentPrice);
     } else if (response.promo_type === 'amount') {
@@ -249,7 +249,7 @@ const PaymentForm = ({
           </FieldInput>
           <TotalPriceWrapper>
             <TotalPriceText>Total</TotalPriceText>
-            <TotalPrice>{`$${totalPrice}`}</TotalPrice>
+            <TotalPrice>{`$${parseFloat(totalPrice).toFixed(2)}`}</TotalPrice>
           </TotalPriceWrapper>
         </PaymentPrice>
       </RightWrapper>

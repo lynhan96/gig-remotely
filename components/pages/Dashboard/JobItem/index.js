@@ -40,7 +40,7 @@ const labelBackground = (type) => {
 
 const JobItem = ({ item, removeItem }) => {
   const {
-    id, title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, status, expiredAt,
+    id, title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, status, expiredAt, jobApplications
   } = item;
 
   const timeText = () => {
@@ -131,7 +131,7 @@ const JobItem = ({ item, removeItem }) => {
               disabled={disabledItem}
               onClick={viewApplicant}
             >
-              view applicants
+              {`view applicants(${jobApplications.length})`}
             </StyledButton>
           </ButtonWrapper>
         </Action>

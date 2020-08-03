@@ -87,6 +87,8 @@ const JobItem = ({
     window.open(`/gigs/${id}?gigId=${id}`, '_blank');
   };
 
+  console.log(item)
+
   useEffect(() => {
     setIsFavorite(favorite);
   }, [favorite]);
@@ -107,7 +109,7 @@ const JobItem = ({
                 <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
               </Title>
               <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
-              <Text color={disabledItem ? '#9a9a8b' : ''} size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company.name}</Text>
+              <Text color={disabledItem ? '#9a9a8b' : ''} size='sm' style={{ marginTop: 5, letterSpacing: 0.34 }}>{company ? company.name : ''}</Text>
             </TitleWrapper>
             <Locale>
               <LocaleItem>

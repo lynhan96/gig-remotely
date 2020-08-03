@@ -193,10 +193,6 @@ const GigDetail = ({ item }) => {
                 </StyledButton>
               )
             }
-            <ShareButton onClick={share}>
-              <ShareImage src='/images/icon/share.svg' />
-              share
-            </ShareButton>
           </ActionGroup>
           )}
           <DescriptionWrapper>
