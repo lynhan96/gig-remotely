@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Text } from 'components/global';
 
 export const StyledText = styled(Text)`
+  width: 100%;
+  overflow: hidden;
   margin: 10px 0 40px 0;
 
   @media (width: 768px) {

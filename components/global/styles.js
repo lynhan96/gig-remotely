@@ -322,4 +322,18 @@ export const GlobalStyle = createGlobalStyle`
     width: 50px;
     height: 50px;
   }
+
+  .google-login-button {
+    div {
+      display: none;
+    }
+
+    span {
+      padding: 0 !important;
+    }
+
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
 `;

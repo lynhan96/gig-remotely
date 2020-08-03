@@ -10,7 +10,7 @@ import {
 const AccountSetting = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.data);
-
+  const { registerType } = user || {};
   const [editView, setEditView] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -44,11 +44,13 @@ const AccountSetting = () => {
             <Form.Item name='newEmail' label='Email' required placeholder='Email' validateType='email' className={editView ? 'show-field' : 'hide-field'} defaultValue={user.email} />
             <Text size='sm' className={editView ? 'hide-field' : 'show-field'}>{user.email}</Text>
             <PasswordField>
-              <Label>
-                Password
-                <span onClick={changePassword}>{editView ? 'change' : ''}</span>
-              </Label>
-              <Text size='sm' style={{ marginTop: 10 }}>**********</Text>
+              { registerType === 'EMAIL' ? (
+                <Label>
+                  Password
+                  <span onClick={changePassword}>{editView ? 'change' : ''}</span>
+                </Label>
+              ) : <Label> Signup with:</Label>}
+              <Text size='sm' style={{ marginTop: 10 }}>{ registerType === 'EMAIL' ? '**********' : Text.toTitleCase(registerType)}</Text>
             </PasswordField>
             <Button htmlType='submit' width='200px' disabled={submitting} style={{ marginTop: 35 }} className={editView ? 'show-field' : 'hide-field'}>{submitting ? 'saving...' : 'save'}</Button>
           </Form>

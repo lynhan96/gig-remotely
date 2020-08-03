@@ -111,23 +111,35 @@ function* signUp({ params, callback }) {
   }
 }
 
-function* loginWithLinkedin({ params }) {
+function* loginWithLinkedin({ params, callback }) {
   try {
     const response = yield call(post, '/users/linkedin-login', params);
 
     afterLogin(response);
   } catch (error) {
-    yield put(onOpenAlert(error.data.message));
+    if (error.status === 401) {
+      yield put(onOpenAlert('Oops! This is an invalid login. Please try again or request a password reset.'));
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
+
+    callback();
   }
 }
 
-function* serviceLogin({ params }) {
+function* serviceLogin({ params, callback }) {
   try {
     const response = yield call(post, '/users/service-login', params);
 
     afterLogin(response);
   } catch (error) {
-    yield put(onOpenAlert(error.data.message));
+    if (error.status === 401) {
+      yield put(onOpenAlert('Oops! This is an invalid login. Please try again or request a password reset.'));
+    } else {
+      yield put(onOpenAlert(error.data.message));
+    }
+
+    callback();
   }
 }
 
@@ -176,12 +188,12 @@ export const onResetPassword = (params, callback) => ({
   type: ON_RESET_PASSWORD, params, callback,
 });
 
-export const onServiceLogin = (params) => ({
-  type: ON_SERVICE_LOGIN, params,
+export const onServiceLogin = (params, callback) => ({
+  type: ON_SERVICE_LOGIN, params, callback,
 });
 
-export const onLoginWithLinkedin = (params) => ({
-  type: ON_LOGIN_WITH_LINKED_IN, params,
+export const onLoginWithLinkedin = (params, callback) => ({
+  type: ON_LOGIN_WITH_LINKED_IN, params, callback,
 });
 
 export default function* authenticationWatcher() {

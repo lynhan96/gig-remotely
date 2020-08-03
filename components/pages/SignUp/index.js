@@ -1,16 +1,21 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { onSignUp } from 'saga/authentication';
 import { onOpenAlert } from 'redux/alert';
 import {
   Form, Button, Text,
 } from 'components/global';
+import GoogleButton from '../LoginWithService/GoogleButton';
+import LinkedinButton from '../LoginWithService/LinkedinButton';
+import FacebookButton from '../LoginWithService/FacebookButton';
+import AlertServiceLogin from '../LoginWithService/AlertServiceLogin';
 import {
   Wrapper, Title, SocialGroup, Image, ContentWrapper, StyledContainer, NoticeTitle,
 } from './styles';
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const alertRef = useRef();
   const [showNotice, setShowNotice] = useState(false);
 
   const callback = () => setShowNotice(true);
@@ -45,6 +50,7 @@ const SignUp = () => {
 
   return (
     <Wrapper>
+      <AlertServiceLogin ref={alertRef} />
       <Title weight='bold'>Welcome aboard. </Title>
       <Form onSubmit={onSubmit}>
         <Form.Item label='First Name' name='firstName' placeholder='First Name' />
@@ -56,9 +62,9 @@ const SignUp = () => {
           <Button width='100%' htmlType='submit'>create account</Button>
           <Text weight='bold' size='mmd' style={{ textAlign: 'center', marginTop: 40 }}>or create account using</Text>
           <SocialGroup>
-            <Image src='/images/icon/linkedin.svg' />
-            <Image src='/images/icon/facebook.svg' />
-            <Image src='/images/icon/gmail.svg' />
+            <LinkedinButton alertRef={alertRef} />
+            <FacebookButton icon={<Image src='/images/icon/facebook.svg' />} alertRef={alertRef} />
+            <GoogleButton icon={<Image src='/images/icon/gmail.svg' />} alertRef={alertRef} />
           </SocialGroup>
         </ContentWrapper>
       </Form>
