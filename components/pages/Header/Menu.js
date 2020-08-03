@@ -19,6 +19,8 @@ const Nav = () => {
   const logout = () => {
     Cookie.remove('__lastApplyGigJob');
     Cookie.remove('__appllicantJobUrl');
+    Cookie.remove('__gigtype');
+    Cookie.remove('__gigtoken');
     redirectTo('/login');
   };
 
