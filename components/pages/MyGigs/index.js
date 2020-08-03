@@ -63,7 +63,7 @@ const MyGigs = () => {
           <TabScrollAble>
             <TabItem size='mmd' onClick={() => setOpenTab(0)} active={openTab === 0}>{`all gigs (${all.length})`}</TabItem>
             <TabItem size='mmd' onClick={() => setOpenTab(1)} active={openTab === 1}>{`applied gigs (${applied.length})`}</TabItem>
-            <TabItem size='mmd' onClick={() => setOpenTab(2)} active={openTab === 2}>{`unapplied gigs (${unapplied.length})`}</TabItem>
+            <TabItem size='mmd' onClick={() => setOpenTab(2)} active={openTab === 2}>{`saved gigs (${unapplied.length})`}</TabItem>
             <TabItem size='mmd' onClick={() => setOpenTab(3)} active={openTab === 3}>{`expired gigs (${expired.length})`}</TabItem>
           </TabScrollAble>
         </TabsItemWrapper>
