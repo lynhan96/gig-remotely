@@ -1,5 +1,5 @@
 import React, {
-  useCallback, useState, useImperativeHandle, useRef,
+  useCallback, useState, useImperativeHandle, useRef, useEffect,
 } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Router from 'next/router';
@@ -65,6 +65,10 @@ const ApplyModal = React.forwardRef(({ item, labelBackground }, ref) => {
       setOpen(false);
     }
   };
+
+  useEffect(() => {
+    valuesRef.current.resume = resume;
+  }, [user]);
 
   const applyJob = useCallback((jobId, params) => dispatch(
     onApplyJob(jobId, params, callback),

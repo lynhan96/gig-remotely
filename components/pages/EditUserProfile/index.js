@@ -1,6 +1,7 @@
 import React, {
   useCallback, useRef,
 } from 'react';
+import Router from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { onOpenAlert } from 'redux/alert';
 import { country } from 'constant';
@@ -91,7 +92,7 @@ const EditUserProfile = () => {
         </RightWrapper>
         <ButtonWrapper>
           <Button htmlType='submit' width='200px'>save</Button>
-          <Button htmlType='reset' buttonType='light' width='200px' style={{ marginTop: 20 }}>cancel</Button>
+          <Button onClick={() => Router.push('/gig-seeker/profile')} buttonType='light' width='200px' style={{ marginTop: 20 }}>cancel</Button>
         </ButtonWrapper>
       </Form>
     </Wrapper>
