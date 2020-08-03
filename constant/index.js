@@ -15,6 +15,7 @@ export const listRoleLevel = [
   { value: 'Intern', name: 'Intern' },
   { value: 'Junior', name: 'Junior' },
   { value: 'Senior', name: 'Senior' },
+  { value: 'MidLevel', name: 'Mid-Level' },
 ];
 export const jobCategory = [
   { value: 'Branding', name: 'Branding' },
