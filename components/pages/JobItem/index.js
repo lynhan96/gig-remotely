@@ -87,8 +87,6 @@ const JobItem = ({
     window.open(`/gigs/${id}?gigId=${id}`, '_blank');
   };
 
-  console.log(item)
-
   useEffect(() => {
     setIsFavorite(favorite);
   }, [favorite]);

@@ -123,15 +123,15 @@ const JobItem = ({ item, removeItem }) => {
         <Action>
           <Time size='xs' color='#9a9a8b' expired={disabledItem}>{timeText()}</Time>
           <ButtonWrapper>
-            <StyledButton buttonType={disabledItem ? '' : 'light'} width='200px' onClick={editGig}>
+            <StyledButton buttonType={disabledItem ? '' : 'light'} width='220px' onClick={editGig}>
               {disabledItem ? 'repost' : 'edit gig'}
             </StyledButton>
             <StyledButton
-              width='200px'
+              width='220px'
               disabled={disabledItem}
               onClick={viewApplicant}
             >
-              {`view applicants(${jobApplications.length})`}
+              {`view applicants (${jobApplications.length})`}
             </StyledButton>
           </ButtonWrapper>
         </Action>
