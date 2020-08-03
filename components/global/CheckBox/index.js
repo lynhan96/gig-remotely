@@ -19,6 +19,7 @@ const CheckBox = ({
     } else {
       setChecked(true);
     }
+
     onChange({ name, value: !checked });
   };
 
@@ -27,7 +28,6 @@ const CheckBox = ({
 
   useEffect(() => {
     setChecked(defaultValue);
-    onChange({ name, value: defaultValue });
   }, [defaultValue]);
 
   return (
@@ -48,6 +48,7 @@ CheckBox.propTypes = {
     PropTypes.string,
     PropTypes.node,
   ]),
+  cantoggle: PropTypes.bool,
 };
 
 CheckBox.defaultProps = {
@@ -56,6 +57,7 @@ CheckBox.defaultProps = {
   onChange: () => {},
   defaultValue: false,
   label: '',
+  cantoggle: true,
 };
 
 export default CheckBox;

@@ -1,5 +1,5 @@
 import React, {
-  useState, useCallback, useEffect,
+  useState, useCallback, useEffect, useRef
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -47,6 +47,7 @@ const Label = ({ text, type }) => (
 const PaymentOptions = () => {
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
+  const clearFieldRef = useRef(false);
   const [carNumberError, setCarNumberError] = useState('');
   const [cardCvcError, setCardCvcError] = useState('');
   const [cardExpiryError, setCardExpiryError] = useState('');
@@ -82,10 +83,19 @@ const PaymentOptions = () => {
         },
       },
     }).then(() => {
+      clearFieldRef.current = true;
       elements.getElement(CardNumberElement).clear();
       elements.getElement(CardCvcElement).clear();
       elements.getElement(CardExpiryElement).clear();
+
       getPaymentMethod();
+
+      setTimeout(() => {
+        setCardCvcError('');
+        setCardExpiryError('');
+        setCarNumberError('');
+        clearFieldRef.current = false;
+      }, 500);
     }).catch((err) => {
       showError(err);
     });
@@ -139,10 +149,6 @@ const PaymentOptions = () => {
   }, []);
 
   useEffect(() => {
-    if (cardCvcError) setCardCvcError('');
-    if (cardExpiryError) setCardExpiryError('');
-    if (carNumberError) setCarNumberError('');
-
     if (!selectedOption) {
       paymentMethod.filter((i) => i.default_source && setSelectedOption(i.id));
     }
@@ -209,7 +215,7 @@ const PaymentOptions = () => {
                 <FieldLabel>Credit Card Number</FieldLabel>
                 <Input />
                 <CardNumberElement options={inputStyle} className='payment-input-field' onChange={onChangeCardNumber} />
-                <Error className={carNumberError ? 'show-input-error' : 'hide-input-error'}>{carNumberError}</Error>
+                <Error className={carNumberError ? 'show-input-error' : 'hide-input-error'}>{!clearFieldRef.current ? carNumberError : ''}</Error>
               </FieldInput>
               <FieldGroupInput>
                 <FieldInput>
@@ -226,8 +232,8 @@ const PaymentOptions = () => {
                   { submitting ? 'adding...' : 'add' }
                 </Button>
               </FieldGroupInput>
-              <Error className={cardCvcError ? 'show-input-error' : 'hide-input-error'}>{cardCvcError}</Error>
-              <Error className={cardExpiryError ? 'show-input-error' : 'hide-input-error'}>{cardExpiryError}</Error>
+              <Error className={cardCvcError ? 'show-input-error' : 'hide-input-error'}>{!clearFieldRef.current ? cardCvcError : ''}</Error>
+              <Error className={cardExpiryError ? 'show-input-error' : 'hide-input-error'}>{!clearFieldRef.current ? cardExpiryError : ''}</Error>
             </Card>
           </Form>
         </RightWrapper>

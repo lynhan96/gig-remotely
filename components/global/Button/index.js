@@ -12,6 +12,7 @@ const Button = ({
   buttonType,
   htmlType,
   disabled,
+  id,
 }) => {
   const fontSize = () => {
     switch (size) {
@@ -28,6 +29,7 @@ const Button = ({
 
   return (
     <StyledButton
+      id={id}
       disabled={disabled}
       className={className}
       width={width}
@@ -56,6 +58,7 @@ Button.propTypes = {
   buttonType: PropTypes.string,
   htmlType: PropTypes.string,
   disabled: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -68,6 +71,7 @@ Button.defaultProps = {
   onClick: null,
   children: null,
   disabled: false,
+  id: '',
 };
 
 export default Button;

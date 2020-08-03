@@ -80,9 +80,10 @@ const JobItem = ({
   };
 
   const onClick = (e) => {
-    if (e.target && e.target.id === 'heart-icon') {
+    if (e.target && (e.target.id === 'heart-icon' || e.target.id === 'apply-button')) {
       return;
     }
+
     if (disabledItem) return;
     window.open(`/gigs/${id}?gigId=${id}`, '_blank');
   };
@@ -148,9 +149,10 @@ const JobItem = ({
         </Information>
         <Action>
           <StyledButton
+            id='apply-button'
             width='200px'
             disabled={disabledItem || applied}
-            onClick={(e) => onClick(e)}
+            onClick={() => window.open(`/gigs/${id}?gigId=${id}`, '_blank')}
           >
             {applied ? 'applied' : 'apply'}
           </StyledButton>
