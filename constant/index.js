@@ -29,6 +29,7 @@ export const jobCategory = [
   { value: 'Content Management', name: 'Content Management' },
   { value: 'Others', name: 'Others' },
 ];
+
 export const listTimezone = [{ name: '(GMT-11:00) Midway Island, Samoa', value: '11:00' },
   { name: '(GMT-10:00) Hawaii-Aleutian', value: '10:00' },
   { name: '(GMT-10:00) Hawaii', value: '10:00' },

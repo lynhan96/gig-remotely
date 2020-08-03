@@ -6,8 +6,9 @@ import {
   useStripe, useElements, CardNumberElement,
 } from '@stripe/react-stripe-js';
 import {
-  country, jobCategory, listTimezone, listRoleLevel, listContractType, listDuration,
+  country, jobCategory, listRoleLevel, listContractType, listDuration,
 } from 'constant';
+import listTimezone from 'constant/timezone';
 import { onOpenAlert } from 'redux/alert';
 import { Form } from 'components/global';
 import { onPostGig, onUpdateGig } from 'saga/company';
