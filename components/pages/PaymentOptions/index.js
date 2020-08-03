@@ -183,7 +183,7 @@ const PaymentOptions = () => {
       <Title>Payment Options</Title>
       <ContentWrapper>
         <LeftWrapper>
-          <Button width='250px' onClick={addPaymentMethod}>add payment option</Button>
+          <Button width='250px' onClick={addPaymentMethod}>confirm primary card</Button>
           <SelectWrapper>
             {
               paymentMethod.map(({ id, card }) => (
