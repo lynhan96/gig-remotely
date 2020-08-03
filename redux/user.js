@@ -6,6 +6,7 @@ const ON_RESET_USER_INFO = 'ON_RESET_USER_INFO';
 const ON_UPDATE_USER_ACCOUNT_SETTING = 'ON_UPDATE_USER_ACCOUNT_SETTING';
 
 const INITIAL_STATE = {
+  loading: true,
   data: {},
 };
 
@@ -16,6 +17,7 @@ export default (state = INITIAL_STATE, action = {}) => {
       return state;
     case ON_UPDATE_USER_PROFILE:
       return {
+        loading: false,
         data: action.payload.profile,
       };
     case ON_UPDATE_USER_TALEN:

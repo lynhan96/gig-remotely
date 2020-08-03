@@ -1,5 +1,5 @@
 import React, {
-  useState, useContext, useCallback, useImperativeHandle,
+  useState, useContext, useCallback, useImperativeHandle, useEffect,
 } from 'react';
 import { useDispatch } from 'react-redux';
 import { onGetUploadFile } from 'saga/upload';
@@ -30,7 +30,7 @@ const FormFileInput = React.forwardRef(({
     onGetUploadFile(filename, type, callback),
   ), [dispatch]);
 
-  const uploadFileCallback = ({filename}) => {
+  const uploadFileCallback = ({ filename }) => {
     setFileName(filename);
     valuesRef.current[name] = filename;
   };
@@ -46,6 +46,10 @@ const FormFileInput = React.forwardRef(({
     valuesRef.current[name] = '';
   };
 
+  useEffect(() => {
+    valuesRef.current[name] = defaultValue;
+  }, []);
+
   return (
     <FileInputWrapper>
       <FileInputLabel>{label}</FileInputLabel>
@@ -57,6 +61,6 @@ const FormFileInput = React.forwardRef(({
       <Upload type='file' onChange={onChange} />
     </FileInputWrapper>
   );
-})
+});
 
 export default FormFileInput;
