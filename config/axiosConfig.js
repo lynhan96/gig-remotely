@@ -6,9 +6,6 @@ const baseUrl = 'https://api.gigremotely.com/';
 
 axios.interceptors.request.use(
   (config) => {
-    config.headers['Access-Control-Allow-Origin'] = '*';
-    config.headers['Access-Control-Allow-Credentials'] = true;
-    config.headers['Access-Control-Allow-Methods'] = 'GET,PUT,POST,DELETE';
     if (config.baseURL === baseUrl && !config.headers.Authorization) {
       const token = Cookie.get('__gigtoken');
       if (token) {
