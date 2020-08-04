@@ -47,7 +47,7 @@ const LinkedInButton = ({ alertRef }) => {
   };
 
   const linkedInRequestToken = () => {
-    const redirectUri = process.env.NODE_ENV === 'development' ? 'https://7c6ae87ccdbd.ngrok.io/linkedin' : 'https://gigremotely.tk/linkedin';
+    const redirectUri = process.env.NODE_ENV === 'development' ? 'https://7c6ae87ccdbd.ngrok.io/linkedin' : 'https://gigremotely.com/linkedin';
     const clientId = process.env.NODE_ENV === 'development' ? '863nizmny7l8qt' : '86zxo5dqwfljd8';
     const oauthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&scope=r_liteprofile%20r_emailaddress&state=${new Date()}&redirect_uri=${redirectUri}`;
     const width = 450;
