@@ -11,7 +11,7 @@ import queryString from 'query-string';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-const promise = loadStripe('pk_test_BIbbDbmvlENgzbbdBRuMsebI00awQs2uw5');
+const promise = loadStripe('pk_live_l9NrmZnYXGraedzXYA4Qcmqk00z52LWv0P');
 
 const RepostGigPage = () => {
   const [state, setState] = useState({ loading: true, data: null });
