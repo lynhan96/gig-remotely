@@ -3,7 +3,7 @@ import { color } from 'components/utils/color';
 
 export const Layout = styled.div`
   margin: 0;
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   color: ${color.black};
   background: ${color.offWhite};

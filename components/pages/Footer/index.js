@@ -5,7 +5,7 @@ import {
 } from './styles';
 
 const Footer = () => (
-  <Wrapper>
+  <Wrapper style={{ display: 'none' }}>
     <StyledContainer>
       <Group position='first'>
         <StyledText size='xs' onClick={() => Router.push('/who-we-are')}>Who We Are</StyledText>

@@ -30,7 +30,7 @@ const Header = () => {
   const redirectTo = (link) => Router.push(link);
 
   return (
-    <HeaderWrapper id='header'>
+    <HeaderWrapper id='header' style={{ display: 'none' }}>
       <Logo src='/images/logo.svg' onClick={() => (userType === 'INVIDUAL' ? {} : redirectTo('/')) } />
       <MenuWrapper>
         <Menu />

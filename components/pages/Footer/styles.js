@@ -6,6 +6,7 @@ import { Text } from 'components/global';
 export const Wrapper = styled.div`
   background: ${color.black};
   padding: 40px 0 100px 0;
+  display: flex !important;
 `;
 
 export const StyledContainer = styled(Container)`

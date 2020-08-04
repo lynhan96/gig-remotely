@@ -7,7 +7,7 @@ const responsiveFontSize = '24px';
 
 export const HeaderWrapper = styled.div`
   z-index: 9999;
-  display: flex;
+  display: flex !important;
   width: calc(100% - 180px);
   padding: 50px 90px;
   height: 45px;
