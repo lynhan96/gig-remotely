@@ -110,6 +110,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
+  .show-page {
+    display: flex !important;
+  }
+
   .sticky {
     padding-top: 30px !important;
     padding-bottom: 30px !important;

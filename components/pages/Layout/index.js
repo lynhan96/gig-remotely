@@ -85,7 +85,7 @@ const MainLayout = ({ Component, pageProps }) => {
   }, [router.asPath]);
 
   return (
-    <Layout>
+    <Layout className='show-page' style={{ display: 'none' }}>
       <Component {...pageProps} />
       <Alert />
     </Layout>
