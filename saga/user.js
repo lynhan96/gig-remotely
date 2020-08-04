@@ -121,10 +121,11 @@ function* updateUserProfile({ params }) {
   try {
     const response = yield call(axiosPut, '/talent', params);
 
-    yield put(onUpdateTalent(response));
+    yield put(onUpdateTalent(response, { firstName: params.firstName, lastName: params.lastName }));
     yield put(onOpenAlert("We've successfully changed your profile"));
     Router.push('/gig-seeker/profile');
   } catch (error) {
+    console.log(error)
     yield put(onOpenAlert(error.data.message));
   }
 }

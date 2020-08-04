@@ -22,6 +22,8 @@ export default (state = INITIAL_STATE, action = {}) => {
       };
     case ON_UPDATE_USER_TALEN:
       state.data.talent = action.payload.talent;
+      state.data.firstName = action.payload.profile.firstName;
+      state.data.lastName = action.payload.profile.lastName;
       return state;
     case ON_UPDATE_USER_COMPANY:
       state.data.company = action.payload.company;
@@ -49,10 +51,11 @@ export const onUpdateProfile = (profile) => ({
   },
 });
 
-export const onUpdateTalent = (talent) => ({
+export const onUpdateTalent = (talent, profile) => ({
   type: ON_UPDATE_USER_TALEN,
   payload: {
     talent,
+    profile,
   },
 });
 

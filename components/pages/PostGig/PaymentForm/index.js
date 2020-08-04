@@ -216,8 +216,7 @@ const PaymentForm = ({
           <LeftContent>
             <Banner>Boost Your Visibility</Banner>
             <Description>
-              When you boost your gig, your job listing will stand out better with a striking, moving accent colour and be bumped to the top everyday for 5 continuous days. See
-              <a>sample.</a>
+              When you boost your gig, your job listing will stand out better with a striking, moving accent colour and be bumped to the top everyday for 5 continuous days.
             </Description>
             <PriceWrapper>
               <Price>$8.00</Price>

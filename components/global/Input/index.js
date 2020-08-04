@@ -56,8 +56,6 @@ const Input = ({
     );
   }
 
-  console.log(defaultValue);
-
   return (
     <InputWrapper>
       <StyledInput
