@@ -40,7 +40,7 @@ const GoogleButton = ({ icon, alertRef }) => {
     <GoogleLogin
       autoLoad={false}
       className='google-login-button'
-      clientId={process.env.NODE_ENV === 'development' ? '1011008869522-5ja3pn6a7jndtmbj5c2ps8plvb2vo8ai.apps.googleusercontent.com' : '1034765245728-cvv2rfctlkn22u3jmkvmlh2bpt3hohc6.apps.googleusercontent.com'}
+      clientId={process.env.GOOGLE_CLIENT_ID}
       buttonText={icon}
       onSuccess={responseGoogle}
       onFailure={errorResponseGoogle}

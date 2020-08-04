@@ -9,7 +9,7 @@ import { Loading } from 'components/global';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-const promise = loadStripe('pk_live_l9NrmZnYXGraedzXYA4Qcmqk00z52LWv0P');
+const promise = loadStripe(process.env.STRIPE_CLIENT_ID);
 
 const PostGigPage = () => {
   const user = useSelector((state) => state.user);
