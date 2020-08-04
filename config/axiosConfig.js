@@ -3,7 +3,6 @@ import Cookie from 'js-cookie';
 
 axios.interceptors.request.use(
   (config) => {
-    console.log(process.env.API_URL)
     if (config.baseURL === process.env.API_URL && !config.headers.Authorization) {
       const token = Cookie.get('__gigtoken');
       if (token) {

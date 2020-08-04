@@ -47,8 +47,6 @@ const LinkedInButton = ({ alertRef }) => {
   };
 
   const linkedInRequestToken = () => {
-    console.log(process.env.LINKED_IN_REDIRECT_URL)
-    console.log(process.env.LINKED_IN_CLIENT_ID)
     const redirectUri = process.env.LINKED_IN_REDIRECT_URL;
     const clientId = process.env.LINKED_IN_CLIENT_ID;
     const oauthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&scope=r_liteprofile%20r_emailaddress&state=${new Date()}&redirect_uri=${redirectUri}`;
