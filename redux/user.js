@@ -26,7 +26,9 @@ export default (state = INITIAL_STATE, action = {}) => {
       state.data.lastName = action.payload.profile.lastName;
       return state;
     case ON_UPDATE_USER_COMPANY:
+      const jobs = state.data.company && state.data.company.jobs ? state.data.company.jobs : [];
       state.data.company = action.payload.company;
+      state.data.company.jobs = jobs;
       return state;
     case ON_UPDATE_USER_ACCOUNT_SETTING:
       state.data.company.name = action.payload.accountSetting.name;
