@@ -33,7 +33,8 @@ const GoogleButton = ({ icon, alertRef }) => {
   };
 
   const errorResponseGoogle = (error) => {
-    if (error.details) showError(error.details);
+    console.error(error);
+    // if (error.details) showError(error.details);
   };
 
   return (
