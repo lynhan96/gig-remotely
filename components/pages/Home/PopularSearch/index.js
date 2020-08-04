@@ -10,7 +10,7 @@ const PopularSearch = () => {
       <Text width='auto' size='llg' weight='bold'>Popular Search Words</Text>
       <TagGroup>
         {
-        ['UIUX', 'Developer', 'Graphic Design', 'Coding', 'Copywriting', 'Work from home', 'Social', 'Freelance']
+        ['UIUX', 'Developer', 'Graphic Design', 'Coding', 'Copywriting', 'Freelance']
           .map((item, index) => (
             <Tag size='sm' key={index} onClick={() => onClick(item)} style={{ cursor: 'pointer' }}>{item}</Tag>
           ))

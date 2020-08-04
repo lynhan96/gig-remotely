@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
-  margin-top: 150px;
+  margin-top: 100px;
 
   @media (max-width: 768px) {
     margin-top: 100px;
@@ -18,9 +18,9 @@ export const TagGroup = styled.div`
   flex-flow: wrap row;
   justify-content: center;
   align-items: center;
-  width: 720px;
+  width: 620px;
   margin-top: 20px;
-  margin-bottom: 150px;
+  margin-bottom: 100px;
 
   @media (max-width: 768px) {
     width: 100%;

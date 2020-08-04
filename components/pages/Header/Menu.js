@@ -47,7 +47,6 @@ const Nav = () => {
               <SubMenu className={showSubMenu ? 'show-sub-menu' : 'hide-sub-menu'}>
                 <SubMenuItem size='sm' onClick={() => redirectTo('/company/account-setting')}>account settings</SubMenuItem>
                 <SubMenuItem size='sm' onClick={() => redirectTo('/company/payment-options')}>payment options</SubMenuItem>
-                <SubMenuItem size='sm' onClick={() => redirectTo('/help')}>help</SubMenuItem>
                 <SubMenuItem size='sm' onClick={logout}>log out</SubMenuItem>
               </SubMenu>
             </MenuItem>

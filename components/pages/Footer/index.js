@@ -13,7 +13,6 @@ const Footer = () => (
         <StyledText size='xs' onClick={() => Router.push('/signup')}>Gig Seeker’s Sign Up</StyledText>
       </Group>
       <Group>
-        <StyledText size='xs' onClick={() => Router.push('/')}>FAQ</StyledText>
         <StyledText size='xs' onClick={() => Router.push('/term-conditions')}>Terms of Use</StyledText>
         <StyledText size='xs' onClick={() => Router.push('/privacy-policy')}>Privacy Policy</StyledText>
         <StyledText size='xs' weight='bold'>&#169; 2020 gigremotely</StyledText>
