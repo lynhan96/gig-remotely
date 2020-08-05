@@ -23,7 +23,7 @@ const CompanyDetailPage = () => {
     const query = queryString.parse(router.asPath.split(/\?/)[1]);
     const id = Number.isNaN(parseInt(router.query.id, 10)) ? query.gigId : parseInt(router.query.id, 10);
 
-    getGig({ id });
+    getGig({ id, detail: true });
   }, [router.asPath]);
 
   return (

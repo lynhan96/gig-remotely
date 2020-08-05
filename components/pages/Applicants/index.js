@@ -20,7 +20,7 @@ import {
 const Empty = () => (
   <EmptyWrapper>
     <EmptyImage src='/images/empty-jobs.png' />
-    <Text width='auto' size='xl' style={{ margin: '25px 0' }} weight='bold'> You don't have any applicants</Text>
+    <Text width='auto' size='xl' style={{ margin: '25px 0', textAlign: 'center' }} weight='bold'> You don't have any applicants</Text>
   </EmptyWrapper>
 );
 

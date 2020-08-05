@@ -13,9 +13,8 @@ const ON_GET_JOB_APPLICANT = 'ON_GET_JOB_APPLICANT';
 function* getJobDetail({ params, setState }) {
   try {
     let url = `/job/${params.id}`;
-    if (params.repostJob) {
-      url += `?repostJob=${params.repostJob}`;
-    }
+    if (params.repostJob) url += `?repostJob=${params.repostJob}`;
+    if (params.detail) url += `?detail=${params.detail}`;
 
     const response = yield call(get, url);
     setState({ loading: false, data: response });

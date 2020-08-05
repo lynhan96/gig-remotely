@@ -40,7 +40,7 @@ const labelBackground = (type) => {
 
 const JobItem = ({ item }) => {
   const {
-    id, title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, status, expiredAt,
+    id, title, contractType, company, description, location, skills, duration, timezone, boostStart, boostEnd, status, expiredAt, views,
   } = item;
 
   const timeText = () => {
@@ -102,7 +102,7 @@ const JobItem = ({ item }) => {
             <TagGroup>
               {
                 skills.map(({ name }) => (
-                  <Tag size='xxs' key={name} >{name}</Tag>
+                  <Tag size='xxs' key={name}>{name}</Tag>
                 ))
               }
             </TagGroup>
@@ -111,7 +111,7 @@ const JobItem = ({ item }) => {
         <Action>
           <Time size='xs' color='#9a9a8b'>{timeText()}</Time>
           <ViewWrapper>
-            <View size='xl'>0</View>
+            <View size='xl'>{views}</View>
             <ViewText size='llg'>views</ViewText>
           </ViewWrapper>
         </Action>
