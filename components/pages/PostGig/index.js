@@ -77,7 +77,7 @@ const PostGig = ({
 
   const paymentAndPostGig = (params) => {
     // trick for our user post no need payment
-    if (user.email === 'hello@chanceupon.co') {
+    if (user.email === 'hello@chanceupon.co' || user.email === 'team@gigremotely.com') {
       params.boost = boostRef.current;
       postGig(params, 'hello@chanceupon.co');
       return;
