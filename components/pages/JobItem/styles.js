@@ -145,9 +145,10 @@ export const Title = styled(Text)`
   @media (max-width: 768px){
     display: inline-block;
     margin-right: 0;
-    width: 96% !important;
+    width: 98% !important;
 
     ${Label} {
+      white-space: nowrap;
       margin-left: 10px;
       vertical-align: middle;
       display: initial !important;
