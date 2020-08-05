@@ -5,9 +5,6 @@ import { ResendVerification } from 'components/pages';
 
 const ResendVerificationPage = () => (
   <>
-    <Head>
-      <title>Resend Verification</title>
-    </Head>
     <Container style={{ alignItems: 'center' }}>
       <ResendVerification />
     </Container>

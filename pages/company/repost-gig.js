@@ -30,9 +30,6 @@ const RepostGigPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{data ? `Repost Gig: ${data.title}` : 'Repost Gig' }</title>
-      </Head>
       <Container>
         { (loading || !data)
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)

@@ -27,9 +27,6 @@ const EditGigPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{data ? data.title : 'Edit Post' }</title>
-      </Head>
       <Container>
         { (loading || !data)
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)

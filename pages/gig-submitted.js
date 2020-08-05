@@ -6,9 +6,6 @@ import { privateRoute } from 'routes';
 
 const GigSubmittedPage = () => (
   <>
-    <Head>
-      <title>Gig Submitted</title>
-    </Head>
     <Container style={{ alignItems: 'center' }}>
       <GigSubmitted />
       <Alert />

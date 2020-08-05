@@ -21,9 +21,6 @@ const VerificationPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Verifying</title>
-      </Head>
       <Container style={{ alignItems: 'center', padding: '255px 0 300px 0;' }}>
         <Text
           style={{

@@ -5,9 +5,6 @@ import { PrivacyPolicy } from 'components/pages';
 
 const PrivacyPolicyPage = () => (
   <>
-    <Head>
-      <title>Privacy Policy</title>
-    </Head>
     <Container style={{ alignItems: 'center' }}>
       <PrivacyPolicy />
     </Container>

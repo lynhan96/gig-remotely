@@ -5,9 +5,6 @@ import { Container } from 'components/global/styles';
 
 const GigsPage = () => (
   <>
-    <Head>
-      <title>Find gigs</title>
-    </Head>
     <Container>
       <Gigs />
     </Container>

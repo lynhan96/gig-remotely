@@ -6,9 +6,6 @@ import { Container } from 'components/global/styles';
 
 const EditProfilePage = () => (
   <>
-    <Head>
-      <title>Edit Profile</title>
-    </Head>
     <Container>
       <EditUserProfile />
     </Container>

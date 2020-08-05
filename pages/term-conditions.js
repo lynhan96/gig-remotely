@@ -5,9 +5,6 @@ import { TermCondition } from 'components/pages';
 
 const TermConditionsPage = () => (
   <>
-    <Head>
-      <title>Term Conditions</title>
-    </Head>
     <Container style={{ alignItems: 'center' }}>
       <TermCondition />
     </Container>

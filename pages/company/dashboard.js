@@ -6,9 +6,6 @@ import { Dashboard } from 'components/pages';
 
 const DashboardPage = () => (
   <>
-    <Head>
-      <title>Dashboard</title>
-    </Head>
     <Container>
       <Dashboard />
     </Container>

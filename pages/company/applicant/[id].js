@@ -23,9 +23,6 @@ const ApplicantPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{data ? data.job.title : 'Applicants' }</title>
-      </Head>
       <Container>
         { (loading || !data)
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)

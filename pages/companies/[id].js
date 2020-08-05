@@ -30,9 +30,6 @@ const CompanyDetailPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{data ? data.name : 'Company Detail' }</title>
-      </Head>
       <Container>
         { (loading || !data)
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)

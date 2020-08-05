@@ -18,9 +18,6 @@ const ProfilePage = () => {
 
   return (
     <>
-      <Head>
-        <title>My Profile</title>
-      </Head>
       <Container>
         { (Object.keys(data).length === 0)
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)

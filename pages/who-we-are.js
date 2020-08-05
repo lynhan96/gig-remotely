@@ -6,9 +6,6 @@ import { WhoWeAre, Alert } from 'components/pages';
 const WhoWeArePage = () => {
   return (
     <>
-      <Head>
-        <title>Who We Are</title>
-      </Head>
       <Container>
         <WhoWeAre />
         <Alert />

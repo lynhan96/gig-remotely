@@ -10,9 +10,6 @@ const promise = loadStripe('pk_test_BIbbDbmvlENgzbbdBRuMsebI00awQs2uw5');
 
 const PaymentOptionsPage = () => (
   <>
-    <Head>
-      <title>Payment Options</title>
-    </Head>
     <Container>
       <Elements stripe={promise}>
         <PaymentOptions />

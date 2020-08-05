@@ -4,9 +4,6 @@ import { Main, Banner } from 'components/pages/Home';
 
 const Home = () => (
   <>
-    <Head>
-      <title>Home</title>
-    </Head>
     <Banner />
     <Main />
   </>

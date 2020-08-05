@@ -6,9 +6,6 @@ import { Container } from 'components/global/styles';
 
 const AccountSettingPage = () => (
   <>
-    <Head>
-      <title>Account Setting</title>
-    </Head>
     <Container>
       <SeekerAccountSetting />
     </Container>

@@ -6,9 +6,6 @@ import { Container } from 'components/global/styles';
 
 const ChangePasswordPage = () => (
   <>
-    <Head>
-      <title>Change password</title>
-    </Head>
     <Container style={{ alignItems: 'center' }}>
       <ChangePassword />
     </Container>

@@ -20,9 +20,6 @@ const PostGigPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Post Gig</title>
-      </Head>
       <Container>
         { user.loading
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)

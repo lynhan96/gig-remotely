@@ -32,7 +32,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
       <Head>
-        {/* <link rel='shortcut icon' type='image/png' sizes='32x32' href='/favicon.png' /> */}
+        <title>Gigremotely - Find remote gigs around the world.</title>
       </Head>
       <Header />
       <MainLayout Component={Component} pageProps={pageProps} />

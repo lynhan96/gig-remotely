@@ -5,9 +5,6 @@ import { SignUp } from 'components/pages';
 
 const SignUpPage = () => (
   <>
-    <Head>
-      <title>Sign up</title>
-    </Head>
     <Container style={{ alignItems: 'center' }}>
       <SignUp />
     </Container>

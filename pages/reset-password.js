@@ -5,9 +5,6 @@ import { ResetPassword } from 'components/pages';
 
 const ResetPasswordPage = () => (
   <>
-    <Head>
-      <title>Reset Password</title>
-    </Head>
     <Container style={{ alignItems: 'center' }}>
       <ResetPassword />
     </Container>

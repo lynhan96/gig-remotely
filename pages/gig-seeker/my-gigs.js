@@ -6,9 +6,6 @@ import { privateRoute } from 'routes';
 
 const MyGigsPage = () => (
   <>
-    <Head>
-      <title>My Gigs</title>
-    </Head>
     <Container>
       <MyGigs />
     </Container>
