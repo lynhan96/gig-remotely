@@ -141,7 +141,7 @@ const PostGig = ({
 
   useEffect(() => {
     // trick for our user post no need payment
-    if (user.email === 'hello@chanceupon.co') buttonRef.current.available();
+    if (user.email === 'hello@chanceupon.co' || user.email === 'team@gigremotely.com') buttonRef.current.available();
   }, []);
 
   return (
