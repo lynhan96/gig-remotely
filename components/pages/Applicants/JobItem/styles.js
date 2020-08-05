@@ -180,7 +180,6 @@ export const CompanyName = styled(Text)`
 `;
 
 export const Title = styled(Text)`
-  margin-right: 10px;
   margin: 5px 0;
   margin-right: 5px;
 
@@ -194,7 +193,7 @@ export const Title = styled(Text)`
     margin-botom: 5px;
 
     ${Label} {
-      margin-left: 10px;
+      white-space: nowrap;
       vertical-align: middle;
       display: initial !important;
     }

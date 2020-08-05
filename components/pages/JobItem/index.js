@@ -104,7 +104,7 @@ const JobItem = ({
                 weight='bold'
                 size='llg'
               >
-                {title}
+                <span style={{ marginRight: 5 }}>{title}</span>
                 <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>
               </Title>
               <Label background={labelBackground(contractType)}>{Text.toTitleCase(contractType === 'FREELANCE' ? 'Projects' : contractType)}</Label>

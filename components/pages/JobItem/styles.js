@@ -136,7 +136,7 @@ export const TitleWrapper = styled.div`
 `;
 
 export const Title = styled(Text)`
-  margin-right: 10px;
+  margin-right: 5px;
   margin-bottom: 5px;
 
   ${Label} {
