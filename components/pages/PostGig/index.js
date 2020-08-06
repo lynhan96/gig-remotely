@@ -141,6 +141,12 @@ const PostGig = ({
     }
 
     if (paymentOptionRef.current) {
+      if (paymentOptionRef.current.length === 0) {
+        showError('Please select payment options.');
+        buttonRef.current.available();
+        return;
+      }
+
       axios.post('/payment/create-saved-payment-intent', {
         boost: boostRef.current,
         paymentMethodId: paymentOptionRef.current[0].id,
