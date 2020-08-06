@@ -119,17 +119,9 @@ const PostGig = ({
   const paymentAndPostGig = (params) => {
     const { checking, isValid, promotion } = promotionRef.current;
 
-    if (checking) {
-      showError('We are checking your promotion code.');
-      buttonRef.current.available();
-      return;
-    }
+    if (checking) return handleError('We are checking your promotion code.');
 
-    if (!isValid) {
-      showError('Please remove invalid promotion code.');
-      buttonRef.current.available();
-      return;
-    }
+    if (!isValid) return handleError('Please remove invalid promotion code.');
 
     if (promotion.promo_type === 'percentage' && parseInt(promotion.amount, 10) === 100 && !boostRef.current) {
       if (paymentOptionRef.current) {
@@ -141,11 +133,7 @@ const PostGig = ({
     }
 
     if (paymentOptionRef.current) {
-      if (paymentOptionRef.current.length === 0) {
-        showError('Please select payment options.');
-        buttonRef.current.available();
-        return;
-      }
+      if (paymentOptionRef.current.length === 0) return handleError('Please select payment options.');
 
       axios.post('/payment/create-saved-payment-intent', {
         boost: boostRef.current,
