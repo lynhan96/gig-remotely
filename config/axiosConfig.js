@@ -18,4 +18,6 @@ axios.defaults.baseURL = process.env.API_URL;
 axios.interceptors.response.use((response) => {
   if (response.status !== 200 && response.status !== 201) return Promise.reject(response);
   return response.data;
-}, (error) => Promise.reject(error.response));
+}, (error) => {
+  return Promise.reject(error.response)
+});

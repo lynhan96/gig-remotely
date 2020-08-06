@@ -105,6 +105,8 @@ function* signUp({ params, callback }) {
           email: params.email,
         },
       });
+    } else if (error.status === 409) {
+      yield put(onOpenAlert('It looks like this email has not been registered on GigRemotely.'));
     } else {
       yield put(onOpenAlert(error.data.message));
     }

@@ -34,7 +34,7 @@ function* removePaymentOption({ id, callback }) {
 
     callback();
   } catch (error) {
-    console.error(error)
+    console.error(error);
     // yield put(onOpenAlert(error.data.message));
   }
 }
