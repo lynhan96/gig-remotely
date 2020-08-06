@@ -34,7 +34,7 @@ const PostGig = ({
   const boostRef = useRef(false);
   const buttonRef = useRef();
   const deletePopupRef = useRef();
-  const promotionRef = useRef({ code: '', isValid: true, checking: false });
+  const promotionRef = useRef({ promotion: {}, isValid: true, checking: false });
   const stripe = payWithSripe ? useStripe() : null;
   const elements = payWithSripe ? useElements() : null;
 
@@ -50,6 +50,11 @@ const PostGig = ({
     onUpdateGig(id, params, callback),
   ), [dispatch]);
 
+  const handleError = (message) => {
+    buttonRef.current.available();
+    showError(message);
+  };
+
   const confirmPayment = async (clientSecret, params, paymentMethod) => {
     if (paymentOptionRef.current) {
       stripe.confirmCardPayment(clientSecret, {
@@ -57,7 +62,7 @@ const PostGig = ({
       }).then((response) => {
         postGig(params, response.paymentIntent.id);
       }).catch((err) => {
-        showError(`Payment failed ${err.message}`);
+        handleError(`Payment failed ${err.message}`);
       });
     } else {
       stripe.confirmCardPayment(clientSecret, {
@@ -65,17 +70,54 @@ const PostGig = ({
           card: elements.getElement(CardNumberElement),
           billing_details: {
             name: user.company ? user.company.name : `${user.firstName} ${user.lastName}`,
+            email: user.email,
           },
         },
       }).then((response) => {
         postGig(params, response.paymentIntent.id);
       }).catch((err) => {
-        showError(`Payment failed ${err.message}`);
+        handleError(`Payment failed ${err.message}`);
       });
     }
   };
 
+  const paymentWithCoupon = (params, prmotionCode, customerId) => {
+    axios.post('/payment/saved-card-with-coupon', {
+      promotionCode: prmotionCode,
+      customerId,
+    }).then((response) => {
+      postGig(params, response.latest_invoice);
+    }).catch((err) => {
+      handleError(err.data.message);
+    });
+  };
+
+  const confirmCardSetup = async (response, params, promotionCode) => {
+    await stripe.confirmCardSetup(response.client_secret, {
+      payment_method: {
+        card: elements.getElement(CardNumberElement),
+        billing_details: {
+          name: user.company ? user.company.name : `${user.firstName} ${user.lastName}`,
+          email: user.email,
+        },
+      },
+    }).then(() => {
+      paymentWithCoupon(params, promotionCode, response.customerId)
+    }).catch((err) => {
+      handleError(err.data.message);
+    });
+  };
+
+  const savedCardInformation = (params, prmotionCode) => {
+    axios.get('/payment/setup-intent').then((response) => {
+      confirmCardSetup(response, params, prmotionCode);
+    }).catch((err) => {
+      handleError(err.data.message);
+    });
+  };
+
   const paymentAndPostGig = (params) => {
+    const { checking, isValid, promotion } = promotionRef.current;
     // trick for our user post no need payment
     if (user.email === 'hello@chanceupon.co' || user.email === 'team@gigremotely.com') {
       params.boost = boostRef.current;
@@ -83,34 +125,46 @@ const PostGig = ({
       return;
     }
 
-    if (promotionRef.current.checking) {
+    if (checking) {
       showError('We are checking your promotion code.');
       buttonRef.current.available();
       return;
     }
-    if (!promotionRef.current.isValid) {
+
+    if (!isValid) {
       showError('Please remove invalid promotion code.');
       buttonRef.current.available();
-    } else if (paymentOptionRef.current) {
+      return;
+    }
+
+    if (promotion.promo_type === 'percentage' && parseInt(promotion.amount, 10) === 100 && !boostRef.current) {
+      if (paymentOptionRef.current) {
+        paymentWithCoupon(params, promotion.code, paymentOptionRef.current[0].customer);
+      } else {
+        savedCardInformation(params, promotion.code);
+      }
+      return;
+    }
+
+    if (paymentOptionRef.current) {
       axios.post('/payment/create-saved-payment-intent', {
         boost: boostRef.current,
         paymentMethodId: paymentOptionRef.current[0].id,
         customerId: paymentOptionRef.current[0].customer,
-        promotionCode: promotionRef.current.code,
+        promotionCode: promotion.code,
       }).then((response) => {
         confirmPayment(response.clientSecret, params, response.paymentMethod);
       }).catch((err) => {
-        buttonRef.current.available();
-        showError(err.data.message);
+        handleError(err.data.message);
       });
     } else {
       axios.post('/payment/create-payment-intent', {
         boost: boostRef.current,
-        promotionCode: promotionRef.current.code,
+        promotionCode: promotion.code,
       }).then((response) => {
         confirmPayment(response.clientSecret, params);
       }).catch((err) => {
-        showError(err.data.message);
+        handleError(err.data.message);
       });
     }
   };
