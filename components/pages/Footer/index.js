@@ -1,7 +1,7 @@
 import React from 'react';
 import Router from 'next/router';
 import {
-  Wrapper, StyledContainer, StyledText, Group, Hint
+  Wrapper, StyledContainer, StyledText, Group, Hint,
 } from './styles';
 
 const Footer = () => (
@@ -18,7 +18,7 @@ const Footer = () => (
         <StyledText size='xs' weight='bold'>&#169; 2020 gigremotely</StyledText>
       </Group>
       <Hint>
-        built with love by Team from
+        Built with love by Team
         <a href='https://chanceupon.co/'>Chanceupon</a>
       </Hint>
     </StyledContainer>
