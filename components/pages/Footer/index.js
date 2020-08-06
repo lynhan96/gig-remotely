@@ -19,7 +19,7 @@ const Footer = () => (
       </Group>
       <Hint>
         Built with love by Team
-        <a href='https://chanceupon.co/'>Chanceupon</a>
+        <a href='https://chanceupon.co/' target='_blank'>Chanceupon</a>
       </Hint>
     </StyledContainer>
   </Wrapper>
