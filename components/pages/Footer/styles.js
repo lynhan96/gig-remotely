@@ -5,13 +5,29 @@ import { Text } from 'components/global';
 
 export const Wrapper = styled.div`
   background: ${color.black};
-  padding: 40px 0 100px 0;
+  padding: 50px 0 50px 0;
   display: flex !important;
+`;
+
+export const Hint = styled.div`
+  margin-top: 40px;
+  width: 100%;
+  color: ${color.white};
+  font-size: 17px;
+  text-align: center;
+
+  a {
+    color: ${color.white};
+    margin-left: 4px;
+    text-decoration: unset;
+    padding-bottom: 1px;
+    border-bottom: 1px solid ${color.white};
+  }
 `;
 
 export const StyledContainer = styled(Container)`
   display: flex;
-  flex-direction: row;
+  flex-flow: wrap row;
   align-items: center;
   justify-content: space-between;
 
