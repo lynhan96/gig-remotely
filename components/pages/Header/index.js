@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <HeaderWrapper id='header' style={{ display: 'none' }}>
-      <Logo src='/images/logo.svg' onClick={() => (userType === 'INVIDUAL' ? {} : redirectTo('/')) } />
+      <Logo src='/images/logo.gif' onClick={() => (userType === 'INVIDUAL' ? {} : redirectTo('/')) } />
       <MenuWrapper>
         <Menu />
       </MenuWrapper>

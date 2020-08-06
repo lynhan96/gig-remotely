@@ -296,9 +296,9 @@ const PrivacyPolicy = () => {
           <Content>
             Chance Upon Pte Ltd may receive money or other property in return for providing the data to the other persons in paragraph (d) above and, when requesting the Users’ written consent as described in paragraph (d) above, Chance Upon Pte Ltd will inform Users if Chance Upon Pte Ltd receives any money or other property in return for providing the data to other persons.
           </Content>
-          <Content>
+          <Content style={{ display: 'inline-block' }}>
             In this regard, Users may choose to sign up or unsubscribe for such materials by logging into the registration or Users’ account maintenance webpage, or clicking on the automatic link appearing in each newsletter/message or contact the Data Project Officer of Chance Upon Pte Ltd at
-            <a>hello@gigremotely.com.</a>
+            <a href='mailto:team@gigremotely.com' style={{ marginLeft: 4 }}>team@gigremotely.com</a>
           </Content>
           <Content>
             In the event that any information provided by the user is inaccurate, in breach of any laws or contains indecent elements, Chance Upon Pte Ltd shall instantly abrogate the user’s account and membership without notice and reserves the right to take any action as it considers appropriate, desirable or necessary, including but not limited to taking legal action against such user. Chance Upon Pte Ltd reserves the right at any time to immediately terminate or suspend any user’s account or access to the Site without notice, where Chance Upon Pte Ltd is of the opinion that the user has breached any of the Terms and Conditions or violated any law or regulation, and to take further action as Chance Upon Pte Ltd in its sole discretion considers appropriate, desirable or necessary, including removing any material which it deems abusive, illegal, disruptive or inappropriate. Chance Upon Pte Ltd shall have the sole and absolute discretion to decide whether the user, gig Seeker or Recruiter/Advertiser has breached any of the Terms and Conditions, and such decision shall be final. In case Chance Upon Pte Ltd has not exercised the right under this Clause, it shall not be deemed to be a waiver.
@@ -308,7 +308,7 @@ const PrivacyPolicy = () => {
           </Content>
           <Content>
             In the event that any information provided by the user is inaccurate, in breach of any laws or contains indecent elements, Chance Upon Pte Ltd shall instantly abrogate the user’s account and membership without notice and reserves the right to take any action as it considers appropriate, desirable or necessary, including but not limited to taking legal action against such user. Chance Upon Pte Ltd reserves the right at any time to immediately terminate or suspend any user’s account or access to the Site without notice, where Chance Upon Pte Ltd is of the opinion that the user has breached any of the Terms and Conditions or violated any law or regulation, and to take further action as Chance Upon Pte Ltd in its sole discretion considers appropriate, desirable or necessary, including removing any material which it deems abusive, illegal, disruptive or inappropriate. Chance Upon Pte Ltd shall have the sole and absolute discretion to decide whether the user, gig Seeker or Recruiter/Advertiser has breached any of the Terms and Conditions, and such decision shall be final. In case Chance Upon Pte Ltd has not exercised the right under this Clause, it shall not be deemed to be a waiver.
-          </Content>          
+          </Content>
         </ContentWrapper>
         <ContentWrapper id='section-15'>
           <Title>Access to or request for correction of data</Title>
