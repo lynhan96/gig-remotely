@@ -1,7 +1,5 @@
 /* eslint-disable */
 
-const withCSS = require('@zeit/next-css');
-
 const env = process.env.ENV || 'development';
 
 const envConfigs = {
@@ -31,15 +29,6 @@ const envConfigs = {
   },
 }[env];
 
-module.exports = withCSS({
-  webpack: (config, { isServer }) => {
-    config.module.rules.filter((el) => el.test == '/\\.css$/')[0].use.unshift({
-      loader: 'raw-loader',
-      options: {
-        esModule: false,
-      },
-    })
-    return config;
-  },
+module.exports = {
   env: envConfigs,
-});
+};
