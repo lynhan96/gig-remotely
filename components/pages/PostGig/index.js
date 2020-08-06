@@ -102,7 +102,7 @@ const PostGig = ({
         },
       },
     }).then(() => {
-      paymentWithCoupon(params, promotionCode, response.customerId)
+      paymentWithCoupon(params, promotionCode, response.customerId);
     }).catch((err) => {
       handleError(err.data.message);
     });
@@ -118,12 +118,6 @@ const PostGig = ({
 
   const paymentAndPostGig = (params) => {
     const { checking, isValid, promotion } = promotionRef.current;
-    // trick for our user post no need payment
-    if (user.email === 'hello@chanceupon.co' || user.email === 'team@gigremotely.com') {
-      params.boost = boostRef.current;
-      postGig(params, 'hello@chanceupon.co');
-      return;
-    }
 
     if (checking) {
       showError('We are checking your promotion code.');
