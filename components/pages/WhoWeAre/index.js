@@ -3,7 +3,7 @@ import {
   Wrapper, Image, ContentWrapper, Title, WrapperText,
 } from './styles';
 
-const WhoWeAre = ({data}) => (
+const WhoWeAre = ({ data }) => (
   <Wrapper>
     <Title>Who We Are</Title>
     <ContentWrapper>
