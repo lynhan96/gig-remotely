@@ -37,7 +37,6 @@
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
-    "@zeit/next-less": "^1.0.1",
     "babel-eslint": "^10.0.3",
     "babel-plugin-styled-components": "^1.10.7",
     "eslint": "^6.5.1",

@@ -120,11 +120,11 @@ const PaymentForm = ({
       serTotalPrice(currentPrice);
     } else if (response.promo_type === 'amount') {
       const calculatedPrice = currentPrice - parseFloat(response.amount);
-      serTotalPrice(calculatedPrice < 2 ? parseFloat(2.00).toFixed(2) : calculatedPrice);
+      serTotalPrice(calculatedPrice);
     } else {
       const priceAfterDiscount = 49.90 * (1.0 - (parseFloat(response.amount) / 100.0));
       const calculatedPrice = boostRef.current ? priceAfterDiscount + 8 : priceAfterDiscount;
-      serTotalPrice(calculatedPrice < 2 ? parseFloat(2.00).toFixed(2) : calculatedPrice);
+      serTotalPrice(calculatedPrice);
     }
   };
 
@@ -132,7 +132,7 @@ const PaymentForm = ({
     if (status === 200) {
       setPromotionValid('valid');
       promotionRef.current.isValid = true;
-      promotionRef.current.code = response.code;
+      promotionRef.current.promotion = response;
       calulatedPrice(true, response);
       currentPromotion.current = response;
 
@@ -164,9 +164,7 @@ const PaymentForm = ({
   useEffect(() => {
     if (promotionValid === 'default') {
       inputRef.current.value = '';
-      promotionRef.current.isValid = true;
-      promotionRef.current.code = '';
-      promotionRef.current.checking = false;
+      promotionRef.current = { isValid: true, promotion: {}, checking: false };
       calulatedPrice(false);
     }
   }, [promotionValid]);
@@ -196,8 +194,7 @@ const PaymentForm = ({
 
   const onInputPromotion = (e) => {
     promotionRef.current.checking = true;
-    promotionTextRef.current = e.target.value; // this is the search text
-    console.log(promotionTextRef.current);
+    promotionTextRef.current = e.target.value;
     if (typing) clearTimeout(typing);
     typing = setTimeout(() => {
       if (promotionTextRef.current === '') {

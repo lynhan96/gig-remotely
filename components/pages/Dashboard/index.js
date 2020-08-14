@@ -52,8 +52,6 @@ const Dashboard = () => {
   const [openTab, setOpenTab] = useState(0);
   const dispatch = useDispatch();
 
-  console.log(state)
-
   const onDeleteGigCallback = (id, currentState) => {
     const allFilterd = currentState.data.all.filter((i) => i.id !== id);
     const expiredFilterd = currentState.data.expired.filter((i) => i.id !== id);

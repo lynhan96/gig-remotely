@@ -58,11 +58,10 @@ function* deleteGig({ id, callback }) {
 
 function* postGig({ params, paymentIntentId }) {
   try {
-    const response = yield call(post, '/job', params);
+    params.paymentIntentId = paymentIntentId;
+    yield call(post, '/job', params);
 
-    axios.post(`/job/${response.id}/payment-intent`, { paymentIntentId }).then((a) => {
-      Router.push('/gig-submitted');
-    });
+    Router.push('/gig-submitted');
   } catch (error) {
     yield put(onOpenAlert(error.data.message));
   }

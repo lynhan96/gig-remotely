@@ -47,51 +47,6 @@ export const DescriptionWrapper = styled.div`
   }
 `;
 
-export const Title = styled(Text)`
-  font-weight: bold;
-  font-size: 32px;
-  margin-bottom: 30px;
-
-  @media (max-width: 440px) {
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
-
-  @media (max-width: 375px) {
-    font-size: 20px;
-  }
-`;
-
-export const Content = styled(Text)`
-  font-size: 17px;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.24;
-  white-space: pre-line;
-  margin-top: 10px;
-
-  ul {
-    margin: 0;
-
-    li {
-      margin-top: 10px;
-
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-  }
-
-
-  @media (max-width: 440px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 360px) {
-    font-size: 12px;
-  }
-`;
-
 export const StyledText = styled(Text)`
   font-weight: bold;
   font-size: 17px;
@@ -111,8 +66,52 @@ export const SubText = styled(Text)`
 export const ContentWrapper = styled.div`
   margin-top: 30px;
 
+  strong,
+  span {
+    font-family: 'Proxima Nova', sans-serif !important;
+    line-height:1.24;
+    letter-spacing: 0.34px;
+  }
+
+  h1, h2, h3, h4, h5 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 32px !important;
+    margin-bottom: 30px;
+    font-family: 'Proxima Nova', sans-serif !important;
+
+    @media (max-width: 440px) {
+      font-size: 22px !important;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 375px) {
+      font-size: 20px !important;
+    }
+  }
+
+  p {
+    font-family: 'Proxima Nova', sans-serif !important;
+    margin: 0;
+    line-height:1.24;
+    letter-spacing: 0.34px;
+    font-size: 17px !important;
+    margin-top: 10px;
+  }
 
   &:first-child {
     margin-top: 0
+  }
+
+  ul {
+    margin: 0;
+
+    li {
+      margin-top: 10px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 `;

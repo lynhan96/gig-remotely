@@ -98,21 +98,34 @@ export const WrapperText = styled.div`
   @media (max-width: 1024px) {
     width: 100%;
   }
+
+  span {
+    font-family: 'Proxima Nova', sans-serif !important;
+    line-height:1.24;
+  }
+
+  p {
+    font-family: 'Proxima Nova', sans-serif !important;
+    margin: 0;
+    margin-bottom:20px;
+    line-height:1.24;
+    letter-spacing: 0.34px;
+    font-size: 17px !important;
+
+    @media (max-width: 1200px) {
+      font-size: 15px !important;
+    }
+
+    @media (max-width: 320px) {
+      font-size: 9px !important;
+    }
+
+    @media (max-width: 280px) {
+      font-size: 8px !important;
+    }
+  }
 `;
 
 export const StyledText = styled(Text)`
-  margin-bottom:20px;
-  line-height:1.24;
 
-  @media (max-width: 1200px) {
-    font-size: 15px;
-  }
-
-  @media (max-width: 320px) {
-    font-size: 9px;
-  }
-
-  @media (max-width: 280px) {
-    font-size: 8px;
-  }
 `;

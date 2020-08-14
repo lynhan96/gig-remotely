@@ -4,7 +4,8 @@ const env = process.env.ENV || 'development';
 
 const envConfigs = {
   development: {
-    API_URL: 'https://api-staging.gigremotely.com/',
+    CMS_URL: 'http://localhost:8000',
+    API_URL: 'http://localhost:8000',
     FACEBOOK_ID: '612438743009066',
     GOOGLE_CLIENT_ID: '1011008869522-5ja3pn6a7jndtmbj5c2ps8plvb2vo8ai.apps.googleusercontent.com',
     LINKED_IN_REDIRECT_URL: 'https://7c6ae87ccdbd.ngrok.io/linkedin',
@@ -12,6 +13,7 @@ const envConfigs = {
     STRIPE_CLIENT_ID: 'pk_test_BIbbDbmvlENgzbbdBRuMsebI00awQs2uw5',
   },
   staging: {
+    CMS_URL: 'https://cms-staging.gigremotely.com/',
     API_URL: 'https://api-staging.gigremotely.com/',
     FACEBOOK_ID: '612438743009066',
     GOOGLE_CLIENT_ID: '1011008869522-5ja3pn6a7jndtmbj5c2ps8plvb2vo8ai.apps.googleusercontent.com',
@@ -20,6 +22,7 @@ const envConfigs = {
     STRIPE_CLIENT_ID: 'pk_test_BIbbDbmvlENgzbbdBRuMsebI00awQs2uw5',
   },
   production: {
+    CMS_URL: 'https://cms.gigremotely.com/',
     API_URL: 'https://api.gigremotely.com/',
     FACEBOOK_ID: '1075658622827685',
     GOOGLE_CLIENT_ID: '1034765245728-cvv2rfctlkn22u3jmkvmlh2bpt3hohc6.apps.googleusercontent.com',
