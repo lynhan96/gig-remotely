@@ -6,28 +6,34 @@ import { onGetJobDetail } from 'saga/jobs';
 import { GigDetail } from 'components/pages';
 import { Container, LoadingWrapper } from 'components/global/styles';
 import { Loading } from 'components/global';
-import queryString from 'query-string';
+import axios from 'axios';
 
-const CompanyDetailPage = () => {
+const CompanyDetailPage = ({ headerData, params }) => {
   const [state, setState] = useState({ loading: true, data: null });
   const { loading, data } = state;
   const dispatch = useDispatch();
-  const router = useRouter();
+  // const router = useRouter();
 
   const getGig = useCallback((params) => dispatch(
     onGetJobDetail(params, setState),
   ), [dispatch]);
 
   useEffect(() => {
-    if (data) setState({ loading: true, data: null });
-    const query = queryString.parse(router.asPath.split(/\?/)[1]);
-    const id = Number.isNaN(parseInt(router.query.id, 10)) ? query.gigId : parseInt(router.query.id, 10);
-
-    getGig({ id, detail: true });
-  }, [router.asPath]);
+    getGig({ id: params.id, detail: true });
+  }, [params]);
 
   return (
     <>
+      <Head>
+        <title>{headerData.title}</title>
+        <meta name='description' content={headerData.description} />
+        <meta name='og:description' content={headerData.description} />
+        <meta name='og:title' content={headerData.title} />
+        <meta name='og:url' content={`${process.env.WEBSITE_URL}/gigs/${headerData.id}`} />
+        <meta name='og:image' content={headerData.company.photo} />
+        <meta name='og:type' content='website' />
+        <meta name='og:site_name' content={process.env.WEBSITE_URL} />
+      </Head>
       <Container>
         { (loading || !data)
           ? (<LoadingWrapper><Loading showText size='60px' /></LoadingWrapper>)
@@ -37,16 +43,19 @@ const CompanyDetailPage = () => {
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ res, query }) {
+  const response = await axios.create().get(`${process.env.API_URL}/job/${query.id}`);
+  if (response.data.code === 404) {
+    res.setHeader('Location', '/404');
+    res.statusCode = 302;
+    res.end();
+    return { props: {} };
+  }
+
   return {
     props: {
-      id: params.id,
+      headerData: response.data,
+      params: query,
     },
   };
 }
