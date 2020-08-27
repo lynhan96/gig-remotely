@@ -8,19 +8,18 @@ import { Container, LoadingWrapper } from 'components/global/styles';
 import { Loading } from 'components/global';
 import axios from 'axios';
 
-const CompanyDetailPage = ({ headerData, params }) => {
+const CompanyDetailPage = ({ headerData, query }) => {
   const [state, setState] = useState({ loading: true, data: null });
   const { loading, data } = state;
   const dispatch = useDispatch();
-  // const router = useRouter();
 
   const getGig = useCallback((params) => dispatch(
     onGetJobDetail(params, setState),
   ), [dispatch]);
 
   useEffect(() => {
-    getGig({ id: params.id, detail: true });
-  }, [params]);
+    getGig({ id: query.id, detail: true });
+  }, [query]);
 
   return (
     <>
@@ -55,7 +54,7 @@ export async function getServerSideProps({ res, query }) {
   return {
     props: {
       headerData: response.data,
-      params: query,
+      query,
     },
   };
 }
