@@ -32,6 +32,8 @@ const CompanyDetailPage = ({ headerData, query }) => {
         <meta name='og:image' content={headerData.company.photo} />
         <meta name='og:type' content='website' />
         <meta name='og:site_name' content={process.env.WEBSITE_URL} />
+        <meta name='og:image:width' content={200} />
+        <meta name='og:image:height' content={200} />
       </Head>
       <Container>
         { (loading || !data)
