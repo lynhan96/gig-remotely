@@ -27,7 +27,7 @@ const CompanyDetailPage = ({ headerData, query }) => {
         <title>{`${headerData.title} - Gigremotely`}</title>
         <meta name='description' content={headerData.description} />
         <meta name='og:description' content={headerData.description} />
-        <meta name='og:title' content={headerData.title} />
+        <meta name='og:title' content={`${headerData.title} - Gigremotely`} />
         <meta name='og:url' content={`${process.env.WEBSITE_URL}/gigs/${headerData.id}`} />
         <meta name='og:image' content={headerData.company.photo} />
         <meta name='og:type' content='website' />
