@@ -24,7 +24,7 @@ const CompanyDetailPage = ({ headerData, query }) => {
   return (
     <>
       <Head>
-        <title>{headerData.title}</title>
+        <title>{`${headerData.title} - Gigremotely`}</title>
         <meta name='description' content={headerData.description} />
         <meta name='og:description' content={headerData.description} />
         <meta name='og:title' content={headerData.title} />
