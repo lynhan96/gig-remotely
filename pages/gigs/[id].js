@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { onGetJobDetail } from 'saga/jobs';
 import { GigDetail } from 'components/pages';
