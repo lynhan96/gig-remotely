@@ -25,7 +25,7 @@ const envConfigs = {
     STRIPE_CLIENT_ID: 'pk_test_BIbbDbmvlENgzbbdBRuMsebI00awQs2uw5',
   },
   production: {
-    WEBSITE_URL: 'https://gigremotely.com/',
+    WEBSITE_URL: 'https://www.gigremotely.com/',
     CMS_URL: 'https://cms.gigremotely.com/',
     API_URL: 'https://api.gigremotely.com/',
     FACEBOOK_ID: '1075658622827685',
