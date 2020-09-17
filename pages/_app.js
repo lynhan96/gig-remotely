@@ -32,8 +32,17 @@ const App = ({ Component, pageProps }) => {
   return (
     <Provider store={store}>
       <Head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-178267131-1" />
         <link rel='shortcut icon' type='image/png' sizes='32x32' href='/images/favicon.svg' />
         <title>Gigremotely - Find remote gigs around the world.</title>
+        <script dangerouslySetInnerHTML={{
+        __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag("js", new Date());
+          gtag("config", "UA-178267131-1");
+        `,
+        }} />
       </Head>
       <Header />
       <MainLayout Component={Component} pageProps={pageProps} />
