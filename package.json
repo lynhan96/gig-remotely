@@ -17,7 +17,7 @@
     "js-cookie": "^2.2.1",
     "jszip": "^3.5.0",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "next": "^9.4.5-canary.37",
     "next-cookies": "^2.0.3",
     "nprogress": "^0.2.0",
